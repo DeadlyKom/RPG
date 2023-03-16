@@ -1,0 +1,9 @@
+
+.tmp/
+*.l
+*.labels
+*.list
+*.sld
+*.tap
+*.trd
+*.sna
