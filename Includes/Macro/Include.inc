@@ -4,7 +4,7 @@
 
                 include "Basic.inc"
                 ; include "Screen.inc"
-                ; include "Memory.inc"
+                include "Memory.inc"
                 include "Interrupt.inc"
 
                 ifdef _DEBUG

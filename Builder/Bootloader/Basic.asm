@@ -18,7 +18,9 @@ StartBoot:      DI
                 Disable_128k_Basic
                 LD SP, StackTop
 
-                ;
+                ; -----------------------------------------
+                ; загрузка кернеля
+                ; -----------------------------------------
                 LD IX, Adr.Kernel
                 LD DE, Kernel.Size
                 LD A, #FF
@@ -26,8 +28,23 @@ StartBoot:      DI
                 CALL BASIC.LD_BYTES
                 DEBUG_BREAK_POINT_NC                                            ; ошибка загрузки
 
+                ; -----------------------------------------
+                ; инициализация прерывания
+                ; -----------------------------------------
+                include "Core/Module/Interrupt/Initialize.asm"
+
+                ; -----------------------------------------
+                ; загрузка игры
+                ; -----------------------------------------
+                LD IX, Adr.Module.Game.Main
+                LD DE, Game.Size
+                LD A, #FF
+                SCF
+                CALL BASIC.LD_BYTES
+                DEBUG_BREAK_POINT_NC                                            ; ошибка загрузки
+
                 ; вызов загрузчика пакета файлов
-                JP #8181
+                JP Adr.Module.Game.Main
 
 EndBoot:        DB #0D                                                          ; конец строки
                 DB #00, #14                                                     ; номер строки 20

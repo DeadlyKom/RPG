@@ -1,0 +1,9 @@
+
+                ifndef _MODULE_GAME_INCLUDE_
+                define _MODULE_GAME_INCLUDE_
+
+                include "EntryPoint.asm"
+                include "Loop.asm"
+                include "Interrupt.asm"
+
+                endif ; ~_MODULE_GAME_INCLUDE_

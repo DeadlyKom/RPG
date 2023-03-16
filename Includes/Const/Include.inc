@@ -4,6 +4,7 @@
 
                 include "Memory.inc"
                 include "MemoryMap.inc"
+                include "MemoryMapGame.inc"
 
                 include "Kernel.inc"
                 include "Interrupt.inc"

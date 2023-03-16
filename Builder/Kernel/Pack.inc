@@ -2,12 +2,11 @@
                 ifndef _BUILDER_KERNEL_PACK_
                 define _BUILDER_KERNEL_PACK_
 
-                MMU 2, 2                                                        ; 2 bank, 2 page
+                MMU 2, Page.Module.Kernel                                       ; 1 bank, Page.Module.Kernel (2) page
                 ORG Adr.Interrupt
                 module Kernel
 
-                display "\'Kernel\' :\t\t\t\t\t\t-------------------- [ ", /D, Size, " bytes [2]\t---------------------------------"
-
+                display "\'Kernel\' :\t\t\t\t\t\t-------------------- [ ", /D, Size, " bytes ]\t [", /D, Page.Module.Kernel, "]\t ---------------------------------"
 Begin:          EQU $
                 ; interrupt
                 include "Core/Module/Interrupt/Include.inc"
