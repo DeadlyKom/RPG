@@ -33,7 +33,7 @@ Handler:        ; ********** HANDLER IM 2 *********
                 ; ~ SAVE REGISTERS
 
 .SaveMemPage    ; ******** SAVE MEMORY PAGE *******
-                LD A, (MemoryPageRef)
+                LD A, (Adr.Port_7FFD)
                 LD (.RestoreMemPage+1), A
                 ; ~ SAVE MEMORY PAGE
 

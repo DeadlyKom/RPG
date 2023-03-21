@@ -3,12 +3,11 @@
                 define _MACRO_INCLUDE_
 
                 include "Basic.inc"
-                ; include "Screen.inc"
+                include "Screen.inc"
                 include "Memory.inc"
                 include "Interrupt.inc"
-
-                ifdef _DEBUG
+                include "Flags.inc"
+                include "Render.inc"
                 include "Debug.inc"
-                endif
 
                 endif ; ~_MACRO_INCLUDE_

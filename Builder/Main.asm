@@ -4,10 +4,11 @@
 
                 DEVICE ZXSPECTRUM128
 
-                define _REBUILD                                                 ; полная пересборка
+                ; define _REBUILD                                                 ; полная пересборка
                 define _DEBUG                                                   ; включить отладочный код
                 define _OPTIMIZE                                                ; включить оптимизацию (ускорение)
                 define _SHOW_DEBUG                                              ; отображение дебажной информации
+                ; define _DEBUG_EXECUTE                                           ; запуск отладки
 
                 ifdef _SHOW_DEBUG
                 define SHOW_FPS                                                 ; отображать FPS

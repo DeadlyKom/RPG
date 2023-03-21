@@ -12,7 +12,7 @@ Disable_128k_Basic macro
                 LD HL, #1303                                                    ; MAIN_4
                 EX (SP), HL
                 RES 4, (IY + 1)
-                LD BC, PORT_7FFD
+                LD BC, Adr.Port_7FFD
                 LD A, ROM_MASK
                 LD (BC), A
                 OUT (C), A

@@ -8,6 +8,19 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Interrupt:      RET
+Interrupt:      
+.SwapScreens    ; ************ Swap Screens ************
+                CHECK_RENDER_FLAG FINISHED_BIT
+                CALL NZ, Render.Swap
+
+.Input          ; ************ Scan Input ************
+                ; CALL Input.Gameplay.Scan
+
+                ifdef _DEBUG
+.Debug_FPS      ; ************** Draw FPS **************
+                CALL FPS_Counter.Tick
+                endif
+
+                RET
 
                 endif ; ~ _CORE_MODULE_GAME_INTERRUPT_

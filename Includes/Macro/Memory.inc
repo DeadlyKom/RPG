@@ -9,12 +9,18 @@
 ;   BC, AF
 ; -----------------------------------------
 SetPage:        macro Page?
-                LD BC, PORT_7FFD
+                LD BC, Adr.Port_7FFD
                 LD A, (BC)
                 AND PAGE_MASK_INV
                 OR Page?
                 LD (BC), A
                 OUT (C), A
+                endm
+; -----------------------------------------
+; включение страницы с графикой
+; -----------------------------------------
+SET_PAGE_GRAPHICS macro 
+                CALL SetPage3
                 endm
 ; -----------------------------------------
 ; включение страницы первого экрана

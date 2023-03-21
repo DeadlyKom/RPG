@@ -14,26 +14,26 @@ Begin:          EQU $
 ; Note:
 ; -----------------------------------------
 SetPage:        EX AF, AF'
-                LD BC, PORT_7FFD
+                LD BC, Adr.Port_7FFD
                 LD A, (BC)
                 LD C, A
                 EX AF, AF'
                 XOR C
                 AND PAGE_MASK
                 XOR C
-                LD C, LOW PORT_7FFD
+                LD C, LOW Adr.Port_7FFD
                 LD (BC), A
                 OUT (C), A
                 RET
 
-SetPage0:       LD BC, PORT_7FFD
+SetPage0:       LD BC, Adr.Port_7FFD
                 LD A, (BC)
                 AND PAGE_MASK_INV
                 LD (BC), A
                 OUT (C), A
                 RET
 
-SetPage1:       LD BC, PORT_7FFD
+SetPage1:       LD BC, Adr.Port_7FFD
                 LD A, (BC)
                 AND PAGE_MASK_INV
                 INC A
@@ -41,7 +41,7 @@ SetPage1:       LD BC, PORT_7FFD
                 OUT (C), A
                 RET
 
-SetPage3:       LD BC, PORT_7FFD
+SetPage3:       LD BC, Adr.Port_7FFD
                 LD A, (BC)
                 AND PAGE_MASK_INV
                 OR PAGE_3
@@ -49,7 +49,7 @@ SetPage3:       LD BC, PORT_7FFD
                 OUT (C), A
                 RET
 
-SetPage4:       LD BC, PORT_7FFD
+SetPage4:       LD BC, Adr.Port_7FFD
                 LD A, (BC)
                 AND PAGE_MASK_INV
                 OR PAGE_4
@@ -57,7 +57,7 @@ SetPage4:       LD BC, PORT_7FFD
                 OUT (C), A
                 RET
 
-SetPage5:       LD BC, PORT_7FFD
+SetPage5:       LD BC, Adr.Port_7FFD
                 LD A, (BC)
                 AND PAGE_MASK_INV
 .OR             OR PAGE_5
@@ -65,7 +65,7 @@ SetPage5:       LD BC, PORT_7FFD
                 OUT (C), A
                 RET
 
-SetPage6:       LD BC, PORT_7FFD
+SetPage6:       LD BC, Adr.Port_7FFD
                 LD A, (BC)
                 AND PAGE_MASK_INV
                 OR PAGE_6
@@ -73,7 +73,7 @@ SetPage6:       LD BC, PORT_7FFD
                 OUT (C), A
                 RET
 
-SetPage7:       LD BC, PORT_7FFD
+SetPage7:       LD BC, Adr.Port_7FFD
                 LD A, (BC)
                 AND PAGE_MASK_INV
                 OR PAGE_7
@@ -88,7 +88,7 @@ SetPage7:       LD BC, PORT_7FFD
 ;   BC, AF
 ; Note:
 ; -----------------------------------------
-ScrPageToC000:  LD BC, PORT_7FFD
+ScrPageToC000:  LD BC, Adr.Port_7FFD
                 LD A, (BC)
                 AND PAGE_MASK_INV
                 BIT SCREEN_BIT, A
@@ -105,7 +105,7 @@ ScrPageToC000:  LD BC, PORT_7FFD
 ;   BC, AF
 ; Note:
 ; -----------------------------------------
-ScrPageToC000_: LD BC, PORT_7FFD
+ScrPageToC000_: LD BC, Adr.Port_7FFD
                 LD A, (BC)
                 AND PAGE_MASK_INV
                 BIT SCREEN_BIT, A
@@ -126,7 +126,7 @@ ScrPageToC000_: LD BC, PORT_7FFD
 ; для 7 страницы равен 1
 ; если будут другие страницы, ну сам дурак!
 ; -----------------------------------------
-ScrFromPageC000 LD BC, PORT_7FFD
+ScrFromPageC000 LD BC, Adr.Port_7FFD
                 LD A, (BC)
                 BIT 1, A
                 RES SCREEN_BIT, A
@@ -144,7 +144,7 @@ ScrFromPageC000 LD BC, PORT_7FFD
 ;   BC, AF
 ; Note:
 ; -----------------------------------------
-SwapScreens:    LD BC, PORT_7FFD
+SwapScreens:    LD BC, Adr.Port_7FFD
                 LD A, (BC)
                 XOR SCREEN_MASK
                 LD (BC), A
@@ -158,7 +158,7 @@ SwapScreens:    LD BC, PORT_7FFD
 ;   BC, AF
 ; Note:
 ; -----------------------------------------
-ShowBaseScreen: LD BC, PORT_7FFD
+ShowBaseScreen: LD BC, Adr.Port_7FFD
                 LD A, (BC)
                 AND SCREEN_MASK_INV
                 LD (BC), A
@@ -172,14 +172,14 @@ ShowBaseScreen: LD BC, PORT_7FFD
 ;   BC, AF
 ; Note:
 ; -----------------------------------------
-ShowShadowScreen: LD BC, PORT_7FFD
+ShowShadowScreen: LD BC, Adr.Port_7FFD
                 LD A, (BC)
                 OR SCREEN_MASK
                 LD (BC), A
                 OUT (C), A
                 RET
 
-                display " - Memory Switch : \t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
+                display " - Memory switch: \t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
 
                 endmodule
 

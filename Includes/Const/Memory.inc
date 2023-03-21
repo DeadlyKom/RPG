@@ -1,6 +1,6 @@
 
-                ifndef _CONST_SHARED_MEMORY_MAP_
-                define _CONST_SHARED_MEMORY_MAP_
+                ifndef _CONST_MEMORY_
+                define _CONST_MEMORY_
 
 MemBank_01_SCR  EQU #4000                                                       ; Bank 01 (Screen 0)
 ScreenSize      EQU #1B00                                                       ; размер экрана
@@ -12,4 +12,4 @@ MemBank_03_SCR  EQU #C000                                                       
 MemBank_03_     EQU #C000 + ScreenSize                                          ; Bank 03 (16384 байт) (пропуск экрана)
 BankSize        EQU #4000                                                       ; размер банка (16384 байт)
 
-                endif ; ~_CONST_SHARED_MEMORY_MAP_
+                endif ; ~_CONST_MEMORY_

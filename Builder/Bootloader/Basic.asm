@@ -16,17 +16,19 @@ Basic:          DB #00, #0A                                                     
 StartBoot:      DI
                 ; отключение 128 бейсика
                 Disable_128k_Basic
-                LD SP, StackTop
+                LD SP, Adr.StackTop
 
                 ; -----------------------------------------
                 ; загрузка кернеля
                 ; -----------------------------------------
+                ifndef _DEBUG
                 LD IX, Adr.Kernel
                 LD DE, Kernel.Size
                 LD A, #FF
                 SCF
                 CALL BASIC.LD_BYTES
                 DEBUG_BREAK_POINT_NC                                            ; ошибка загрузки
+                endif
 
                 ; -----------------------------------------
                 ; инициализация прерывания
@@ -36,12 +38,27 @@ StartBoot:      DI
                 ; -----------------------------------------
                 ; загрузка игры
                 ; -----------------------------------------
+                ifndef _DEBUG
                 LD IX, Adr.Module.Game.Main
                 LD DE, Game.Size
                 LD A, #FF
                 SCF
                 CALL BASIC.LD_BYTES
                 DEBUG_BREAK_POINT_NC                                            ; ошибка загрузки
+                endif
+
+                ; -----------------------------------------
+                ; загрузка графики
+                ; -----------------------------------------
+                ifndef _DEBUG
+                SET_PAGE_GRAPHICS                                               ; включить страницу графики
+                LD IX, Adr.Graphics.Pack1
+                LD DE, Graphics.Size
+                LD A, #FF
+                SCF
+                CALL BASIC.LD_BYTES
+                DEBUG_BREAK_POINT_NC                                            ; ошибка загрузки
+                endif
 
                 ; вызов загрузчика пакета файлов
                 JP Adr.Module.Game.Main

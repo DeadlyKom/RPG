@@ -1,0 +1,46 @@
+                ifndef _CORE_MODULE_TABLE_SCREEN_ADDRESS_GENERATION_
+                define _CORE_MODULE_TABLE_SCREEN_ADDRESS_GENERATION_
+
+                module Tables
+; -----------------------------------------
+; генерация адресов экрана (строк)
+; In:
+; Out:
+; Corrupt:
+; Note:
+; -----------------------------------------
+ScrAdrGen:      LD HL, Adr.ScrAdrTable
+                LD DE, #38C0                                                    ; константы
+                LD B, E
+
+.Loop           ; расчёт младший байт
+                LD A, L
+                AND D
+                ADD A, A
+                ADD A, A
+                LD (HL), A
+
+                INC H
+
+                ; расчёт старший байт
+                LD A, L
+                AND E
+                RRA
+                RRA
+                RRA
+                XOR L
+                AND D
+                XOR L
+                OR E
+                LD (HL), A
+                
+                DEC H
+                INC L
+                DJNZ .Loop
+
+                RET
+
+                display " - Screen address generation: \t\t\t", /A, ScrAdrGen, " = busy [ ", /D, $ - ScrAdrGen, " bytes  ]"
+                endmodule
+
+                endif ; ~ _CORE_MODULE_TABLE_SCREEN_ADDRESS_GENERATION_

@@ -5,7 +5,7 @@
                 include "Const/Include.inc"
                 include "Config/Include.inc"
                 include "Macro/Include.inc"
-                ; include "Struct/Include.inc"
+                include "Struct/Include.inc"
 
                 ; version build
                 define BUILD 0
@@ -13,5 +13,6 @@
                 define MINOR 1
 
                 define TAP_FILENAME "RPG.tap"                                   ; имя образа
+                define SNA_FILENAME "RPG.sna"                                   ; имя образа для отладки
 
                 endif ; ~_BUILDER_INCLUDES_

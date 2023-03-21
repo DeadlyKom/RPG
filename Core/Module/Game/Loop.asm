@@ -1,6 +1,6 @@
 
-                ifndef _MODULE_GAME_LOOP_
-                define _MODULE_GAME_LOOP_
+                ifndef _CORE_MODULE_GAME_LOOP_
+                define _CORE_MODULE_GAME_LOOP_
 ; -----------------------------------------
 ; игровой цикл
 ; In:
@@ -8,9 +8,9 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-GameLoop:       SHOW_BASE_SCREEN
-
-.Loop           
+GameLoop:       
+.Loop           CHECK_RENDER_FLAG FINISHED_BIT
+                CALL Z, Render.World
                 JP .Loop
 
-                endif ; ~_MODULE_GAME_LOOP_
+                endif ; ~_CORE_MODULE_GAME_LOOP_
