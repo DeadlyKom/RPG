@@ -20,122 +20,183 @@ WorldSpriteGen: SHOW_SHADOW_SCREEN                                              
                 SET_SCREEN_SHADOW                                               ; включение страницы второго экрана
 
                 ; -----------------------------------------
-                ; генерация таблицы спрайтов и смещёные спрайты
+                ; генерация смещёных спрайтов тайлопары
                 ; -----------------------------------------
-                LD IX, Adr.WorldSprTable
-                LD HL, Adr.WorldSpr - WORLD_TILE_TOTAL_SIZE 
-                LD DE, WORLD_TILE_TOTAL_SIZE
-                LD B, WORLD_TILE_NUM
+                LD IX, Adr.WorldSpr
+                LD HL, .TableTilepairs
+                LD B, .Num
 
+.TilepairsLoop  LD E, (HL)
+                INC HL
+                LD D, (HL)
+                INC HL
+                PUSH DE
                 EXX
-                LD HL, MemBank_01_SCR
-                EXX
+                POP BC
 
-.TableLoop      ; -----------------------------------------
-                ; расчёт адреса спрайта и заполнение таблицы
+                ; расчёт адреса 2-го тайла
+                LD H, HIGH MemBank_01_SCR >> 2
+                LD A, B
+                ADD A, A    ; x2
+                ADD A, A    ; x4
+                ADD A, A    ; x8
+                LD L, A
+                ADD HL, HL  ; x16
+                ADD HL, HL  ; x32
+
+                EX DE, HL
+
+                ; расчёт адреса 1-го тайла
+                LD H, HIGH MemBank_01_SCR >> 2
+                LD A, C
+                ADD A, A    ; x2
+                ADD A, A    ; x4
+                ADD A, A    ; x8
+                LD L, A
+                ADD HL, HL  ; x16
+                ADD HL, HL  ; x32
+                LD B, H
+                LD C, L
+
+                LD A, 16
+.ShiftLoop      BIT 0, A
+                EX AF, AF'
+
                 ; -----------------------------------------
-                ADD HL, DE
-                PUSH HL
+                ; 0-ой сдвиг
+                ; -----------------------------------------
+
+                ; 1-ый байт 1-го тайла
+                LD A, (BC)
+                INC BC
+                LD H, A
+                
+                ; 2-ой байт 1-го тайла
+                LD A, (BC)
+                INC BC
+                LD L, A
+
+                ; 1-ый байт 2-го тайла
+                LD A, (DE)
+                INC DE
+                INC DE
+
+                EX AF, AF'
+                JR Z, .Forward_0
+
                 LD (IX + 0), L
                 LD (IX + 1), H
-                INC IX
-                INC IX
+                JR .Forward_0_
 
+.Forward_0      LD (IX + 0), H
+                LD (IX + 1), L
+.Forward_0_     EX AF, AF'
                 ; -----------------------------------------
-                ; копирование спрайтов (после декомпрессии)
-                ; -----------------------------------------
-                EXX
-                POP DE
-                PUSH DE                                                         ; сохранение начального адреса копии тайла
-                LD BC, WORLD_TILE_SIZE - 2
-                CALL Memcpy.FastLDIR
-                EX (SP), HL                                                     ; сохранение адреса следующего тайла (после декомпрессии)
-                                                                                ; восстановление начального адреса скопированного тайла
-               
-                ; -----------------------------------------
-                ; создание сдвинутых спрайтов
+                ; 1-ый сдвиг
                 ; -----------------------------------------
 
-                ; HL - адрес спрайта
-                ; DE - адрес спрайта сдвига     (назначение)
-
-                PUSH DE
-                POP IY
-
-                ; инициализация
-                LD B, 16
-
-.RL_Loop        LD D, (HL)
-                INC HL
-                LD E, (HL)
-                INC HL
-                XOR A
-
-                EX DE, HL
-
-                ; 1
                 rept 2
-                ADD HL, HL
-                ADC A, A
+                ADD A, A
+                ADC HL, HL
                 endr
 
-                ; 2 первых байта буферная зона порчи стека
-                BIT 0, B
-                JR Z, .Forward_6
-                LD (IY + 103), L
-                LD (IY + 105), A
-                JR .Forward_6_
-.Forward_6      LD (IY + 103), A
-                LD (IY + 105), L
-.Forward_6_     LD (IY + 104), H
-
-                ; 2
-                rept 2
-                ADD HL, HL
-                ADC A, A
-                endr
-
-                ; 2 первых байта буферная зона порчи стека
-                BIT 0, B
-                JR Z, .Forward_4
-                LD (IY + 52), L
-                LD (IY + 54), A
-                JR .Forward_4_
-.Forward_4      LD (IY + 52), A
-                LD (IY + 54), L
-.Forward_4_     LD (IY + 53), H
-
-                ; 3
-                rept 2
-                ADD HL, HL
-                ADC A, A
-                endr
-
-                ; 2 первых байта буферная зона порчи стека
-                BIT 0, B
+                EX AF, AF'
                 JR Z, .Forward_2
-                LD (IY + 2), L
-                LD (IY + 4), A
+
+                LD (IX + 32), L
+                LD (IX + 33), H
                 JR .Forward_2_
-.Forward_2      LD (IY + 2), A
-                LD (IY + 4), L
-.Forward_2_     LD (IY + 3), H
 
-                EX DE, HL
+.Forward_2      LD (IX + 32), H
+                LD (IX + 33), L
+.Forward_2_     EX AF, AF'
 
-                INC IY
-                INC IY
-                INC IY
+                ; -----------------------------------------
+                ; 2-ой сдвиг
+                ; -----------------------------------------
 
-                DJNZ .RL_Loop
-                POP HL                                                          ; восстановление адреса следующего тайла (после декомпрессии)
+                rept 2
+                ADD A, A
+                ADC HL, HL
+                endr
+                
+                EX AF, AF'
+                JR Z, .Forward_4
+
+                LD (IX + 64), L
+                LD (IX + 65), H
+                JR .Forward_4_
+
+.Forward_4      LD (IX + 64), H
+                LD (IX + 65), L
+.Forward_4_     EX AF, AF'
+
+                ; -----------------------------------------
+                ; 3-ий сдвиг
+                ; -----------------------------------------
+
+                rept 2
+                ADD A, A
+                ADC HL, HL
+                endr
+                
+                EX AF, AF'
+                JR Z, .Forward_6
+
+                LD (IX + 96), L
+                LD (IX + 97), H
+                JR .Forward_6_
+
+.Forward_6      LD (IX + 96), H
+                LD (IX + 97), L
+.Forward_6_     EX AF, AF'
+
+                INC IX
+                INC IX
+
+                EX AF, AF'
+                DEC A
+                JR NZ, .ShiftLoop
+
+                ;
+                LD BC, 128 - 32
+                ADD IX, BC
 
                 EXX
-                DJNZ .TableLoop
+                DEC B
+                JP NZ, .TilepairsLoop
 
                 RET
 
-                display " - World sprite generatuion: \t\t\t\t", /A, ScrAdrGen, " = busy [ ", /D, $ - ScrAdrGen, " bytes  ]"
+.TableTilepairs DB #00, #00
+                DB #00, #01
+                DB #01, #01
+                DB #01, #02
+                DB #02, #02
+                DB #02, #01
+                DB #01, #00
+
+                DB #00, #03
+                DB #03, #04
+                DB #04, #04
+                DB #04, #05
+                DB #05, #00
+
+                DB #00, #06
+                DB #06, #07
+                DB #07, #07
+                DB #07, #08
+                DB #08, #00
+
+                DB #00, #09
+                DB #09, #0A
+                DB #0A, #0A
+                DB #0A, #0B
+                DB #0B, #00
+.Num            EQU ($-.TableTilepairs) >> 1
+
+                display " - World sprite generatuion: \t\t[", /D, WorldSpriteGen.Num, " tilepairs]\t", /A, ScrAdrGen, " = busy [ ", /D, $ - ScrAdrGen, " bytes  ]"
+
                 endmodule
 
                 endif ; ~ _CORE_MODULE_TABLE_WORLD_SPRITE_GENERATION_

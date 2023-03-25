@@ -11,11 +11,15 @@ Begin:          EQU $
                 incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Sand_0.spr"
                 incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Sand_1.spr"
                 incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Sand_2.spr"
-                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Sand_3.spr"
-                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Sand_4.spr"
-                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Sand_5.spr"
-                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Sand_6.spr"
-                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Sand_7.spr"
+                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_0.spr"
+                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_1.spr"
+                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_2.spr"
+                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_3.spr"
+                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_4.spr"
+                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_5.spr"
+                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_6.spr"
+                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_7.spr"
+                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_8.spr"
 Size:           EQU $ - Begin
 
                 savebin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground.pack", Begin, Size

@@ -22,8 +22,7 @@ PRNG            EQU #0100                                                       
 
                 module Adr
 EntryPoint      EQU Adr.PRNG + Size.PRNG
-WorldSprTable   EQU MemBank_03_                                                 ; адрес таблицы спрайтов карты мира
-WorldSpr        EQU 2 + WorldSprTable + Size.WorldSprTable                      ; 2 первых байта буферная зона порчи стека
+WorldSpr        EQU #F000                                                       ; адрес прайтов карты мира (тайлопары)      [выровненый по границе 4096 байт]
 GameConfig      EQU Adr.GameVar_A                                               ; 32 байта переменных конфигурации игры
 GameState       EQU Adr.GameVar_B                                               ; 32 байта переменных состояние игры
                 module Module

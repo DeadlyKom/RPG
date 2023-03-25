@@ -9,11 +9,11 @@
 ; Note:
 ; -----------------------------------------
 World:          SET_SCREEN_SHADOW
-
+                
                 CALL Draw.World
                 CALL Game.Input.Gameplay.Scan
-                CHECK_RENDER_FLAG GEN_BIT
-                CALL Z, Game.World.Generate
+                ; CHECK_RENDER_FLAG GEN_BIT
+                ; CALL Z, Game.World.Generate
 
                 ; show mouse position
                 LD DE, #0000

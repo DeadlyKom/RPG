@@ -27,7 +27,7 @@ SpeedScroll     DB #00                                                          
 Options         DB #00
 
 Seed            DW #0000                                                        ; seed для генерации текущей сессии
-Frequency       DB #00                                                          ; частота шума перлина
+Frequency       DB #00                                                          ; частота шума перлина (устаревшая)
 
                 ends
 

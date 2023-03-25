@@ -59,9 +59,10 @@ Convert:
 
 ; world map
 World:
-.Offset_X       EQU Kernel.World.Draw.Offset_X                                  ; смещение карты мира по горизонтали
-.Offset_Y       EQU Kernel.World.Draw.Offset_Y                                  ; смещение карты мира по вертикали
+.Shake_X        EQU Kernel.World.Draw.Shake_X                                   ; тряска карты мира по горизонтали
+.Shake_Y        EQU Kernel.World.Draw.Shake_Y                                   ; тряска карты мира по вертикали
 .Shift_X        EQU Kernel.World.Draw.Shift_X                                   ; смещение карты мира по горизонтали
+; .Shift_Y        EQU Kernel.World.Draw.Shift_Y                                   ; смещение карты мира по вертикали
 
 Input:
 .CheckKeyState  EQU Kernel.Input.CheckKeyState
@@ -117,11 +118,24 @@ Decompressor
 ; load modules
 
 ; functions
+Func
+.Left.x8        EQU Kernel.Functions.NoShiftLeft.x8
+.Left.x6        EQU Kernel.Functions.NoShiftLeft.x6
+.Left.x4        EQU Kernel.Functions.NoShiftLeft.x4
+.Left.x2        EQU Kernel.Functions.NoShiftLeft.x2
+.Left.x0        EQU Kernel.Functions.NoShiftLeft.x0
+.Center.x8      EQU Kernel.Functions.NoShiftCenter.x8
+.Center.x6      EQU Kernel.Functions.NoShiftCenter.x6
+.Center.x4      EQU Kernel.Functions.NoShiftCenter.x4
+.Center.x2      EQU Kernel.Functions.NoShiftCenter.x2
+.Center.x0      EQU Kernel.Functions.NoShiftCenter.x0
+.Right.x8       EQU Kernel.Functions.NoShiftRight.x8
+.Right.x6       EQU Kernel.Functions.NoShiftRight.x6
+.Right.x4       EQU Kernel.Functions.NoShiftRight.x4
+.Right.x2       EQU Kernel.Functions.NoShiftRight.x2
+.Right.x0       EQU Kernel.Functions.NoShiftRight.x0
 
 ; tables
-Table:
-.WorldShift     EQU Kernel.LD.TableShift.LD_16
-.WorldNoShift   EQU Kernel.LD.TableNoShift.LD_16
 
 ; debug
                 ifdef _DEBUG
