@@ -9,8 +9,8 @@
 ; Note:
 ; -----------------------------------------
 Scan:           ; опрос виртуальных клавиш
-                LD DE, InputHandler
-                CALL Input.JumpKeys
+                ; LD DE, InputHandler
+                ; CALL Input.JumpKeys
 
                 ; ; проверка необходимости опроса мыши
                 ; LD A, (GameConfig.Options)
@@ -35,6 +35,16 @@ Scan:           ; опрос виртуальных клавиш
                 CALL Input.CheckKeyState
                 CALL Z, Game.World.Right
 
+                ; move map up
+                LD A, VK_W
+                CALL Input.CheckKeyState
+                CALL Z, Game.World.Up
+
+                ; move map down
+                LD A, VK_S
+                CALL Input.CheckKeyState
+                CALL Z, Game.World.Down
+
                 CHECK_RENDER_FLAG INERT_BIT
                 JR Z, .RES
 
@@ -51,15 +61,7 @@ Scan:           ; опрос виртуальных клавиш
                 LD (HL), A
 
 
-                ; ; move map up
-                ; LD A, VK_W
-                ; CALL Input.CheckKeyState
-                ; CALL Z, Up
-
-                ; ; move map down
-                ; LD A, VK_S
-                ; CALL Input.CheckKeyState
-                ; CALL Z, Down
+                
 
                 RET
 .Counter        DB #50

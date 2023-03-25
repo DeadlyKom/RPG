@@ -15,7 +15,7 @@ World:          SET_SCREEN_SHADOW
                 ; CHECK_RENDER_FLAG GEN_BIT
                 ; CALL Z, Game.World.Generate
 
-                ; show mouse position
+                ; show position
                 LD DE, #0000
                 CALL Console.SetCursor
                 LD HL, Game.World.Generate.X
@@ -29,6 +29,17 @@ World:          SET_SCREEN_SHADOW
                 LD DE, #0004
                 CALL Console.SetCursor
                 LD HL, Game.World.Delta
+                LD A, (HL)
+                CALL Console.DrawByte
+
+                LD DE, #0100
+                CALL Console.SetCursor
+                LD HL, Game.World.Generate.Y
+                LD A, (HL)
+                CALL Console.DrawByte
+                LD DE, #0102
+                CALL Console.SetCursor
+                LD HL, World.Shift_Y
                 LD A, (HL)
                 CALL Console.DrawByte
 

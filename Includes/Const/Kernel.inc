@@ -62,7 +62,7 @@ World:
 .Shake_X        EQU Kernel.World.Draw.Shake_X                                   ; тряска карты мира по горизонтали
 .Shake_Y        EQU Kernel.World.Draw.Shake_Y                                   ; тряска карты мира по вертикали
 .Shift_X        EQU Kernel.World.Draw.Shift_X                                   ; смещение карты мира по горизонтали
-; .Shift_Y        EQU Kernel.World.Draw.Shift_Y                                   ; смещение карты мира по вертикали
+.Shift_Y        EQU Kernel.World.DrawColumn.Shift_Y                                   ; смещение карты мира по вертикали
 
 Input:
 .CheckKeyState  EQU Kernel.Input.CheckKeyState

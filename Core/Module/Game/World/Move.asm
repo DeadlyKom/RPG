@@ -41,7 +41,48 @@ Right:          SET_RENDER_FLAG INERT_BIT
                 LD (World.Shift_X), A
                 RET
 
+
+Up:             SET_RENDER_FLAG INERT_BIT
+
+                LD HL, Delta
+                LD A, (LocationY)
+                ADD A, (HL)
+                JR NC, .L1
+
+                LD HL, (Game.World.Generate.Y)
+                DEC HL
+                LD (Game.World.Generate.Y), HL
+
+                RES_RENDER_FLAG GEN_BIT
+                
+
+                XOR A
+.L1             LD (LocationY), A
+                AND #0F
+                LD (World.Shift_Y), A
+                RET
+
+Down:           SET_RENDER_FLAG INERT_BIT
+
+                LD HL, Delta
+                LD A, (LocationY)
+                SUB (HL)
+                JR NC, .L1
+
+                LD HL, (Game.World.Generate.Y)
+                INC HL
+                LD (Game.World.Generate.Y), HL
+
+                RES_RENDER_FLAG GEN_BIT
+
+                LD A, #EE
+.L1             LD (LocationY), A
+                AND #0F
+                LD (World.Shift_Y), A
+                RET
+
 LocationX:      DB #00
+LocationY:      DB #00
 Delta           DB #22
 
                 endif ; ~_MODULE_GAME_WORLD_MOVE_

@@ -14,13 +14,13 @@ InputHandler:   JR NZ, .NotProcessing                                           
                 EX AF, AF'                                                      ; переключится на ID виртуальной клавиши
 
                 CP KEY_ID_UP                                                    ; клавиша "вверх"
-                JP Z, Up
+                JP Z, Game.World.Up
                 CP KEY_ID_DOWN                                                  ; клавиша "вниз"
-                JP Z, Down
-                ; CP KEY_ID_LEFT                                                  ; клавиша "влево"
-                ; JP Z, Left
-                ; CP KEY_ID_RIGHT                                                 ; клавиша "вправо"
-                ; JP Z, Right
+                JP Z, Game.World.Down
+                CP KEY_ID_LEFT                                                  ; клавиша "влево"
+                JP Z, Game.World.Left
+                CP KEY_ID_RIGHT                                                 ; клавиша "вправо"
+                JP Z, Game.World.Right
                 ; CP KEY_ID_SELECT                                                ; клавиша "выбор"
                 ; JP Z, $
                 ; CP KEY_ID_BACK                                                  ; клавиша "отмена/назад"
@@ -36,8 +36,5 @@ InputHandler:   JR NZ, .NotProcessing                                           
 Processed:      OR A                                                            ; сброс флага переполнения (произведена обработка клавиши)
                 RET
 
-Up:             CALL Game.World.Left
-                JR Processed
-Down:           JP Game.World.Right
 
                 endif ; ~_MODULE_GAME_INPUT_GAMEPLAY_HANDLER_

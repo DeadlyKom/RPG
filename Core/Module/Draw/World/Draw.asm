@@ -39,7 +39,7 @@ Draw:           ; -----------------------------------------
                 LD (.ScreenAddress), DE
 
                 ; -----------------------------------------
-                ; расчёт смещения спрайта (0-3)
+                ; расчёт смещения спрайта по горизонтали (0-3)
                 ; -----------------------------------------
 .Shift_X        EQU $+1
                 LD A, #00
@@ -49,7 +49,22 @@ Draw:           ; -----------------------------------------
                 ADD A, A    ; x4
                 ADD A, A    ; x8
                 ADD A, A    ; x16
+                LD B, A
                 ADD A, A    ; x32
+                LD (DrawColumn.ShiftEnd), A
+                LD (DrawColumn.ShiftLoop), A
+
+                ; -----------------------------------------
+                ; расчёт смещения спрайта по вертикали
+                ; -----------------------------------------
+                LD A, (DrawColumn.Shift_Y)
+                LD L, A
+                AND %00001111
+                ADD A, A
+                NEG
+                ADD A, #20
+                OR B
+                ADD A, A
                 LD (DrawColumn.Shift), A
 
                 ; -----------------------------------------
@@ -115,6 +130,8 @@ Draw:           ; -----------------------------------------
 
                 LD HL, Func.Right.x8
                 LD (DrawColumn.x8), HL
+                LD (DrawColumn.x8_Loop), HL
+                LD (DrawColumn.x8_End), HL
 
                 EXX
                 LD HL, (.ScreenAddress)
@@ -146,6 +163,8 @@ Draw:           ; -----------------------------------------
 
                 LD HL, Func.Left.x8
                 LD (DrawColumn.x8), HL
+                LD (DrawColumn.x8_Loop), HL
+                LD (DrawColumn.x8_End), HL
 
                 EXX
                 LD HL, (.ScreenAddress)
@@ -186,6 +205,8 @@ Draw:           ; -----------------------------------------
 
                 LD HL, Func.Center.x8
                 LD (DrawColumn.x8), HL
+                LD (DrawColumn.x8_Loop), HL
+                LD (DrawColumn.x8_End), HL
 
                 ; -----------------------------------------
                 ;   DE  - адрес буфера отображения (RenderBuffer)

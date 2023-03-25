@@ -11,7 +11,7 @@
 EntryPoint:     ; -----------------------------------------
                 ; установка бордюра
                 ; -----------------------------------------
-                BORDER GREEN
+                BORDER BLACK
                 
                 ; -----------------------------------------
                 ; подготовка теневого экрана
@@ -19,7 +19,7 @@ EntryPoint:     ; -----------------------------------------
                 SET_SCREEN_SHADOW
                 CLS_C000
                 ATTR_C000_IPB WHITE, BLACK, 0
-                ATTR_RECT_IPB MemBank_03_SCR, SCR_WORLD_POS_X, SCR_WORLD_POS_Y, SCR_WORLD_SIZE_X * 2 - 1, SCR_WORLD_SIZE_Y * 2 - 1, BLACK, WHITE, 0
+                ATTR_RECT_IPB MemBank_03_SCR, SCR_WORLD_POS_X, SCR_WORLD_POS_Y, SCR_WORLD_SIZE_X * 2 - 1, SCR_WORLD_SIZE_Y * 2, BLACK, WHITE, 0
 
                 ; -----------------------------------------
                 ; инициализация таблиц
@@ -33,7 +33,7 @@ EntryPoint:     ; -----------------------------------------
                 ; -----------------------------------------
                 CLS_4000
                 ATTR_4000_IPB WHITE, BLACK, 0
-                ATTR_RECT_IPB MemBank_01_SCR, SCR_WORLD_POS_X, SCR_WORLD_POS_Y, SCR_WORLD_SIZE_X * 2 - 1, SCR_WORLD_SIZE_Y * 2 - 1, BLACK, WHITE, 0
+                ATTR_RECT_IPB MemBank_01_SCR, SCR_WORLD_POS_X, SCR_WORLD_POS_Y, SCR_WORLD_SIZE_X * 2 - 1, SCR_WORLD_SIZE_Y * 2, BLACK, WHITE, 0
 
                 ; -----------------------------------------
                 ; инициализация обработчика прерываний
