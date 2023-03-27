@@ -40,4 +40,24 @@ Y               FValue
 Data			FValue
 				ends
 
+				struct FPNInt32
+.Low            DW #0000
+.High           DW #0000
+                ends
+
+                struct FLocation32
+.X              FPNInt32 0x0000, 0x0000
+.Y              FPNInt32 0x0000, 0x0000
+                ends
+
+                struct FPNMultiply40
+.Byte           DB #00
+.Int            FPNInt32
+                ends
+
+                struct FNoise2D
+.Frequency      DB #00
+.Location       FLocation32 {0x0000, 0x0000}, {0x0000, 0x0000}
+                ends
+
 				endif ; ~_STRUCT_BASE_

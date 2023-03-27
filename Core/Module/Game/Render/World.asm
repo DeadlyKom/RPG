@@ -10,15 +10,19 @@
 ; -----------------------------------------
 World:          SET_SCREEN_SHADOW
                 
+                RestoreBC                                                       ; защита от повреждения данных во время прерывания
+                
                 CALL Draw.World
+                CALL Draw.Minimap
+
                 CALL Game.Input.Gameplay.Scan
-                ; CHECK_RENDER_FLAG GEN_BIT
-                ; CALL Z, Game.World.Generate
+                CHECK_RENDER_FLAG GEN_BIT
+                CALL Z, Game.World.MoveRight
 
                 ; show position
                 LD DE, #0000
                 CALL Console.SetCursor
-                LD HL, Game.World.Generate.X
+                LD HL, GameState.PositionX
                 LD A, (HL)
                 CALL Console.DrawByte
                 LD DE, #0002
@@ -34,7 +38,7 @@ World:          SET_SCREEN_SHADOW
 
                 LD DE, #0100
                 CALL Console.SetCursor
-                LD HL, Game.World.Generate.Y
+                LD HL, GameState.PositionX
                 LD A, (HL)
                 CALL Console.DrawByte
                 LD DE, #0102

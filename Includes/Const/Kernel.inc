@@ -51,6 +51,7 @@ Generation:
 ; draw
 Draw:
 .World          EQU Kernel.World.Draw                                           ; отображение карты миры
+.Minimap        EQU Kernel.World.Minimap                                        ; отображение миникарты
 
 Convert:
 .CharToScreen   EQU Kernel.Utils.PixelAddressC

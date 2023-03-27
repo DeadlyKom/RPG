@@ -33,7 +33,7 @@ DrawChar:       ; расчёт адреса символа
                 ; адрес экрана
 .ScreenAdr      EQU $+1
                 LD DE, #0000
-                HiddenScreenAdr_ D
+                HiddenScrAdr_ D                                                 ; корректировка адреса скрытого экрана
 
                 ; вывод на экран
                 dup  7

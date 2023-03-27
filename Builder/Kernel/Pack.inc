@@ -27,14 +27,15 @@ Begin:          EQU $
                 include "Core/Module/Draw/World/Draw.asm"
                 include "Core/Module/Draw/World/DrawColumn.asm"
                 include "Core/Module/Draw/World/Functions/Include.inc"
+                include "Core/Module/Draw/World/Minimap.asm"
 
                 ; decompressor
                 include "Core/Module/Decompressor/Forward.asm"
                 include "Core/Module/Decompressor/Backward.asm"
 
                 ; math
-                include "Core/Module/Math/Lerp.asm"
                 include "Core/Module/Math/RNG/Rand8.asm"
+                include "Core/Module/Math/Lerp.asm"
                 include "Core/Module/Math/Mul/16x8_16.asm"
                 include "Core/Module/Math/Mul/16x8_24.asm"
                 include "Core/Module/Math/Mul/32x8_40.asm"

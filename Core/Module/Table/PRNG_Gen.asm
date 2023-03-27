@@ -10,13 +10,13 @@
 ; Note:
 ; -----------------------------------------
 PRNG_Gen:       ; установка seed
-                LD BC, (0);(GameConfig.Seed)
+                LD BC, (110);(GameConfig.Seed)
                 CALL Math.SetSeed16
 
                 CALL Math.Rand8
                 INC A
                 ADD A, A
-                LD A, #10
+                LD A, #24
                 LD (Math.PN_Frequency), A
                 LD (GameConfig.Frequency), A
 

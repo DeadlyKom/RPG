@@ -9,9 +9,9 @@ Left:           SET_RENDER_FLAG INERT_BIT
                 SUB (HL)
                 JR NC, .L1
 
-                LD HL, (Game.World.Generate.X)
-                INC HL
-                LD (Game.World.Generate.X), HL
+                ; LD HL, (Game.World.Generate.X)
+                ; INC HL
+                ; LD (Game.World.Generate.X), HL
 
                 RES_RENDER_FLAG GEN_BIT
 
@@ -28,12 +28,20 @@ Right:          SET_RENDER_FLAG INERT_BIT
                 ADD A, (HL)
                 JR NC, .L1
 
-                LD HL, (Game.World.Generate.X)
-                DEC HL
-                LD (Game.World.Generate.X), HL
+                ; INC 32
+                LD HL, GameState.PositionX
+                INC (HL)
+                JR NZ, $+12
+                INC HL
+                INC (HL)
+                JR NZ, $+8
+                INC HL
+                INC (HL)
+                JR NZ, $+4
+                INC HL
+                INC (HL)
 
                 RES_RENDER_FLAG GEN_BIT
-                
 
                 XOR A
 .L1             LD (LocationX), A
@@ -49,9 +57,9 @@ Up:             SET_RENDER_FLAG INERT_BIT
                 ADD A, (HL)
                 JR NC, .L1
 
-                LD HL, (Game.World.Generate.Y)
-                DEC HL
-                LD (Game.World.Generate.Y), HL
+                ; LD HL, (Game.World.Generate.Y)
+                ; DEC HL
+                ; LD (Game.World.Generate.Y), HL
 
                 RES_RENDER_FLAG GEN_BIT
                 
@@ -69,9 +77,9 @@ Down:           SET_RENDER_FLAG INERT_BIT
                 SUB (HL)
                 JR NC, .L1
 
-                LD HL, (Game.World.Generate.Y)
-                INC HL
-                LD (Game.World.Generate.Y), HL
+                ; LD HL, (Game.World.Generate.Y)
+                ; INC HL
+                ; LD (Game.World.Generate.Y), HL
 
                 RES_RENDER_FLAG GEN_BIT
 

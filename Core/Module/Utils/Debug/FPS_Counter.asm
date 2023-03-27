@@ -57,7 +57,7 @@ Frame:
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Render:         SET_PAGE_SHADOW_SCREEN                                          ; установка страницы не видимого экрана
+Render:         SET_PAGE_SHADOW_SCREEN                                          ; установка страницы невидимого экрана
 
                 ; установка атрибут
                 LD A, COLOR_FPS

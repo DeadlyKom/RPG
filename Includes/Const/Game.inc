@@ -8,5 +8,7 @@ GameState           EQU Adr.GameState                                           
 .Render             EQU GameState + FGameState.Render                           ; флаги отрисовки
 .Gameplay           EQU GameState + FGameState.Gameplay                         ; флаги геймплея
 .Hardware           EQU GameState + FGameState.Hardware                         ; флаги железа
+.PositionX          EQU GameState + FGameState.PositionX                        ; позиция карты мира по горизонтали
+.PositionY          EQU GameState + FGameState.PositionY                        ; позиция карты мира по вертикали
 
                     endif ; ~_CONST_GAME_
