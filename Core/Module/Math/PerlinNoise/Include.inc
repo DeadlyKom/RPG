@@ -13,8 +13,8 @@ PerlinNoise     EQU $
 
                 ; внутренние переменные
 Noise2D:        FNoise2D 0x18
-LocationX:      FPNMultiply40
-LocationY:      FPNMultiply40
+LocationX:      FPNInt40
+LocationY:      FPNInt40
 IntNoiseData:   FLocation32
 
                 display " - PerlinNoise: \t\t\t\t\t", /A, PerlinNoise, " = busy [ ", /D, $ - PerlinNoise, " bytes  ]"

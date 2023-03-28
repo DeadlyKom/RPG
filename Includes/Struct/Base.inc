@@ -50,7 +50,7 @@ Data			FValue
 .Y              FPNInt32 0x0000, 0x0000
                 ends
 
-                struct FPNMultiply40
+                struct FPNInt40
 .Byte           DB #00
 .Int            FPNInt32
                 ends
