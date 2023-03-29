@@ -12,6 +12,7 @@
                 include "Game.inc"
                 include "Kernel.inc"
                 include "Input.inc"
+                include "World.inc"
                 include "Render.inc"
                 include "Interrupt.inc"
 

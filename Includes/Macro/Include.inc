@@ -7,6 +7,7 @@
                 include "Memory.inc"
                 include "Interrupt.inc"
                 include "Flags.inc"
+                include "World.inc"
                 include "Render.inc"
                 include "Debug.inc"
 

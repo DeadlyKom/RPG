@@ -34,6 +34,7 @@ PRNG_Gen:       ; установка seed
                 RET
 
                 display " - PRNG generation: \t\t\t\t\t", /A, PRNG_Gen, " = busy [ ", /D, $ - PRNG_Gen, " bytes  ]"
+
                 endmodule
 
                 endif ; ~ _CORE_MODULE_TABLE_PRNG_GENERATION_

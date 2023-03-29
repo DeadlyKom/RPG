@@ -6,6 +6,7 @@ GameConfig          EQU Adr.GameConfig                                          
 .Frequency          EQU GameConfig + FGameConfig.Frequency                      ; частота шума перлина
 GameState           EQU Adr.GameState                                           ; адрес структуры состояния игры
 .Render             EQU GameState + FGameState.Render                           ; флаги отрисовки
+.World              EQU GameState + FGameState.World                            ; флаги отрисовки мира
 .Gameplay           EQU GameState + FGameState.Gameplay                         ; флаги геймплея
 .Hardware           EQU GameState + FGameState.Hardware                         ; флаги железа
 .PositionX          EQU GameState + FGameState.PositionX                        ; позиция карты мира по горизонтали

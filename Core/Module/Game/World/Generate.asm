@@ -8,33 +8,71 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Generate:       ;
+Generate:       ; очистка спрайта мини карты
                 LD HL, Adr.MinimapSpr + 128
                 LD DE, #0000
                 CALL SafeFill.b128
 
-                ; положение карты по горизонтали
-                LD HL, (GameState.PositionX + 0)
-                LD (Math.PN_LocationX + 0), HL
-                LD HL, (GameState.PositionX + 2)
-                LD (Math.PN_LocationX + 2), HL
+                ; -----------------------------------------
+                ; центрирование мини карты по горизонтали
+                ; -----------------------------------------
 
-                ;
+                ; положение карты по горизонтали            DEHL
+                LD HL, (GameState.PositionX + 3)
+                EX DE, HL
+                LD HL, (GameState.PositionX + 1)
+                
+                ; вычесть половину смещения (центрирование)
+                LD BC, SCR_MINIMAP_OFFSET_X
+                OR A
+                SBC HL, BC
+                JR NC, $+3
+                DEC DE
+
+                ; сохранить значение
+                LD (Math.PN_LocationX + 0), HL
+                LD (Math.PN_LocationX + 2), DE
+
+                ; -----------------------------------------
+                ; центрирование мини карты по вертикали
+                ; -----------------------------------------
+
+                ; положение карты по горизонтали            DEHL
+                LD HL, (GameState.PositionY + 3)
+                EX DE, HL
+                LD HL, (GameState.PositionY + 1)
+                
+                ; вычесть половину смещения (центрирование)
+                LD BC, SCR_MINIMAP_OFFSET_Y
+                OR A
+                SBC HL, BC
+                JR NC, $+3
+                DEC DE
+
+                ; сохранить значение
+                LD (.LocationY_L), HL
+                LD (.LocationY_H), DE
+
+                ; -----------------------------------------
+                ; генерация спрайта мини карты
+                ; -----------------------------------------
                 LD DE, Adr.MinimapSpr
                 LD C, SCR_MINIMAP_SIZE_X >> 1
 
 .RowLoop        PUSH DE
 
                 ; копирование положение карты по вертикали
-                LD HL, (GameState.PositionY + 0)
+.LocationY_L    EQU $+1
+                LD HL, #0000
                 LD (Math.PN_LocationY + 0), HL
-                LD HL, (GameState.PositionY + 2)
+.LocationY_H    EQU $+1
+                LD HL, #0000
                 LD (Math.PN_LocationY + 2), HL
 
                 LD B, SCR_MINIMAP_SIZE_Y >> 1
 
 .ColumnLoop     ;
-                CALL .Gen
+                CALL .Noise
 
                 ;      7    6    5    4    3    2    1    0
                 ;   +----+----+----+----+----+----+----+----+
@@ -67,7 +105,7 @@ Generate:       ;
                 INC HL
                 INC (HL)
 
-                CALL .Gen
+                CALL .Noise
 
                 EX DE, HL
                 ADD A, A
@@ -126,7 +164,7 @@ Generate:       ;
 
                 RET
 
-.Gen            EXX
+.Noise          EXX
                 CALL Math.PerlinNoise2D
                 ; LD A, L
                 ; CP #10
@@ -143,11 +181,19 @@ Generate:       ;
                 ; LD A, #FF
 
                 LD A, L
-                ADD A, #60
-                CP #70
+                ADD A, #70
+                CP #80
                 LD A, #FF
                 JR C, $+3
                 INC A
+
+                ; LD A, L
+                ; ADD A, #90
+                ; CP #40
+                ; LD A, L
+                ; ADD A, A
+                ; JR C, $+3
+                ; LD A, #00
 
                 EXX
                 CPL
