@@ -9,7 +9,7 @@
 ; Note:
 ; -----------------------------------------
 Generate:       ; очистка спрайта мини карты
-                LD HL, Adr.MinimapSpr + 128
+                LD HL, Adr.MinimapSpr + Size.MinimapSpr
                 LD DE, #0000
                 CALL SafeFill.b128
 
@@ -96,13 +96,13 @@ Generate:       ; очистка спрайта мини карты
                 LD HL, Math.PN_LocationY
                 INC (HL)
                 JR NZ, $+12
-                INC HL
+                INC L
                 INC (HL)
                 JR NZ, $+8
-                INC HL
+                INC L
                 INC (HL)
                 JR NZ, $+4
-                INC HL
+                INC L
                 INC (HL)
 
                 CALL .Noise
@@ -126,13 +126,13 @@ Generate:       ; очистка спрайта мини карты
                 LD HL, Math.PN_LocationY
                 INC (HL)
                 JR NZ, $+12
-                INC HL
+                INC L
                 INC (HL)
                 JR NZ, $+8
-                INC HL
+                INC L
                 INC (HL)
                 JR NZ, $+4
-                INC HL
+                INC L
                 INC (HL)
 
                 DJNZ .ColumnLoop
@@ -141,13 +141,13 @@ Generate:       ; очистка спрайта мини карты
                 LD HL, Math.PN_LocationX
                 INC (HL)
                 JR NZ, $+12
-                INC HL
+                INC L
                 INC (HL)
                 JR NZ, $+8
-                INC HL
+                INC L
                 INC (HL)
                 JR NZ, $+4
-                INC HL
+                INC L
                 INC (HL)
 
                 ;

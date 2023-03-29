@@ -88,10 +88,38 @@ DrawByte:       LD C, A
                 CCF
                 ADC A, #30
                 DAA
-                CALL DrawChar
+                JP DrawChar
+; -----------------------------------------
+; отображение 16-битного значения
+; In:
+;   HL  - адрес 16-битного значения
+; Out:
+; Corrupt:
+;   HL, DE, С, AF
+; Note:
+; -----------------------------------------
+DrawWordFromAdr PUSH HL
+                INC HL
+                LD A, (HL)
+                CALL DrawByte
 
+                POP HL
+                LD A, (HL)
+                CALL DrawByte
                 RET
-
+; -----------------------------------------
+; отображение 16-битного значения
+; In:
+;   BC  - 16-битное значение
+; Out:
+; Corrupt:
+;   HL, DE, С, AF
+; Note:
+; -----------------------------------------
+DrawWord:       LD A, C
+                CALL DrawByte
+                LD A, B
+                JP DrawByte
 ; -----------------------------------------
 ; установка курсора вывода
 ; In:

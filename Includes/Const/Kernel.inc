@@ -105,11 +105,8 @@ Math
 .PerlinNoise2D  EQU Kernel.Math.PerlinNoise2D
 .PN_Frequency   EQU Kernel.Math.Noise2D.Frequency
 .PN_LocationX   EQU Kernel.Math.Noise2D.Location.X
-.PN_LocationXL  EQU Kernel.Math.Noise2D.Location.X.Low
-.PN_LocationXH  EQU Kernel.Math.Noise2D.Location.X.High
 .PN_LocationY   EQU Kernel.Math.Noise2D.Location.Y
-.PN_LocationYL  EQU Kernel.Math.Noise2D.Location.Y.Low
-.PN_LocationYH  EQU Kernel.Math.Noise2D.Location.Y.High
+
 
 ; decompressor
 Decompressor
@@ -143,6 +140,8 @@ Func
 Console:
 .DrawChar       EQU Kernel.Console.DrawChar
 .DrawByte       EQU Kernel.Console.DrawByte
+.DrawWord       EQU Kernel.Console.DrawWord
+.DrawWordFrom   EQU Kernel.Console.DrawWordFromAdr
 .SetCursor      EQU Kernel.Console.SetCursor
 .SetScreenAdr   EQU Kernel.Console.SetScreenAdr
 .SetAttribute   EQU Kernel.Console.SetAttribute

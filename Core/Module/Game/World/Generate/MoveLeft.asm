@@ -14,8 +14,7 @@ MoveLeft:       ; -----------------------------------------
                 ; -----------------------------------------
 
                 ; положение карты по горизонтали            DEHL
-                LD HL, (GameState.PositionX + 3)
-                EX DE, HL
+                LD DE, (GameState.PositionX + 3)
                 LD HL, (GameState.PositionX + 1)
 
                 ; вычесть половину смещения (левый край мини карты)
@@ -34,8 +33,7 @@ MoveLeft:       ; -----------------------------------------
                 ; -----------------------------------------
 
                 ; положение карты по горизонтали            DEHL
-                LD HL, (GameState.PositionY + 3)
-                EX DE, HL
+                LD DE, (GameState.PositionY + 3)
                 LD HL, (GameState.PositionY + 1)
                 
                 ; вычесть половину смещения (верхний край мини карты)
@@ -54,7 +52,7 @@ MoveLeft:       ; -----------------------------------------
                 ; -----------------------------------------
                 LD HL, Adr.MinimapSpr                                           ; адрес левого-вверхний байта спрайта
                                                                                 ; сдвигаем сверху вниз
-                LD B, SCR_MINIMAP_SIZE_Y
+                LD B, SCR_MINIMAP_SIZE_Y >> 1
                 LD A, (GameState.PositionX + 0)
                 LD C, A
   
@@ -63,9 +61,7 @@ MoveLeft:       ; -----------------------------------------
                 ADD A, A
                 JR NC, .Aligned
 
-                ;
                 DEC B                                                           ; на 1 строку меньше
-
                 CALL Generate.Noise
 
                 ;
@@ -104,19 +100,18 @@ MoveLeft:       ; -----------------------------------------
                 LD HL, Math.PN_LocationY
                 INC (HL)
                 JR NZ, $+12
-                INC HL
+                INC L
                 INC (HL)
                 JR NZ, $+8
-                INC HL
+                INC L
                 INC (HL)
                 JR NZ, $+4
-                INC HL
+                INC L
                 INC (HL)
 
                 EX DE, HL
 
-.Aligned        ;
-                CALL Generate.Noise
+.Aligned        CALL Generate.Noise
 
                 ;      7    6    5    4    3    2    1    0
                 ;   +----+----+----+----+----+----+----+----+

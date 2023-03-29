@@ -20,7 +20,7 @@ IntegerNoise:   LD B, HIGH Adr.PRNG
 
                 rept 8 
                 LD A, (BC)
-                INC HL
+                INC L
                 ADD A, (HL)
                 LD C, A
                 endr

@@ -26,27 +26,23 @@ World:          SET_SCREEN_SHADOW
                 ; show position
                 LD DE, #0000
                 CALL Console.SetCursor
+                LD HL, GameState.PositionX+3
+                CALL Console.DrawWordFrom
                 LD HL, GameState.PositionX+1
-                LD A, (HL)
-                CALL Console.DrawByte
-                LD DE, #0002
-                CALL Console.SetCursor
+                CALL Console.DrawWordFrom
                 LD HL, World.Shift_X
                 LD A, (HL)
                 CALL Console.DrawByte
-                LD DE, #0004
-                CALL Console.SetCursor
                 LD HL, Game.World.Delta
                 LD A, (HL)
                 CALL Console.DrawByte
 
                 LD DE, #0100
                 CALL Console.SetCursor
+                LD HL, GameState.PositionY+3
+                CALL Console.DrawWordFrom
                 LD HL, GameState.PositionY+1
-                LD A, (HL)
-                CALL Console.DrawByte
-                LD DE, #0102
-                CALL Console.SetCursor
+                CALL Console.DrawWordFrom
                 LD HL, World.Shift_Y
                 LD A, (HL)
                 CALL Console.DrawByte

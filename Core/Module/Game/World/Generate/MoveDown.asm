@@ -52,7 +52,7 @@ MoveDown:       ; -----------------------------------------
                 ; -----------------------------------------
                 LD HL, Adr.MinimapSpr + Size.MinimapSpr - 1                     ; адрес правого-нижнего байта спрайта
                                                                                 ; сдвигаем снизу вверх
-                LD B, SCR_MINIMAP_SIZE_Y
+                LD B, SCR_MINIMAP_SIZE_Y >> 1
                 LD A, (GameState.PositionX + 0)
                 LD C, A
   
@@ -97,16 +97,24 @@ MoveDown:       ; -----------------------------------------
 
                 ; DEC 32
                 LD HL, Math.PN_LocationY
-                DEC (HL)
-                JR NZ, $+12
-                INC HL
-                DEC (HL)
-                JR NZ, $+8
-                INC HL
-                DEC (HL)
-                JR NZ, $+4
-                INC HL
-                DEC (HL)
+                LD A, (HL)
+                SUB #01
+                LD (HL), A
+                JR NC, $+21
+                INC L
+                LD A, (HL)
+                SUB #01
+                LD (HL), A
+                JR NC, $+14
+                INC L
+                LD A, (HL)
+                SUB #01
+                LD (HL), A
+                JR NC, $+7
+                INC L
+                LD A, (HL)
+                SUB #01
+                LD (HL), A
 
                 EX DE, HL
 

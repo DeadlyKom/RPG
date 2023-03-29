@@ -34,13 +34,13 @@ LerpNoise:      ; v1 = (x, y)
                 LD HL, IntNoiseData + FLocation32.X.Low
                 INC (HL)
                 JR NZ, $+12
-                INC HL
+                INC L
                 INC (HL)
                 JR NZ, $+8
-                INC HL
+                INC L
                 INC (HL)
                 JR NZ, $+4
-                INC HL
+                INC L
                 INC (HL)
 
                 CALL IntegerNoise
@@ -52,13 +52,13 @@ LerpNoise:      ; v1 = (x, y)
                 LD HL, IntNoiseData + FLocation32.Y.Low
                 INC (HL)
                 JR NZ, $+12
-                INC HL
+                INC L
                 INC (HL)
                 JR NZ, $+8
-                INC HL
+                INC L
                 INC (HL)
                 JR NZ, $+4
-                INC HL
+                INC L
                 INC (HL)
 
                 CALL IntegerNoise
@@ -70,13 +70,13 @@ LerpNoise:      ; v1 = (x, y)
                 LD HL, IntNoiseData + FLocation32.X.Low
                 DEC (HL)
                 JR NZ, $+12
-                INC HL
+                INC L
                 DEC (HL)
                 JR NZ, $+8
-                INC HL
+                INC L
                 DEC (HL)
                 JR NZ, $+4
-                INC HL
+                INC L
                 DEC (HL)
 
                 CALL IntegerNoise

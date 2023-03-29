@@ -11,21 +11,30 @@ Left:           SET_RENDER_FLAG INERT_BIT
 
                 ; DEC 40
                 LD HL, GameState.PositionX
+                LD C, #01
                 LD A, (HL)
                 SUB #80
                 LD (HL), A
-                JR NC, $+16
-                INC HL
-                DEC (HL)
-                JR NZ, $+12
-                INC HL
-                DEC (HL)
-                JR NZ, $+8
-                INC HL
-                DEC (HL)
-                JR NZ, $+4
-                INC HL
-                DEC (HL)
+                JR NC, $+24
+                INC L
+                LD A, (HL)
+                SUB C
+                LD (HL), A
+                JR NC, $+18
+                INC L
+                LD A, (HL)
+                SUB C
+                LD (HL), A
+                JR NC, $+12
+                INC L
+                LD A, (HL)
+                SUB C
+                LD (HL), A
+                JR NC, $+6
+                INC L
+                LD A, (HL)
+                SUB C
+                LD (HL), A
 
                 SET_WORLD_FLAG WORLD_LEFT_BIT
 
@@ -48,16 +57,16 @@ Right:          SET_RENDER_FLAG INERT_BIT
                 ADD A, (HL)
                 LD (HL), A
                 JR NC, $+16
-                INC HL
+                INC L
                 INC (HL)
                 JR NZ, $+12
-                INC HL
+                INC L
                 INC (HL)
                 JR NZ, $+8
-                INC HL
+                INC L
                 INC (HL)
                 JR NZ, $+4
-                INC HL
+                INC L
                 INC (HL)
 
                 SET_WORLD_FLAG WORLD_RIGHT_BIT
@@ -77,21 +86,30 @@ Up:             SET_RENDER_FLAG INERT_BIT
 
                 ; DEC 40
                 LD HL, GameState.PositionX
+                LD C, #01
                 LD A, (HL)
                 SUB #80
                 LD (HL), A
-                JR NC, $+16
-                INC HL
-                DEC (HL)
-                JR NZ, $+12
-                INC HL
-                DEC (HL)
-                JR NZ, $+8
-                INC HL
-                DEC (HL)
-                JR NZ, $+4
-                INC HL
-                DEC (HL)
+                JR NC, $+24
+                INC L
+                LD A, (HL)
+                SUB C
+                LD (HL), A
+                JR NC, $+18
+                INC L
+                LD A, (HL)
+                SUB C
+                LD (HL), A
+                JR NC, $+12
+                INC L
+                LD A, (HL)
+                SUB C
+                LD (HL), A
+                JR NC, $+6
+                INC L
+                LD A, (HL)
+                SUB C
+                LD (HL), A
 
                 SET_WORLD_FLAG WORLD_UP_BIT
 
@@ -114,16 +132,16 @@ Down:           SET_RENDER_FLAG INERT_BIT
                 ADD A, (HL)
                 LD (HL), A
                 JR NC, $+16
-                INC HL
+                INC L
                 INC (HL)
                 JR NZ, $+12
-                INC HL
+                INC L
                 INC (HL)
                 JR NZ, $+8
-                INC HL
+                INC L
                 INC (HL)
                 JR NZ, $+4
-                INC HL
+                INC L
                 INC (HL)
 
                 SET_WORLD_FLAG WORLD_DOWN_BIT
