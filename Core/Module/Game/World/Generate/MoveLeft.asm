@@ -18,7 +18,7 @@ MoveLeft:       ; -----------------------------------------
                 LD HL, (GameState.PositionX + 1)
 
                 ; вычесть половину смещения (левый край мини карты)
-                LD BC, SCR_MINIMAP_OFFSET_X
+                LD BC, SCR_MINIMAP_OFFSET_X >> 1
                 OR A
                 SBC HL, BC
                 JR NC, $+3
@@ -37,7 +37,7 @@ MoveLeft:       ; -----------------------------------------
                 LD HL, (GameState.PositionY + 1)
                 
                 ; вычесть половину смещения (верхний край мини карты)
-                LD BC, SCR_MINIMAP_OFFSET_Y
+                LD BC, SCR_MINIMAP_OFFSET_Y >> 1
                 OR A
                 SBC HL, BC
                 JR NC, $+3
@@ -53,11 +53,11 @@ MoveLeft:       ; -----------------------------------------
                 LD HL, Adr.MinimapSpr                                           ; адрес левого-вверхний байта спрайта
                                                                                 ; сдвигаем сверху вниз
                 LD B, SCR_MINIMAP_SIZE_Y >> 1
-                LD A, (GameState.PositionX + 0)
+                LD A, (GameState.PositionX + 1)
                 LD C, A
   
                 ; если y = 1 (не выровнен), берётся только 1 значение из шума 03/04
-                LD A, (GameState.PositionY + 0)
+                LD A, (GameState.PositionY + 1)
                 ADD A, A
                 JR NC, .Aligned
 
@@ -79,7 +79,7 @@ MoveLeft:       ; -----------------------------------------
                 ADD A, A
 
                 ; смещение шума влево (значения 04), если х = 1
-                BIT 1, C
+                BIT 0, C
                 JR Z, $+3
                 ADD A, A
 
@@ -123,7 +123,7 @@ MoveLeft:       ; -----------------------------------------
                 ;       02/04, если x = 1
 
                 ; смещение шума влево (значения 02 и 04), если х = 1
-                BIT 1, C
+                BIT 0, C
                 JR Z, $+3
                 ADD A, A
 

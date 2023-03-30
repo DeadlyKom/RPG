@@ -9,6 +9,7 @@
 
                 include "Generate/MoveLeft.asm"
                 include "Generate/MoveRight.asm"
+                include "Generate/MoveUp.asm"
                 include "Generate/MoveDown.asm"
                 include "Generate/Tilepair.asm"
 

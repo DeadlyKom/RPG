@@ -67,17 +67,21 @@ LerpNoise:      ; v1 = (x, y)
                 PUSH HL
 
                 ; v3 = (x, y + 1)
-                LD HL, IntNoiseData + FLocation32.X.Low
-                DEC (HL)
-                JR NZ, $+12
-                INC L
-                DEC (HL)
-                JR NZ, $+8
-                INC L
-                DEC (HL)
-                JR NZ, $+4
-                INC L
-                DEC (HL)
+                ; LD HL, IntNoiseData + FLocation32.X.Low
+                ; DEC (HL)
+                ; JR NZ, $+12
+                ; INC L
+                ; DEC (HL)
+                ; JR NZ, $+8
+                ; INC L
+                ; DEC (HL)
+                ; JR NZ, $+4
+                ; INC L
+                ; DEC (HL)
+                LD HL, (LocationX + FPNInt40.Int.Low)
+                LD (IntNoiseData + FLocation32.X.Low), HL
+                LD HL, (LocationX + FPNInt40.Int.High)
+                LD (IntNoiseData + FLocation32.X.High), HL
 
                 CALL IntegerNoise
                 SRA H

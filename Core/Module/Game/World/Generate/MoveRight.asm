@@ -18,7 +18,7 @@ MoveRight:      ; -----------------------------------------
                 LD HL, (GameState.PositionX + 1)
                 
                 ; прибавить смещение и ширину карты мира (правый край мини карты)
-                LD BC, SCR_MINIMAP_SIZE_X - SCR_MINIMAP_OFFSET_X
+                LD BC, (SCR_MINIMAP_SIZE_X - SCR_MINIMAP_OFFSET_X) >> 1
                 ADD HL, BC
                 JR NC, $+3
                 INC DE
@@ -36,7 +36,7 @@ MoveRight:      ; -----------------------------------------
                 LD HL, (GameState.PositionY + 1)
                 
                 ; прибавить смещение и высоту карты мира (нижний край мини карты)
-                LD BC, SCR_MINIMAP_SIZE_Y - SCR_MINIMAP_OFFSET_Y
+                LD BC, (SCR_MINIMAP_SIZE_Y - SCR_MINIMAP_OFFSET_Y) >> 1
                 ADD HL, BC
                 JR NC, $+3
                 INC DE
@@ -51,11 +51,11 @@ MoveRight:      ; -----------------------------------------
                 LD HL, Adr.MinimapSpr + Size.MinimapSpr - 1                     ; адрес правого-нижнего байта спрайта
                                                                                 ; сдвигаем снизу вверх
                 LD B, SCR_MINIMAP_SIZE_Y >> 1
-                LD A, (GameState.PositionX + 0)
+                LD A, (GameState.PositionX + 1)
                 LD C, A
   
                 ; если y = 1 (не выровнен), берётся только 1 значение из шума 01/02
-                LD A, (GameState.PositionY + 0)
+                LD A, (GameState.PositionY + 1)
                 ADD A, A
                 JR NC, .Aligned
 
@@ -74,7 +74,7 @@ MoveRight:      ; -----------------------------------------
                 
 
                 ; смещение шума влево (значения 02), если х = 1
-                BIT 1, C
+                BIT 0, C
                 JR Z, $+3
                 ADD A, A
 
@@ -141,7 +141,7 @@ MoveRight:      ; -----------------------------------------
                 ;   +----+----+----+----+----+----+----+----+
 
                 ; смещение шума влево (значения 02 и 04), если х = 1
-                BIT 1, C
+                BIT 0, C
                 JR Z, $+3
                 ADD A, A
 

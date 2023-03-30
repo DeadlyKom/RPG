@@ -1,15 +1,15 @@
 
-                ifndef _MODULE_GAME_WORLD_GENERATE_MOVE_DOWN_
-                define _MODULE_GAME_WORLD_GENERATE_MOVE_DOWN_
+                ifndef _MODULE_GAME_WORLD_GENERATE_MOVE_UP_
+                define _MODULE_GAME_WORLD_GENERATE_MOVE_UP_
 ; -----------------------------------------
-; генерация мини карты (скрол вниз)
+; генерация мини карты (скрол вверх)
 ; In:
 ; Out:
 ; Corrupt:
 ; Note:
 ;   шаг 1 пикселя
 ; -----------------------------------------
-MoveDown:       ; -----------------------------------------
+MoveUp:         ; -----------------------------------------
                 ; центрирование мини карты по горизонтали
                 ; -----------------------------------------
 
@@ -36,26 +36,28 @@ MoveDown:       ; -----------------------------------------
                 LD DE, (GameState.PositionY + 3)
                 LD HL, (GameState.PositionY + 1)
                 
-                ; прибавить смещение и высоту карты мира (нижний край мини карты)
-                LD BC, (SCR_MINIMAP_SIZE_Y - SCR_MINIMAP_OFFSET_Y) >> 1
-                ADD HL, BC
+                ; вычесть половину смещения (верхний край мини карты)
+                LD BC, SCR_MINIMAP_OFFSET_Y >> 1
+                OR A
+                SBC HL, BC
                 JR NC, $+3
-                INC DE
+                DEC DE
 
                 ; сохранить значение
                 LD (Math.PN_LocationY + 0), HL
                 LD (Math.PN_LocationY + 2), DE
 
-                ; сдвигаем спрайт мини карты на одну строку выше
-                LD HL, Adr.MinimapSpr + 4                                       ; адрес левого-нижнего байта спрайта (+1 строка)
-                LD DE, Adr.MinimapSpr                                           ; адрес левого-нижнего байта спрайта
+                ; сдвигаем спрайт мини карты на одну строку ниже
+                LD HL, Adr.MinimapSpr + Size.MinimapSpr - 4 - 1                 ; адрес левого-верхнего байта спрайта (-1 строка)
+                LD DE, Adr.MinimapSpr + Size.MinimapSpr - 1                     ; адрес левого-верхнего байта спрайта
                 LD BC, Size.MinimapSpr - 4
-                CALL Memcpy.FastLDIR
+                LDDR
 
                 ; -----------------------------------------
                 ; инициализация
                 ; -----------------------------------------
-                EX DE, HL
+                INC L
+                ; EX DE, HL
                 ;LD HL, Adr.MinimapSpr                                           ; адрес левого-вверхний байта спрайта
                                                                                 ; сдвигаем снизу вверх
                 LD B, 4;SCR_MINIMAP_SIZE_X >> 1
@@ -188,12 +190,12 @@ MoveDown:       ; -----------------------------------------
 
 .Aligned_       INC L
                 BIT 2, L
-                JR NZ, .L11
+                JR Z, .L11
 
-                RES_WORLD_FLAG WORLD_DOWN_BIT
+                RES_WORLD_FLAG WORLD_UP_BIT
 
                 RET
 
-                display " - Move down: \t\t\t\t\t", /A, MoveDown, " = busy [ ", /D, $ - MoveDown, " bytes  ]"
+                display " - Move up: \t\t\t\t\t\t", /A, MoveUp, " = busy [ ", /D, $ - MoveUp, " bytes  ]"
 
-                endif ; ~_MODULE_GAME_WORLD_GENERATE_MOVE_DOWN_
+                endif ; ~_MODULE_GAME_WORLD_GENERATE_MOVE_UP_

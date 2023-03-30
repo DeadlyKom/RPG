@@ -20,8 +20,10 @@ World:          SET_SCREEN_SHADOW
                 CALL NZ, Game.World.MoveLeft
                 CHECK_WORLD_FLAG WORLD_RIGHT_BIT
                 CALL NZ, Game.World.MoveRight
-                ; CHECK_WORLD_FLAG WORLD_DOWN_BIT
-                ; CALL NZ, Game.World.MoveDown
+                CHECK_WORLD_FLAG WORLD_UP_BIT
+                CALL NZ, Game.World.MoveUp
+                CHECK_WORLD_FLAG WORLD_DOWN_BIT
+                CALL NZ, Game.World.MoveDown
 
                 ; show position
                 LD DE, #0000

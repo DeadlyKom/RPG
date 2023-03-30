@@ -11,7 +11,7 @@ PerlinNoise     EQU $
                 include "PerlinNoise.asm"
 
                 ; внутренние переменные
-Noise2D:        FNoise2D 0x18
+Noise2D:        FNoise2D
 LocationX:      FPNInt40
 LocationY:      FPNInt40
 IntNoiseData:   FLocation32

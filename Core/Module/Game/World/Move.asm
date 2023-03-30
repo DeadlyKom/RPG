@@ -85,7 +85,7 @@ Up:             SET_RENDER_FLAG INERT_BIT
                 JR NC, .L1
 
                 ; DEC 40
-                LD HL, GameState.PositionX
+                LD HL, GameState.PositionY
                 LD C, #01
                 LD A, (HL)
                 SUB #80
