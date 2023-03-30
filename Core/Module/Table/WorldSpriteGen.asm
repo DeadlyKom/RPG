@@ -169,30 +169,41 @@ WorldSpriteGen: SHOW_SHADOW_SCREEN                                              
                 RET
 
 .TableTilepairs DB #00, #00 ; 0
-                DB #00, #01 ; 1
-                DB #01, #01 ; 2
-                DB #01, #02 ; 3
-                DB #02, #02 ; 4
-                DB #02, #01 ; 5
-                DB #01, #00 ; 6
 
-                DB #00, #03 ; 7
-                DB #03, #04 ; 8
-                DB #04, #04 ; 9
-                DB #04, #05 ; A
-                DB #05, #00 ; B
+                DB #00, #03 ; 1
+                DB #00, #06 ; 2
+                DB #00, #09 ; 3
 
-                DB #00, #06 ; C
-                DB #06, #07 ; D
-                DB #07, #07 ; E
-                DB #07, #08 ; F
-                DB #08, #00 ; 10
+                DB #03, #05 ; 4
+                DB #06, #08 ; 5
+                DB #09, #0B ; 6
 
-                DB #00, #09 ; 11
-                DB #09, #0A ; 12
-                DB #0A, #0A ; 13
-                DB #0A, #0B ; 14
-                DB #0B, #00 ; 15
+                DB #05, #00 ; 7
+                DB #08, #00 ; 8
+                DB #0B, #00 ; 9
+
+                DB #03, #04 ; A
+                DB #06, #07 ; B
+                DB #09, #0A ; C
+
+                DB #04, #05 ; D
+                DB #07, #08 ; E
+                DB #0A, #0B ; F
+
+                DB #04, #04 ; 10
+                DB #07, #07 ; 11
+                DB #0A, #0A ; 12
+
+                DB #03, #00 ; 13
+                DB #06, #00 ; 14
+                DB #09, #00 ; 15
+
+                DB #03, #07 ; 16
+                DB #09, #07 ; 17
+
+                DB #07, #05 ; 18
+                DB #07, #0B ; 19
+
 .Num            EQU ($-.TableTilepairs) >> 1
 
                 display " - World sprite generatuion: \t\t[", /D, WorldSpriteGen.Num, " tilepairs]\t", /A, ScrAdrGen, " = busy [ ", /D, $ - ScrAdrGen, " bytes  ]"

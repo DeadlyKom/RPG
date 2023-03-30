@@ -171,15 +171,77 @@ MoveRight:      ; -----------------------------------------
 
                 DJNZ .RollLoop
 
+                CALL .Tile
+
                 RES_WORLD_FLAG WORLD_RIGHT_BIT
 
                 RET
 
-;                 ; сдвигаем всё влево на высоту видимой чати карты
-;                 LD HL, RenderBuffer +  SCR_WORLD_SIZE_Y
-;                 LD DE, RenderBuffer
-;                 LD BC, (SCR_WORLD_SIZE_X - 1) * SCR_WORLD_SIZE_Y
-;                 CALL Memcpy.FastLDIR
+.Tile           ; сдвигаем всё влево на высоту видимой чати карты
+                LD HL, RenderBuffer +  SCR_WORLD_SIZE_Y
+                LD DE, RenderBuffer
+                LD BC, (SCR_WORLD_SIZE_X - 1) * SCR_WORLD_SIZE_Y
+                CALL Memcpy.FastLDIR
+
+                LD HL, Adr.MinimapSpr + 2 + 4 * 8                               ; адрес левого бита
+                LD B, SCR_WORLD_SIZE_Y
+
+.TileLoop       ;
+                XOR A
+                
+                ; 2ой байт 0 бит
+                LD C, (HL)
+                RR C
+                ADC A, A
+
+                ; переход на 3 байт (1 страка выше)
+                DEC L
+                DEC L
+                DEC L
+
+                ; 3ый байт 7 бит
+                LD C, (HL)
+                RL C
+                ADC A, A
+
+                ; строка ниже
+                INC L
+                INC L
+                INC L
+                INC L
+
+                ; 3ый байт 7 бит
+                LD C, (HL)
+                RL C
+                ADC A, A
+
+                ; строка ниже
+                INC L
+                INC L
+                INC L
+                INC L
+
+                ; 3ый байт 7 бит
+                LD C, (HL)
+                RL C
+                ADC A, A
+
+                ; подготовить к следующей строке
+                DEC L
+
+                PUSH DE
+                EXX
+                POP DE
+                CALL Tilepair
+                EXX
+
+                ; сохраним тайлопару
+                LD (DE), A
+                INC E
+
+                DJNZ .TileLoop
+
+                RET
 
 ;                 ;
 ;                 LD B, SCR_WORLD_SIZE_Y

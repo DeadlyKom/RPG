@@ -16,12 +16,13 @@ PRNG_Gen:       ; установка seed
                 CALL Math.Rand8
                 INC A
                 ADD A, A
-                LD A, #2F
+                LD A, #55
                 LD (Math.PN_Frequency), A
                 LD (GameConfig.Frequency), A
 
                 LD HL, #0000
                 LD (GameState.PositionX + 1), HL
+                LD HL, #0000
                 LD (GameState.PositionY + 1), HL
                 LD HL, #1000
                 LD (GameState.PositionX + 3), HL
