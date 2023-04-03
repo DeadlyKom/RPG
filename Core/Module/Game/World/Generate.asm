@@ -70,12 +70,12 @@ Generate:       ; -----------------------------------------
                 ; JR Z, $+3
                 ; INC A
 
-                ; LD A, L
-                ; ADD A, #80
-                ; CP #60
-                ; LD A, #FF
-                ; JR NC, $+3
-                ; INC A
+                LD A, L
+                ADD A, #70
+                CP #60
+                LD A, #FF
+                JR NC, $+3
+                INC A
 
                 ; LD A, L
                 ; ADD A, #90
@@ -85,10 +85,10 @@ Generate:       ; -----------------------------------------
                 ; JR C, $+3
                 ; LD A, #00
 
-                LD A, H
+                ; LD A, H
 
                 EXX
-                ; CPL
+                CPL
                 RET
 
                 endif ; ~_MODULE_GAME_WORLD_GENERATE_

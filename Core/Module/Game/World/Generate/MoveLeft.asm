@@ -58,7 +58,8 @@ MoveLeft:       ; -----------------------------------------
   
                 ; если y = 1 (не выровнен), берётся только 1 значение из шума 03/04
                 LD A, (GameState.PositionY + 1)
-                ADD A, A
+                ; ADD A, A
+                RRA
                 JR NC, .Aligned
 
                 DEC B                                                           ; на 1 строку меньше
@@ -153,23 +154,57 @@ MoveLeft:       ; -----------------------------------------
 
                 DJNZ .RollLoop
 
+                ; -----------------------------------------
+                LD A, (GameState.PositionY + 1)
+                ; ADD A, A
+                RRA
+                JR NC, .Aligned_
+
+                CALL Generate.Noise
+
+                ;      7    6    5    4    3    2    1    0
+                ;   +----+----+----+----+----+----+----+----+
+                ;   | 01 | 02 | 03 | 04 | .. | .. | .. | .. |
+                ;   +----+----+----+----+----+----+----+----+
+                ;
+                ;   при сдвиге влево берутся значения
+                ;       01/03, если x = 0
+                ;       02/04, если x = 1
+
+                ; смещение шума влево (значения 02 и 04), если х = 1
+                BIT 0, C
+                JR Z, $+3
+                ADD A, A
+
+                ; сдвиг строки вправо на 1 пиксель
+                ADD A, A
+                RR (HL)
+                INC L
+                RR (HL)
+                INC L
+                RR (HL)
+                INC L
+                RR (HL)
+.Aligned_
+                ; -----------------------------------------
+
                 CALL .Tile
 
                 RES_WORLD_FLAG WORLD_LEFT_BIT
 
                 RET
 
-.Tile           ; сдвигаем всё вправо на высоту видимой чати карты
-                LD HL, RenderBuffer + (SCR_WORLD_SIZE_X - 1) * SCR_WORLD_SIZE_Y - 1
-                LD DE, RenderBuffer + (SCR_WORLD_SIZE_X + 0) * SCR_WORLD_SIZE_Y - 1
-                LD BC, (SCR_WORLD_SIZE_X - 1) * SCR_WORLD_SIZE_Y
+.Tile           ; сдвигаем всё вправо на ширину видимой чати карты
+                LD HL, RenderBuffer + (SCR_WORLD_SIZE_X - 1) * (SCR_WORLD_SIZE_Y + 1) - 1
+                LD DE, RenderBuffer + (SCR_WORLD_SIZE_X + 0) * (SCR_WORLD_SIZE_Y + 1) - 1
+                LD BC, (SCR_WORLD_SIZE_X - 1) * (SCR_WORLD_SIZE_Y + 1)
                 LDDR
 
                 INC HL
                 EX DE, HL
 
                 LD HL, Adr.MinimapSpr + 1 + 4 * 10 - 4                          ; адрес левой грани видимой части карты мира (-1 строка)
-                LD A, SCR_WORLD_SIZE_Y
+                LD A, SCR_WORLD_SIZE_Y + 1
 
 .TileLoop       EX AF, AF'
 
@@ -264,7 +299,7 @@ MoveLeft:       ; -----------------------------------------
                 XOR C
                 LD L, B                                                         ; восстановление адреса (положение для следующей проверки)
 
-.Fill           ; значение результата выборки в аккумуляторе
+.Fill           ; значение выборки в аккумуляторе
                 LD C, A
 
                 ;
@@ -278,7 +313,7 @@ MoveLeft:       ; -----------------------------------------
 
                 ; смещение адреса на тайл левее
                 LD A, E
-                ADD A, SCR_WORLD_SIZE_Y
+                ADD A, (SCR_WORLD_SIZE_Y + 1)
                 LD E, A
 
                 ; совмещение левого тайла (3..0 биты) и текущую выбоку
@@ -290,11 +325,10 @@ MoveLeft:       ; -----------------------------------------
                 XOR C
                 AND %00001111
                 XOR C
-                LD C, A
                 LD E, B                                                         ; восстановление адреса (текущий адрес тайла)
 
                 ;
-                ;   значение в регистре C
+                ;   значение в аккумуляторе
                 ;
                 ;      7    6    5    4    3    2    1    0
                 ;   +----+----+----+----+----+----+----+----+

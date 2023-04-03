@@ -17,7 +17,7 @@ LocationY:      FPNInt40
 IntNoiseData:   FLocation32
 
                 if (Noise2D >> 8) - ($ >> 8)
-                error "whole table must be within single 256 byte block"
+                error "must be within single 256 byte block"
                 endif
 
                 display " - PerlinNoise: \t\t\t\t\t", /A, PerlinNoise, " = busy [ ", /D, $ - PerlinNoise, " bytes  ]"

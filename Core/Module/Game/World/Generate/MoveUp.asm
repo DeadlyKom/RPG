@@ -192,9 +192,235 @@ MoveUp:         ; -----------------------------------------
                 BIT 2, L
                 JR Z, .L11
 
+                CALL .Tile
+
                 RES_WORLD_FLAG WORLD_UP_BIT
 
                 RET
+
+.Tile           ; сдвигаем всё вниз на высоту видимой чати карты (правый нижний)
+                LD HL, RenderBuffer + SCR_WORLD_SIZE_X * (SCR_WORLD_SIZE_Y + 1) - 2
+                LD DE, RenderBuffer + SCR_WORLD_SIZE_X * (SCR_WORLD_SIZE_Y + 1) - 1
+                LD BC, (SCR_WORLD_SIZE_Y + 1) - 1
+                LD A, C
+                LDDR
+
+                rept SCR_WORLD_SIZE_X - 1
+                DEC E
+                DEC L
+                LD C, A
+                LDDR
+                endr
+
+                ; -----------------------------------------
+                LD BC, Adr.MinimapSpr + 1 + 4 * 10 - 4                          ; адрес левой-верхней грани видимой части карты мира (-1 строка)
+.Test           LD HL, .BufferUp
+
+                ; -----------------------------------------
+                ; копирование Up
+                ; -----------------------------------------
+                LD A, (BC)
+                LD (HL), A
+                INC C
+                INC L
+                LD A, (BC)
+                LD (HL), A
+                INC C
+                INC C
+                INC C
+
+                ; -----------------------------------------
+                ; копирование Left/Right
+                ; -----------------------------------------
+                LD L, LOW .BufferRight
+                LD A, (BC)
+                LD (HL), A
+                INC L
+                INC L
+                LD (HL), A
+                DEC L
+                INC C
+                LD A, (BC)
+                LD (HL), A
+                INC L
+                INC L
+                LD (HL), A
+                INC C
+                INC C
+                INC C
+
+                ; -----------------------------------------
+                ; копирование Down
+                ; -----------------------------------------
+                LD L, LOW .BufferDown
+                LD A, (BC)
+                LD (HL), A
+                INC C
+                INC L
+                LD A, (BC)
+                LD (HL), A
+
+                ; -----------------------------------------
+                ; сдвиг Down
+                ; -----------------------------------------
+                RL (HL)
+                DEC L
+                RL (HL)
+                DEC L
+
+                ; -----------------------------------------
+                ; сдвиг Up
+                ; -----------------------------------------
+                RL (HL)
+                DEC L
+                RL (HL)
+                DEC L
+
+                DEC L
+                DEC L
+
+                ; -----------------------------------------
+                ; сдвиг Left/Right
+                ; -----------------------------------------
+                RL (HL)
+                DEC L
+                RL (HL)
+                INC L
+                RL (HL)
+                DEC L
+                RL (HL)
+
+                ; -----------------------------------------
+                ; -----------------------------------------
+                LD L, LOW .BufferLast
+                RL (HL)
+                DEC L
+                RL (HL)
+                DEC L
+                ADC A, A
+                
+                RL (HL)
+                DEC L
+                RL (HL)
+                DEC L
+                ADC A, A
+
+                RL (HL)
+                DEC L
+                RL (HL)
+                LD C, (HL)
+                DEC L
+                ADC A, A
+
+                RL (HL)
+                DEC L
+                RL (HL)
+                ADC A, A
+
+                ; проверка, что бит не пустой
+                BIT 7, C
+                JR Z, $+4                                                       ; проверка, что тайл является пустым
+                LD A, #0F
+
+                ADD A, A
+                ADD A, A
+                ADD A, A
+                ADD A, A
+                LD B, A
+
+                ;
+                ;   значение в регистре B
+                ;
+                ;      7    6    5    4    3    2    1    0
+                ;   +----+----+----+----+----+----+----+----+
+                ;   | D  | U  | L  | R  | .. | .. | .. | .. |
+                ;   +----+----+----+----+----+----+----+----+
+
+                LD A, SCR_WORLD_SIZE_X
+.TileLoop       EX AF, AF
+
+                ; -----------------------------------------
+                ; -----------------------------------------
+                LD L, LOW .BufferLast
+                XOR A
+                RL (HL)
+                DEC L
+                RL (HL)
+                DEC L
+                ADC A, A
+                
+                RL (HL)
+                DEC L
+                RL (HL)
+                DEC L
+                ADC A, A
+
+                RL (HL)
+                DEC L
+                RL (HL)
+                LD C, (HL)
+                DEC L
+                ADC A, A
+
+                RL (HL)
+                DEC L
+                RL (HL)
+                ADC A, A
+
+                ; проверка, что бит не пустой
+                BIT 7, C
+                JR Z, $+4                                                       ; проверка, что тайл является пустым
+                LD A, #0F
+
+                ;   значение в аккумуляторе
+                ;
+                ;      7    6    5    4    3    2    1    0
+                ;   +----+----+----+----+----+----+----+----+
+                ;   | .. | .. | .. | .. | D  | U  | L  | R  |
+                ;   +----+----+----+----+----+----+----+----+
+
+                ; совмещение левого тайла (7..4 биты) и текущую выбоку (3..0)
+                OR B
+                
+                ;
+                ;   значение в аккумуляторе
+                ;
+                ;      7    6    5    4    3    2    1    0
+                ;   +----+----+----+----+----+----+----+----+
+                ;   | I3 | I2 | I1 | I0 | D  | U  | L  | R  |
+                ;   +----+----+----+----+----+----+----+----+
+
+                ; сохраним тайлопару
+                LD (DE), A
+
+                ;
+                ADD A, A
+                ADD A, A
+                ADD A, A
+                ADD A, A
+                LD B, A
+
+                ;
+                LD A, E
+                ADD A, SCR_WORLD_SIZE_Y + 1
+                LD E, A
+
+                EX AF, AF'
+                DEC A
+                JR NZ, .TileLoop
+ 
+                RET
+
+.Buffer         DS 8, 0
+.BufferRight    EQU .Buffer + 0
+.BufferLeft     EQU .Buffer + 2
+.BufferUp       EQU .Buffer + 4
+.BufferDown     EQU .Buffer + 6
+.BufferLast     EQU $-1
+
+                if (.Buffer >> 8) - ($ >> 8)
+                error "must be within single 256 byte block"
+                endif
 
                 display " - Move up: \t\t\t\t\t\t", /A, MoveUp, " = busy [ ", /D, $ - MoveUp, " bytes  ]"
 

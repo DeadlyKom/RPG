@@ -9,12 +9,12 @@
 ; Note:
 ;   шаг 1 пикселя
 ; -----------------------------------------
-MoveRight:      CALL .Generate
-                CALL .Tile
+MoveRight:      ;CALL .Generate
+                ;CALL .Tile
 
-                RES_WORLD_FLAG WORLD_RIGHT_BIT
+                ; RES_WORLD_FLAG WORLD_RIGHT_BIT
 
-                RET
+                ;RET
 
 .Generate       ; -----------------------------------------
                 ; центрирование мини карты по горизонтали
@@ -63,7 +63,8 @@ MoveRight:      CALL .Generate
   
                 ; если y = 1 (не выровнен), берётся только 1 значение из шума 01/02
                 LD A, (GameState.PositionY + 1)
-                ADD A, A
+                ; ADD A, A
+                RRA
                 JR NC, .Aligned
 
                 DEC B                                                           ; на 1 строку меньше
@@ -177,23 +178,73 @@ MoveRight:      CALL .Generate
                 DEC L
 
                 DJNZ .RollLoop
-                RET
 
-.Tile           ; сдвигаем всё влево на высоту видимой чати карты
-                LD HL, RenderBuffer +  SCR_WORLD_SIZE_Y
-                LD DE, RenderBuffer
-                LD BC, (SCR_WORLD_SIZE_X - 1) * SCR_WORLD_SIZE_Y
-                CALL Memcpy.FastLDIR
+                ; -----------------------------------------
+                LD A, (GameState.PositionY + 1)
+                ; ADD A, A
+                RRA
+                JR NC, .Aligned_
 
-                LD HL, Adr.MinimapSpr + 2 + 4 * 10 - 4                          ; адрес правой грани видимой части карты мира (-1 строка)
-                LD A, SCR_WORLD_SIZE_Y
-
-.TileLoop       EX AF, AF
+                CALL Generate.Noise
 
                 ;      7    6    5    4    3    2    1    0
                 ;   +----+----+----+----+----+----+----+----+
-                ;   | .. | .. | .. | .. | U  | .. | .. | .. |
+                ;   | 01 | 02 | 03 | 04 | .. | .. | .. | .. |
                 ;   +----+----+----+----+----+----+----+----+
+                ;
+                ;   при сдвиге влево берутся значения
+                ;       01/03, если x = 0
+                ;       02/04, если x = 1
+
+                ; меняем местами значени 01/02 и 03/04
+                LD D, A
+                RR D
+                RR D
+                ADD A, A
+                ADD A, A
+                XOR D
+                AND %11000000
+                XOR D
+
+                ;      7    6    5    4    3    2    1    0
+                ;   +----+----+----+----+----+----+----+----+
+                ;   | 03 | 04 | 01 | 02 | .. | .. | .. | .. |
+                ;   +----+----+----+----+----+----+----+----+
+
+                ; смещение шума влево (значения 02 и 04), если х = 1
+                BIT 0, C
+                JR Z, $+3
+                ADD A, A
+
+                ; сдвиг строки влево на 1 пиксель
+                ADD A, A
+                RL (HL)
+                DEC L
+                RL (HL)
+                DEC L
+                RL (HL)
+                DEC L
+                RL (HL)
+.Aligned_
+                ; -----------------------------------------
+
+                CALL .Tile
+
+                RES_WORLD_FLAG WORLD_RIGHT_BIT
+
+                RET
+
+.Tile           ; сдвигаем всё влево на ширину видимой чати карты
+                LD HL, RenderBuffer + (SCR_WORLD_SIZE_Y + 1)
+                LD DE, RenderBuffer
+                LD BC, (SCR_WORLD_SIZE_X - 1) * (SCR_WORLD_SIZE_Y + 1)
+                CALL Memcpy.FastLDIR
+
+                LD HL, Adr.MinimapSpr + 2 + 4 * 10 - 4                          ; адрес правой грани видимой части карты мира (-1 строка)
+                LD A, SCR_WORLD_SIZE_Y + 1
+
+.TileLoop       EX AF, AF
+
                 LD C, (HL)
                 INC L
                 INC L
@@ -228,8 +279,14 @@ MoveRight:      CALL .Generate
                 ;   | .. | .. | .. | .. | .. | .. | L  | R  |
                 ;   +----+----+----+----+----+----+----+----+
 
+                ;
+                ;   значение в регистре C
+                ;
+                ;      7    6    5    4    3    2    1    0
+                ;   +----+----+----+----+----+----+----+----+
+                ;   | .. | .. | .. | .. | U  | .. | .. | .. |
+                ;   +----+----+----+----+----+----+----+----+
                 RR C
-
                 ;
                 ;   значение в регистре C
                 ;
@@ -283,7 +340,7 @@ MoveRight:      CALL .Generate
 
                 ; смещение адреса на тайл левее
                 LD A, E
-                SUB SCR_WORLD_SIZE_Y
+                SUB SCR_WORLD_SIZE_Y + 1
                 LD E, A
 
                 ; совмещение левого тайла (3..0 биты) и текущую выбоку
@@ -295,11 +352,10 @@ MoveRight:      CALL .Generate
                 XOR C
                 AND %11110000
                 XOR C
-                LD C, A
                 LD E, B                                                         ; восстановление адреса (текущий адрес тайла)
 
                 ;
-                ;   значение в регистре C
+                ;   значение в аккумуляторе
                 ;
                 ;      7    6    5    4    3    2    1    0
                 ;   +----+----+----+----+----+----+----+----+
