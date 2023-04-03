@@ -11,10 +11,9 @@
 Generate:       ; -----------------------------------------
                 ; генерация спрайта мини карты
                 ; -----------------------------------------
-
                 LD A, SCR_MINIMAP_SIZE_Y >> 1
 
-.Loop           EX AF, AF'
+.Loop           PUSH AF
                 CALL MoveRight
                 CALL MoveRight
 
@@ -31,7 +30,7 @@ Generate:       ; -----------------------------------------
                 INC L
                 INC (HL)
 
-                EX AF, AF'
+                POP AF
                 DEC A
                 JR NZ, .Loop
 
@@ -39,7 +38,24 @@ Generate:       ; -----------------------------------------
 
 .Noise          EXX
                 
+                ; LD A, #10
+                ; LD (Math.PN_Frequency), A
                 CALL Math.PerlinNoise2D
+                ; PUSH HL
+                ; LD A, #30
+                ; LD (Math.PN_Frequency), A
+                ; CALL Math.PerlinNoise2D
+                ; POP DE
+                ; LD A, D
+                ; AND H
+                ; PUSH AF
+                ; LD A, #A0
+                ; LD (Math.PN_Frequency), A
+                ; CALL Math.PerlinNoise2D
+                ; POP AF
+                ; AND H
+
+
                 ; LD A, L
                 ; CP #10
                 ; JR C, $+8
@@ -49,17 +65,17 @@ Generate:       ; -----------------------------------------
                 ; RLCA
                 ; XOR %00101000
 
-                ; BIT 7, L
+                ; BIT 6, L
                 ; LD A, #FF
                 ; JR Z, $+3
                 ; INC A
 
-                LD A, L
-                ADD A, #10
-                CP #60
-                LD A, #FF
-                JR NC, $+3
-                INC A
+                ; LD A, L
+                ; ADD A, #80
+                ; CP #60
+                ; LD A, #FF
+                ; JR NC, $+3
+                ; INC A
 
                 ; LD A, L
                 ; ADD A, #90
@@ -68,6 +84,8 @@ Generate:       ; -----------------------------------------
                 ; ADD A, A
                 ; JR C, $+3
                 ; LD A, #00
+
+                LD A, H
 
                 EXX
                 ; CPL

@@ -19,9 +19,9 @@ Begin:          EQU $
                 ; include "Core/Module/Memory/MemcpySprite.asm"
 
                 ; generation
-                include "Core/Module/Table/PRNG_Gen.asm"
-                include "Core/Module/Table/ScrAdrGen.asm"
-                include "Core/Module/Table/WorldSpriteGen.asm"
+                include "Core/Module/Table/Gen_PRNG.asm"
+                include "Core/Module/Table/Gen_ScrAdr.asm"
+                include "Core/Module/Table/Gen_WorldSprite.asm"
 
                 ; draw world map
                 include "Core/Module/Draw/World/Draw.asm"

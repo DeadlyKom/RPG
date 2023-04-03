@@ -7,10 +7,7 @@
                 module Package
 Begin:          EQU $
 
-                ; 23 тайла максимум
-                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Sand_0.spr"
-                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Sand_1.spr"
-                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Sand_2.spr"
+                ; 32 тайла максимум
                 incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_0.spr"
                 incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_1.spr"
                 incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_2.spr"
@@ -20,6 +17,13 @@ Begin:          EQU $
                 incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_6.spr"
                 incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_7.spr"
                 incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_8.spr"
+                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_9.spr"
+                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_A.spr"
+                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_B.spr"
+                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_C.spr"
+                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_D.spr"
+                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_E.spr"
+                incbin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground_F.spr"
 Size:           EQU $ - Begin
 
                 savebin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground.pack", Begin, Size

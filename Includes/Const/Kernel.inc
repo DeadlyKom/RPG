@@ -44,9 +44,11 @@ TickCounterRef  EQU Kernel.Interrupt.Handler.TickCounterPtr                     
 
 ; generation
 Generation:
-.ScrAdr         EQU Kernel.Tables.ScrAdrGen                                     ; генерация адресов экрана (строк)      - перенести в страницу!
-.PRNG_Gen       EQU Kernel.Tables.PRNG_Gen                                      ; генерация PRNG карты мира             - перенести в страницу!
-.WorldSprite    EQU Kernel.Tables.WorldSpriteGen                                ; генерация спрайтов для карты мира     - перенести в страницу!
+.ScrAdr         EQU Kernel.Tables.ScrAdrGen                                     ; генерация адресов экрана (строк)      ToDo перенести в страницу!
+.PRNG_Gen       EQU Kernel.Tables.PRNG_Gen                                      ; генерация PRNG карты мира             ToDo перенести в страницу!
+.WorldSprite    EQU Kernel.Tables.WorldSpriteGen                                ; генерация спрайтов для карты мира     ToDo перенести в страницу!
+
+; tables
 
 ; draw
 Draw:
@@ -132,8 +134,6 @@ Func
 .Right.x4       EQU Kernel.Functions.NoShiftRight.x4
 .Right.x2       EQU Kernel.Functions.NoShiftRight.x2
 .Right.x0       EQU Kernel.Functions.NoShiftRight.x0
-
-; tables
 
 ; debug
                 ifdef _DEBUG
