@@ -1,5 +1,5 @@
-                ifndef _CORE_MODULE_TABLE_PRNG_GENERATION_
-                define _CORE_MODULE_TABLE_PRNG_GENERATION_
+                ifndef _CORE_MODULE_TABLE_GENERATION_PRNG_
+                define _CORE_MODULE_TABLE_GENERATION_PRNG_
 
                 module Tables
 ; -----------------------------------------
@@ -9,7 +9,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-PRNG_Gen:       ; установка seed
+Gen_PRNG:       ; установка seed
                 LD BC, (110);(GameConfig.Seed)
                 CALL Math.SetSeed16
 
@@ -41,8 +41,8 @@ PRNG_Gen:       ; установка seed
 
                 RET
 
-                display " - PRNG generation: \t\t\t\t\t", /A, PRNG_Gen, " = busy [ ", /D, $ - PRNG_Gen, " bytes  ]"
+                display " - PRNG generation: \t\t\t\t\t", /A, Gen_PRNG, " = busy [ ", /D, $ - Gen_PRNG, " bytes  ]"
 
                 endmodule
 
-                endif ; ~ _CORE_MODULE_TABLE_PRNG_GENERATION_
+                endif ; ~ _CORE_MODULE_TABLE_GENERATION_PRNG_

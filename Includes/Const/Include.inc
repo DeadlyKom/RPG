@@ -7,6 +7,7 @@
                 include "Memory.inc"
                 include "MemoryMap.inc"
                 include "MemoryMapGame.inc"
+                include "MemoryMapObject.inc"
                 include "MemoryMapGraphics.inc"
 
                 include "Game.inc"
@@ -18,8 +19,11 @@
 
                 include "RenderBuffer.inc"
                 include "SharedBuffer.inc"
+                include "SortBuffer.inc"
 
                 include "GameScreenWorld.inc"
                 include "GameWorldSprite.inc"
+
+                include "ObjectType.inc"
 
                 endif ; ~_CONST_INCLUDES_

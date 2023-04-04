@@ -16,18 +16,25 @@ Begin:          EQU $
                 include "Core/Module/Memory/MemSet.asm"
                 include "Core/Module/Memory/MemcpyPages.asm"
                 include "Core/Module/Memory/MemcpyFastLDIR.asm"
-                ; include "Core/Module/Memory/MemcpySprite.asm"
+                include "Core/Module/Memory/MemcpySprite.asm"
 
                 ; generation
                 include "Core/Module/Table/Gen_PRNG.asm"
                 include "Core/Module/Table/Gen_ScrAdr.asm"
+                include "Core/Module/Table/Gen_ShiftTable.asm"
                 include "Core/Module/Table/Gen_WorldSprite.asm"
+                include "Core/Module/Table/Gen_MultiplySpriteTable.asm"
 
                 ; draw world map
                 include "Core/Module/Draw/World/Draw.asm"
                 include "Core/Module/Draw/World/DrawColumn.asm"
                 include "Core/Module/Draw/World/Functions/Include.inc"
                 include "Core/Module/Draw/World/Minimap.asm"
+
+                ; draw sprite
+                include "Core/Module/Draw/Sprite/Include.inc"
+                include "Core/Module/Draw/Sprite/Functions/Include.inc"
+                include "Core/Module/Draw/Object/Include.inc"                   ; ToDo перенести в страницу!
 
                 ; decompressor
                 include "Core/Module/Decompressor/Forward.asm"
@@ -39,6 +46,7 @@ Begin:          EQU $
                 include "Core/Module/Math/Mul/16x8_16.asm"
                 include "Core/Module/Math/Mul/16x8_24.asm"
                 include "Core/Module/Math/Mul/32x8_40.asm"
+                include "Core/Module/Math/Div/Div8x8.asm"
                 include "Core/Module/Math/PerlinNoise/Include.inc"
 
                 ; input
@@ -47,6 +55,9 @@ Begin:          EQU $
                 ; utils
                 include "Core/Module/Draw/Utils/PixelAddress.asm"
                 include "Core/Module/Draw/Utils/PixelAttribute.asm"
+
+                ; object
+                include "Core/Module/Object/Initialize/Include.inc"             ; ToDo перенести в страницу!
 
                 ; debug
                 ifdef _DEBUG

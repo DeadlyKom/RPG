@@ -8,12 +8,14 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-World:          SET_SCREEN_SHADOW
+World:          SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
                 
                 RestoreBC                                                       ; защита от повреждения данных во время прерывания
-                
                 CALL Draw.World
                 CALL Draw.Minimap
+                CALL DrawObjects
+
+                SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
 
                 CALL Game.Input.Gameplay.Scan
                 CHECK_WORLD_FLAG WORLD_LEFT_BIT
@@ -26,6 +28,7 @@ World:          SET_SCREEN_SHADOW
                 CALL NZ, Game.World.MoveDown
 
                 ; show position
+                ifdef _DEBUG
                 LD DE, #0000
                 CALL Console.SetCursor
                 LD HL, GameState.PositionX+3
@@ -48,6 +51,7 @@ World:          SET_SCREEN_SHADOW
                 LD HL, World.Shift_Y
                 LD A, (HL)
                 CALL Console.DrawByte
+                endif
 
                 SET_RENDER_FLAG FINISHED_BIT                                    ; установка флага завершения отрисовки
 

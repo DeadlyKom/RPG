@@ -26,7 +26,7 @@
                 display "-------------------------------------------------------------------------------------------------------------------------------"
 
                 include "Pack.inc"
-                
-                display "   World Sprite size:\t", /D, WORLD_SPRITE_SIZE, "\tAligned: ", /D, WORLD_SPRITE_SIZE_ALIGNED
+
+                display "   World sprite size:\t", /D, WORLD_SPRITE_SIZE, "\tAligned: ", /D, WORLD_SPRITE_SIZE_ALIGNED
                 
                 endif ; ~_BUILDER_MAIN_

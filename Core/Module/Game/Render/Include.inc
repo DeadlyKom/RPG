@@ -5,6 +5,7 @@
                 module Render
                 
                 include "World.asm"
+                include "Object.asm"
                 include "Swap.asm"
 
                 endmodule

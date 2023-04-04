@@ -22,13 +22,14 @@ Screen:
 Memcpy:
 .Pages          EQU Kernel.Memcpy.Pages
 .FastLDIR       EQU Kernel.Memcpy.FastLDIR
-; .Sprite         EQU Kernel.Memcpy.Sprite
+.Sprite         EQU Kernel.Memcpy.Sprite
 
 ; memory set
 SafeFill:
 .Screen         EQU Kernel.Memset.SafeFill_Screen
 .b4096          EQU Kernel.Memset.SafeFill_4096
 .b2048          EQU Kernel.Memset.SafeFill_2048
+.b1024          EQU Kernel.Memset.SafeFill_1024
 .b768           EQU Kernel.Memset.SafeFill_768
 .b256           EQU Kernel.Memset.SafeFill_256
 .b192           EQU Kernel.Memset.SafeFill_192
@@ -44,17 +45,32 @@ TickCounterRef  EQU Kernel.Interrupt.Handler.TickCounterPtr                     
 
 ; generation
 Generation:
-.ScrAdr         EQU Kernel.Tables.ScrAdrGen                                     ; генерация адресов экрана (строк)      ToDo перенести в страницу!
-.PRNG_Gen       EQU Kernel.Tables.PRNG_Gen                                      ; генерация PRNG карты мира             ToDo перенести в страницу!
-.WorldSprite    EQU Kernel.Tables.WorldSpriteGen                                ; генерация спрайтов для карты мира     ToDo перенести в страницу!
+.ScrAdr         EQU Kernel.Tables.Gen_ScrAdr                                    ; генерация адресов экрана (строк)      ToDo перенести в страницу!
+.PRNG           EQU Kernel.Tables.Gen_PRNG                                      ; генерация PRNG карты мира             ToDo перенести в страницу!
+.ShiftTable     EQU Kernel.Tables.Gen_ShiftTable                                ; генерация таблицы сдвигов             ToDo перенести в страницу!
+.MulSprTable    EQU Kernel.Tables.Gen_MulSprTable                               ; генерация таблицы умножения для спрайтов  ToDo перенести в страницу!
+.WorldSprite    EQU Kernel.Tables.Gen_WorldSpr                                  ; генерация спрайтов для карты мира     ToDo перенести в страницу!
 
 ; tables
+Table:
+.ShiftFunc      EQU Kernel.Function.Table.Shift_LD
+.NoShiftFunc    EQU Kernel.Function.Table.NoShift_LD
+.ShiftOXRFunc   EQU Kernel.Function.Table_SR.Shift_OR_XOR
+.NoShiftOXRFunc EQU Kernel.Function.Table_SR.NoShift_OR_XOR
 
 ; draw
 Draw:
 .World          EQU Kernel.World.Draw                                           ; отображение карты миры
 .Minimap        EQU Kernel.World.Minimap                                        ; отображение миникарты
+.Sprite         EQU Kernel.Sprite.Draw                                          ; отображение спрайта без атрибутов
+.Object         EQU Kernel.Object.Draw                                          ; отображение объектов                  ToDo перенести в страницу!
 
+.Prepare        EQU Kernel.Sprite.Prepare                                       ; подготовка спрайта перед выводм на экран
+.Prepare.PosX   EQU Kernel.Sprite.Prepare.PositionX                             ; положение спрайта по горизонтали
+.Prepare.PosY   EQU Kernel.Sprite.Prepare.PositionY                             ; положение спрайта по вертикали
+.Prepare.SOx    EQU Kernel.Sprite.Prepare.SOx                                   ; смещение спрайта по горизонтали
+.Prepare.SOy    EQU Kernel.Sprite.Prepare.SOy                                   ; смещение спрайта по вертикали
+.Prepare.Size   EQU Kernel.Sprite.Prepare.SpriteSize                            ; размер спрайта (E - высота, D - ширина)
 Convert:
 .CharToScreen   EQU Kernel.Utils.PixelAddressC
 .PixelToScreen  EQU Kernel.Utils.PixelAddressP
@@ -65,7 +81,7 @@ World:
 .Shake_X        EQU Kernel.World.Draw.Shake_X                                   ; тряска карты мира по горизонтали
 .Shake_Y        EQU Kernel.World.Draw.Shake_Y                                   ; тряска карты мира по вертикали
 .Shift_X        EQU Kernel.World.Draw.Shift_X                                   ; смещение карты мира по горизонтали
-.Shift_Y        EQU Kernel.World.DrawColumn.Shift_Y                                   ; смещение карты мира по вертикали
+.Shift_Y        EQU Kernel.World.DrawColumn.Shift_Y                             ; смещение карты мира по вертикали
 
 Input:
 .CheckKeyState  EQU Kernel.Input.CheckKeyState
@@ -104,11 +120,11 @@ Math
 .Mul16x8_16     EQU Kernel.Math.Mul16x8_16
 .Mul16x8_23     EQU Kernel.Math.Mul16x8_16
 .Mul32x8_40     EQU Kernel.Math.Mul32x8_40
+.Div8x8         EQU Kernel.Math.Div8x8
 .PerlinNoise2D  EQU Kernel.Math.PerlinNoise2D
 .PN_Frequency   EQU Kernel.Math.Noise2D.Frequency
 .PN_LocationX   EQU Kernel.Math.Noise2D.Location.X
 .PN_LocationY   EQU Kernel.Math.Noise2D.Location.Y
-
 
 ; decompressor
 Decompressor
@@ -134,6 +150,9 @@ Func
 .Right.x4       EQU Kernel.Functions.NoShiftRight.x4
 .Right.x2       EQU Kernel.Functions.NoShiftRight.x2
 .Right.x0       EQU Kernel.Functions.NoShiftRight.x0
+
+.InitObject     EQU Kernel.Initialize.Object                                    ; инициализация работы с объектами      ToDo перенести в страницу!
+.SpawnObject    EQU Kernel.Initialize.Spawn                                     ; спавн объекта в мире                  ToDo перенести в страницу!
 
 ; debug
                 ifdef _DEBUG

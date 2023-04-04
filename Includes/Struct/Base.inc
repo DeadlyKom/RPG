@@ -41,13 +41,13 @@ Data			FValue
 				ends
 
 				struct FPNInt32
-.Low            DW #0000
-.High           DW #0000
+.Low            FValue
+.High           FValue
                 ends
 
                 struct FLocation32
-.X              FPNInt32 0x0000, 0x0000
-.Y              FPNInt32 0x0000, 0x0000
+.X              FPNInt32
+.Y              FPNInt32
                 ends
 
                 struct FPNInt40
@@ -57,7 +57,7 @@ Data			FValue
 
                 struct FNoise2D
 .Frequency      DB #00
-.Location       FLocation32 {0x0000, 0x0000}, {0x0000, 0x0000}
+.Location       FLocation32
                 ends
 
 				endif ; ~_STRUCT_BASE_

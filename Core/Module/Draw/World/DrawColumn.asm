@@ -538,7 +538,7 @@ DrawColumn:     ; сохранение стека
                 LD SP, #0000
                 RET
 
-                display " - Draw Column : \t\t\t\t\t", /A, DrawColumn, " = busy [ ", /D, $ - DrawColumn, " bytes  ]"
+                display " - Draw column:\t\t\t\t\t", /A, DrawColumn, " = busy [ ", /D, $ - DrawColumn, " bytes  ]"
 
                 endmodule
 

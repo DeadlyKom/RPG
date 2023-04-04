@@ -7,9 +7,9 @@
                 include "Generate.asm"
                 include "Move.asm"
 
+                include "Generate/MoveUp.asm"
                 include "Generate/MoveLeft.asm"
                 include "Generate/MoveRight.asm"
-                include "Generate/MoveUp.asm"
                 include "Generate/MoveDown.asm"
 
                 endmodule

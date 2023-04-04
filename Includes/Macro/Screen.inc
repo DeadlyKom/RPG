@@ -108,7 +108,7 @@ HiddenScrAdr_   macro Reg?
 ;   после функции PixelAddressP
 ; -----------------------------------------
 VisibleScrAdr_  macro Reg?
-                LD A, (MemoryPageRef)
+                LD A, (Adr.Port_7FFD)
                 AND SCREEN_MASK
                 JR NZ, $+4
                 RES 7, Reg?

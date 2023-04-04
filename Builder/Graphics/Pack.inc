@@ -6,7 +6,7 @@
                 ORG Adr.Graphics.Pack1
                 module Graphics
 
-                display "\'Graphic Pack\':\t\t\t\t\t-------------------- [ ", /D, Size, " bytes ]\t [", /D, Page.Graphics.Pack1, "]\t ------------------------"
+                display "\'Graphics Pack\':\t\t\t\t\t-------------------- [ ", /D, Size, " bytes ]\t [", /D, Page.Graphics.Pack1, "]\t ------------------------"
 
                 ifdef _REBUILD
                 include "Core/Module/Graphics/Tile/World/Sprite/Package.inc"
@@ -14,7 +14,7 @@
                 endif
 Begin:          EQU $
 
-                include "Core/Module/Graphics/Tile/World/Include.inc"
+                include "Core/Module/Graphics/Include.inc"
 Size:           EQU $ - Begin
 
                 ifndef _DEBUG

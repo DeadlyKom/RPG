@@ -6,4 +6,9 @@
                 include "Config.inc"
                 include "Game.inc"
 
+                include "AABB.inc"
+                include "Sprite.inc"
+
+                include "Object.inc"
+
                 endif ; ~_STRUCT_INCLUDE_

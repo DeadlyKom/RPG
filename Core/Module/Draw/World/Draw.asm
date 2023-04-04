@@ -251,7 +251,7 @@ Draw:           ; -----------------------------------------
                 DW Func.Left.x6, Func.Left.x2,      Func.Center.x6, Func.Center.x2,     Func.Right.x6, Func.Right.x2    ; 6/2
                 DW Func.Left.x8, Func.Left.x0,      Func.Center.x8, Func.Center.x0,     Func.Right.x8, Func.Right.x0    ; 8/0
 
-                display " - Draw World: \t\t\t\t\t", /A, Draw, " = busy [ ", /D, $ - Draw, " bytes  ]"
+                display " - Draw world:\t\t\t\t\t", /A, Draw, " = busy [ ", /D, $ - Draw, " bytes  ]"
 
                 endmodule
 

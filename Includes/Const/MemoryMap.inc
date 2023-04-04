@@ -5,10 +5,6 @@
 ; bank 01 (#4000 - #7FFF)
 Adr:
 .StackTop       EQU MemBank_01 + Size.Stack                                     ; расположение стека
-.ScrAdrTable    EQU Adr.StackTop                                                ; адрес таблицы адресов экрана
-.GameVar_A      EQU Adr.ScrAdrTable + 192                                       ; адрес переменных A (32 байта)
-.GameVar_B      EQU Adr.ScrAdrTable + 256 + 192                                 ; адрес переменных B (32 байта)
-.PRNG           EQU Adr.ScrAdrTable + Size.ScrAdrTable                          ; адрс таблицы генерации карты мира (https://www.random.org/)
 .SharedBuffer   EQU SharedBuffer                                                ; адрес буфера общего назначения
 .RenderBuffer   EQU RenderBuffer                                                ; адрес буфера отображения
 .Port_7FFD      EQU PORT_7FFD                                                   ; адрес хранения номера странички

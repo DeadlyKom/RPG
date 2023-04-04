@@ -1,5 +1,5 @@
-                ifndef _CORE_MODULE_TABLE_SCREEN_ADDRESS_GENERATION_
-                define _CORE_MODULE_TABLE_SCREEN_ADDRESS_GENERATION_
+                ifndef _CORE_MODULE_TABLE_GENERATION_SCREEN_ADDRESS_
+                define _CORE_MODULE_TABLE_GENERATION_SCREEN_ADDRESS_
 
                 module Tables
 ; -----------------------------------------
@@ -9,7 +9,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-ScrAdrGen:      LD HL, Adr.ScrAdrTable
+Gen_ScrAdr:     LD HL, Adr.ScrAdrTable
                 LD DE, #38C0                                                    ; константы
                 LD B, E
 
@@ -40,7 +40,7 @@ ScrAdrGen:      LD HL, Adr.ScrAdrTable
 
                 RET
 
-                display " - Screen address generation: \t\t\t", /A, ScrAdrGen, " = busy [ ", /D, $ - ScrAdrGen, " bytes  ]"
+                display " - Screen address table generation:\t\t\t", /A, Gen_ScrAdr, " = busy [ ", /D, $ - Gen_ScrAdr, " bytes  ]"
                 endmodule
 
-                endif ; ~ _CORE_MODULE_TABLE_SCREEN_ADDRESS_GENERATION_
+                endif ; ~ _CORE_MODULE_TABLE_GENERATION_SCREEN_ADDRESS_

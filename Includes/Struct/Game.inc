@@ -25,6 +25,7 @@ Gameplay        FFlags                                                          
 Hardware        FFlags                                                          ; флаги ограничения железа
 PositionX       FPNInt40                                                        ; позиция на карте мира по горизонтали
 PositionY       FPNInt40                                                        ; позиция на карте мира по вертикали
+Objects         DB #00                                                          ; количество объектов в массиве
                 ends
 
                 endif ; ~_STRUCT_GAME_

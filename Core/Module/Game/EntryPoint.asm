@@ -16,7 +16,7 @@ EntryPoint:     ; -----------------------------------------
                 ; -----------------------------------------
                 ; подготовка теневого экрана
                 ; -----------------------------------------
-                SET_SCREEN_SHADOW
+                SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
                 CLS_C000
                 ATTR_C000_IPB WHITE, BLACK, 0
                 ATTR_RECT_IPB MemBank_03_SCR, SCR_WORLD_POS_X, SCR_WORLD_POS_Y, SCR_WORLD_SIZE_X * 2 - 1, SCR_WORLD_SIZE_Y * 2, BLACK, WHITE, 0
@@ -27,9 +27,26 @@ EntryPoint:     ; -----------------------------------------
                 ; инициализация таблиц
                 ; -----------------------------------------
                 CALL Generation.ScrAdr                                          ; генерация адресов экрана
-                CALL Generation.PRNG_Gen                                        ; генерация PRNG карты мира
+                CALL Generation.PRNG                                            ; генерация PRNG карты мира
+                CALL Generation.ShiftTable                                      ; генерация таблицы сдвигов
+                CALL Generation.MulSprTable                                     ; генерация таблицы умножения для спрайтов
                 CALL Generation.WorldSprite                                     ; генерация спрайтов для карты мира
 
+                ; -----------------------------------------
+                ; инициализация объектов
+                ; -----------------------------------------
+                SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
+                CALL Func.InitObject                                            ; инициализация работы с объектами
+
+                ; ToDo тестовый спавн
+                LD DE, #0A0A
+                LD BC, OBJECT_PLAYER
+                CALL Func.SpawnObject
+                LD HL, SortBuffer
+                LD (HL), #00
+                INC L
+                LD (HL), #C0
+                SET_SCREEN_SHADOW                                               ; включение страницы второго экрана
                 ; -----------------------------------------
                 ; подготовка основного экрана
                 ; -----------------------------------------

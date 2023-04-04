@@ -86,6 +86,24 @@ SafeFill_2048:  RestoreDE
                 LD A, #31
                 LD (MS_ContainerSP - 1), A
                 RET
+SafeFill_1024:  RestoreDE
+                LD (.ContainerSP), SP
+                LD SP, HL
+                LD A, #23
+                LD (MS_ContainerSP - 1), A
+                LD (MS_ContainerSP + 0), A
+                LD A, #E9
+                LD (MS_ContainerSP + 1), A
+                LD IX, MemSet_512
+                LD HL, .Jumps
+.Jumps          dup 2
+                JP (IX)
+                edup
+.ContainerSP    EQU $+1
+                LD SP, #0000
+                LD A, #31
+                LD (MS_ContainerSP - 1), A
+                RET
 SafeFill_768:   ; 768
                 RestoreDE
                 LD (MS_ContainerSP), SP

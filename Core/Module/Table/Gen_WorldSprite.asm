@@ -1,5 +1,5 @@
-                ifndef _CORE_MODULE_TABLE_WORLD_SPRITE_GENERATION_
-                define _CORE_MODULE_TABLE_WORLD_SPRITE_GENERATION_
+                ifndef _CORE_MODULE_TABLE_GENERATION_WORLD_SPRITE_
+                define _CORE_MODULE_TABLE_GENERATION_WORLD_SPRITE_
 
                 module Tables
 ; -----------------------------------------
@@ -9,7 +9,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-WorldSpriteGen: SHOW_SHADOW_SCREEN                                              ; отображение теневого экрана
+Gen_WorldSpr:   SHOW_SHADOW_SCREEN                                              ; отображение теневого экрана
                 SET_PAGE_GRAPHICS                                               ; включить страницу графики
 
                 ; распаковк графики
@@ -430,8 +430,8 @@ TableTilepairs  DB #00, #00 ; 0
 
 .Num            EQU ($-TableTilepairs) >> 1
 
-                display " - World sprite generatuion: \t\t[", /D, TableTilepairs.Num, " tilepairs]\t", /A, ScrAdrGen, " = busy [ ", /D, $ - ScrAdrGen, " bytes  ]"
+                display " - World sprite generatuion: \t\t[", /D, TableTilepairs.Num, " tilepairs]\t", /A, Gen_WorldSpr, " = busy [ ", /D, $ - Gen_WorldSpr, " bytes  ]"
 
                 endmodule
 
-                endif ; ~ _CORE_MODULE_TABLE_WORLD_SPRITE_GENERATION_
+                endif ; ~ _CORE_MODULE_TABLE_GENERATION_WORLD_SPRITE_
