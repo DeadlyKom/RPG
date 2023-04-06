@@ -1,2 +1,2 @@
-Converter.exe Tilepair.ini
+Converter.exe Tilepair_1.ini
 pause
