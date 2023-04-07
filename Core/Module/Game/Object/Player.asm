@@ -25,69 +25,41 @@ PlayerObject:   ;
                 ; cos (andle)
                 LD A, B
                 RRA
-                AND #3F
-                LD L, LOW .RotTable
-                ADD A, L
-                LD L, A
-                ADC A, HIGH .RotTable
-                SUB L
-                LD H, A
-                LD A, (HL)
+                RRA
+                LD B, A
+                CALL .CalcRotation
 
-                LD C, A
-                BIT 7, C
-                JR Z, $+4
-                NEG
-                
-                ;   DE - multiplicand
-                ;   A  - multiplier
-                ; Out :
-                ;   HL - product DE * A
-
-                CALL Math.Mul16x8_16
-
-                ; округление
-                ADD HL, HL
-                ADD HL, HL
-                LD L, H
-                LD H, #00
-
-                ; определение знака
-                BIT 7, C
-                JR Z, .IsPositive_
-
-                ; NEG HL
-                XOR A
-                SUB L
-                LD L, A
-                SBC A, A
-                SUB H
-                LD H, A
-.IsPositive_
-                ; округление
                 ; отладка
                 LD A, L
                 LD (PlayerState.Debug), A
 
-                LD DE, (IX + FObject.Position.X)
-                ADD HL, DE
+                LD A, B                                                         ; освобождение регистра B
+                LD BC, (IX + FObject.Position.X)
+                ADD HL, BC
                 LD (IX + FObject.Position.X), HL
 
-
-                LD A, (PlayerState.RotationAngle)
-                LD B, A
-                ; скорость
-                LD A, (PlayerState.Speed)
-                LD E, A
-                ADD A, A
-                SBC A, A
-                LD D, A
-
                 ; sin (andle)
-                LD A, B
-                RRA
-                ADD A, 16
-                AND #3F
+                ADD A, 8                                                        ; -sin α = cos(π * 0.5 + α)
+                CALL .CalcRotation
+
+                LD BC, (IX + FObject.Position.Y)
+                ADD HL, BC
+                LD (IX + FObject.Position.Y), HL
+
+                ; -----------------------------------------
+
+                RET
+
+; -----------------------------------------
+; расчтёт проекции вектора на ось
+; In:
+;   A  - угол поворота
+;   DE - скорость
+; Out:
+; Corrupt:
+; Note:
+; ----------------------------------------
+.CalcRotation   AND #1F
                 LD L, LOW .RotTable
                 ADD A, L
                 LD L, A
@@ -101,13 +73,27 @@ PlayerObject:   ;
                 JR Z, $+4
                 NEG
                 
+                ; ----------------------------------------
+                ; In:
                 ;   DE - multiplicand
                 ;   A  - multiplier
                 ; Out :
                 ;   HL - product DE * A
-
+                ; Corrupt :
+                ;   HL, F
+                ; ----------------------------------------
+                PUSH DE
+                LD D, #00
+                BIT 7, E
+                JR Z, $+8
+                EX AF, AF'
+                LD A, E
+                NEG
+                LD E, A
+                EX AF, AF'
                 CALL Math.Mul16x8_16
-
+                POP DE
+                
                 ; округление
                 ADD HL, HL
                 ADD HL, HL
@@ -115,8 +101,10 @@ PlayerObject:   ;
                 LD H, #00
 
                 ; определение знака
-                BIT 7, C
-                JR Z, .IsPositive
+                LD A, C
+                XOR D
+                ADD A, A
+                RET NC
 
                 ; NEG HL
                 XOR A
@@ -125,40 +113,33 @@ PlayerObject:   ;
                 SBC A, A
                 SUB H
                 LD H, A
-.IsPositive
-                ; отладка
-                LD A, L
-                LD (PlayerState.Debug), A
 
-                LD DE, (IX + FObject.Position.Y)
-                ADD HL, DE
-                LD (IX + FObject.Position.Y), HL
                 RET
 
 .RotTable       lua allpass
-                for i = 0, 15 do
-                    local Angle = math.cos(math.rad(90/15 * i)) + 0.001
+                for i = 0, 7 do
+                    local Angle = math.cos(math.rad(90/7 * i)) + 0.001
                     local Value = (math.floor(Angle * 127)) % 256
                     _pc("DB " .. Value)
-                    --print (string.format("DB #%.2X - [ cos(%.1f) \t=  %f ]", Value, 90/15 * i, Angle))
+                    --print (string.format("DB #%.2X - [ cos(%.1f) \t=  %f ]", Value, 90/7 * i, Angle))
                 end
-                for i = 0, 15 do
-                    local Angle = math.cos(math.rad(90 + 90/15 * i)) + 0.001
+                for i = 0, 7 do
+                    local Angle = math.cos(math.rad(90 + 90/7 * i)) + 0.001
                     local Value = (math.floor(Angle * 127)) % 256
                     _pc("DB " .. Value)
-                    --print (string.format("DB #%.2X - [ cos(%.1f) \t=  %f ]", Value, 90 + 90/15 * i, Angle))
+                    --print (string.format("DB #%.2X - [ cos(%.1f) \t=  %f ]", Value, 90 + 90/7 * i, Angle))
                 end
-                for i = 0, 15 do
-                    local Angle = math.cos(math.rad(180 + 90/15 * i)) + 0.001
+                for i = 0, 7 do
+                    local Angle = math.cos(math.rad(180 + 90/7 * i)) + 0.001
                     local Value = (math.floor(Angle * 127)) % 256
                     _pc("DB " .. Value)
-                    --print (string.format("DB #%.2X - [ cos(%.1f) \t=  %f ]", Value, 180 + 90/15 * i, Angle))
+                    --print (string.format("DB #%.2X - [ cos(%.1f) \t=  %f ]", Value, 180 + 90/7 * i, Angle))
                 end
-                for i = 0, 15 do
-                    local Angle = math.cos(math.rad(270 + 90/15 * i)) + 0.001
+                for i = 0, 7 do
+                    local Angle = math.cos(math.rad(270 + 90/7 * i)) + 0.001
                     local Value = (math.floor(Angle * 127)) % 256
                     _pc("DB " .. Value)
-                    --print (string.format("DB #%.2X - [ cos(%.1f) \t=  %f ]", Value, 270 +  90/15 * i, Angle))
+                    --print (string.format("DB #%.2X - [ cos(%.1f) \t=  %f ]", Value, 270 +  90/7 * i, Angle))
                 end
 
                 endlua

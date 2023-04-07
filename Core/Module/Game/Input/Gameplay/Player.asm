@@ -8,7 +8,11 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-RotateLeft:     LD HL, PlayerState.RotationAngle
+RotateLeft:     LD A, (PlayerState.Speed)
+                ADD A, A
+                JR C, RotateRight.DEC
+                
+.INC            LD HL, PlayerState.RotationAngle
                 INC (HL)
                 RET
 ; -----------------------------------------
@@ -18,7 +22,11 @@ RotateLeft:     LD HL, PlayerState.RotationAngle
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-RotateRight:    LD HL, PlayerState.RotationAngle
+RotateRight:    LD A, (PlayerState.Speed)
+                ADD A, A
+                JR C, RotateLeft.INC
+
+.DEC            LD HL, PlayerState.RotationAngle
                 DEC (HL)
                 RET
 ; -----------------------------------------
