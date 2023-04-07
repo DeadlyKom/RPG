@@ -14,8 +14,8 @@ MoveUp:         ; -----------------------------------------
                 ; -----------------------------------------
 
                 ; положение карты по горизонтали            DEHL
-                LD DE, (GameState.PositionX + 3)
-                LD HL, (GameState.PositionX + 1)
+                LD DE, (PlayerState.PositionX + 3)
+                LD HL, (PlayerState.PositionX + 1)
                 
                 ; вычесть половину смещения (левый край мини карты)
                 LD BC, SCR_MINIMAP_OFFSET_X >> 1
@@ -33,8 +33,8 @@ MoveUp:         ; -----------------------------------------
                 ; -----------------------------------------
 
                 ; положение карты по горизонтали            DEHL
-                LD DE, (GameState.PositionY + 3)
-                LD HL, (GameState.PositionY + 1)
+                LD DE, (PlayerState.PositionY + 3)
+                LD HL, (PlayerState.PositionY + 1)
                 
                 ; вычесть половину смещения (верхний край мини карты)
                 LD BC, SCR_MINIMAP_OFFSET_Y >> 1
@@ -61,11 +61,11 @@ MoveUp:         ; -----------------------------------------
                 ;LD HL, Adr.MinimapSpr                                           ; адрес левого-вверхний байта спрайта
                                                                                 ; сдвигаем снизу вверх
                 LD B, 4;SCR_MINIMAP_SIZE_X >> 1
-                LD A, (GameState.PositionY + 1)
+                LD A, (PlayerState.PositionY + 1)
                 LD C, A
   
                 ; если x = 1 (не выровнен), берётся только 1 значение из шума 02/04
-                LD A, (GameState.PositionX + 1)
+                LD A, (PlayerState.PositionX + 1)
                 ADD A, A
                 JR NC, .Aligned
 
@@ -143,7 +143,7 @@ MoveUp:         ; -----------------------------------------
                 LD B, 4;SCR_MINIMAP_SIZE_X >> 1
 
                 ; если x = 1 (не выровнен), берётся только 1 значение из шума 02/04
-                LD A, (GameState.PositionX + 1)
+                LD A, (PlayerState.PositionX + 1)
                 ADD A, A
                 JR NC, .Aligned_
 

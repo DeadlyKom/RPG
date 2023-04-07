@@ -14,7 +14,10 @@ Interrupt:
                 CALL NZ, Render.Swap
 
 .Input          ; ************ Scan Input ************
-                ; CALL Input.Gameplay.Scan
+                CALL Input.Gameplay.Scan
+
+.Tick           ; ************* TICK *************
+                CALL Object.Tick
 
                 ifdef _DEBUG
 .Debug_FPS      ; ************** Draw FPS **************

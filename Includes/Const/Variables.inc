@@ -14,13 +14,19 @@ GameConfig          EQU Adr.GameConfig                                          
 .Element_2          EQU GameConfig + FGameConfig.Animation + 2                  ; 3 элемент массив анимаций
 .Element_3          EQU GameConfig + FGameConfig.Animation + 3                  ; 4 элемент массив анимаций
 .SpriteCounter      EQU GameConfig + FGameConfig.SpriteCounter                  ; флаги композитного спрайта/счётчика спрайтов
+
 GameState           EQU Adr.GameState                                           ; адрес структуры состояния игры
 .Render             EQU GameState + FGameState.Render                           ; флаги отрисовки
 .World              EQU GameState + FGameState.World                            ; флаги отрисовки мира
 .Gameplay           EQU GameState + FGameState.Gameplay                         ; флаги геймплея
 .Hardware           EQU GameState + FGameState.Hardware                         ; флаги железа
-.PositionX          EQU GameState + FGameState.PositionX                        ; позиция карты мира по горизонтали
-.PositionY          EQU GameState + FGameState.PositionY                        ; позиция карты мира по вертикали
 .Objects            EQU GameState + FGameState.Objects                          ; количество объектов в массиве
+
+PlayerState         EQU Adr.PlayerState
+.PositionX          EQU PlayerState + FPlayerState.PositionX                    ; позиция карты мира по горизонтали
+.PositionY          EQU PlayerState + FPlayerState.PositionY                    ; позиция карты мира по вертикали
+.Speed              EQU PlayerState + FPlayerState.Speed                        ; скорость игрока
+.RotationAngle      EQU PlayerState + FPlayerState.RotationAngle                ; угол поворота игрока
+.Debug      EQU PlayerState + FPlayerState.Debug                                ; 
 
                     endif ; ~_CONST_GAME_

@@ -9,8 +9,11 @@
 ; Note:
 ; -----------------------------------------
 GameLoop:       
-.Loop           CHECK_RENDER_FLAG FINISHED_BIT
+.Loop           ;
+.Render         ; ************ RENDER ************
+                CHECK_RENDER_FLAG FINISHED_BIT
                 CALL Z, Render.World
+
                 JP .Loop
 
                 endif ; ~_CORE_MODULE_GAME_LOOP_

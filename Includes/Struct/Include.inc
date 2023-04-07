@@ -5,6 +5,7 @@
                 include "Base.inc"
                 include "Config.inc"
                 include "Game.inc"
+                include "Player.inc"
 
                 include "AABB.inc"
                 include "Sprite.inc"

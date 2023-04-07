@@ -10,11 +10,11 @@
                 include "MemoryMapObject.inc"
                 include "MemoryMapGraphics.inc"
 
-                include "Game.inc"
                 include "Kernel.inc"
                 include "Input.inc"
                 include "World.inc"
                 include "Render.inc"
+                include "Variables.inc"
                 include "Interrupt.inc"
 
                 include "RenderBuffer.inc"

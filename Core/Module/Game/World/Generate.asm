@@ -18,7 +18,7 @@ Generate:       ; -----------------------------------------
                 CALL MoveRight
 
                 ; INC 32
-                LD HL, GameState.PositionX + 1
+                LD HL, PlayerState.PositionX + 1
                 INC (HL)
                 JR NZ, $+12
                 INC L

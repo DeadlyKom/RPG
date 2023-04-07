@@ -21,12 +21,12 @@ Gen_PRNG:       ; установка seed
                 LD (GameConfig.Frequency), A
 
                 LD HL, #0000
-                LD (GameState.PositionX + 1), HL
+                LD (PlayerState.PositionX + 1), HL
                 LD HL, #0000
-                LD (GameState.PositionY + 1), HL
+                LD (PlayerState.PositionY + 1), HL
                 LD HL, #1000
-                LD (GameState.PositionX + 3), HL
-                LD (GameState.PositionY + 3), HL
+                LD (PlayerState.PositionX + 3), HL
+                LD (PlayerState.PositionY + 3), HL
 
                 ; инициализация генерации
                 LD HL, Adr.PRNG

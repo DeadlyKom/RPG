@@ -17,7 +17,7 @@ World:          SET_SCREEN_SHADOW                                               
 
                 SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
 
-                CALL Game.Input.Gameplay.Scan
+                ; CALL Game.Input.Gameplay.Scan
                 CHECK_WORLD_FLAG WORLD_LEFT_BIT
                 CALL NZ, Game.World.MoveLeft
                 CHECK_WORLD_FLAG WORLD_RIGHT_BIT
@@ -31,9 +31,9 @@ World:          SET_SCREEN_SHADOW                                               
                 ifdef _DEBUG
                 LD DE, #0000
                 CALL Console.SetCursor
-                LD HL, GameState.PositionX+3
+                LD HL, PlayerState.PositionX+3
                 CALL Console.DrawWordFrom
-                LD HL, GameState.PositionX+1
+                LD HL, PlayerState.PositionX+1
                 CALL Console.DrawWordFrom
                 LD HL, World.Shift_X
                 LD A, (HL)
@@ -44,12 +44,20 @@ World:          SET_SCREEN_SHADOW                                               
 
                 LD DE, #0100
                 CALL Console.SetCursor
-                LD HL, GameState.PositionY+3
-                CALL Console.DrawWordFrom
-                LD HL, GameState.PositionY+1
-                CALL Console.DrawWordFrom
-                LD HL, World.Shift_Y
-                LD A, (HL)
+                ; LD HL, PlayerState.PositionY+3
+                ; CALL Console.DrawWordFrom
+                ; LD HL, PlayerState.PositionY+1
+                ; CALL Console.DrawWordFrom
+                ; LD HL, World.Shift_Y
+                ; LD A, (HL)
+                ; CALL Console.DrawByte
+
+                LD A, (PlayerState.RotationAngle)
+                AND #7F
+                CALL Console.DrawByte
+                LD A, (PlayerState.Speed)
+                CALL Console.DrawByte
+                LD A, (PlayerState.Debug)
                 CALL Console.DrawByte
                 endif
 
