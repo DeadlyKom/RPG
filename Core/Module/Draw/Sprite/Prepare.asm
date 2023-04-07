@@ -435,6 +435,12 @@ Prepare:        EX DE, HL
                 LD A, H
                 ADD A, B
                 SUB (SCR_WORLD_POS_X + (SCR_WORLD_SIZE_X << 1) - 1) * 8
+                LD L, A
+                LD A, B
+                NEG
+                AND 7
+                ADD A, L
+                OR A
 
                 ; округление до знакоместа
                 LD L, #00
