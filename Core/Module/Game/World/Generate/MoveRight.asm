@@ -9,20 +9,14 @@
 ; Note:
 ;   шаг 1 пикселя
 ; -----------------------------------------
-MoveRight:      ;CALL .Generate
-                ;CALL .Tile
-
-                ; RES_WORLD_FLAG WORLD_RIGHT_BIT
-
-                ;RET
-
+MoveRight:      ;
 .Generate       ; -----------------------------------------
                 ; центрирование мини карты по горизонтали
                 ; -----------------------------------------
 
                 ; положение карты по горизонтали            DEHL
-                LD DE, (PlayerState.PositionX + 3)
-                LD HL, (PlayerState.PositionX + 1)
+                LD DE, (PlayerState.CameraPosX + 3)
+                LD HL, (PlayerState.CameraPosX + 1)
                 
                 ; прибавить смещение и ширину карты мира (правый край мини карты)
                 LD BC, (SCR_MINIMAP_SIZE_X - SCR_MINIMAP_OFFSET_X) >> 1
@@ -39,8 +33,8 @@ MoveRight:      ;CALL .Generate
                 ; -----------------------------------------
 
                 ; положение карты по горизонтали            DEHL
-                LD DE, (PlayerState.PositionY + 3)
-                LD HL, (PlayerState.PositionY + 1)
+                LD DE, (PlayerState.CameraPosY + 3)
+                LD HL, (PlayerState.CameraPosY + 1)
                 
                 ; прибавить смещение и высоту карты мира (нижний край мини карты)
                 LD BC, (SCR_MINIMAP_SIZE_Y - SCR_MINIMAP_OFFSET_Y) >> 1
@@ -58,11 +52,11 @@ MoveRight:      ;CALL .Generate
                 LD HL, Adr.MinimapSpr + Size.MinimapSpr - 1                     ; адрес правого-нижнего байта спрайта
                                                                                 ; сдвигаем снизу вверх
                 LD B, SCR_MINIMAP_SIZE_Y >> 1
-                LD A, (PlayerState.PositionX + 1)
+                LD A, (PlayerState.CameraPosX + 1)
                 LD C, A
   
                 ; если y = 1 (не выровнен), берётся только 1 значение из шума 01/02
-                LD A, (PlayerState.PositionY + 1)
+                LD A, (PlayerState.CameraPosY + 1)
                 ; ADD A, A
                 RRA
                 JR NC, .Aligned
@@ -180,7 +174,7 @@ MoveRight:      ;CALL .Generate
                 DJNZ .RollLoop
 
                 ; -----------------------------------------
-                LD A, (PlayerState.PositionY + 1)
+                LD A, (PlayerState.CameraPosY + 1)
                 ; ADD A, A
                 RRA
                 JR NC, .Aligned_

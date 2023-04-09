@@ -14,8 +14,8 @@ MoveDown:       ; -----------------------------------------
                 ; -----------------------------------------
 
                 ; положение карты по горизонтали            DEHL
-                LD DE, (PlayerState.PositionX + 3)
-                LD HL, (PlayerState.PositionX + 1)
+                LD DE, (PlayerState.CameraPosX + 3)
+                LD HL, (PlayerState.CameraPosX + 1)
                 
                 ; вычесть половину смещения (левый край мини карты)
                 LD BC, SCR_MINIMAP_OFFSET_X >> 1
@@ -33,8 +33,8 @@ MoveDown:       ; -----------------------------------------
                 ; -----------------------------------------
 
                 ; положение карты по горизонтали            DEHL
-                LD DE, (PlayerState.PositionY + 3)
-                LD HL, (PlayerState.PositionY + 1)
+                LD DE, (PlayerState.CameraPosY + 3)
+                LD HL, (PlayerState.CameraPosY + 1)
                 
                 ; прибавить смещение и высоту карты мира (нижний край мини карты)
                 LD BC, (SCR_MINIMAP_SIZE_Y - SCR_MINIMAP_OFFSET_Y) >> 1
@@ -59,11 +59,11 @@ MoveDown:       ; -----------------------------------------
                 ;LD HL, Adr.MinimapSpr                                           ; адрес левого-вверхний байта спрайта
                                                                                 ; сдвигаем снизу вверх
                 LD B, 4;SCR_MINIMAP_SIZE_X >> 1
-                LD A, (PlayerState.PositionY + 1)
+                LD A, (PlayerState.CameraPosY + 1)
                 LD C, A
   
                 ; если x = 1 (не выровнен), берётся только 1 значение из шума 02/04
-                LD A, (PlayerState.PositionX + 1)
+                LD A, (PlayerState.CameraPosX + 1)
                 ADD A, A
                 JR NC, .Aligned
 
@@ -141,7 +141,7 @@ MoveDown:       ; -----------------------------------------
                 LD B, 4;SCR_MINIMAP_SIZE_X >> 1
 
                 ; если x = 1 (не выровнен), берётся только 1 значение из шума 02/04
-                LD A, (PlayerState.PositionX + 1)
+                LD A, (PlayerState.CameraPosX + 1)
                 ADD A, A
                 JR NC, .Aligned_
 

@@ -23,10 +23,11 @@ GameState           EQU Adr.GameState                                           
 .Objects            EQU GameState + FGameState.Objects                          ; количество объектов в массиве
 
 PlayerState         EQU Adr.PlayerState
-.PositionX          EQU PlayerState + FPlayerState.PositionX                    ; позиция карты мира по горизонтали
-.PositionY          EQU PlayerState + FPlayerState.PositionY                    ; позиция карты мира по вертикали
+.CameraPosX         EQU PlayerState + FPlayerState.CameraPosX                   ; позиция карты мира по горизонтали
+.CameraPosY         EQU PlayerState + FPlayerState.CameraPosY                   ; позиция карты мира по вертикали
 .Speed              EQU PlayerState + FPlayerState.Speed                        ; скорость игрока
 .RotationAngle      EQU PlayerState + FPlayerState.RotationAngle                ; угол поворота игрока
+.DeltaCameraX      EQU PlayerState + FPlayerState.DeltaCameraX                  ; дельта камеры по горизонтали
 .Debug      EQU PlayerState + FPlayerState.Debug                                ; 
 
                     endif ; ~_CONST_GAME_

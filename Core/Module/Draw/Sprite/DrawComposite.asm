@@ -45,7 +45,7 @@ DrawComposite:  EXX
 
                 ; расчёт максимального значения по оси Y (a.maxY)
                 LD DE, (IX + FUnit.Position.Y)
-                LD (Prepare.PositionY), DE                                      ; сохранение позиции юнита по вертикали
+                LD (Prepare.CameraPosY), DE                                      ; сохранение позиции юнита по вертикали
                 ADD HL, DE
                 ; ---------------------------------------------
                 ; HL - a.maxY
@@ -121,7 +121,7 @@ DrawComposite:  EXX
 
                 ; расчёт максимального значения по оси X (a.maxX)
                 LD DE, (IX + FUnit.Position.X)
-                LD (Prepare.PositionX), DE                                      ; сохранение позиции юнита по горизонтали
+                LD (Prepare.CameraPosX), DE                                      ; сохранение позиции юнита по горизонтали
                 ADD HL, DE
 
                 ; сравнение a.maxX, b.minX

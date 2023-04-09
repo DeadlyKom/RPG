@@ -23,6 +23,7 @@
 
                 include "GameScreenWorld.inc"
                 include "GameWorldSprite.inc"
+                include "GameWorldCamera.inc"
 
                 include "ObjectType.inc"
 

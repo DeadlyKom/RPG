@@ -8,7 +8,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Interrupt:      
+Interrupt:      ;
 .SwapScreens    ; ************ Swap Screens ************
                 CHECK_RENDER_FLAG FINISHED_BIT
                 CALL NZ, Render.Swap
@@ -18,6 +18,9 @@ Interrupt:
 
 .Tick           ; ************* TICK *************
                 CALL Object.Tick
+
+.Camera         ; ************ CAMERA *************
+                CALL Game.World.Horizontal                                      ; обязательно вызвать после обновления объектов! (Object.Tick)
 
                 ifdef _DEBUG
 .Debug_FPS      ; ************** Draw FPS **************

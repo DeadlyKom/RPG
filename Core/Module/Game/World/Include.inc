@@ -4,11 +4,12 @@
 
                 module World
                 
-                include "Generate.asm"
                 include "Move.asm"
+                include "Camera.asm"
+                include "Generate.asm"
 
-                include "Generate/MoveUp.asm"
                 include "Generate/MoveRight.asm"
+                include "Generate/MoveUp.asm"
                 include "Generate/MoveDown.asm"
                 include "Generate/MoveLeft.asm"
 

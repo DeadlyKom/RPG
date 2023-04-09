@@ -18,7 +18,7 @@ Generate:       ; -----------------------------------------
                 CALL MoveRight
 
                 ; INC 32
-                LD HL, PlayerState.PositionX + 1
+                LD HL, PlayerState.CameraPosX + 1
                 INC (HL)
                 JR NZ, $+12
                 INC L
@@ -70,12 +70,12 @@ Generate:       ; -----------------------------------------
                 ; JR Z, $+3
                 ; INC A
 
-                LD A, L
-                ADD A, #70
-                CP #60
-                LD A, #FF
-                JR NC, $+3
-                INC A
+                ; LD A, L
+                ; ADD A, #70
+                ; CP #60
+                ; LD A, #FF
+                ; JR NC, $+3
+                ; INC A
 
                 ; LD A, L
                 ; ADD A, #90
@@ -85,7 +85,7 @@ Generate:       ; -----------------------------------------
                 ; JR C, $+3
                 ; LD A, #00
 
-                ; LD A, H
+                LD A, H
 
                 EXX
                 CPL

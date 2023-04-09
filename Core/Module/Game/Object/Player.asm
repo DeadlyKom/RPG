@@ -47,6 +47,7 @@ PlayerObject:   ;
                 LD (IX + FObject.Position.Y), HL
 
                 ; -----------------------------------------
+                CALL Game.World.Camera
 
                 RET
 
