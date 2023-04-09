@@ -25,6 +25,7 @@ DrawPlayer:     ; сохранеие текущей страницы
 
                 LD H, HIGH SpriteInfo.Data
                 LD A, (IX + FObject.Direction)
+                AND %01111000
                 ADD A, LOW SpriteInfo.Data
                 LD L, A
                 ADC A, H

@@ -44,6 +44,29 @@ Scan:           ; опрос виртуальных клавиш
                 CALL Input.CheckKeyState
                 CALL Z, DecreaseSpeed
 
+
+                ifdef _DEBUG
+                ; move map left
+                LD A, VK_J
+                CALL Input.CheckKeyState
+                CALL Z, Game.World.Left
+
+                ; move map right
+                LD A, VK_L
+                CALL Input.CheckKeyState
+                CALL Z, Game.World.Right
+
+                ; move map up
+                LD A, VK_I
+                CALL Input.CheckKeyState
+                CALL Z, Game.World.Up
+
+                ; move map down
+                LD A, VK_K
+                CALL Input.CheckKeyState
+                CALL Z, Game.World.Down
+                endif
+
                 RET
 
                 endif ; ~_MODULE_GAME_INPUT_GAMEPLAY_SCAN_

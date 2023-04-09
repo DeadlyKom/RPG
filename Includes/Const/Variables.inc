@@ -25,9 +25,13 @@ GameState           EQU Adr.GameState                                           
 PlayerState         EQU Adr.PlayerState
 .CameraPosX         EQU PlayerState + FPlayerState.CameraPosX                   ; позиция карты мира по горизонтали
 .CameraPosY         EQU PlayerState + FPlayerState.CameraPosY                   ; позиция карты мира по вертикали
+.CameraShiftX       EQU PlayerState + FPlayerState.CameraShiftX                 ; смещение карты мира по горизонтали
+.CameraShiftY       EQU PlayerState + FPlayerState.CameraShiftY                 ; смещение карты мира по вертикали
 .Speed              EQU PlayerState + FPlayerState.Speed                        ; скорость игрока
 .RotationAngle      EQU PlayerState + FPlayerState.RotationAngle                ; угол поворота игрока
-.DeltaCameraX      EQU PlayerState + FPlayerState.DeltaCameraX                  ; дельта камеры по горизонтали
-.Debug      EQU PlayerState + FPlayerState.Debug                                ; 
+.DeltaCameraX       EQU PlayerState + FPlayerState.DeltaCameraX                 ; дельта камеры по горизонтали
+.DeltaCameraY       EQU PlayerState + FPlayerState.DeltaCameraY                 ; дельта камеры по вертикали
+
+.Debug              EQU PlayerState + FPlayerState.Debug                        ; отладочная
 
                     endif ; ~_CONST_GAME_

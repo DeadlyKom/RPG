@@ -39,13 +39,15 @@ EntryPoint:     ; -----------------------------------------
                 CALL Func.InitObject                                            ; инициализация работы с объектами
 
                 ; ToDo тестовый спавн
-                LD DE, #0A0A
+                LD DE, #5050
                 LD BC, OBJECT_PLAYER
                 CALL Func.SpawnObject
                 LD HL, SortBuffer
                 LD (HL), #00
                 INC L
                 LD (HL), #C0
+                LD HL, PlayerState.Speed
+                LD (HL), #00
                 SET_SCREEN_SHADOW                                               ; включение страницы второго экрана
                 ; -----------------------------------------
                 ; подготовка основного экрана

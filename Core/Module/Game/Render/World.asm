@@ -8,7 +8,13 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-World:          ; скрол карты мира в зависимости от состояний флагов
+World:          ; копирование данных сдвига карты мира
+                LD A, (PlayerState.CameraShiftX)
+                LD (World.Shift_X), A
+                LD A, (PlayerState.CameraShiftY)
+                LD (World.Shift_Y), A
+
+                ; скрол карты мира в зависимости от состояний флагов
                 CHECK_WORLD_FLAG WORLD_LEFT_BIT
                 CALL NZ, Game.World.MoveLeft
                 CHECK_WORLD_FLAG WORLD_RIGHT_BIT
@@ -25,10 +31,9 @@ World:          ; скрол карты мира в зависимости от 
                 CALL Draw.Minimap
                 CALL DrawObjects
 
-                SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
-
                 ; show position
                 ifdef _DEBUG
+                SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
                 LD DE, #0000
                 CALL Console.SetCursor
                 LD HL, PlayerState.CameraPosX+3
@@ -44,20 +49,27 @@ World:          ; скрол карты мира в зависимости от 
 
                 LD DE, #0100
                 CALL Console.SetCursor
-                ; LD HL, PlayerState.CameraPosY+3
-                ; CALL Console.DrawWordFrom
-                ; LD HL, PlayerState.CameraPosY+1
-                ; CALL Console.DrawWordFrom
-                ; LD HL, World.Shift_Y
-                ; LD A, (HL)
-                ; CALL Console.DrawByte
-                LD A, (PlayerState.DeltaCameraX)
+                LD HL, PlayerState.CameraPosY+3
+                CALL Console.DrawWordFrom
+                LD HL, PlayerState.CameraPosY+1
+                CALL Console.DrawWordFrom
+                LD HL, World.Shift_Y
+                LD A, (HL)
                 CALL Console.DrawByte
-
+                
+                LD DE, #0200
+                CALL Console.SetCursor
                 LD A, (PlayerState.RotationAngle)
                 AND #7F
                 CALL Console.DrawByte
                 LD A, (PlayerState.Speed)
+                CALL Console.DrawByte
+
+                LD DE, #0300
+                CALL Console.SetCursor
+                LD A, (PlayerState.DeltaCameraX)
+                CALL Console.DrawByte
+                LD A, (PlayerState.DeltaCameraY)
                 CALL Console.DrawByte
                 ; LD A, (PlayerState.Debug)
                 ; CALL Console.DrawByte

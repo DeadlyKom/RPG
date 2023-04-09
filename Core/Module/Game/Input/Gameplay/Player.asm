@@ -10,7 +10,7 @@
 ; -----------------------------------------
 RotateLeft:     LD A, (PlayerState.Speed)
                 ADD A, A
-                JR C, RotateRight.DEC
+                ; JR C, RotateRight.DEC
                 
 .INC            LD HL, PlayerState.RotationAngle
                 INC (HL)
@@ -24,7 +24,7 @@ RotateLeft:     LD A, (PlayerState.Speed)
 ; -----------------------------------------
 RotateRight:    LD A, (PlayerState.Speed)
                 ADD A, A
-                JR C, RotateLeft.INC
+                ; JR C, RotateLeft.INC
 
 .DEC            LD HL, PlayerState.RotationAngle
                 DEC (HL)

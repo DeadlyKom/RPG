@@ -21,6 +21,7 @@ Interrupt:      ;
 
 .Camera         ; ************ CAMERA *************
                 CALL Game.World.Horizontal                                      ; обязательно вызвать после обновления объектов! (Object.Tick)
+                CALL Game.World.Vertical                                        ; обязательно вызвать после обновления объектов! (Object.Tick)
 
                 ifdef _DEBUG
 .Debug_FPS      ; ************** Draw FPS **************
