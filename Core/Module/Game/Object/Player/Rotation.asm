@@ -1,15 +1,15 @@
 
-                ifndef _MODULE_GAME_OBJECT_UPDATE_PLAYER_
-                define _MODULE_GAME_OBJECT_UPDATE_PLAYER_
+                ifndef _MODULE_GAME_OBJECT_PLAYER_ROTATION_
+                define _MODULE_GAME_OBJECT_PLAYER_ROTATION_
 ; -----------------------------------------
-; обновление игрока
+; вращение игрока
 ; In:
 ;   IX - адрес обрабатываемого объекта FObject
 ; Out:
 ; Corrupt:
 ; Note:
 ; ----------------------------------------
-PlayerObject:   ;
+Rotation:       ;
                 LD A, (PlayerState.RotationAngle)
                 LD B, A
                 AND %01111000
@@ -147,4 +147,4 @@ PlayerObject:   ;
 
                 endlua
 
-                endif ; ~_MODULE_GAME_OBJECT_UPDATE_PLAYER_
+                endif ; ~_MODULE_GAME_OBJECT_PLAYER_ROTATION_

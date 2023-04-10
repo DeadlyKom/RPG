@@ -23,6 +23,7 @@ GameState           EQU Adr.GameState                                           
 .Objects            EQU GameState + FGameState.Objects                          ; количество объектов в массиве
 
 PlayerState         EQU Adr.PlayerState
+.InputFlags         EQU PlayerState + FPlayerState.InputFlags                   ; флаги управления игроком
 .CameraPosX         EQU PlayerState + FPlayerState.CameraPosX                   ; позиция карты мира по горизонтали
 .CameraPosY         EQU PlayerState + FPlayerState.CameraPosY                   ; позиция карты мира по вертикали
 .Speed              EQU PlayerState + FPlayerState.Speed                        ; скорость игрока

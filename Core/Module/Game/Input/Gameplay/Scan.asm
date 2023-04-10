@@ -44,6 +44,11 @@ Scan:           ; опрос виртуальных клавиш
                 CALL Input.CheckKeyState
                 CALL Z, DecreaseSpeed
 
+                ; турбонаддув
+                LD A, VK_SPACE
+                CALL Input.CheckKeyState
+                CALL Z, TurbochargOn
+                CALL NZ, TurbochargOff
 
                 ifdef _DEBUG
                 ; move map left

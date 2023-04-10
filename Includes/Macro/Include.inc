@@ -9,6 +9,7 @@
                 include "Flags.inc"
                 include "World.inc"
                 include "Render.inc"
+                include "Player.inc"
                 include "Debug.inc"
 
                 endif ; ~_MACRO_INCLUDE_

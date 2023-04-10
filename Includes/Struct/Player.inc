@@ -3,6 +3,7 @@
                 define _STRUCT_PLAYER_
 
                 struct FPlayerState
+InputFlags      DB #00                                                          ; флаги управления игроком                      [1 байт]
 CameraPosX      FPNInt40                                                        ; позиция на карте мира по горизонтали          [5 байт]
 CameraPosY      FPNInt40                                                        ; позиция на карте мира по вертикали            [5 байт]
 Speed           DB #00                                                          ; скорость игрока                               [1 байт]

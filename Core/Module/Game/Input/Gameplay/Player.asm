@@ -9,11 +9,15 @@
 ; Note:
 ; -----------------------------------------
 RotateLeft:     LD A, (PlayerState.Speed)
-                ADD A, A
+                ; ADD A, A
                 ; JR C, RotateRight.DEC
                 
 .INC            LD HL, PlayerState.RotationAngle
                 INC (HL)
+
+                LD A, (PlayerState.Speed)
+                CP #10
+                CALL C, IncreaseSpeed
                 RET
 ; -----------------------------------------
 ; поворот игрока против часовой стрелки
@@ -23,11 +27,15 @@ RotateLeft:     LD A, (PlayerState.Speed)
 ; Note:
 ; -----------------------------------------
 RotateRight:    LD A, (PlayerState.Speed)
-                ADD A, A
+                ; ADD A, A
                 ; JR C, RotateLeft.INC
 
 .DEC            LD HL, PlayerState.RotationAngle
                 DEC (HL)
+
+                LD A, (PlayerState.Speed)
+                CP #10
+                CALL C, IncreaseSpeed
                 RET
 ; -----------------------------------------
 ; увеличить скорость игрока
@@ -36,8 +44,19 @@ RotateRight:    LD A, (PlayerState.Speed)
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-IncreaseSpeed:  LD HL, PlayerState.Speed
-                INC (HL)
+IncreaseSpeed:  ;
+                CHECK_PLAYER_FLAG TURBOCHARGING_BIT
+                LD BC, MAX_TURBOCHARGING_SPEED << 8 | 5
+                JR NZ, .Turbocharging
+                LD BC, MAX_FORWARD_SPEED << 8 | 2
+
+.Turbocharging  ; турбонаддув активирован
+                LD HL, PlayerState.Speed
+                LD A, (HL)
+                ADD A, C
+                CP B
+                RET NC
+.Set            LD (HL), A
                 RET
 ; -----------------------------------------
 ; уменьшить скорость игрока
@@ -47,14 +66,30 @@ IncreaseSpeed:  LD HL, PlayerState.Speed
 ; Note:
 ; -----------------------------------------
 DecreaseSpeed:  LD HL, PlayerState.Speed
-                DEC (HL)
+                LD A, (HL)
+                DEC A
+                CP 256-MAX_REVERSE_SPEED
+                RET C
+                LD (HL), A
                 RET
 ; -----------------------------------------
-; пассивное торможение игрока
+; активация турбонаддува
 ; In:
 ; Out:
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Deceleration:   RET
+TurbochargOn:   SET_PLAYER_FLAG TURBOCHARGING_BIT
+                RET
+
+; -----------------------------------------
+; деактивация турбонаддува
+; In:
+; Out:
+; Corrupt:
+; Note:
+; -----------------------------------------
+TurbochargOff:  RES_PLAYER_FLAG TURBOCHARGING_BIT
+                RET
+
                 endif ; ~_MODULE_GAME_INPUT_GAMEPLAY_PLAYER_

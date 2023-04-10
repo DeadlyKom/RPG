@@ -21,6 +21,8 @@
                 include "SharedBuffer.inc"
                 include "SortBuffer.inc"
 
+                include "Player.inc"
+
                 include "GameScreenWorld.inc"
                 include "GameWorldSprite.inc"
                 include "GameWorldCamera.inc"

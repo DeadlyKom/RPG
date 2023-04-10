@@ -6,7 +6,7 @@
                 
                 include "Tick.asm"
                 include "Update.asm"
-                include "Player.asm"
+                include "Player/Include.inc"
 
                 endmodule
 

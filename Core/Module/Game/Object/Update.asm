@@ -9,11 +9,7 @@
 ; Corrupt:
 ; Note:
 ; ----------------------------------------
-Update:         ; добавить точку выхода обновления объекта
-                LD HL, .RET
-                PUSH HL
-
-                ; переход в зависимости от типа объекта
+Update:         ; переход в зависимости от типа объекта
                 LD A, (IX + FObject.Type)                                       ; получим тип объекта
                 AND IDX_OBJECT_TYPE
                 ADD A, A
@@ -22,28 +18,28 @@ Update:         ; добавить точку выхода обновления 
                 JR $
 
                 ; 0
-                JP PlayerObject
+                JP Player.Update
                 DB #00                                                          ; dummy
                 ; 1
-                RET
-                DB #00, #00, #00                                                ; dummy
+                JP .RET
+                DB #00                                                          ; dummy
                 ; 2
-                RET
-                DB #00, #00, #00                                                ; dummy
+                JP .RET
+                DB #00                                                          ; dummy
                 ; 3
-                RET
-                DB #00, #00, #00                                                ; dummy
+                JP .RET
+                DB #00                                                          ; dummy
                 ; 4
-                RET
-                DB #00, #00, #00                                                ; dummy
+                JP .RET
+                DB #00                                                          ; dummy
                 ; 5
-                RET
-                DB #00, #00, #00                                                ; dummy
+                JP .RET
+                DB #00                                                          ; dummy
                 ; 6
-                RET
-                DB #00, #00, #00                                                ; dummy
+                JP .RET
+                DB #00                                                          ; dummy
                 ; 7
-                RET
+                JP .RET
 
 .RET            ; ----------------------------------------
                 ; общая логика поведения для всех объектов
