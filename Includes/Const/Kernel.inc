@@ -118,7 +118,7 @@ Math
 .SetSeed16      EQU Kernel.Math.SetSeed16
 .Lerp           EQU Kernel.Math.Lerp
 .Mul16x8_16     EQU Kernel.Math.Mul16x8_16
-.Mul16x8_23     EQU Kernel.Math.Mul16x8_16
+.Mul16x8_24     EQU Kernel.Math.Mul16x8_24
 .Mul32x8_40     EQU Kernel.Math.Mul32x8_40
 .Div8x8         EQU Kernel.Math.Div8x8
 .PerlinNoise2D  EQU Kernel.Math.PerlinNoise2D

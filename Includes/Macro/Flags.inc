@@ -48,7 +48,7 @@ RES_FLAG        macro FlagBit?
 ; Corrupt:
 ; -----------------------------------------
 CHECK_FLAGS     macro Flags?
-                AND Flags
+                AND Flags?
                 endm
 ; -----------------------------------------
 ; изъятие флага

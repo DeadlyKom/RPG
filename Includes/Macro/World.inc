@@ -36,7 +36,7 @@ CHECK_WORLD_FLAG macro FlagBit?
 ; -----------------------------------------
 CHECK_WORLD_FLAGS macro Flags?
                 WORLD_FLAGS_A
-                CHECK_FLAGS FlagBit?
+                CHECK_FLAGS Flags?
                 endm
 ; -----------------------------------------
 ; проверка World флага используя аккумулятор

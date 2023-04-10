@@ -36,7 +36,7 @@ CHECK_PLAYER_FLAG macro FlagBit?
 ; -----------------------------------------
 CHECK_PLAYER_FLAGS macro Flags?
                 PLAYER_FLAGS_A
-                CHECK_FLAGS FlagBit?
+                CHECK_FLAGS Flags?
                 endm
 ; -----------------------------------------
 ; проверка World флага используя аккумулятор

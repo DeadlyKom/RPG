@@ -4,7 +4,10 @@
 
                 module World
                 
+                ifdef _DEBUG
                 include "Move.asm"
+                endif
+                
                 include "Camera.asm"
                 include "Generate.asm"
 

@@ -32,7 +32,7 @@ Rotation:       ;
                 ; отладка
                 ifdef _DEBUG
                 LD A, L
-                LD (PlayerState.Debug), A
+                LD (PlayerState.DebugX), A
                 endif
 
                 LD A, B                                                         ; освобождение регистра B

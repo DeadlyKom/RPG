@@ -58,7 +58,7 @@ MoveDown:       ; -----------------------------------------
                 EX DE, HL
                 ;LD HL, Adr.MinimapSpr                                           ; адрес левого-вверхний байта спрайта
                                                                                 ; сдвигаем снизу вверх
-                LD B, 4;SCR_MINIMAP_SIZE_X >> 1
+                LD B, SCR_MINIMAP_SIZE_X >> 3
                 LD A, (PlayerState.CameraPosY + 1)
                 LD C, A
   

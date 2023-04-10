@@ -2,9 +2,7 @@
                 ifndef _MODULE_GAME_WORLD_MOVE_
                 define _MODULE_GAME_WORLD_MOVE_
 
-Left:           ;
-                ; SET_RENDER_FLAG INERT_BIT
-                ; DEC 40
+Left:           ; DEC 40
                 LD HL, PlayerState.CameraPosX
                 LD B, #01
                 LD A, (HL)
@@ -57,8 +55,7 @@ Left:           ;
 
                 RET
 
-Right:          ;
-                ; SET_RENDER_FLAG INERT_BIT
+Right:          
                 ; INC 40
                 LD HL, PlayerState.CameraPosX
                 LD A, #10
@@ -96,9 +93,7 @@ Right:          ;
                 ; SET_SCREEN_SHADOW                                               ; включение страницы второго экрана
                 RET
 
-Down:           ;
-                ; SET_RENDER_FLAG INERT_BIT
-                ; DEC 40
+Down:           ; DEC 40
                 LD HL, PlayerState.CameraPosY
                 LD B, #01
                 LD A, (HL)
@@ -151,8 +146,7 @@ Down:           ;
 
                 RET
 
-Up:           
-                ; INC 40
+Up:             ; INC 40
                 LD HL, PlayerState.CameraPosY
                 LD A, #10
                 ADD A, (HL)
