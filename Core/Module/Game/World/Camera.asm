@@ -20,7 +20,7 @@ Camera:         ;
                 LD HL, (IX + FObject.Position.Y)
                 ADD HL, HL
                 LD A, H
-                SUB SCR_CAMERA_CENTER_Y + SCR_WORLD_POS_Y
+                SUB SCR_CAMERA_CENTER_Y + SCR_WORLD_POS_Y+1
                 LD (PlayerState.DeltaCameraY), A
 
                 RET
@@ -44,8 +44,8 @@ Horizontal:     ; скорость
                 AND %001111
                 INC A
                 LD B, A
-                LD HL, #0100
-                LD DE, #0004
+                LD HL, #0200
+                LD DE, #0002
 .MultLoop       ADD HL, DE
                 DJNZ .MultLoop
                 EX DE, HL
@@ -104,8 +104,7 @@ Horizontal:     ; скорость
                 RRA
                 RRA
                 AND #0E
-                LD (PlayerState.CameraShiftX), A
-                ; LD (World.Shift_X), A
+                LD (World.Shift_X), A
 
                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
                 LD IX, #C000
@@ -164,17 +163,15 @@ Horizontal:     ; скорость
                 LD A, (HL)
                 SUB #01
                 LD (HL), A
-.LL2_
-                SET_WORLD_FLAG WORLD_LEFT_BIT
-.LL1_
-                LD A, E
+.LL2_           SET_WORLD_FLAG WORLD_LEFT_BIT
+
+.LL1_           LD A, E
                 RRA
                 RRA
                 RRA
                 RRA
                 AND #0E
-                LD (PlayerState.CameraShiftX), A
-                ; LD (World.Shift_X), A
+                LD (World.Shift_X), A
 
                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
                 LD IX, #C000
@@ -198,8 +195,8 @@ Vertical:       ; скорость
                 AND %001111
                 INC A
                 LD B, A
-                LD HL, #0080
-                LD DE, #0004
+                LD HL, #0200
+                LD DE, #0002
 
 .MultLoop       ADD HL, DE
                 DJNZ .MultLoop
@@ -261,8 +258,7 @@ Vertical:       ; скорость
                 RRA
                 RRA
                 AND #0E
-                LD (PlayerState.CameraShiftY), A
-                ; LD (World.Shift_Y), A
+                LD (World.Shift_Y), A
 
                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
                 LD IX, #C000
@@ -328,8 +324,7 @@ Vertical:       ; скорость
                 RRA
                 RRA
                 AND #0E
-                LD (PlayerState.CameraShiftY), A
-                ; LD (World.Shift_Y), A
+                LD (World.Shift_Y), A
 
                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
                 LD IX, #C000

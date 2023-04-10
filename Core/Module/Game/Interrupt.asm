@@ -8,13 +8,9 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Interrupt:      ;
-.SwapScreens    ; ************ Swap Screens ************
+Interrupt:      ; проверка завершённости процесса отрисовки
                 CHECK_RENDER_FLAG FINISHED_BIT
-                CALL NZ, Render.Swap
-
-.Input          ; ************ Scan Input ************
-                CALL Input.Gameplay.Scan
+                JR Z, .RenderProcess                                            ; переход, если процесс отрисовки не завершён
 
 .Tick           ; ************* TICK *************
                 CALL Object.Tick
@@ -22,6 +18,14 @@ Interrupt:      ;
 .Camera         ; ************ CAMERA *************
                 CALL Game.World.Horizontal                                      ; обязательно вызвать после обновления объектов! (Object.Tick)
                 CALL Game.World.Vertical                                        ; обязательно вызвать после обновления объектов! (Object.Tick)
+
+.SwapScreens    ; ************ Swap Screens ************
+                CALL Render.Swap
+
+.RenderProcess  ; процесс отрисовки не завершён
+
+.Input          ; ************ Scan Input ************
+                CALL Input.Gameplay.Scan
 
                 ifdef _DEBUG
 .Debug_FPS      ; ************** Draw FPS **************

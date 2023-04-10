@@ -8,13 +8,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-World:          ; копирование данных сдвига карты мира
-                LD A, (PlayerState.CameraShiftX)
-                LD (World.Shift_X), A
-                LD A, (PlayerState.CameraShiftY)
-                LD (World.Shift_Y), A
-
-                ; скрол карты мира в зависимости от состояний флагов
+World:          ; скрол карты мира в зависимости от состояний флагов
                 CHECK_WORLD_FLAG WORLD_LEFT_BIT
                 CALL NZ, Game.World.MoveLeft
                 CHECK_WORLD_FLAG WORLD_RIGHT_BIT
@@ -41,9 +35,6 @@ World:          ; копирование данных сдвига карты м
                 LD HL, PlayerState.CameraPosX+1
                 CALL Console.DrawWordFrom
                 LD HL, World.Shift_X
-                LD A, (HL)
-                CALL Console.DrawByte
-                LD HL, Game.World.Delta
                 LD A, (HL)
                 CALL Console.DrawByte
 

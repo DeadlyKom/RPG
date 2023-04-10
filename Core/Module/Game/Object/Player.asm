@@ -30,8 +30,10 @@ PlayerObject:   ;
                 CALL .CalcRotation
 
                 ; отладка
+                ifdef _DEBUG
                 LD A, L
                 LD (PlayerState.Debug), A
+                endif
 
                 LD A, B                                                         ; освобождение регистра B
                 LD BC, (IX + FObject.Position.X)
