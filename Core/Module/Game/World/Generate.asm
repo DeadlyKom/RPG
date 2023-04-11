@@ -11,10 +11,9 @@
 Generate:       ; -----------------------------------------
                 ; генерация спрайта мини карты
                 ; -----------------------------------------
-                LD A, SCR_MINIMAP_SIZE_Y >> 1
+                LD A, SCR_MINIMAP_SIZE_X
 
 .Loop           PUSH AF
-                CALL MoveRight
                 CALL MoveRight
 
                 ; INC 32

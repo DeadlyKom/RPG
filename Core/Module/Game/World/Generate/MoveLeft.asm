@@ -18,7 +18,7 @@ MoveLeft:       ; -----------------------------------------
                 LD HL, (PlayerState.CameraPosX + 1)
 
                 ; вычесть половину смещения (левый край мини карты)
-                LD BC, SCR_MINIMAP_OFFSET_X >> 1
+                LD BC, (SCR_MINIMAP_OFFSET_X >> 1) + 2
                 OR A
                 SBC HL, BC
                 JR NC, $+3
@@ -37,7 +37,7 @@ MoveLeft:       ; -----------------------------------------
                 LD HL, (PlayerState.CameraPosY + 1)
                 
                 ; вычесть половину смещения (верхний край мини карты)
-                LD BC, SCR_MINIMAP_OFFSET_Y >> 1
+                LD BC, (SCR_MINIMAP_OFFSET_Y >> 1) - 2
                 OR A
                 SBC HL, BC
                 JR NC, $+3
@@ -58,9 +58,8 @@ MoveLeft:       ; -----------------------------------------
   
                 ; если y = 1 (не выровнен), берётся только 1 значение из шума 03/04
                 LD A, (PlayerState.CameraPosY + 1)
-                ; ADD A, A
                 RRA
-                JR NC, .Aligned
+                JR C, .Aligned
 
                 DEC B                                                           ; на 1 строку меньше
                 CALL Generate.Noise
@@ -156,9 +155,8 @@ MoveLeft:       ; -----------------------------------------
 
                 ; -----------------------------------------
                 LD A, (PlayerState.CameraPosY + 1)
-                ; ADD A, A
                 RRA
-                JR NC, .Aligned_
+                JR C, .Aligned_
 
                 CALL Generate.Noise
 

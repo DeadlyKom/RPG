@@ -18,7 +18,7 @@ MoveRight:      ; -----------------------------------------
                 LD HL, (PlayerState.CameraPosX + 1)
                 
                 ; прибавить смещение и ширину карты мира (правый край мини карты)
-                LD BC, (SCR_MINIMAP_SIZE_X - SCR_MINIMAP_OFFSET_X) >> 1
+                LD BC, ((SCR_MINIMAP_SIZE_X - SCR_MINIMAP_OFFSET_X) >> 1) + 14
                 ADD HL, BC
                 JR NC, $+3
                 INC DE
@@ -36,7 +36,7 @@ MoveRight:      ; -----------------------------------------
                 LD HL, (PlayerState.CameraPosY + 1)
                 
                 ; прибавить смещение и высоту карты мира (нижний край мини карты)
-                LD BC, (SCR_MINIMAP_SIZE_Y - SCR_MINIMAP_OFFSET_Y) >> 1
+                LD BC, ((SCR_MINIMAP_SIZE_Y - SCR_MINIMAP_OFFSET_Y) >> 1) + 2
                 ADD HL, BC
                 JR NC, $+3
                 INC DE
@@ -53,12 +53,13 @@ MoveRight:      ; -----------------------------------------
                 LD B, SCR_MINIMAP_SIZE_Y >> 1
                 LD A, (PlayerState.CameraPosX + 1)
                 LD C, A
-  
+
+
                 ; если y = 1 (не выровнен), берётся только 1 значение из шума 01/02
                 LD A, (PlayerState.CameraPosY + 1)
-                ; ADD A, A
                 RRA
-                JR NC, .Aligned
+                JR C, .Aligned                                                  ; переход, если y = 1
+                                                                                ; т.к. двигаемся снизу вверх 2 значения являются выровнеными
 
                 DEC B                                                           ; на 1 строку меньше
                 CALL Generate.Noise
@@ -71,8 +72,7 @@ MoveRight:      ; -----------------------------------------
                 ;
                 ;   при сдвиге влево берутся значения
                 ;       01/03, если x = 0
-                ;       02/04, если x = 1
-                
+                ;       02/04, если x = 1   
 
                 ; смещение шума влево (значения 02), если х = 1
                 BIT 0, C
@@ -127,6 +127,7 @@ MoveRight:      ; -----------------------------------------
                 ;       02/04, если x = 1
 
                 ; меняем местами значени 01/02 и 03/04
+                ; т.к. идём снизу вверх
                 LD D, A
                 RR D
                 RR D
@@ -157,7 +158,7 @@ MoveRight:      ; -----------------------------------------
                 RL (HL)
                 DEC L
 
-                ADD A, A
+                ADD A, A                                                        ; пропуск 01 или 03
 
                 ; сдвиг строки влево на 1 пиксель
                 ADD A, A
@@ -174,9 +175,9 @@ MoveRight:      ; -----------------------------------------
 
                 ; -----------------------------------------
                 LD A, (PlayerState.CameraPosY + 1)
-                ; ADD A, A
                 RRA
-                JR NC, .Aligned_
+                JR C, .Aligned_                                                 ; переход, если y = 1
+                                                                                ; т.к. двигаемся снизу вверх 2 значения являются выровнеными
 
                 CALL Generate.Noise
 

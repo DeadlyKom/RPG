@@ -14,7 +14,7 @@ SCR_MINIMAP_POS_Y       EQU 2                                                   
 SCR_MINIMAP_POS_PIX_Y   EQU SCR_MINIMAP_POS_Y * 8                               ; положение мини карты на экране по вертикали в пикселях
 SCR_MINIMAP_SIZE_X      EQU 32                                                  ; размер мини карты по горизонтали в пикселях
 SCR_MINIMAP_SIZE_Y      EQU 32                                                  ; размер мини карты по вертикали в пикселях
-SCR_MINIMAP_OFFSET_X    EQU ((SCR_MINIMAP_SIZE_X - SCR_WORLD_SIZE_X) >> 1)      ; смещение видимой части мира в мини карте по горизонтали   (центрирование)
-SCR_MINIMAP_OFFSET_Y    EQU ((SCR_MINIMAP_SIZE_Y - SCR_WORLD_SIZE_Y) >> 1)      ; смещение видимой части мира в мини карте по вертикали     (центрирование)
+SCR_MINIMAP_OFFSET_X    EQU ((SCR_MINIMAP_SIZE_X - (SCR_WORLD_SIZE_X + 1) << 1) >> 1); смещение видимой части мира в мини карте по горизонтали   (центрирование)
+SCR_MINIMAP_OFFSET_Y    EQU ((SCR_MINIMAP_SIZE_Y - (SCR_WORLD_SIZE_X + 1) << 1) >> 1); смещение видимой части мира в мини карте по вертикали     (центрирование)
 
                 endif ; ~_CONST_GAME_SCREEN_WORLD_

@@ -60,13 +60,13 @@ MoveUp:         ; -----------------------------------------
                 ; EX DE, HL
                 ;LD HL, Adr.MinimapSpr                                           ; адрес левого-вверхний байта спрайта
                                                                                 ; сдвигаем снизу вверх
-                LD B, 4;SCR_MINIMAP_SIZE_X >> 1
+                LD B, SCR_MINIMAP_SIZE_X >> 3
                 LD A, (PlayerState.CameraPosY + 1)
                 LD C, A
   
                 ; если x = 1 (не выровнен), берётся только 1 значение из шума 02/04
                 LD A, (PlayerState.CameraPosX + 1)
-                ADD A, A
+                RRA
                 JR NC, .Aligned
 
                 DEC B                                                           ; на 1 строку меньше
@@ -140,11 +140,11 @@ MoveUp:         ; -----------------------------------------
 
                 DJNZ .RollLoop
 
-                LD B, 4;SCR_MINIMAP_SIZE_X >> 1
+                LD B, SCR_MINIMAP_SIZE_X >> 3
 
                 ; если x = 1 (не выровнен), берётся только 1 значение из шума 02/04
                 LD A, (PlayerState.CameraPosX + 1)
-                ADD A, A
+                RRA
                 JR NC, .Aligned_
 
                 DEC B
