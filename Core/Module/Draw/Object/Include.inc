@@ -6,6 +6,7 @@
 
                 include "Draw.asm"
                 include "Player.asm"
+                include "Decal.asm"
 
                 endmodule
 

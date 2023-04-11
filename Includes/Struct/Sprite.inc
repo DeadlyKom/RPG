@@ -1,6 +1,6 @@
 
-				ifndef _STRUCT_SPRITE_
-				define _STRUCT_SPRITE_
+                ifndef _STRUCT_SPRITE_
+                define _STRUCT_SPRITE_
 
                 struct FSpriteData
 ; -----------------------------------------

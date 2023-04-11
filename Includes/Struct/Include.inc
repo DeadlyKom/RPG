@@ -11,5 +11,6 @@
                 include "Sprite.inc"
 
                 include "Object.inc"
+                include "Object_Decal.inc"
 
                 endif ; ~_STRUCT_INCLUDE_

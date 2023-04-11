@@ -8,17 +8,17 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-DrawObjects:    ; инициализация
+Draw:           ; инициализация
                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
 
 .Num            EQU $+1                                                         ; количество элементов в отсортированном массиве
-                LD A, #01
+                LD A, #00
                 OR A
                 RET Z                                                           ; выход, если массив пуст
 
                 LD HL, SortBuffer
                 LD B, A
-
+                
 .Loop           PUSH BC
                 LD A, (HL)
                 AND (~(OBJECT_SIZE - 1)) & 0xFF

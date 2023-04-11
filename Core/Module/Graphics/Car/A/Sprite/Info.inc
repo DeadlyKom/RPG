@@ -1,6 +1,6 @@
 
                 module SpriteInfo
-Data:           
+Car:           
                 FSprite { { 18, 2, 24, 0 }, 0, { Page.Graphics.Pack1, Graphics.Car.Anim_4 } }       ; 0000 - 0.0°     right
                 FSprite { { 22, 1, 24, 0 }, 0, { Page.Graphics.Pack1, Graphics.Car.Anim_3 } }       ; 0001 - 22.5°
                 FSprite { { 24, 0, 23, 0 }, 0, { Page.Graphics.Pack1, Graphics.Car.Anim_2 } }       ; 0010 - 45.0°    up-right

@@ -4,7 +4,7 @@
 ; -----------------------------------------
 ; отображение дроид-пехотинца
 ; In:
-;   IX - указывает на структуру FUnit
+;   IX - указывает на структуру FObject
 ; Out:
 ; Corrupt:
 ; Note:
@@ -23,10 +23,10 @@ DrawPlayer:     ; сохранеие текущей страницы
                 ; расчёт адреса
                 ; -----------------------------------------
 
-                LD H, HIGH SpriteInfo.Data
+                LD H, HIGH SpriteInfo.Car
                 LD A, (IX + FObject.Direction)
                 AND %01111000
-                ADD A, LOW SpriteInfo.Data
+                ADD A, LOW SpriteInfo.Car
                 LD L, A
                 ADC A, H
                 SUB L

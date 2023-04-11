@@ -28,7 +28,7 @@ DrawChar:       ; расчёт адреса символа
 
                 ; сложение смещения и адреса
                 LD E, A
-				ADD HL, DE
+                ADD HL, DE
 
                 ; адрес экрана
 .ScreenAdr      EQU $+1

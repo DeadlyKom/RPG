@@ -23,7 +23,7 @@ World:          ; скрол карты мира в зависимости от 
                 RestoreBC                                                       ; защита от повреждения данных во время прерывания
                 CALL Draw.World
                 CALL Draw.Minimap
-                CALL DrawObjects
+                CALL Object.Draw
 
                 ; show position
                 ifdef _DEBUG

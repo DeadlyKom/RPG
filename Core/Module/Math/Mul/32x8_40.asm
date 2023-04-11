@@ -28,20 +28,22 @@ Mul32x8_40:     ; TODO optimize
                 LD HL, #0000        ; low
                 POP DE
 
-                LD B, #08
-.L1             ADD HL, HL          ; low
+                LD B, #00
+
+                rept 8
+                ADD HL, HL          ; low
                 EXX
                 ADC HL, HL          ; hi
                 EXX
                 
                 ADC A, A
-                JR NC, $+9
+                JR NC, $+8
                 ADD HL, DE          ; low
                 EXX
                 ADC HL, DE          ; hi
                 EXX
-                ADC A, #00
-                DJNZ .L1
+                ADC A, B
+                endr
 
                 PUSH HL
                 EXX

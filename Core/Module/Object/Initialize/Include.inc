@@ -6,6 +6,8 @@
 
                 include "Initialize.asm"
                 include "Spawn.asm"
+                include "Spawn_Player.asm"
+                include "Spawn_Decal.asm"
 
                 endmodule
 

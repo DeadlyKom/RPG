@@ -13,14 +13,14 @@ InputHandler:   JR NZ, .NotProcessing                                           
 .Processing     ; опрос нажатой виртуальной клавиши
                 EX AF, AF'                                                      ; переключится на ID виртуальной клавиши
 
-                CP KEY_ID_UP                                                    ; клавиша "вверх"
-                JP Z, Game.World.Up
-                CP KEY_ID_DOWN                                                  ; клавиша "вниз"
-                JP Z, Game.World.Down
-                CP KEY_ID_LEFT                                                  ; клавиша "влево"
-                JP Z, Game.World.Left
-                CP KEY_ID_RIGHT                                                 ; клавиша "вправо"
-                JP Z, Game.World.Right
+                ; CP KEY_ID_UP                                                    ; клавиша "вверх"
+                ; JP Z, Game.World.Up
+                ; CP KEY_ID_DOWN                                                  ; клавиша "вниз"
+                ; JP Z, Game.World.Down
+                ; CP KEY_ID_LEFT                                                  ; клавиша "влево"
+                ; JP Z, Game.World.Left
+                ; CP KEY_ID_RIGHT                                                 ; клавиша "вправо"
+                ; JP Z, Game.World.Right
                 ; CP KEY_ID_SELECT                                                ; клавиша "выбор"
                 ; JP Z, $
                 ; CP KEY_ID_BACK                                                  ; клавиша "отмена/назад"

@@ -234,9 +234,7 @@ Vertical:       ; скорость
                 LD D, A
 
                 AND #F0
-                ; INC 40
-                ; LD HL, PlayerState.CameraPosY
-                ; ADD A, (HL)
+                ; INC 40 (8)
                 LD C, A
                 LD HL, PlayerState.CameraPosY
                 LD A, (HL)
@@ -295,10 +293,7 @@ Vertical:       ; скорость
                 LD D, A
 
                 AND #F0
-                ; LD C, A
-                ; LD HL, PlayerState.CameraPosY
-                ; LD A, (HL)
-                ; SUB C
+                ; DEC 40 (8)
                 LD HL, PlayerState.CameraPosY
                 ADD A, (HL)
                 LD (HL), A

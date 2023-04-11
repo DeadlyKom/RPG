@@ -8,7 +8,12 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Generate:       ; -----------------------------------------
+Generate:       LD HL, (PlayerState.CameraPosX + 3)
+                PUSH HL
+                LD HL, (PlayerState.CameraPosX + 1)
+                PUSH HL
+
+                ; -----------------------------------------
                 ; генерация спрайта мини карты
                 ; -----------------------------------------
                 LD A, SCR_MINIMAP_SIZE_X
@@ -33,6 +38,11 @@ Generate:       ; -----------------------------------------
                 DEC A
                 JR NZ, .Loop
 
+                POP HL
+                LD (PlayerState.CameraPosX + 1), HL
+                POP HL
+                LD (PlayerState.CameraPosX + 3), HL
+
                 RET
 
 .Noise          EXX
@@ -53,7 +63,6 @@ Generate:       ; -----------------------------------------
                 ; CALL Math.PerlinNoise2D
                 ; POP AF
                 ; AND H
-
 
                 ; LD A, L
                 ; CP #10
@@ -84,8 +93,17 @@ Generate:       ; -----------------------------------------
                 ; JR C, $+3
                 ; LD A, #00
 
-                LD A, H
+                ; LD A, H
 
+                ; ADD A, A
+                ; JR C, .L1
+                ; LD A, L
+                ; CP #1F
+                ; JR C, .L1
+                ; LD BC, OBJECT_DECAL
+                ; CALL Func.SpawnObject
+
+.L1             LD A, H
                 EXX
                 CPL
                 RET

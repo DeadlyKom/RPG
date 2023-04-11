@@ -6,5 +6,8 @@ World:          incbin "Core/Module/Graphics/Tile/World/Sprite/Compressed/Ground
 Cars:
 .A              include "Core/Module/Graphics/Car/A/Include.inc"
                 display " - Car: \t\t\t\t\t\t", /A, Cars.A, " = busy [ ", /D, $ - Cars.A, " bytes  ]"
+Declas:
+                include "Core/Module/Graphics/Tile/World/Sprite/Original/Decal/Include.inc"
+                display " - Decals: \t\t\t\t\t\t", /A, Declas, " = busy [ ", /D, $ - Declas, " bytes  ]"
 
                 endif ; ~ _CORE_MODULE_GRAPHICS_TILE_WORLD_GRAPHICS_PACK_1_

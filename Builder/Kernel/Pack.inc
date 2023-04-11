@@ -42,12 +42,12 @@ Begin:          EQU $
 
                 ; math
                 include "Core/Module/Math/RNG/Rand8.asm"
-                include "Core/Module/Math/Lerp.asm"
                 include "Core/Module/Math/Mul/16x8_16.asm"
                 include "Core/Module/Math/Mul/16x8_24.asm"
                 include "Core/Module/Math/Mul/32x8_40.asm"
-                include "Core/Module/Math/Div/Div8x8.asm"
+                include "Core/Module/Math/Lerp.asm"
                 include "Core/Module/Math/PerlinNoise/Include.inc"
+                include "Core/Module/Math/Div/Div8x8.asm"
 
                 ; input
                 include "Core/Module/Input/Include.inc"

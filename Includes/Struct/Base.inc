@@ -1,46 +1,46 @@
 
-				ifndef _STRUCT_BASE_
-				define _STRUCT_BASE_
+                ifndef _STRUCT_BASE_
+                define _STRUCT_BASE_
 
-				struct FValue
+                struct FValue
 Low             DB #00
 High            DB #00
-				ends
+                ends
 
-				struct FAddress
+                struct FAddress
 Low             DB #00
 High            DB #00
-				ends
+                ends
 
-				struct FSize
+                struct FSize
 Width           DB #00
-Height          DB #00            
-				ends
+Height          DB #00
+                ends
 
-				struct FOffset
+                struct FOffset
 X               DB #00
-Y               DB #00            
-				ends
+Y               DB #00
+                ends
 
- 				struct FLocation
+                 struct FLocation
 X               DB #00
-Y               DB #00            
-				ends
+Y               DB #00
+                ends
 
-				struct FLocation16
+                struct FLocation16
+Y               FValue															; для сортировки первый Y
 X               FValue
-Y               FValue
-				ends
+                ends
 
-				struct FFlags
-				DB #00
-				ends
+                struct FFlags
+                DB #00
+                ends
 
-				struct FWFlags
+                struct FWFlags
 Data			FValue
-				ends
+                ends
 
-				struct FPNInt32
+                struct FPNInt32
 .Low            FValue
 .High           FValue
                 ends
@@ -55,9 +55,14 @@ Data			FValue
 .Int            FPNInt32
                 ends
 
+                struct FLocation40
+.X              FPNInt40
+.Y              FPNInt40
+                ends
+
                 struct FNoise2D
 .Frequency      DB #00
 .Location       FLocation32
                 ends
 
-				endif ; ~_STRUCT_BASE_
+                endif ; ~_STRUCT_BASE_

@@ -42,12 +42,18 @@ EntryPoint:     ; -----------------------------------------
                 LD DE, #5050
                 LD BC, OBJECT_PLAYER
                 CALL Func.SpawnObject
-                LD HL, SortBuffer
-                LD (HL), #00
-                INC L
-                LD (HL), #C0
-                LD HL, PlayerState.Speed
-                LD (HL), #00
+
+                ;
+                LD BC, OBJECT_DECAL
+                LD HL, #0008
+                LD (Math.PN_LocationX + 0), HL
+                LD HL, #0008
+                LD (Math.PN_LocationY + 0), HL
+                LD HL, #1000
+                LD (Math.PN_LocationX + 2), HL
+                LD (Math.PN_LocationY + 2), HL
+                CALL Func.SpawnObject
+
                 SET_SCREEN_SHADOW                                               ; включение страницы второго экрана
                 ; -----------------------------------------
                 ; подготовка основного экрана

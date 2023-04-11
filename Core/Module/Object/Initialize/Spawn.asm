@@ -4,10 +4,9 @@
 ; -----------------------------------------
 ; спавн объекта в мире
 ; In:
-;   DE - позиция юнита  (D - y, E - x)
-;   BC - параметры      (B - , C - тип юнита)
+;   BC - параметры      (B - подтип, C - тип объекта)
 ; Out:
-;   IX - адрес юнита
+;   IX - адрес объекта
 ; Corrupt:
 ;   HL, DE, BC, AF, HL', DE', BC', AF', IX
 ; Note:
@@ -43,44 +42,37 @@ Spawn:          ; поиск свободной ячейки
                 INC (HL)
                 EXX
 
-                ; -----------------------------------------
-                ; инициализация
-                ; -----------------------------------------
-                
-                LD (IX + FObject.Type), C                                       ; тип юнита
-
-                ; установка позиции по горизонтали
-                LD A, E
-                LD E, #00
-                rept 4
+                ; переход в зависимости от типа объекта
+                LD A, C                                                         ; получим тип объекта
+                AND IDX_OBJECT_TYPE
                 ADD A, A
-                RL E
-                endr
-                LD (IX + FObject.Position.X.Low), A
-                LD (IX + FObject.Position.X.High), E
-                
-                ;  установка позиции по вертикали
-                LD A, D
-                LD D, #00
-                rept 4
-                ADD A, A
-                RL D
-                endr
-                LD (IX + FObject.Position.Y.Low), A
-                LD (IX + FObject.Position.Y.High), D
+                LD (.Jump), A
+.Jump           EQU $+1
+                JR $
 
-                XOR A
-
-                ; сброс направления
-                LD (IX + FObject.Direction), A
-
-                ; сброс скорости
-                LD (IX + FObject.Velocity.X.Low), A
-                LD (IX + FObject.Velocity.X.High), A
-                LD (IX + FObject.Velocity.Y.Low), A
-                LD (IX + FObject.Velocity.Y.High), A
-
-                RET
+                ; 0
+                JP Player
+                DB #00                                                          ; dummy
+                ; 1
+                JP Decal
+                DB #00                                                          ; dummy
+                ; 2
+                JP $
+                DB #00                                                          ; dummy
+                ; 3
+                JP $
+                DB #00                                                          ; dummy
+                ; 4
+                JP $
+                DB #00                                                          ; dummy
+                ; 5
+                JP $
+                DB #00                                                          ; dummy
+                ; 6
+                JP $
+                DB #00                                                          ; dummy
+                ; 7
+                JP $
 
                 display " - Spawn object in world : \t\t\t\t", /A, Spawn, " = busy [ ", /D, $ - Spawn, " bytes  ]"
 
