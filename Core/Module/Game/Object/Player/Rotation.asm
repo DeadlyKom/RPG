@@ -36,20 +36,17 @@ Rotation:       ;
                 endif
 
                 LD A, B                                                         ; освобождение регистра B
-                LD BC, (IX + FObject.Position.X)
-                ADD HL, BC
-                LD (IX + FObject.Position.X), HL
+                ; LD BC, (IX + FObject.Position.X)
+                ; ADD HL, BC
+                LD (IX + FObject.Velocity.X), HL
 
                 ; sin (andle)
                 ADD A, 8                                                        ; -sin α = cos(π * 0.5 + α)
                 CALL .CalcRotation
 
-                LD BC, (IX + FObject.Position.Y)
-                ADD HL, BC
-                LD (IX + FObject.Position.Y), HL
-
-                ; -----------------------------------------
-                CALL Game.World.Camera
+                ; LD BC, (IX + FObject.Position.Y)
+                ; ADD HL, BC
+                LD (IX + FObject.Velocity.Y), HL
 
                 RET
 

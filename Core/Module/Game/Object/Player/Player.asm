@@ -11,6 +11,7 @@
 ; ----------------------------------------
 Update:         CALL Rotation
                 CALL Deceleration
-                RET
+                CALL Game.World.Camera
+                JP Game.Object.Update.RET
 
                 endif ; ~_MODULE_GAME_OBJECT_UPDATE_PLAYER_
