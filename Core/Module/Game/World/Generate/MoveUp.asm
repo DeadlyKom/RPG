@@ -16,13 +16,6 @@ MoveUp:         ; -----------------------------------------
                 ; положение карты по горизонтали            DEHL
                 LD DE, (PlayerState.CameraPosX + 3)
                 LD HL, (PlayerState.CameraPosX + 1)
-                
-                ; вычесть половину смещения (левый край мини карты)
-                LD BC, SCR_MINIMAP_OFFSET_X >> 1
-                OR A
-                SBC HL, BC
-                JR NC, $+3
-                DEC DE
 
                 ; сохранить значение
                 LD (Math.PN_LocationX + 0), HL
@@ -35,13 +28,6 @@ MoveUp:         ; -----------------------------------------
                 ; положение карты по горизонтали            DEHL
                 LD DE, (PlayerState.CameraPosY + 3)
                 LD HL, (PlayerState.CameraPosY + 1)
-                
-                ; вычесть половину смещения (верхний край мини карты)
-                LD BC, SCR_MINIMAP_OFFSET_Y >> 1
-                OR A
-                SBC HL, BC
-                JR NC, $+3
-                DEC DE
 
                 ; сохранить значение
                 LD (Math.PN_LocationY + 0), HL
@@ -59,44 +45,14 @@ MoveUp:         ; -----------------------------------------
                 INC L
                 ; EX DE, HL
                 ;LD HL, Adr.MinimapSpr                                           ; адрес левого-вверхний байта спрайта
-                                                                                ; сдвигаем снизу вверх
-                LD B, SCR_MINIMAP_SIZE_X >> 3
-                LD A, (PlayerState.CameraPosY + 1)
-                LD C, A
-  
-                ; если x = 1 (не выровнен), берётся только 1 значение из шума 02/04
-                LD A, (PlayerState.CameraPosX + 1)
-                RRA
-                JR NC, .Aligned
+.RowLoop        LD B, 8
+.RollLoop       CALL Generate.Noise
 
-                DEC B                                                           ; на 1 строку меньше
-                CALL Generate.Noise
-
-                ;
-                ;      7    6    5    4    3    2    1    0
-                ;   +----+----+----+----+----+----+----+----+
-                ;   | 01 | 02 | 03 | 04 | .. | .. | .. | .. |
-                ;   +----+----+----+----+----+----+----+----+
-                ;
-                ;   при сдвиге влево берутся значения
-                ;       01/03, если x = 0
-                ;       02/04, если x = 1
-
-                ; смещение до 02 значения
-                ADD A, A
-
-                ; смещение шума влево (значения 04), если y = 1
-                BIT 0, C
-                JR Z, $+4
-                ADD A, A
-                ADD A, A
-
-.L11            ; сдвиг строки влево на 1 пиксель
+                ; сдвиг на 1 пиксель
                 ADD A, A
                 RL (HL)
 
-.RollLoop       EX DE, HL
-
+                EX DE, HL
                 ; INC 32
                 LD HL, Math.PN_LocationX
                 INC (HL)
@@ -109,88 +65,13 @@ MoveUp:         ; -----------------------------------------
                 JR NZ, $+4
                 INC L
                 INC (HL)
-
                 EX DE, HL
-
-.Aligned        ;
-                CALL Generate.Noise
-
-                ;      7    6    5    4    3    2    1    0
-                ;   +----+----+----+----+----+----+----+----+
-                ;   | 01 | 02 | 03 | 04 | .. | .. | .. | .. |
-                ;   +----+----+----+----+----+----+----+----+
-                ;
-                ;   при сдвиге влево берутся значения
-                ;       01/03, если x = 0
-                ;       02/04, если x = 1
-
-                ; смещение шума влево (значения 02 и 04), если y = 1
-                BIT 0, C
-                JR Z, $+4
-                ADD A, A
-                ADD A, A
-
-                ; сдвиг на 1 пиксель
-                ADD A, A
-                RL (HL)
-
-                ; сдвиг на 1 пиксель
-                ADD A, A
-                RL (HL)
 
                 DJNZ .RollLoop
 
-                LD B, SCR_MINIMAP_SIZE_X >> 3
-
-                ; если x = 1 (не выровнен), берётся только 1 значение из шума 02/04
-                LD A, (PlayerState.CameraPosX + 1)
-                RRA
-                JR NC, .Aligned_
-
-                DEC B
-
-                EX DE, HL
-
-                ; INC 32
-                LD HL, Math.PN_LocationX
-                INC (HL)
-                JR NZ, $+12
                 INC L
-                INC (HL)
-                JR NZ, $+8
-                INC L
-                INC (HL)
-                JR NZ, $+4
-                INC L
-                INC (HL)
-
-                EX DE, HL
-
-                CALL Generate.Noise
-
-                ;
-                ;      7    6    5    4    3    2    1    0
-                ;   +----+----+----+----+----+----+----+----+
-                ;   | 01 | 02 | 03 | 04 | .. | .. | .. | .. |
-                ;   +----+----+----+----+----+----+----+----+
-                ;
-                ;   при сдвиге влево берутся значения
-                ;       01/03, если x = 0
-                ;       02/04, если x = 1
-
-                ; смещение шума влево (значения 04), если y = 1
-                BIT 0, C
-                JR Z, $+4
-                ADD A, A
-                ADD A, A
-
-                ; сдвиг строки влево на 1 пиксель
-                ADD A, A
-                RL (HL)
-
-.Aligned_       INC L
                 BIT 2, L
-                JR Z, .L11
+                JR Z, .RowLoop
 
                 CALL .Tile
 
@@ -214,6 +95,7 @@ MoveUp:         ; -----------------------------------------
 
                 ; -----------------------------------------
                 LD BC, Adr.MinimapSpr + 1 + 4 * 10 - 4                          ; адрес левой-верхней грани видимой части карты мира (-1 строка)
+                ; LD BC, Adr.MinimapSpr + 1 + 4 * 20 - 4                          ; адрес левой-нижней грани видимой части карты мира (-1 строка)
 .Test           LD HL, .BufferUp
 
                 ; -----------------------------------------

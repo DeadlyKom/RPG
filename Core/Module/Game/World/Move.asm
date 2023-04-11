@@ -93,37 +93,26 @@ Right:
                 ; SET_SCREEN_SHADOW                                               ; включение страницы второго экрана
                 RET
 
-Down:           ; DEC 40
+Down:           ; INC 40 (8 инверт)
                 LD HL, PlayerState.CameraPosY
-                LD B, #01
                 LD A, (HL)
                 SUB #10
                 LD (HL), A
-                LD C, A
                 JR NC, .L1
                 INC L
-                LD A, (HL)
-                SUB B
-                LD (HL), A
-                JR NC, .L1_
+                INC (HL)
+                JR NZ, .L1_
                 INC L
-                LD A, (HL)
-                SUB B
-                LD (HL), A
-                JR NC, .L1_
+                INC (HL)
+                JR NZ, .L1_
                 INC L
-                LD A, (HL)
-                SUB B
-                LD (HL), A
-                JR NC, .L1_
+                INC (HL)
+                JR NZ, .L1_
                 INC L
-                LD A, (HL)
-                SUB B
-                LD (HL), A
+                INC (HL)
 .L1_            SET_WORLD_FLAG WORLD_DOWN_BIT
 
-.L1             LD A, C
-                RRA
+.L1             RRA
                 RRA
                 RRA
                 RRA
@@ -146,30 +135,44 @@ Down:           ; DEC 40
 
                 RET
 
-Up:             ; INC 40
+Up:             ; DEC 40 (8 инверт)
                 LD HL, PlayerState.CameraPosY
-                LD A, #10
-                ADD A, (HL)
+                LD B, #01
+                LD A, (HL)
+                ADD A, #10
                 LD (HL), A
+                LD C, A
                 JR NC, .L1
                 INC L
-                INC (HL)
-                JR NZ, .L1_
+                LD A, (HL)
+                SUB B
+                LD (HL), A
+                JR NC, .L1_
                 INC L
-                INC (HL)
-                JR NZ, .L1_
+                LD A, (HL)
+                SUB B
+                LD (HL), A
+                JR NC, .L1_
                 INC L
-                INC (HL)
-                JR NZ, .L1_
+                LD A, (HL)
+                SUB B
+                LD (HL), A
+                JR NC, .L1_
                 INC L
-                INC (HL)
+                LD A, (HL)
+                SUB B
+                LD (HL), A
 .L1_            SET_WORLD_FLAG WORLD_UP_BIT
 
-.L1             RRA
+.L1             LD A, C
+                RRA
                 RRA
                 RRA
                 RRA
                 AND #0E
+                ; LD C, A
+                ; LD A, #0E
+                ; SUB C
                 LD (World.Shift_Y), A
 
                 ; SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами

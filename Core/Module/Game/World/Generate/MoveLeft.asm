@@ -17,13 +17,6 @@ MoveLeft:       ; -----------------------------------------
                 LD DE, (PlayerState.CameraPosX + 3)
                 LD HL, (PlayerState.CameraPosX + 1)
 
-                ; вычесть половину смещения (левый край мини карты)
-                LD BC, (SCR_MINIMAP_OFFSET_X >> 1) + 2
-                OR A
-                SBC HL, BC
-                JR NC, $+3
-                DEC DE
-
                 ; сохранить значение
                 LD (Math.PN_LocationX + 0), HL
                 LD (Math.PN_LocationX + 2), DE
@@ -35,13 +28,6 @@ MoveLeft:       ; -----------------------------------------
                 ; положение карты по горизонтали            DEHL
                 LD DE, (PlayerState.CameraPosY + 3)
                 LD HL, (PlayerState.CameraPosY + 1)
-                
-                ; вычесть половину смещения (верхний край мини карты)
-                LD BC, (SCR_MINIMAP_OFFSET_Y >> 1) - 2
-                OR A
-                SBC HL, BC
-                JR NC, $+3
-                DEC DE
 
                 ; сохранить значение
                 LD (Math.PN_LocationY + 0), HL
@@ -51,37 +37,9 @@ MoveLeft:       ; -----------------------------------------
                 ; инициализация
                 ; -----------------------------------------
                 LD HL, Adr.MinimapSpr                                           ; адрес левого-вверхний байта спрайта
-                                                                                ; сдвигаем сверху вниз
-                LD B, SCR_MINIMAP_SIZE_Y >> 1
-                LD A, (PlayerState.CameraPosX + 1)
-                LD C, A
-  
-                ; если y = 1 (не выровнен), берётся только 1 значение из шума 03/04
-                LD A, (PlayerState.CameraPosY + 1)
-                RRA
-                JR C, .Aligned
+                LD B, SCR_MINIMAP_SIZE_Y
 
-                DEC B                                                           ; на 1 строку меньше
-                CALL Generate.Noise
-
-                ;
-                ;      7    6    5    4    3    2    1    0
-                ;   +----+----+----+----+----+----+----+----+
-                ;   | 01 | 02 | 03 | 04 | .. | .. | .. | .. |
-                ;   +----+----+----+----+----+----+----+----+
-                ;
-                ;   при сдвиге влево берутся значения
-                ;       01/03, если x = 0
-                ;       02/04, если x = 1
-
-                ; смещение до 03 значения
-                ADD A, A
-                ADD A, A
-
-                ; смещение шума влево (значения 04), если х = 1
-                BIT 0, C
-                JR Z, $+3
-                ADD A, A
+.RollLoop       CALL Generate.Noise
 
                 ; сдвиг строки вправо на 1 пиксель
                 ADD A, A
@@ -94,8 +52,7 @@ MoveLeft:       ; -----------------------------------------
                 RR (HL)
                 INC L
 
-.RollLoop       EX DE, HL
-
+                EX DE, HL
                 ; INC 32
                 LD HL, Math.PN_LocationY
                 INC (HL)
@@ -108,83 +65,9 @@ MoveLeft:       ; -----------------------------------------
                 JR NZ, $+4
                 INC L
                 INC (HL)
-
                 EX DE, HL
 
-.Aligned        CALL Generate.Noise
-
-                ;      7    6    5    4    3    2    1    0
-                ;   +----+----+----+----+----+----+----+----+
-                ;   | 01 | 02 | 03 | 04 | .. | .. | .. | .. |
-                ;   +----+----+----+----+----+----+----+----+
-                ;
-                ;   при сдвиге влево берутся значения
-                ;       01/03, если x = 0
-                ;       02/04, если x = 1
-
-                ; смещение шума влево (значения 02 и 04), если х = 1
-                BIT 0, C
-                JR Z, $+3
-                ADD A, A
-
-                ; сдвиг строки вправо на 1 пиксель
-                ADD A, A
-                RR (HL)
-                INC L
-                RR (HL)
-                INC L
-                RR (HL)
-                INC L
-                RR (HL)
-                INC L
-
-                ADD A, A
-
-                ; сдвиг строки вправо на 1 пиксель
-                ADD A, A
-                RR (HL)
-                INC L
-                RR (HL)
-                INC L
-                RR (HL)
-                INC L
-                RR (HL)
-                INC L
-
                 DJNZ .RollLoop
-
-                ; -----------------------------------------
-                LD A, (PlayerState.CameraPosY + 1)
-                RRA
-                JR C, .Aligned_
-
-                CALL Generate.Noise
-
-                ;      7    6    5    4    3    2    1    0
-                ;   +----+----+----+----+----+----+----+----+
-                ;   | 01 | 02 | 03 | 04 | .. | .. | .. | .. |
-                ;   +----+----+----+----+----+----+----+----+
-                ;
-                ;   при сдвиге влево берутся значения
-                ;       01/03, если x = 0
-                ;       02/04, если x = 1
-
-                ; смещение шума влево (значения 02 и 04), если х = 1
-                BIT 0, C
-                JR Z, $+3
-                ADD A, A
-
-                ; сдвиг строки вправо на 1 пиксель
-                ADD A, A
-                RR (HL)
-                INC L
-                RR (HL)
-                INC L
-                RR (HL)
-                INC L
-                RR (HL)
-.Aligned_
-                ; -----------------------------------------
 
                 CALL .Tile
 

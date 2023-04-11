@@ -205,8 +205,8 @@ Vertical:       ; скорость
 
                 LD A, (PlayerState.DeltaCameraY)
                 BIT 7, A
-                JR Z, .IsNegative
-                NEG
+                JR NZ, .IsNegative
+                ; NEG
 
                 ; const float Dist = Target - Current;
                 ; if( FMath::Square(Dist) < SMALL_NUMBER )
@@ -234,8 +234,13 @@ Vertical:       ; скорость
                 LD D, A
 
                 AND #F0
+                ; INC 40
+                ; LD HL, PlayerState.CameraPosY
+                ; ADD A, (HL)
+                LD C, A
                 LD HL, PlayerState.CameraPosY
-                ADD A, (HL)
+                LD A, (HL)
+                SUB C
                 LD (HL), A
                 LD E, A
                 JR NC, .LL1
@@ -250,7 +255,7 @@ Vertical:       ; скорость
                 JR NZ, .LL2
                 INC L
                 INC (HL)
-.LL2            SET_WORLD_FLAG WORLD_UP_BIT
+.LL2            SET_WORLD_FLAG WORLD_DOWN_BIT
 
 .LL1            LD A, E
                 RRA
@@ -266,13 +271,13 @@ Vertical:       ; скорость
                 OR A
                 LD E, D
                 LD D, #00
-                ADD HL, DE
+                SBC HL, DE
                 LD (IX + FObject.Position.Y), HL
                 SET_SCREEN_SHADOW                                               ; включение страницы второго экрана
 
                 RET
 
-.IsNegative     ; ----------------------------------------
+.IsNegative     NEG; ----------------------------------------
                 ; In:
                 ;   DE - multiplicand
                 ;   A  - multiplier
@@ -290,10 +295,12 @@ Vertical:       ; скорость
                 LD D, A
 
                 AND #F0
-                LD C, A
+                ; LD C, A
+                ; LD HL, PlayerState.CameraPosY
+                ; LD A, (HL)
+                ; SUB C
                 LD HL, PlayerState.CameraPosY
-                LD A, (HL)
-                SUB C
+                ADD A, (HL)
                 LD (HL), A
                 LD E, A
                 JR NC, .LL1_
@@ -316,7 +323,7 @@ Vertical:       ; скорость
                 LD A, (HL)
                 SUB #01
                 LD (HL), A
-.LL2_           SET_WORLD_FLAG WORLD_DOWN_BIT
+.LL2_           SET_WORLD_FLAG WORLD_UP_BIT
 
 .LL1_           LD A, E
                 RRA
@@ -332,7 +339,7 @@ Vertical:       ; скорость
                 OR A
                 LD E, D
                 LD D, #00
-                SBC HL, DE
+                ADD HL, DE
                 LD (IX + FObject.Position.Y), HL
                 SET_SCREEN_SHADOW                                               ; включение страницы второго экрана
 
