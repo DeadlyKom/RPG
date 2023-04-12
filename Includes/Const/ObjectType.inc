@@ -6,6 +6,7 @@ OBJECT_EMPTY_ELEMENT        EQU #FF                                             
 ; сдвиг необходим для быстрого получить адрес из таблице по типу юнита (GetAdrInTable)
 OBJECT_PLAYER               EQU 0x00 << 1                                       ; игрок
 OBJECT_DECAL                EQU 0x01 << 1                                       ; декаль
+OBJECT_COLLISION            EQU 0x02 << 1                                       ; физичный объект
 
 FACTION_TYPE_BIT            EQU 0x07                                            ; тип фракции (0 - нейтральная, 1 - враждебная)
 FACTION_SUBTYPE_BIT         EQU 0x06

@@ -8,7 +8,9 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-World:          ; скрол карты мира в зависимости от состояний флагов
+World:          SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
+
+                ; скрол карты мира в зависимости от состояний флагов
                 CHECK_WORLD_FLAG WORLD_LEFT_BIT
                 CALL NZ, Game.World.MoveLeft
                 CHECK_WORLD_FLAG WORLD_RIGHT_BIT

@@ -17,50 +17,57 @@ Sort:           ; количество обрабатываемых объект
                  
                 ; инициализация
                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
-
                 LD (.ContainerSP), SP
+
+                ; -----------------------------------------
+                ; копирование в буфер сортировки
+                ; -----------------------------------------
                 
                 LD HL, SortBuffer
-                LD DE, Adr.Object; + FObjectDecal.Position.Y                    ; стартовый адрес обрабатываемого объекта
-                LD BC, #0100                                                    ; B - размер массива, C - количествой элементов в массиве
-                
+                LD DE, Adr.Object                                               ; стартовый адрес обрабатываемого объекта
                 EX AF, AF'
-.ObjectLoop     LD (.ObjectCounter), A
-.ObjectLoop_    ; проверка валидности элемента
+                LD B, A
+                LD C, B                                                         ; B - размер массива, C - количествой элементов в массиве
+
+.ObjectLoop     ; проверка валидности элемента
                 LD A, (DE)
                 CP OBJECT_EMPTY_ELEMENT
                 JR Z, .NextObject
 
-                ; -----------------------------------------
+                ; CP OBJECT_DECAL
+                ; JR Z, $+5
+                ; DEC C
+                ; JR .NextObject
+
                 ; копирование адреса объекта
-                INC E
+                INC E                                                           ; FObjectDecal.Position.Y
                 LD (HL), E
                 DEC E
                 INC L
                 LD (HL), D
                 INC L
 
-                ; прверка что массив увеличился и больше 1
-                LD A, B
-                ADD A, C
-                DEC A
-                JR Z, .Skip                                                     ; переход, если 1 элемент в массиве
-                INC A
-                LD B, A
+.NextObject     ; следующий элемент
+                LD A, E
+                ADD A, OBJECT_SIZE
+                LD E, A
+                ADC A, D
+                SUB E
+                LD D, A
 
-                ; HL - адрес на первый неотсортированный элемент
-                ; С  - количествой элементов в массиве
+                DJNZ .ObjectLoop
+
+                ; -----------------------------------------
+
                 LD A, C
-                INC C
-                OR A
-                JR Z, .FirstSort                                                ; переход, если это первые элементы в массиве
-                DEC L
-                DEC L
-                DEC L
-                DEC L
-                DEC C
+                DEC A
+                JR Z, .RET
 
-.FirstSort      ; инициализация
+                LD HL, SortBuffer
+                LD B, C                                                         ; B - размер массива, C - количествой элементов в массиве
+                LD C, #00
+
+                ; инициализация
                 LD SP, HL
                 LD A, C
                 INC A
@@ -101,7 +108,7 @@ Sort:           ; количество обрабатываемых объект
                 POP HL
                 PUSH HL
 
-                ; чтение
+                ; чтение значения
                 LD A, (HL)
                 INC L
                 LD H, (HL)
@@ -132,12 +139,11 @@ Sort:           ; количество обрабатываемых объект
                 EX AF, AF'
 
                 ; 
-                LD L, C
-                DEC L
-                LD H, #00
-                ADD HL, HL
-                LD DE, SortBuffer
-                ADD HL, DE
+                LD A, C
+                DEC A
+                ADD A, A
+                LD L, A
+                LD H, HIGH SortBuffer
                 LD SP, HL
 
                 ; i < size
@@ -146,40 +152,14 @@ Sort:           ; количество обрабатываемых объект
                 JP C, .Loop
 
                 ; -1
-                INC HL
-                INC HL
-
-.Skip           INC C
-                ; -----------------------------------------
-
-                ; следующий элемент
-                LD A, E
-                ADD A, OBJECT_SIZE
-                LD E, A
-                ADC A, D
-                SUB E
-                LD D, A
-
-                ; уменьшение счётчика элементов
-.ObjectCounter  EQU $+1
-                LD A, #00
-                DEC A
-                JR NZ, .ObjectLoop
-
+                INC L
+                INC L
+.RET
 .ContainerSP    EQU $+1
                 LD SP, #0000
 
-                LD A, B
+                LD A, C
 .Set            LD (Draw.Num), A
                 RET
-
-.NextObject     ; следующий элемент
-                LD A, E
-                ADD A, OBJECT_SIZE
-                LD E, A
-                ADC A, D
-                SUB E
-                LD D, A
-                JR .ObjectLoop_
 
                 endif ; ~_MODULE_GAME_RENDER_SORT_OBJECTS_

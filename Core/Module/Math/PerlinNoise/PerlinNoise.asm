@@ -15,7 +15,6 @@
 PerlinNoise2D:  ; AHLDE = Location.X * Frequency
                 LD DE, (Noise2D + FNoise2D.Location.X.High)
                 LD HL, (Noise2D + FNoise2D.Location.X.Low)
-                XOR A
                 LD A, (Noise2D + FNoise2D.Frequency)
                 CALL Math.Mul32x8_40                                            ; AHLDE
                 
@@ -27,7 +26,6 @@ PerlinNoise2D:  ; AHLDE = Location.X * Frequency
                 ; AHLDE = Location.Y * Frequency
                 LD DE, (Noise2D + FNoise2D.Location.Y.High)
                 LD HL, (Noise2D + FNoise2D.Location.Y.Low)
-                XOR A
                 LD A, (Noise2D + FNoise2D.Frequency)
                 CALL Math.Mul32x8_40                                            ; AHLDE
 

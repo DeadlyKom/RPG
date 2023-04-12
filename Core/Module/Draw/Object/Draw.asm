@@ -24,7 +24,7 @@ Draw:           ; переход в зависимости от типа объ�
                 JP DrawDecal
                 DB #00                                                          ; dummy
                 ; 2
-                JP $
+                JP DrawDecal
                 DB #00                                                          ; dummy
                 ; 3
                 JP $

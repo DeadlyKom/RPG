@@ -57,7 +57,7 @@ Spawn:          ; поиск свободной ячейки
                 JP Decal
                 DB #00                                                          ; dummy
                 ; 2
-                JP $
+                JP Decal
                 DB #00                                                          ; dummy
                 ; 3
                 JP $

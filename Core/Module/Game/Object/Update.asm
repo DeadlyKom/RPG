@@ -21,7 +21,7 @@ Update:         ; переход в зависимости от типа объ�
                 JP Player.Update
                 DB #00                                                          ; dummy
                 ; 1
-                JP Decal
+                JP .RET
                 DB #00                                                          ; dummy
                 ; 2
                 JP .RET

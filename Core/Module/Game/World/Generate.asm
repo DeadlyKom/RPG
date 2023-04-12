@@ -103,7 +103,56 @@ Generate:       LD HL, (PlayerState.CameraPosX + 3)
                 ; LD BC, OBJECT_DECAL
                 ; CALL Func.SpawnObject
 
-.L1             LD A, H
+                ; фильтр
+                LD A, H
+                OR L
+                ADD A, A
+                JR C, .Ground
+
+                ; спавн на песке
+                LD A, L
+                CP #1E              ; кактусы
+                JR NZ, .IsSkull
+
+.IsCactus       LD A, R
+                AND #03
+                CP #03
+                JR C, $+4
+                LD A, #02
+                LD B, A
+                LD C, OBJECT_COLLISION
+                JR .Spawn
+
+.IsSkull        CP #55              ; череп
+                JR NZ, .Skip
+                LD B, #0C
+                LD C, OBJECT_DECAL
+                JR .Spawn
+
+.Ground         ; спавн на грунте
+                LD A, L
+                CP #20              ; камень
+                JR NZ, .Skip
+                LD B, #0E
+                LD C, OBJECT_COLLISION
+                ; JR .Spawn
+
+.Spawn          EXX
+                PUSH HL
+                PUSH DE
+                PUSH BC
+                EXX
+
+                CALL Func.SpawnObject
+
+                EXX
+                POP BC
+                POP DE
+                POP HL
+                EXX
+
+.Skip           LD A, H
+                OR L
                 EXX
                 CPL
                 RET
