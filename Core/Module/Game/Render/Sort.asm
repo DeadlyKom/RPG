@@ -31,8 +31,10 @@ Sort:           ; количество обрабатываемых объект
 
 .ObjectLoop     ; проверка валидности элемента
                 LD A, (DE)
+                DEC C
                 CP OBJECT_EMPTY_ELEMENT
                 JR Z, .NextObject
+                INC C
 
                 ; CP OBJECT_DECAL
                 ; JR Z, $+5
@@ -56,6 +58,7 @@ Sort:           ; количество обрабатываемых объект
                 LD D, A
 
                 DJNZ .ObjectLoop
+                JR .RET
 
                 ; -----------------------------------------
 

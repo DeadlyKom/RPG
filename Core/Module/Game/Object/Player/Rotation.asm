@@ -12,6 +12,13 @@
 Rotation:       ;
                 LD A, (PlayerState.RotationAngle)
                 LD B, A
+                
+                ; округление
+                BIT 2, A
+                JR Z, $+4
+                ADD A, #08
+
+                ; установка направления
                 AND %01111000
                 LD (IX + FObject.Direction), A
 

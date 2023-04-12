@@ -16,13 +16,13 @@ Gen_PRNG:       ; установка seed
                 CALL Math.Rand8
                 INC A
                 ADD A, A
-                LD A, #43
+                LD A, #41
                 LD (Math.PN_Frequency), A
                 LD (GameConfig.Frequency), A
 
-                LD HL, #0000
+                LD HL, #00A8
                 LD (PlayerState.CameraPosX + 1), HL
-                LD HL, #0000
+                LD HL, #008A
                 LD (PlayerState.CameraPosY + 1), HL
                 LD HL, #1000
                 LD (PlayerState.CameraPosX + 3), HL

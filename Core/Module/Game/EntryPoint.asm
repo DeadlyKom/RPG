@@ -39,9 +39,19 @@ EntryPoint:     ; -----------------------------------------
                 CALL Func.InitObject                                            ; инициализация работы с объектами
 
                 ; ToDo тестовый спавн
-                LD DE, #5050
+                LD DE, #5080
                 LD BC, OBJECT_PLAYER
                 CALL Func.SpawnObject
+                
+                ; LD BC, OBJECT_DECAL
+                ; LD HL, #0000
+                ; LD (Math.PN_LocationX + 0), HL
+                ; LD HL, #0010
+                ; LD (Math.PN_LocationY + 0), HL
+                ; LD HL, #1000
+                ; LD (Math.PN_LocationX + 2), HL
+                ; LD (Math.PN_LocationY + 2), HL
+                ; CALL Func.SpawnObject
 
                 SET_SCREEN_SHADOW                                               ; включение страницы второго экрана
                 ; -----------------------------------------

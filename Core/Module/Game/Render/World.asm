@@ -64,6 +64,12 @@ World:          SET_PAGE_OBJECT                                                 
                 CALL Console.DrawByte
                 LD A, (PlayerState.DeltaCameraY)
                 CALL Console.DrawByte
+                
+                LD DE, #0400
+                CALL Console.SetCursor
+                LD A, (GameState.Objects)
+                CALL Console.DrawByte
+
                 ; LD A, (PlayerState.Debug)
                 ; CALL Console.DrawByte
                 endif

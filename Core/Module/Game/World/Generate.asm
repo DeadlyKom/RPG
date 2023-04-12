@@ -8,10 +8,57 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Generate:       LD HL, (PlayerState.CameraPosX + 3)
-                PUSH HL
-                LD HL, (PlayerState.CameraPosX + 1)
-                PUSH HL
+Generate:       ; -----------------------------------------
+                ; центровка карты мира
+                ; -----------------------------------------
+                LD B, #01
+
+                ; DEC 32
+                LD HL, PlayerState.CameraPosX + 1
+                LD A, (HL)
+                SUB SCR_MINIMAP_SIZE_X
+                LD (HL), A
+                JR NC, $+18
+                INC L
+                LD A, (HL)
+                SUB B
+                LD (HL), A
+                JR NC, $+12
+                INC L
+                LD A, (HL)
+                SUB B
+                LD (HL), A
+                JR NC, $+6
+                INC L
+                LD A, (HL)
+                SUB B
+                LD (HL), A
+
+                ; LD HL, (PlayerState.CameraPosX + 3)
+                ; PUSH HL
+                ; LD HL, (PlayerState.CameraPosX + 1)
+                ; PUSH HL
+
+                ; ; DEC 40
+                ; LD HL, PlayerState.CameraPosY + 1
+                ; LD A, (HL)
+                ; SUB SCR_MINIMAP_SIZE_Y >> 1
+                ; LD (HL), A
+                ; JR NC, $+18
+                ; INC L
+                ; LD A, (HL)
+                ; SUB B
+                ; LD (HL), A
+                ; JR NC, $+12
+                ; INC L
+                ; LD A, (HL)
+                ; SUB B
+                ; LD (HL), A
+                ; JR NC, $+6
+                ; INC L
+                ; LD A, (HL)
+                ; SUB B
+                ; LD (HL), A
 
                 ; -----------------------------------------
                 ; генерация спрайта мини карты
@@ -38,10 +85,10 @@ Generate:       LD HL, (PlayerState.CameraPosX + 3)
                 DEC A
                 JR NZ, .Loop
 
-                POP HL
-                LD (PlayerState.CameraPosX + 1), HL
-                POP HL
-                LD (PlayerState.CameraPosX + 3), HL
+                ; POP HL
+                ; LD (PlayerState.CameraPosX + 1), HL
+                ; POP HL
+                ; LD (PlayerState.CameraPosX + 3), HL
 
                 RET
 
@@ -107,37 +154,69 @@ Generate:       LD HL, (PlayerState.CameraPosX + 3)
                 LD A, H
                 OR L
                 ADD A, A
-                JR C, .Ground
+                JR NC, .Ground
 
                 ; спавн на песке
                 LD A, L
-                CP #1E              ; кактусы
-                JR NZ, .IsSkull
+                CP #D0              ; кактусы
+                JR NZ, .IsDecal
 
 .IsCactus       LD A, R
                 AND #03
-                CP #03
-                JR C, $+4
-                LD A, #02
+                SUB #01
+                ADC A, #00
                 LD B, A
-                LD C, OBJECT_COLLISION
-                JR .Spawn
+                JR .Collision
 
-.IsSkull        CP #55              ; череп
+.IsDecal        SUB #A8
+                LD B, #04           ; череп 1
+                JR Z, .Decal
+                SUB #02
+                LD B, #0C           ; череп 2
+                JR Z, .Decal
+                SUB #02
+                LD B, #03           ; куст
+                JR Z, .Decal
+                SUB #02
+                LD B, #09           ; бревно 2
+                JR Z, .Collision
+                SUB #02
+                LD B, #0D           ; канава 1
                 JR NZ, .Skip
-                LD B, #0C
-                LD C, OBJECT_DECAL
+
+.Decal          LD C, OBJECT_DECAL
                 JR .Spawn
 
 .Ground         ; спавн на грунте
                 LD A, L
-                CP #20              ; камень
+                SUB #20
+                ; JR C, .Skip
+                ; LD B, #05           ; бревно 1
+                ; JR Z, .Collision
+                SUB #02
+                LD B, #0A           ; бревно 3
+                JR Z, .Collision
+                SUB #04
+                LD B, #06           ; камень 1
+                JR Z, .Collision
+                ; SUB #05
+                ; LD B, #07           ; камень 2
+                ; JR Z, .Collision
+                ; SUB #06
+                ; LD B, #08           ; камень 3
+                ; JR Z, .Collision
+                SUB #07
+                LD B, #0E           ; камень 4
+                JR Z, .Collision
+                SUB #08
+                LD B, #0B           ; канава 2
                 JR NZ, .Skip
-                LD B, #0E
-                LD C, OBJECT_COLLISION
+
+.Collision      LD C, OBJECT_COLLISION
                 ; JR .Spawn
 
-.Spawn          EXX
+.Spawn          PUSH HL
+                EXX
                 PUSH HL
                 PUSH DE
                 PUSH BC
@@ -150,6 +229,7 @@ Generate:       LD HL, (PlayerState.CameraPosX + 3)
                 POP DE
                 POP HL
                 EXX
+                POP HL
 
 .Skip           LD A, H
                 OR L

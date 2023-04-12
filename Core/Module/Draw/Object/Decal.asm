@@ -1,6 +1,13 @@
 
                 ifndef _CORE_MODULE_DRAW_OBJECT_DECAL_
                 define _CORE_MODULE_DRAW_OBJECT_DECAL_
+
+Remove          ; ToDo удалить объект
+                LD (IX + FObjectDecal.Type), OBJECT_EMPTY_ELEMENT
+                LD HL, GameState.Objects
+                DEC (HL)
+                JP DrawDecal.RET
+
 ; -----------------------------------------
 ; отображение дроид-пехотинца
 ; In:
@@ -21,13 +28,25 @@ DrawDecal:      ; сохранеие текущей страницы
                 LD HL, (IX + FObjectDecal.Location.X.Low)
                 OR A
                 SBC HL, BC
-                EX DE, HL
+                LD A, L
+                EX AF, AF'
+                LD BC, ((SCR_MINIMAP_SIZE_X - (SCR_WORLD_SIZE_X << 1)) >> 1) + 1
+                ADD HL, BC
 
-                LD BC, (PlayerState.CameraPosX + 3)
-                LD HL, (IX + FObjectDecal.Location.X.High)  
-                SBC HL, BC
-                ; JP NZ, .Remove                                                  ; переход, если объект дальше от -32768 до +32767
-                EX DE, HL
+                EX AF, AF'
+                JP P, $+5
+                NEG
+                CP (SCR_MINIMAP_SIZE_X >> 1) + 2
+                JR NC, Remove
+                
+;                 LD A, L
+;                 JR NC, .PositiveX
+;                 CP -SCR_MINIMAP_SIZE_X
+;                 JR C, Remove                                                    ; переход, если объект дальше -32
+;                 JR .PositiveX_
+; .PositiveX      CP -SCR_MINIMAP_SIZE_X
+;                 JR NC, Remove                                                   ; переход, если объект дальше +32
+; .PositiveX_
 
                 ; -----------------------------------------
                 ;   значение фиксированной точки 12.4 (знаковое)    [от -2^11 до +2^11 в пикселях]
@@ -55,16 +74,30 @@ DrawDecal:      ; сохранеие текущей страницы
                 LD (IX + FObjectDecal.Position.X), HL                           ; сохранение позиции юнита по горизонтали
                 LD (Draw.Prepare.PosX), HL                                      ; сохранение позиции юнита по горизонтали
 
-                LD BC, (PlayerState.CameraPosY + 3)
-                LD HL, (IX + FObjectDecal.Location.Y.High)
-                OR A
-                SBC HL, BC
-                ; JR NZ, .Remove                                                  ; переход, если объект дальше от -32768 до +32767
-
-                ; 
                 LD BC, (PlayerState.CameraPosY + 1)
                 LD HL, (IX + FObjectDecal.Location.Y.Low)
+                OR A
                 SBC HL, BC
+                LD A, L
+                EX AF, AF'
+                LD BC, ((SCR_MINIMAP_SIZE_Y - ((SCR_WORLD_SIZE_Y + 1) << 1)) >> 1) + 0
+                ADD HL, BC
+
+                EX AF, AF'
+                JP P, $+5
+                NEG
+                CP (SCR_MINIMAP_SIZE_Y >> 1) + 2
+                JR NC, Remove
+
+
+;                 LD A, L
+;                 JR NC, .PositiveY
+;                 CP -SCR_MINIMAP_SIZE_Y
+;                 JR C, Remove                                                    ; переход, если объект дальше -32
+;                 JR .PositiveY_
+; .PositiveY      CP -SCR_MINIMAP_SIZE_Y
+;                 JR NC, Remove                                                   ; переход, если объект дальше +32
+; .PositiveY_
 
                 ; -----------------------------------------
                 ;   значение фиксированной точки 12.4 (знаковое)    [от -2^11 до +2^11 в пикселях]
