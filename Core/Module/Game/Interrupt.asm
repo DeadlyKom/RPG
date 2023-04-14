@@ -12,15 +12,15 @@ Interrupt:      ; проверка завершённости процесса �
                 CHECK_RENDER_FLAG FINISHED_BIT
                 JR Z, .RenderProcess                                            ; переход, если процесс отрисовки не завершён
 
+.SwapScreens    ; ************ Swap Screens ************
+                CALL Render.Swap
+
 .Camera         ; ************ CAMERA *************
                 CALL Game.World.Horizontal
                 CALL Game.World.Vertical
-				
+
 .Tick           ; ************* TICK *************
                 CALL Object.Tick
-
-.SwapScreens    ; ************ Swap Screens ************
-                CALL Render.Swap
 
 .RenderProcess  ; процесс отрисовки не завершён
 
@@ -33,5 +33,5 @@ Interrupt:      ; проверка завершённости процесса �
                 endif
 
                 RET
-
+    
                 endif ; ~ _CORE_MODULE_GAME_INTERRUPT_
