@@ -18,9 +18,10 @@ Decal:          ; -----------------------------------------
                 LD (IX + FObjectDecal.Type), C                                  ; тип объекта
                 LD (IX + FObjectDecal.Subtype), B                               ; подтип декали
 
+                ; правки по горизонтали
                 LD HL, (Math.PN_LocationX + 0)
                 LD DE, (Math.PN_LocationX + 2)
-                LD BC, (SCR_MINIMAP_SIZE_X >> 1) - 3
+                LD BC, SCR_MINIMAP_SIZE_X >> 1
                 OR A
                 SBC HL, BC
                 JR NC, $+3
@@ -28,19 +29,10 @@ Decal:          ; -----------------------------------------
                 LD (IX + FObjectDecal.Location.X.Low), HL
                 LD (IX + FObjectDecal.Location.X.High), DE
 
-                ; LD HL, (Math.PN_LocationX + 0)
-                ; LD (IX + FObjectDecal.Location.X.Low), HL
-                ; LD HL, (Math.PN_LocationX + 2)
-                ; LD (IX + FObjectDecal.Location.X.High), HL
-
-                ; LD HL, (Math.PN_LocationY + 0)
-                ; LD (IX + FObjectDecal.Location.Y.Low), HL
-                ; LD HL, (Math.PN_LocationY + 2)
-                ; LD (IX + FObjectDecal.Location.Y.High), HL
-                
+                ; правки по вертикали
                 LD HL, (Math.PN_LocationY + 0)
                 LD DE, (Math.PN_LocationY + 2)
-                LD BC, (SCR_MINIMAP_SIZE_Y >> 1) - 1
+                LD BC, SCR_MINIMAP_SIZE_Y >> 1
                 OR A
                 SBC HL, BC
                 JR NC, $+3

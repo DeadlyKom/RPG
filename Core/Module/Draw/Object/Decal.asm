@@ -30,13 +30,13 @@ DrawDecal:      ; сохранеие текущей страницы
                 SBC HL, BC
                 LD A, L
                 EX AF, AF'
-                LD BC, ((SCR_MINIMAP_SIZE_X - (SCR_WORLD_SIZE_X << 1)) >> 1) + 1
+                LD BC, ((SCR_MINIMAP_SIZE_X - (SCR_WORLD_SIZE_X << 1)) >> 1) + 2
                 ADD HL, BC
 
                 EX AF, AF'
                 JP P, $+5
                 NEG
-                CP (SCR_MINIMAP_SIZE_X >> 1) + 2
+                CP (SCR_MINIMAP_SIZE_X >> 1) + 1
                 JR NC, Remove
                 
 ;                 LD A, L
@@ -86,7 +86,7 @@ DrawDecal:      ; сохранеие текущей страницы
                 EX AF, AF'
                 JP P, $+5
                 NEG
-                CP (SCR_MINIMAP_SIZE_Y >> 1) + 2
+                CP (SCR_MINIMAP_SIZE_Y >> 1) + 1
                 JR NC, Remove
 
 

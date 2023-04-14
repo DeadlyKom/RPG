@@ -27,21 +27,28 @@ Sort:           ; количество обрабатываемых объект
                 LD DE, Adr.Object                                               ; стартовый адрес обрабатываемого объекта
                 EX AF, AF'
                 LD B, A
-                LD C, B                                                         ; B - размер массива, C - количествой элементов в массиве
+                LD C, A                                                         ; B - размер массива, C - количествой элементов в массиве
 
 .ObjectLoop     ; проверка валидности элемента
                 LD A, (DE)
-                DEC C
                 CP OBJECT_EMPTY_ELEMENT
-                JR Z, .NextObject
-                INC C
+                JP NZ, .CopyObject
+
+                ; следующий элемент
+                LD A, E
+                ADD A, OBJECT_SIZE
+                LD E, A
+                ADC A, D
+                SUB E
+                LD D, A
+                JR .ObjectLoop
 
                 ; CP OBJECT_DECAL
                 ; JR Z, $+5
                 ; DEC C
                 ; JR .NextObject
 
-                ; копирование адреса объекта
+.CopyObject     ; копирование адреса объекта
                 INC E                                                           ; FObjectDecal.Position.Y
                 LD (HL), E
                 DEC E
@@ -49,7 +56,7 @@ Sort:           ; количество обрабатываемых объект
                 LD (HL), D
                 INC L
 
-.NextObject     ; следующий элемент
+                ; следующий элемент
                 LD A, E
                 ADD A, OBJECT_SIZE
                 LD E, A
@@ -58,17 +65,18 @@ Sort:           ; количество обрабатываемых объект
                 LD D, A
 
                 DJNZ .ObjectLoop
-                JR .RET
+
+.Copied         JR .RET
 
                 ; -----------------------------------------
 
                 LD A, C
-                DEC A
+                OR A
                 JR Z, .RET
 
                 LD HL, SortBuffer
                 LD B, C                                                         ; B - размер массива, C - количествой элементов в массиве
-                LD C, #00
+                LD C, #01
 
                 ; инициализация
                 LD SP, HL
