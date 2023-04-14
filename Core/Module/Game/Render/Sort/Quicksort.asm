@@ -8,27 +8,26 @@
 ; Out:
 ; Corrupt:
 ; Note:
-;  не устойчив к прерыванию
+;   устойчив к прерыванию
 ; -----------------------------------------
 Quicksort:      LD A, C
                 DEC A
                 RET Z
 
+                ; -----------------------------------------
                 ; инициализация
-                LD (.ContainerSP), SP
+                ; -----------------------------------------
                 LD HL, SortBuffer
                 LD B, #01                                                       ; текущий элемент
-
-                ; инициализация
-                LD SP, HL
                 LD A, B
                 INC A
                 EX AF, AF'
 
+                ; -----------------------------------------
                 ; s     = C  - размер массива
                 ; i     = B  - текущий элемент
                 ; j     = A' - следующий элемент
-                ; a[]   = SP - указатель на массив
+                ; a[]   = HL - указатель на массив
                 ;
                 ; while (i < s)
                 ; {
@@ -47,42 +46,69 @@ Quicksort:      LD A, C
                 ;         }
                 ;     }
                 ; }
+                ; -----------------------------------------
 
-.Loop           ; SP - [i-1]
+.Loop           ; чтение адреса элемента [i-1]
+                LD E, (HL)
+                INC L
+                LD D, (HL)
+                INC L
+                PUSH DE
 
-                ; элемент [i-1]
+                ; чтение адреса элемента [i]
+                LD E, (HL)
+                INC L
+                LD D, (HL)
+                PUSH DE
+
+                ; -----------------------------------------
+                ; проверка [i] >= [i-1]
+                ; -----------------------------------------
+                EXX
+                
+                ; чтение значения элемента [i]
                 POP HL
                 LD E, (HL)
                 INC L
                 LD D, (HL)
 
-                ; элемент [i]
+                ; чтение значения элемента [i-1]
                 POP HL
-                PUSH HL
-
-                ; чтение значения
                 LD A, (HL)
                 INC L
                 LD H, (HL)
                 LD L, A
 
-                ; проверка [i] >= [i-1]
                 OR A
+                EX DE, HL
                 SBC HL, DE
-                JR NC, .Next    ; i = j; j++
+                EXX
+                JR NC, .Next    ; переход, если [i] >= [i-1]
 
+                ; -----------------------------------------
                 ; меняем местами адреса
-                DEC SP
-                DEC SP
-                POP HL
-                EX (SP), HL
-                PUSH HL
-                DEC SP
-                DEC SP
+                ; -----------------------------------------
+                DEC L
+                DEC L
+                DEC L
+                LD A, (HL)
+                LD (HL), E
+                INC L
+                LD E, (HL)
+                LD (HL), D
+                INC L
+                LD (HL), A
+                INC L
+                LD (HL), E
+                DEC L
+                DEC L
+                DEC L
+
+                ; назад на 1 элемент
+                DEC L
+                DEC L
 
                 ; i--; if (i == 0)
-                ; DEC C
-                ; JR NZ, .Loop
                 DJNZ .Loop
 
 .Next           ; i = j, j++
@@ -91,21 +117,17 @@ Quicksort:      LD A, C
                 INC A
                 EX AF, AF'
 
-                ; 
+                ; расчёт адреса по индексу
                 LD A, B
                 DEC A
                 ADD A, A
                 LD L, A
                 LD H, HIGH SortBuffer
-                LD SP, HL
 
                 ; i < size
                 LD A, B
                 CP C
                 JP C, .Loop
-
-.ContainerSP    EQU $+1
-                LD SP, #0000
 
                 RET
 
