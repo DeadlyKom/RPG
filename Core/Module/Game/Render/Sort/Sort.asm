@@ -14,15 +14,9 @@ Object:         ; количество обрабатываемых объект
                 OR A
                 JR Z, .Set                                                      ; переход, если массив пуст
                 EX AF, AF'
-                 
-                ; инициализация
-                LD (.ContainerSP), SP
 
                 CALL Prepare
-                ; CALL Quicksort
-
-.ContainerSP    EQU $+1
-                LD SP, #0000
+                CALL Quicksort
 
                 LD A, C
 .Set            LD (Game.Render.Object.Draw.Num), A

@@ -4,27 +4,29 @@
 ; -----------------------------------------
 ; сортировка
 ; In:
+;   C - количествой элементов в массиве (обязательно > 0)
 ; Out:
 ; Corrupt:
 ; Note:
 ;  не устойчив к прерыванию
 ; -----------------------------------------
 Quicksort:      LD A, C
-                OR A
+                DEC A
                 RET Z
 
+                ; инициализация
+                LD (.ContainerSP), SP
                 LD HL, SortBuffer
-                LD B, C                                                         ; B - размер массива, C - количествой элементов в массиве
-                LD C, #01
+                LD B, #01                                                       ; текущий элемент
 
                 ; инициализация
                 LD SP, HL
-                LD A, C
+                LD A, B
                 INC A
                 EX AF, AF'
 
-                ; s     = B  - размер массива
-                ; i     = C  - текущий элемент
+                ; s     = C  - размер массива
+                ; i     = B  - текущий элемент
                 ; j     = A' - следующий элемент
                 ; a[]   = SP - указатель на массив
                 ;
@@ -79,17 +81,18 @@ Quicksort:      LD A, C
                 DEC SP
 
                 ; i--; if (i == 0)
-                DEC C
-                JR NZ, .Loop
+                ; DEC C
+                ; JR NZ, .Loop
+                DJNZ .Loop
 
 .Next           ; i = j, j++
                 EX AF, AF'
-                LD C, A
+                LD B, A
                 INC A
                 EX AF, AF'
 
                 ; 
-                LD A, C
+                LD A, B
                 DEC A
                 ADD A, A
                 LD L, A
@@ -97,14 +100,13 @@ Quicksort:      LD A, C
                 LD SP, HL
 
                 ; i < size
-                LD A, C
-                CP B
+                LD A, B
+                CP C
                 JP C, .Loop
 
-                ; -1
-                INC L
-                INC L 
- 
+.ContainerSP    EQU $+1
+                LD SP, #0000
+
                 RET
 
                 endif ; ~_MODULE_GAME_RENDER_SORT_QUICKSORT_
