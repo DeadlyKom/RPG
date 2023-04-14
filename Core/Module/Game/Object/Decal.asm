@@ -4,12 +4,14 @@
 ; -----------------------------------------
 ; обновление декали
 ; In:
-;   IX - адрес обрабатываемого объекта FObject
+;   IX - адрес обрабатываемого объекта FObject/FObjectDecal
 ; Out:
 ; Corrupt:
 ; Note:
 ; ----------------------------------------
-Decal:          ; -----------------------------------------
+Decal:          RES VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                ; сброс флага видимости
+
+                ; -----------------------------------------
                 ; расчёт дельт позиции декали
                 ; -----------------------------------------
 
@@ -17,13 +19,16 @@ Decal:          ; -----------------------------------------
                 LD HL, (IX + FObjectDecal.Location.X.Low)
                 OR A
                 SBC HL, BC
-                EX DE, HL
+                LD A, L
+                EX AF, AF'
+                LD BC, ((SCR_MINIMAP_SIZE_X - (SCR_WORLD_SIZE_X << 1)) >> 1) + 2
+                ADD HL, BC
 
-                LD BC, (PlayerState.CameraPosX + 3)
-                LD HL, (IX + FObjectDecal.Location.X.High)  
-                SBC HL, BC
-                ; JP NZ, .Remove                                                  ; переход, если объект дальше от -32768 до +32767
-                EX DE, HL
+                EX AF, AF'
+                JP P, $+5
+                NEG
+                CP (SCR_MINIMAP_SIZE_X >> 1) + 1
+                JR NC, Remove
 
                 ; -----------------------------------------
                 ;   значение фиксированной точки 12.4 (знаковое)    [от -2^11 до +2^11 в пикселях]
@@ -50,16 +55,27 @@ Decal:          ; -----------------------------------------
                 LD L, A
                 LD (IX + FObjectDecal.Position.X), HL                           ; сохранение позиции юнита по горизонтали
 
-                LD BC, (PlayerState.CameraPosY + 3)
-                LD HL, (IX + FObjectDecal.Location.Y.High)
-                OR A
-                SBC HL, BC
-                ; JR NZ, .Remove                                                  ; переход, если объект дальше от -32768 до +32767
+                ; фильтр по горизонтали
+                LD A, H
+                SUB SCR_CAMERA_RIGH_EDGE >> 1
+                RET NC
+                ADD A, SCR_WORLD_SIZE_X + 1
+                RET NC
 
-                ; 
                 LD BC, (PlayerState.CameraPosY + 1)
                 LD HL, (IX + FObjectDecal.Location.Y.Low)
+                OR A
                 SBC HL, BC
+                LD A, L
+                EX AF, AF'
+                LD BC, ((SCR_MINIMAP_SIZE_Y - ((SCR_WORLD_SIZE_Y + 1) << 1)) >> 1) + 0
+                ADD HL, BC
+
+                EX AF, AF'
+                JP P, $+5
+                NEG
+                CP (SCR_MINIMAP_SIZE_Y >> 1) + 1
+                JR NC, Remove
 
                 ; -----------------------------------------
                 ;   значение фиксированной точки 12.4 (знаковое)    [от -2^11 до +2^11 в пикселях]
@@ -83,12 +99,27 @@ Decal:          ; -----------------------------------------
                 LD L, A
                 LD (IX + FObjectDecal.Position.Y), HL                           ; сохранение позиции юнита по вертикали
 
-                JP Game.Object.Update.RET
+                ; фильтр по вертикали
+                LD A, H
+                SUB (SCR_CAMERA_DOWN_EDGE - 1) >> 1
+                RET NC
+                ADD A, SCR_WORLD_SIZE_Y + 1
+                RET NC
 
-.Remove         ; ToDo удалить объект
-                LD (IX + FObjectDecal.Type), OBJECT_EMPTY_ELEMENT
+                SET VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                ; установка флага видимости
+
+                RET
+; -----------------------------------------
+; пометить объект как удалённый
+; In:
+; Out:
+;   сброшен флаг переполнения, объект не видим
+; Corrupt:
+; Note:
+; -----------------------------------------
+Remove          LD (IX + FObjectDecal.Type), OBJECT_EMPTY_ELEMENT
                 LD HL, GameState.Objects
                 DEC (HL)
-                JP Game.Object.Update.RET
+                RET
 
                 endif ; ~_MODULE_GAME_OBJECT_UPDATE_DECAL_

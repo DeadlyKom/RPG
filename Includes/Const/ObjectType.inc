@@ -10,6 +10,7 @@ OBJECT_COLLISION            EQU 0x02 << 1                                       
 
 FACTION_TYPE_BIT            EQU 0x07                                            ; тип фракции (0 - нейтральная, 1 - враждебная)
 FACTION_SUBTYPE_BIT         EQU 0x06
+VISIBLE_OBJECT_BIT          EQU 0x00                                            ; видимость объекта
 
 PLAYER_FACTION              EQU 0x00 << FACTION_SUBTYPE_BIT                     ; фракция игрока
 NEUTRAL_FACTION             EQU 0x01 << FACTION_SUBTYPE_BIT                     ; нейтральная фракция

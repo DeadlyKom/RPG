@@ -7,8 +7,9 @@
                 include "World.asm"
                 include "Swap.asm"
 
+                include "Sort/Include.inc"
+
                 module Object
-                include "Sort.asm"
                 include "Object.asm"
                 endmodule
                 endmodule

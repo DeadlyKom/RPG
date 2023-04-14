@@ -20,6 +20,9 @@ World:          SET_PAGE_OBJECT                                                 
                 CHECK_WORLD_FLAG WORLD_DOWN_BIT
                 CALL NZ, Game.World.MoveDown
 
+				; сортировка видимых объектов
+                CALL Sort.Object
+
                 SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
                 
                 RestoreBC                                                       ; защита от повреждения данных во время прерывания
@@ -69,9 +72,8 @@ World:          SET_PAGE_OBJECT                                                 
                 CALL Console.SetCursor
                 LD A, (GameState.Objects)
                 CALL Console.DrawByte
-
-                ; LD A, (PlayerState.Debug)
-                ; CALL Console.DrawByte
+                LD A, (Object.Draw.Num)
+                CALL Console.DrawByte
                 endif
 
                 SET_RENDER_FLAG FINISHED_BIT                                    ; установка флага завершения отрисовки

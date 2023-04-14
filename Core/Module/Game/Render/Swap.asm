@@ -14,7 +14,6 @@ Swap:           ; отображение счётчика FPS
                 endif
 
                 CALL Screen.Swap
-                CALL Object.Sort
                 RES_RENDER_FLAG FINISHED_BIT                                    ; обнуление флага FINISHED_BIT
                 RET
  
