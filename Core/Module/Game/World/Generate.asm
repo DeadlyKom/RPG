@@ -36,32 +36,6 @@ Generate:       SET_PAGE_OBJECT                                                 
                 SUB B
                 LD (HL), A
 
-                ; LD HL, (PlayerState.CameraPosX + 3)
-                ; PUSH HL
-                ; LD HL, (PlayerState.CameraPosX + 1)
-                ; PUSH HL
-
-                ; ; DEC 40
-                ; LD HL, PlayerState.CameraPosY + 1
-                ; LD A, (HL)
-                ; SUB SCR_MINIMAP_SIZE_Y >> 1
-                ; LD (HL), A
-                ; JR NC, $+18
-                ; INC L
-                ; LD A, (HL)
-                ; SUB B
-                ; LD (HL), A
-                ; JR NC, $+12
-                ; INC L
-                ; LD A, (HL)
-                ; SUB B
-                ; LD (HL), A
-                ; JR NC, $+6
-                ; INC L
-                ; LD A, (HL)
-                ; SUB B
-                ; LD (HL), A
-
                 ; -----------------------------------------
                 ; генерация спрайта мини карты
                 ; -----------------------------------------
@@ -86,71 +60,11 @@ Generate:       SET_PAGE_OBJECT                                                 
                 POP AF
                 DEC A
                 JR NZ, .Loop
-
-                ; POP HL
-                ; LD (PlayerState.CameraPosX + 1), HL
-                ; POP HL
-                ; LD (PlayerState.CameraPosX + 3), HL
-
+    
                 RET
 
 .Noise          EXX
-                
-                ; LD A, #10
-                ; LD (Math.PN_Frequency), A
                 CALL Math.PerlinNoise2D
-                ; PUSH HL
-                ; LD A, #30
-                ; LD (Math.PN_Frequency), A
-                ; CALL Math.PerlinNoise2D
-                ; POP DE
-                ; LD A, D
-                ; AND H
-                ; PUSH AF
-                ; LD A, #A0
-                ; LD (Math.PN_Frequency), A
-                ; CALL Math.PerlinNoise2D
-                ; POP AF
-                ; AND H
-
-                ; LD A, L
-                ; CP #10
-                ; JR C, $+8
-                ; AND %10100101
-                ; RRCA
-                ; XOR %10100101
-                ; RLCA
-                ; XOR %00101000
-
-                ; BIT 6, L
-                ; LD A, #FF
-                ; JR Z, $+3
-                ; INC A
-
-                ; LD A, L
-                ; ADD A, #70
-                ; CP #60
-                ; LD A, #FF
-                ; JR NC, $+3
-                ; INC A
-
-                ; LD A, L
-                ; ADD A, #90
-                ; CP #40
-                ; LD A, L
-                ; ADD A, A
-                ; JR C, $+3
-                ; LD A, #00
-
-                ; LD A, H
-
-                ; ADD A, A
-                ; JR C, .L1
-                ; LD A, L
-                ; CP #1F
-                ; JR C, .L1
-                ; LD BC, OBJECT_DECAL
-                ; CALL Func.SpawnObject
 
                 ; фильтр
                 LD A, H
@@ -237,6 +151,7 @@ Generate:       SET_PAGE_OBJECT                                                 
                 OR L
                 EXX
                 CPL
+
                 RET
 
                 endif ; ~_MODULE_GAME_WORLD_GENERATE_

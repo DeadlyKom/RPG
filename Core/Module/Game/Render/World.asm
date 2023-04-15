@@ -70,18 +70,18 @@ World:          SET_PAGE_OBJECT                                                 
                 
                 LD DE, #0400
                 CALL Console.SetCursor
-                LD A, (GameState.Objects)
+                LD A, (GameState.Objects)                                       ; количество объектов на карте мира
                 CALL Console.DrawByte
-                LD A, (Object.Draw.Num)
+                LD A, (Object.Draw.Num)                                         ; количество видимых объектоа на экране
                 CALL Console.DrawByte
                 endif
 
-                SET_RENDER_FLAG FINISHED_BIT                                    ; установка флага завершения отрисовки
 
                 ifdef _DEBUG
                 CALL FPS_Counter.Frame
                 endif
                 
+                SET_RENDER_FLAG FINISHED_BIT                                    ; установка флага завершения отрисовки
                 RET
 
                 endif ; ~_MODULE_GAME_RENDER_WORLD_

@@ -8,7 +8,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-RotateLeft:     LD A, (PlayerState.Speed)
+RotateLeft:     ; LD A, (PlayerState.Speed)
                 ; ADD A, A
                 ; JR C, RotateRight.DEC
                 
@@ -26,7 +26,7 @@ RotateLeft:     LD A, (PlayerState.Speed)
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-RotateRight:    LD A, (PlayerState.Speed)
+RotateRight:    ; LD A, (PlayerState.Speed)
                 ; ADD A, A
                 ; JR C, RotateLeft.INC
 

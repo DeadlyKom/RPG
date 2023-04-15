@@ -49,7 +49,6 @@ MoveDown:       ; -----------------------------------------
                 ; инициализация
                 ; -----------------------------------------
                 EX DE, HL
-                ;LD HL, Adr.MinimapSpr                                           ; адрес левого-вверхний байта спрайта
 .RowLoop        LD B, 8
                 
 .RollLoop       CALL Generate.Noise
@@ -102,8 +101,7 @@ MoveDown:       ; -----------------------------------------
                 LD DE, RenderBuffer + (SCR_WORLD_SIZE_Y + 1) - 1
                 ; -----------------------------------------
                 LD BC, Adr.MinimapSpr + 1 + 4 * 20 - 4                          ; адрес левой-нижней грани видимой части карты мира (-1 строка)
-                ; LD BC, Adr.MinimapSpr + 1 + 4 * 10 - 4                          ; адрес левой-верхней грани видимой части карты мира (-1 строка)
-                JP MoveUp.Test
+                JP MoveUp.AdaptTilepair
 
                 display " - Move down: \t\t\t\t\t", /A, MoveDown, " = busy [ ", /D, $ - MoveDown, " bytes  ]"
 

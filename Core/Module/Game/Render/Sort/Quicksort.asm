@@ -17,6 +17,7 @@ Quicksort:      LD A, C
                 ; -----------------------------------------
                 ; инициализация
                 ; -----------------------------------------
+.Offset         EQU $+1
                 LD HL, SortBuffer
                 LD B, #01                                                       ; текущий элемент
                 LD A, B
@@ -118,9 +119,11 @@ Quicksort:      LD A, C
                 EX AF, AF'
 
                 ; расчёт адреса по индексу
+                LD HL, .Offset
                 LD A, B
                 DEC A
                 ADD A, A
+                ADD A, (HL)
                 LD L, A
                 LD H, HIGH SortBuffer
 
@@ -128,6 +131,14 @@ Quicksort:      LD A, C
                 LD A, B
                 CP C
                 JP C, .Loop
+
+                ; корректировка количество элементов в массиве
+                ; несортированные + сортированные
+                LD HL, .Offset
+                LD A, (HL)
+                SRL A
+                ADD A, C
+                LD C, A
 
                 RET
 

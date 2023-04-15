@@ -15,6 +15,11 @@ Prepare:        ; -----------------------------------------
                 
                 LD HL, SortBuffer
                 LD DE, Adr.Object                                               ; стартовый адрес обрабатываемого объекта
+                LD A, H
+                EXX
+                LD D, A
+                LD B, #00
+                EXX
                 EX AF, AF'
                 LD B, A
                 LD C, A                                                         ; B - размер массива, C - количествой элементов в массиве
@@ -33,15 +38,16 @@ Prepare:        ; -----------------------------------------
                 LD D, A
                 JR .ObjectLoop
 
-                ; CP OBJECT_DECAL
-                ; JR Z, $+5
-                ; DEC C
-                ; JR .NextObject
-
-.CopyObject     RRA                                                             ; BIT VISIBLE_OBJECT_BIT, A
+.CopyObject     ; проверка видимости объекта
+                RRA                                                             ; BIT VISIBLE_OBJECT_BIT, A
                 JR NC, .NextObject
 
-                ; копирование адреса объекта
+                ; является ли объект декалью
+                AND IDX_OBJECT_TYPE >> 1
+                CP OBJECT_DECAL >> 1
+                JR Z, .IsDecal                                                  ; переход если объект, является декалью
+
+.Copy           ; копирование адреса объекта
                 INC E                                                           ; FObjectDecal.Position.Y
                 LD (HL), E
                 DEC E
@@ -61,7 +67,41 @@ Prepare:        ; -----------------------------------------
                 LD D, A
 
                 DJNZ .ObjectLoop
- 
+
                 RET
+
+.IsDecal        ; сдвиг право на 2 байта весь массив
+                LD A, L
+                EXX
+                LD E, A
+                LD L, A
+                LD C, A
+                INC E
+                DEC L
+                LD H, D
+                LDDR
+
+                INC A
+                INC A
+
+                ;
+                LD HL, Quicksort.Offset
+                INC (HL)
+                INC (HL)
+
+                EXX
+
+                LD L, #00
+
+                ; копирование адреса объекта
+                INC E
+                LD (HL), E
+                DEC E
+                INC L
+                LD (HL), D
+
+                LD L, A
+
+                JR .NextObject
 
                 endif ; ~_MODULE_GAME_RENDER_SORT_PREPARE_

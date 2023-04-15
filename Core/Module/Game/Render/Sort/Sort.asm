@@ -15,6 +15,10 @@ Object:         ; количество обрабатываемых объект
                 JR Z, .Set                                                      ; переход, если массив пуст
                 EX AF, AF'
 
+                ; сброс смещения
+                LD HL, Quicksort.Offset
+                LD (HL), #00
+
                 CALL Prepare
                 CALL Quicksort
 

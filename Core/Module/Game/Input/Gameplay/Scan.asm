@@ -22,7 +22,6 @@ Scan:           ; опрос виртуальных клавиш
                 ; LD HL, GameFlags.Hardware
                 ; BIT HW_MOUSE_BIT, (HL)
                 ; CALL Z, Mouse.UpdateCursor                                      ; обновить положение курсора, если мышь доступна
-                
 
                 ; move map left
                 LD A, VK_A
