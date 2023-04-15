@@ -533,9 +533,11 @@ DrawColumn:     ; сохранение стека
 .x8_End         EQU $+1
                 JP #0000
 
-.DrawDownEnd    EXX
+.DrawDownEnd    
 .ContainerSP_2  EQU $+1
                 LD SP, #0000
+                EXX
+
                 RET
 
                 display " - Draw column:\t\t\t\t\t", /A, DrawColumn, " = busy [ ", /D, $ - DrawColumn, " bytes  ]"
