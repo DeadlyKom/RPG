@@ -4,7 +4,7 @@
 ; -----------------------------------------
 ; обновление декали
 ; In:
-;   IX - адрес обрабатываемого объекта FObject/FObjectDecal
+;   IX - адрес обрабатываемого объекта FObjectDecal
 ; Out:
 ; Corrupt:
 ; Note:
@@ -29,7 +29,7 @@ Decal:          RES VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                
                 JP P, $+5
                 NEG
                 CP (SCR_MINIMAP_SIZE_X >> 1) + 1
-                JR NC, Remove
+                JR NC, RemoveObject
 
                 ; -----------------------------------------
                 ;   значение фиксированной точки 12.4 (знаковое)    [от -2^11 до +2^11 в пикселях]
@@ -45,16 +45,11 @@ Decal:          RES VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                
                 ;   F0-F3   [3..0]  - дробная часть фиксированной точки 12.4
                 ; -----------------------------------------
                 LD H, L
-                LD A, (World.Shift_X)
-                ADD A, A
-                ADD A, A
-                ADD A, A
-                ADD A, A
+                LD A, (PlayerState.CameraPosX + 0)
+                CPL
+                AND #E0
                 LD L, A
-                LD A, #E0
-                SUB L
-                LD L, A
-                LD (IX + FObjectDecal.Position.X), HL                           ; сохранение позиции юнита по горизонтали
+                LD (IX + FObjectDecal.Position.X), HL                           ; сохранение позиции по горизонтали
 
                 ; фильтр по горизонтали
                 LD A, H
@@ -76,7 +71,7 @@ Decal:          RES VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                
                 JP P, $+5
                 NEG
                 CP (SCR_MINIMAP_SIZE_Y >> 1) + 1
-                JR NC, Remove
+                JR NC, RemoveObject
 
                 ; -----------------------------------------
                 ;   значение фиксированной точки 12.4 (знаковое)    [от -2^11 до +2^11 в пикселях]
@@ -92,13 +87,10 @@ Decal:          RES VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                
                 ;   F0-F3   [3..0]  - дробная часть фиксированной точки 12.4
                 ; -----------------------------------------
                 LD H, L
-                LD A, (World.Shift_Y)
-                ADD A, A
-                ADD A, A
-                ADD A, A
-                ADD A, A
+                LD A, (PlayerState.CameraPosY + 0)
+                AND #E0
                 LD L, A
-                LD (IX + FObjectDecal.Position.Y), HL                           ; сохранение позиции юнита по вертикали
+                LD (IX + FObjectDecal.Position.Y), HL                           ; сохранение позиции по вертикали
 
                 ; фильтр по вертикали
                 LD A, H
@@ -118,9 +110,11 @@ Decal:          RES VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Remove          LD (IX + FObjectDecal.Type), OBJECT_EMPTY_ELEMENT
+RemoveObject    LD (IX + FObjectDecal.Type), OBJECT_EMPTY_ELEMENT
                 LD HL, GameState.Objects
                 DEC (HL)
                 RET
+
+                display " - Update object 'DECAL':\t\t\t\t", /A, Decal, " = busy [ ", /D, $ - Decal, " bytes  ]"
 
                 endif ; ~_MODULE_GAME_OBJECT_UPDATE_DECAL_

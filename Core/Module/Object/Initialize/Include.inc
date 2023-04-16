@@ -8,6 +8,7 @@
                 include "Spawn.asm"
                 include "Spawn_Player.asm"
                 include "Spawn_Decal.asm"
+                include "Spawn_Particle.asm"
 
                 endmodule
 

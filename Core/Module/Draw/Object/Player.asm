@@ -9,7 +9,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-DrawPlayer:     ; сохранеие текущей страницы
+Player:         ; сохранеие текущей страницы
                 LD A, (Adr.Port_7FFD)
                 LD (.RestoreMemPage), A                                         ; сохранение страницы спрайта
 
@@ -77,6 +77,6 @@ DrawPlayer:     ; сохранеие текущей страницы
 
                 include "Core/Module/Graphics/Car/A/Sprite/Info.inc"
 
-                display " - Draw object 'PLAYER':\t\t\t\t", /A, DrawPlayer, " = busy [ ", /D, $ - DrawPlayer, " bytes  ]"
+                display " - Draw object 'PLAYER':\t\t\t\t", /A, Player, " = busy [ ", /D, $ - Player, " bytes  ]"
 
                 endif ; ~ _CORE_MODULE_DRAW_OBJECT_PLAYER_

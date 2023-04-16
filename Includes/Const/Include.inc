@@ -28,5 +28,7 @@
                 include "GameWorldCamera.inc"
 
                 include "ObjectType.inc"
+                include "ObjectType_Decal.inc"
+                include "ObjectType_Particle.inc"
 
                 endif ; ~_CONST_INCLUDES_

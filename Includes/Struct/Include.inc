@@ -12,5 +12,6 @@
 
                 include "Object.inc"
                 include "Object_Decal.inc"
+                include "Object_Particle.inc"
 
                 endif ; ~_STRUCT_INCLUDE_

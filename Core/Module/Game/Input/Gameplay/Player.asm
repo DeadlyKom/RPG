@@ -8,16 +8,17 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-RotateLeft:     ; LD A, (PlayerState.Speed)
-                ; ADD A, A
-                ; JR C, RotateRight.DEC
-                
-.INC            LD HL, PlayerState.RotationAngle
-                INC (HL)
+RotateLeft:     LD HL, PlayerState.RotationAngle
+                LD A, (HL)
+                ADD A, #03
+                LD (HL), A
 
                 LD A, (PlayerState.Speed)
                 CP #10
                 CALL C, IncreaseSpeed
+                RET
+
+.Input          SET_PLAYER_FLAG ROTATE_LEFT_BIT
                 RET
 ; -----------------------------------------
 ; поворот игрока против часовой стрелки
@@ -26,16 +27,17 @@ RotateLeft:     ; LD A, (PlayerState.Speed)
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-RotateRight:    ; LD A, (PlayerState.Speed)
-                ; ADD A, A
-                ; JR C, RotateLeft.INC
-
-.DEC            LD HL, PlayerState.RotationAngle
-                DEC (HL)
+RotateRight:    LD HL, PlayerState.RotationAngle
+                LD A, (HL)
+                SUB #03
+                LD (HL), A
 
                 LD A, (PlayerState.Speed)
                 CP #10
                 CALL C, IncreaseSpeed
+                RET
+
+.Input          SET_PLAYER_FLAG ROTATE_RIGHT_BIT
                 RET
 ; -----------------------------------------
 ; увеличить скорость игрока
@@ -58,6 +60,9 @@ IncreaseSpeed:  ;
                 RET NC
 .Set            LD (HL), A
                 RET
+
+.Input          SET_PLAYER_FLAG INCREASE_SPEED_BIT
+                RET
 ; -----------------------------------------
 ; уменьшить скорость игрока
 ; In:
@@ -71,6 +76,9 @@ DecreaseSpeed:  LD HL, PlayerState.Speed
                 CP 256-MAX_REVERSE_SPEED
                 RET C
                 LD (HL), A
+                RET
+
+.Input          SET_PLAYER_FLAG DECREASE_SPEED_BIT
                 RET
 ; -----------------------------------------
 ; активация турбонаддува

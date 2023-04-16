@@ -9,7 +9,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-DrawDecal:      BIT VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                ; проверка флаг видимости объекта
+Decal:          BIT VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                ; проверка флаг видимости объекта
                 RET Z                                                           ; выход, если объект невидим
 
                 ; сохранеие текущей страницы
@@ -81,6 +81,6 @@ DrawDecal:      BIT VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                
 
                 include "Core/Module/Graphics/Tile/World/Sprite/Original/Decal/Info.inc"
 
-                display " - Draw object 'DECAL':\t\t\t\t", /A, DrawDecal, " = busy [ ", /D, $ - DrawDecal, " bytes  ]"
+                display " - Draw object 'DECAL':\t\t\t\t", /A, Decal, " = busy [ ", /D, $ - Decal, " bytes  ]"
 
                 endif ; ~ _CORE_MODULE_DRAW_OBJECT_DECAL_

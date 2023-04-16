@@ -6,9 +6,9 @@
 ; In:
 ;   BC - параметры      (B - подтип, C - тип объекта)
 ; Out:
-;   IX - адрес объекта
+;   IY - адрес объекта
 ; Corrupt:
-;   HL, DE, BC, AF, HL', DE', BC', AF', IX
+;   HL, DE, BC, AF, HL', DE', BC', AF', IY
 ; Note:
 ; -----------------------------------------
 Spawn:          ; поиск свободной ячейки
@@ -30,7 +30,7 @@ Spawn:          ; поиск свободной ячейки
 .Spawn          ; адрес свободного элемента найден
                 DEC HL
                 PUSH HL
-                POP IX
+                POP IY
 
                 ; увеличение количества юнитов в массиве
                 LD HL, GameState.Objects
@@ -60,7 +60,7 @@ Spawn:          ; поиск свободной ячейки
                 JP Decal
                 DB #00                                                          ; dummy
                 ; 3
-                JP $
+                JP Particle
                 DB #00                                                          ; dummy
                 ; 4
                 JP $

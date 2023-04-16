@@ -12,10 +12,12 @@ Deceleration:   LD A, (PlayerState.Speed)
                 OR A
                 RET Z
                 LD C, A
+                LD A, #FF
+                JP P, .Apply
                 LD A, #01
-                JP M, $+5
-                NEG
-                ADD A, C
+                CHECK_PLAYER_FLAG DECREASE_SPEED_BIT
+                RET NZ
+.Apply          ADD A, C
                 LD (PlayerState.Speed), A
 
                 RET

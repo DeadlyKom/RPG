@@ -38,11 +38,17 @@ EntryPoint:     ; -----------------------------------------
                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
                 CALL Func.InitObject                                            ; инициализация работы с объектами
 
-                ; ToDo тестовый спавн
+                ; ToDo тестовый спавн игрока
                 LD DE, #5080
                 LD BC, OBJECT_PLAYER
                 CALL Func.SpawnObject
+
+                ; ; ToDo спавн частицы
+                ; LD DE, #5080
+                ; LD BC, PARTICLE_DUST << 8 | OBJECT_PARTICLE
+                ; CALL Func.SpawnObject
                 
+                ; ToDo спавн декали
                 ; LD BC, OBJECT_COLLISION
                 ; LD HL, #0010
                 ; LD (Math.PN_LocationX + 0), HL

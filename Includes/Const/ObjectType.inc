@@ -3,10 +3,11 @@
                             define _CONST_OBJECT_TYPE_
 OBJECT_EMPTY_ELEMENT        EQU #FF                                             ; свобдный элемент массива
 
-; сдвиг необходим для быстрого получить адрес из таблице по типу юнита (GetAdrInTable)
+; сдвиг необходим для быстрого получить адреса
 OBJECT_PLAYER               EQU 0x00 << 1                                       ; игрок
 OBJECT_DECAL                EQU 0x01 << 1                                       ; декаль
 OBJECT_COLLISION            EQU 0x02 << 1                                       ; физичный объект
+OBJECT_PARTICLE             EQU 0x03 << 1                                       ; частица
 
 FACTION_TYPE_BIT            EQU 0x07                                            ; тип фракции (0 - нейтральная, 1 - враждебная)
 FACTION_SUBTYPE_BIT         EQU 0x06
@@ -20,6 +21,8 @@ ENEMY_FACTION_B             EQU 0x03 << FACTION_SUBTYPE_BIT                     
 FACTION_TYPE                EQU 1 << FACTION_TYPE_BIT
 FACTION_SUBTYPE             EQU 1 << FACTION_SUBTYPE_BIT
 FACTION_MASK                EQU %11000000
+
+VISIBLE_OBJECT              EQU 1 << VISIBLE_OBJECT_BIT                         ; видимость объекта
 IDX_OBJECT_TYPE             EQU %00111110
 
                             endif ; ~_CONST_OBJECT_TYPE_

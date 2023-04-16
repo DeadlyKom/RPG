@@ -33,25 +33,35 @@ World:          SET_PAGE_OBJECT                                                 
                 ; show position
                 ifdef _DEBUG
                 SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
-                LD DE, #0000
-                CALL Console.SetCursor
-                LD HL, PlayerState.CameraPosX+3
-                CALL Console.DrawWordFrom
-                LD HL, PlayerState.CameraPosX+1
-                CALL Console.DrawWordFrom
-                LD HL, World.Shift_X
-                LD A, (HL)
-                CALL Console.DrawByte
+                ; LD DE, #0000
+                ; CALL Console.SetCursor
+                ; LD HL, PlayerState.CameraPosX+3
+                ; CALL Console.DrawWordFrom
+                ; LD HL, PlayerState.CameraPosX+1
+                ; CALL Console.DrawWordFrom
+                ; LD A, (PlayerState.CameraPosX)
+                ; CALL Console.DrawByte
+                ; LD HL, World.Shift_X
+                ; LD A, (HL)
+                ; CALL Console.DrawByte
+                ; LD HL, PlayerState.DeltaCameraPixX
+                ; LD A, (HL)
+                ; CALL Console.DrawByte
 
-                LD DE, #0100
-                CALL Console.SetCursor
-                LD HL, PlayerState.CameraPosY+3
-                CALL Console.DrawWordFrom
-                LD HL, PlayerState.CameraPosY+1
-                CALL Console.DrawWordFrom
-                LD HL, World.Shift_Y
-                LD A, (HL)
-                CALL Console.DrawByte
+                ; LD DE, #0100
+                ; CALL Console.SetCursor
+                ; LD HL, PlayerState.CameraPosY+3
+                ; CALL Console.DrawWordFrom
+                ; LD HL, PlayerState.CameraPosY+1
+                ; CALL Console.DrawWordFrom
+                ; LD A, (PlayerState.CameraPosY)
+                ; CALL Console.DrawByte
+                ; LD HL, World.Shift_Y
+                ; LD A, (HL)
+                ; CALL Console.DrawByte
+                ; LD HL, PlayerState.DeltaCameraPixY
+                ; LD A, (HL)
+                ; CALL Console.DrawByte
                 
                 LD DE, #0200
                 CALL Console.SetCursor
@@ -61,18 +71,23 @@ World:          SET_PAGE_OBJECT                                                 
                 LD A, (PlayerState.Speed)
                 CALL Console.DrawByte
 
-                LD DE, #0300
-                CALL Console.SetCursor
-                LD A, (PlayerState.DeltaCameraX)
-                CALL Console.DrawByte
-                LD A, (PlayerState.DeltaCameraY)
-                CALL Console.DrawByte
+                ; LD DE, #0300
+                ; CALL Console.SetCursor
+                ; LD A, (PlayerState.DeltaCameraX)
+                ; CALL Console.DrawByte
+                ; LD A, (PlayerState.DeltaCameraY)
+                ; CALL Console.DrawByte
                 
                 LD DE, #0400
                 CALL Console.SetCursor
                 LD A, (GameState.Objects)                                       ; количество объектов на карте мира
                 CALL Console.DrawByte
                 LD A, (Object.Draw.Num)                                         ; количество видимых объектоа на экране
+                CALL Console.DrawByte
+
+                LD DE, #0500
+                CALL Console.SetCursor
+                PLAYER_FLAGS_A
                 CALL Console.DrawByte
                 endif
 

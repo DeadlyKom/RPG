@@ -5,18 +5,18 @@
 ; спавн объекта в мире
 ; In:
 ;   BC - параметры      (B - подтип декали, C - тип объекта)
-;   IX - адрес объекта
+;   IY - адрес объекта FObjectDecal
 ; Out:
 ; Corrupt:
-;   HL, DE, BC, AF, HL', DE', BC', AF', IX
+;   HL, DE, BC, AF, HL', DE', BC', AF', IY
 ; Note:
 ; -----------------------------------------
 Decal:          ; -----------------------------------------
                 ; инициализация
                 ; -----------------------------------------
                 
-                LD (IX + FObjectDecal.Type), C                                  ; тип объекта
-                LD (IX + FObjectDecal.Subtype), B                               ; подтип декали
+                LD (IY + FObjectDecal.Type), C                                  ; тип объекта
+                LD (IY + FObjectDecal.Subtype), B                               ; подтип декали
 
                 ; правки по горизонтали
                 LD HL, (Math.PN_LocationX + 0)
@@ -26,8 +26,8 @@ Decal:          ; -----------------------------------------
                 SBC HL, BC
                 JR NC, $+3
                 DEC DE
-                LD (IX + FObjectDecal.Location.X.Low), HL
-                LD (IX + FObjectDecal.Location.X.High), DE
+                LD (IY + FObjectDecal.Location.X.Low), HL
+                LD (IY + FObjectDecal.Location.X.High), DE
 
                 ; правки по вертикали
                 LD HL, (Math.PN_LocationY + 0)
@@ -37,11 +37,11 @@ Decal:          ; -----------------------------------------
                 SBC HL, BC
                 JR NC, $+3
                 DEC DE
-                LD (IX + FObjectDecal.Location.Y.Low), HL
-                LD (IX + FObjectDecal.Location.Y.High), DE
+                LD (IY + FObjectDecal.Location.Y.Low), HL
+                LD (IY + FObjectDecal.Location.Y.High), DE
 
                 RET
 
-                display " - Spawn object 'DECAL' in world : \t\t\t", /A, Decal, " = busy [ ", /D, $ - Decal, " bytes  ]"
+                display " - Spawn object 'DECAL' in world:\t\t\t", /A, Decal, " = busy [ ", /D, $ - Decal, " bytes  ]"
 
                 endif ; ~ _CORE_MODULE_OBJECT_SPAWN_DECAL_

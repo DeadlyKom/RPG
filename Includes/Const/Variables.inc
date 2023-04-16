@@ -29,8 +29,10 @@ PlayerState         EQU Adr.PlayerState
 .Speed              EQU PlayerState + FPlayerState.Speed                        ; скорость игрока
 .Deceleration       EQU PlayerState + FPlayerState.Deceleration                 ; торможение игрока
 .RotationAngle      EQU PlayerState + FPlayerState.RotationAngle                ; угол поворота игрока
-.DeltaCameraX       EQU PlayerState + FPlayerState.DeltaCameraX                 ; дельта камеры по горизонтали
-.DeltaCameraY       EQU PlayerState + FPlayerState.DeltaCameraY                 ; дельта камеры по вертикали
+.DeltaCameraX       EQU PlayerState + FPlayerState.DeltaCameraX                 ; дельта камеры и игрока по горизонтали в знакоместах
+.DeltaCameraPixX    EQU PlayerState + FPlayerState.DeltaCameraPixX              ; дельта камеры по горизонтали * 0.125 (фактическая) в пикселях
+.DeltaCameraY       EQU PlayerState + FPlayerState.DeltaCameraY                 ; дельта камеры и игрока по вертикали в знакоместах
+.DeltaCameraPixY    EQU PlayerState + FPlayerState.DeltaCameraPixY              ; дельта камеры по вертикали * 0.125 (фактическая) в пикселях
 
 .DebugX             EQU PlayerState + FPlayerState.DebugX                       ; отладочная информация
 .DebugY             EQU PlayerState + FPlayerState.DebugY                       ; отладочная информация

@@ -8,6 +8,7 @@
                 include "Update.asm"
                 include "Player/Include.inc"
                 include "Decal.asm"
+                include "Particle.asm"
 
                 endmodule
 

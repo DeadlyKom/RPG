@@ -27,7 +27,7 @@ Update:         ; переход в зависимости от типа объ�
                 JP Decal
                 DB #00                                                          ; dummy
                 ; 3
-                JP .RET
+                JP Particle
                 DB #00                                                          ; dummy
                 ; 4
                 JP .RET

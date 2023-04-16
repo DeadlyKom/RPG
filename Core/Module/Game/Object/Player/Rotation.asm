@@ -35,24 +35,12 @@ Rotation:       ;
                 RRA
                 LD B, A
                 CALL .CalcRotation
-
-                ; отладка
-                ifdef _DEBUG
-                LD A, L
-                LD (PlayerState.DebugX), A
-                endif
-
                 LD A, B                                                         ; освобождение регистра B
-                ; LD BC, (IX + FObject.Position.X)
-                ; ADD HL, BC
                 LD (IX + FObject.Velocity.X), HL
 
                 ; sin (andle)
                 ADD A, 8                                                        ; -sin α = cos(π * 0.5 + α)
                 CALL .CalcRotation
-
-                ; LD BC, (IX + FObject.Position.Y)
-                ; ADD HL, BC
                 LD (IX + FObject.Velocity.Y), HL
 
                 RET

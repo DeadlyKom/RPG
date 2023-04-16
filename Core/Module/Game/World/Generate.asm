@@ -85,19 +85,19 @@ Generate:       SET_PAGE_OBJECT                                                 
                 JR .Collision
 
 .IsDecal        SUB #A8
-                LD B, #04           ; череп 1
+                LD B, OBJECT_SCULL_A    ; череп 1
                 JR Z, .Decal
                 SUB #02
-                LD B, #0C           ; череп 2
+                LD B, OBJECT_SCULL_B    ; череп 2
                 JR Z, .Decal
                 SUB #02
-                LD B, #03           ; куст
+                LD B, OBJECT_GRASS      ; трава
                 JR Z, .Decal
                 SUB #02
-                LD B, #09           ; бревно 2
+                LD B, OBJECT_LOG_B      ; бревно 2
                 JR Z, .Collision
                 SUB #02
-                LD B, #0D           ; канава 1
+                LD B, OBJECT_DITCH_B    ; канава 2
                 JR NZ, .Skip
 
 .Decal          LD C, OBJECT_DECAL
@@ -107,25 +107,25 @@ Generate:       SET_PAGE_OBJECT                                                 
                 LD A, L
                 SUB #20
                 ; JR C, .Skip
-                ; LD B, #05           ; бревно 1
+                ; LD B, OBJECT_LOG_A      ; бревно 1
                 ; JR Z, .Collision
                 SUB #02
-                LD B, #0A           ; бревно 3
+                LD B, OBJECT_LOG_C      ; бревно 3
                 JR Z, .Collision
                 SUB #04
-                LD B, #06           ; камень 1
+                LD B, OBJECT_STONE_A    ; камень 1
                 JR Z, .Collision
                 ; SUB #05
-                ; LD B, #07           ; камень 2
+                ; LD B, #OBJECT_STONE_B   ; камень 2
                 ; JR Z, .Collision
                 ; SUB #06
-                ; LD B, #08           ; камень 3
+                ; LD B, OBJECT_STONE_C    ; камень 3
                 ; JR Z, .Collision
                 SUB #07
                 LD B, #0E           ; камень 4
                 JR Z, .Collision
                 SUB #08
-                LD B, #0B           ; канава 2
+                LD B, OBJECT_DITCH_A    ; канава 1
                 JR NZ, .Skip
 
 .Collision      LD C, OBJECT_COLLISION

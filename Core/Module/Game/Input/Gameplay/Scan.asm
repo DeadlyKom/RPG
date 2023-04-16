@@ -23,25 +23,28 @@ Scan:           ; опрос виртуальных клавиш
                 ; BIT HW_MOUSE_BIT, (HL)
                 ; CALL Z, Mouse.UpdateCursor                                      ; обновить положение курсора, если мышь доступна
 
+                PLAYER_FLAGS
+                LD (HL), #00
+
                 ; move map left
                 LD A, VK_A
                 CALL Input.CheckKeyState
-                CALL Z, RotateLeft
+                CALL Z, RotateLeft.Input
 
                 ; move map right
                 LD A, VK_D
                 CALL Input.CheckKeyState
-                CALL Z, RotateRight
+                CALL Z, RotateRight.Input
 
                 ; move map up
                 LD A, VK_W
                 CALL Input.CheckKeyState
-                CALL Z, IncreaseSpeed
+                CALL Z, IncreaseSpeed.Input
 
                 ; move map down
                 LD A, VK_S
                 CALL Input.CheckKeyState
-                CALL Z, DecreaseSpeed
+                CALL Z, DecreaseSpeed.Input
 
                 ; турбонаддув
                 LD A, VK_SPACE

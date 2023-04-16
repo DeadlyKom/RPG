@@ -74,6 +74,10 @@ Horizontal:     ; скорость
                 CALL Math.Mul16x8_16
 
                 LD A, H
+                NEG
+                LD (PlayerState.DeltaCameraPixX), A
+
+                LD A, H
                 ADD A, A
                 ADD A, A
                 ADD A, A
@@ -109,9 +113,18 @@ Horizontal:     ; скорость
                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
                 LD IX, #C000
                 LD HL, (IX + FObject.Position.X)
-                OR A
+
+                ; LD A, D
+                ; BIT 3, A
+                ; JR Z, $+4
+                ; SUB #10
+                ; LD E, A
+                ; LD D, #00
+
                 LD E, D
                 LD D, #00
+
+                OR A
                 SBC HL, DE
                 LD (IX + FObject.Position.X), HL
                 SET_SCREEN_SHADOW                                               ; включение страницы второго экрана
@@ -131,6 +144,7 @@ Horizontal:     ; скорость
                 CALL Math.Mul16x8_16
 
                 LD A, H
+                LD (PlayerState.DeltaCameraPixX), A
                 ADD A, A
                 ADD A, A
                 ADD A, A
@@ -176,9 +190,17 @@ Horizontal:     ; скорость
                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
                 LD IX, #C000
                 LD HL, (IX + FObject.Position.X)
-                OR A
+                
+                ; LD A, D
+                ; BIT 3, A
+                ; JR Z, $+4
+                ; ADD A, #10
+                ; LD E, A
+                ; LD D, #00
+
                 LD E, D
                 LD D, #00
+
                 ADD HL, DE
                 LD (IX + FObject.Position.X), HL
                 SET_SCREEN_SHADOW                                               ; включение страницы второго экрана
@@ -227,6 +249,10 @@ Vertical:       ; скорость
                 ; ----------------------------------------
                 CALL Math.Mul16x8_16
 
+                LD A, H
+                NEG
+                LD (PlayerState.DeltaCameraPixY), A
+                
                 LD A, H
                 ADD A, A
                 ADD A, A
@@ -287,6 +313,7 @@ Vertical:       ; скорость
                 CALL Math.Mul16x8_16
 
                 LD A, H
+                LD (PlayerState.DeltaCameraPixY), A
                 ADD A, A
                 ADD A, A
                 ADD A, A
