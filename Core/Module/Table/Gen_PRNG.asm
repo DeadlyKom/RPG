@@ -20,9 +20,9 @@ Gen_PRNG:       ; установка seed
                 LD (Math.PN_Frequency), A
                 LD (GameConfig.Frequency), A
 
-                LD HL, #00A8
+                LD HL, #0000
                 LD (PlayerState.CameraPosX + 1), HL
-                LD HL, #008A
+                LD HL, #0000
                 LD (PlayerState.CameraPosY + 1), HL
                 LD HL, #1000
                 LD (PlayerState.CameraPosX + 3), HL

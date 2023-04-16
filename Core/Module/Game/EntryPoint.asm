@@ -43,8 +43,8 @@ EntryPoint:     ; -----------------------------------------
                 LD BC, OBJECT_PLAYER
                 CALL Func.SpawnObject
                 
-                ; LD BC, OBJECT_DECAL
-                ; LD HL, #0000
+                ; LD BC, OBJECT_COLLISION
+                ; LD HL, #0010
                 ; LD (Math.PN_LocationX + 0), HL
                 ; LD HL, #0010
                 ; LD (Math.PN_LocationY + 0), HL
