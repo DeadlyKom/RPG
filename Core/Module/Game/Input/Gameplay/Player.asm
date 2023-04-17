@@ -10,13 +10,13 @@
 ; -----------------------------------------
 RotateLeft:     LD HL, PlayerState.RotationAngle
                 LD A, (HL)
-                ADD A, #03
+                ADD A, #01
                 LD (HL), A
 
                 LD A, (PlayerState.Speed)
                 CP #10
                 CALL C, IncreaseSpeed
-                RET
+                ; RET
 
 .Input          SET_PLAYER_FLAG ROTATE_LEFT_BIT
                 RET
@@ -29,13 +29,13 @@ RotateLeft:     LD HL, PlayerState.RotationAngle
 ; -----------------------------------------
 RotateRight:    LD HL, PlayerState.RotationAngle
                 LD A, (HL)
-                SUB #03
+                SUB #01
                 LD (HL), A
 
                 LD A, (PlayerState.Speed)
                 CP #10
                 CALL C, IncreaseSpeed
-                RET
+                ; RET
 
 .Input          SET_PLAYER_FLAG ROTATE_RIGHT_BIT
                 RET
@@ -59,7 +59,7 @@ IncreaseSpeed:  ;
                 CP B
                 RET NC
 .Set            LD (HL), A
-                RET
+                ; RET
 
 .Input          SET_PLAYER_FLAG INCREASE_SPEED_BIT
                 RET
@@ -70,16 +70,31 @@ IncreaseSpeed:  ;
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-DecreaseSpeed:  LD HL, PlayerState.Speed
+DecreaseSpeed:  CHECK_PLAYER_FLAG TURBOCHARGING_BIT
+                JR NZ, .HandBrake
+                LD HL, PlayerState.Speed
                 LD A, (HL)
                 DEC A
                 CP 256-MAX_REVERSE_SPEED
                 RET C
                 LD (HL), A
-                RET
+                ; RET
 
 .Input          SET_PLAYER_FLAG DECREASE_SPEED_BIT
                 RET
+
+.HandBrake      CALL Game.Object.Player.Deceleration
+                LD A, (PlayerState.Speed)
+                OR A
+                RET Z
+
+                LD HL, PlayerState.RotationAngle
+                LD A, (HL)
+                ADD A, #02
+                LD (HL), A
+                RET
+
+
 ; -----------------------------------------
 ; активация турбонаддува
 ; In:

@@ -105,7 +105,7 @@ Generate:       SET_PAGE_OBJECT                                                 
 
 .Ground         ; спавн на грунте
                 LD A, L
-                SUB #20
+                SUB #30
                 ; JR C, .Skip
                 ; LD B, OBJECT_LOG_A      ; бревно 1
                 ; JR Z, .Collision

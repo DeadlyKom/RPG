@@ -26,32 +26,32 @@ Scan:           ; опрос виртуальных клавиш
                 PLAYER_FLAGS
                 LD (HL), #00
 
-                ; move map left
-                LD A, VK_A
-                CALL Input.CheckKeyState
-                CALL Z, RotateLeft.Input
-
-                ; move map right
-                LD A, VK_D
-                CALL Input.CheckKeyState
-                CALL Z, RotateRight.Input
-
-                ; move map up
-                LD A, VK_W
-                CALL Input.CheckKeyState
-                CALL Z, IncreaseSpeed.Input
-
-                ; move map down
-                LD A, VK_S
-                CALL Input.CheckKeyState
-                CALL Z, DecreaseSpeed.Input
-
                 ; турбонаддув
                 LD A, VK_SPACE
                 CALL Input.CheckKeyState
                 CALL Z, TurbochargOn
                 CALL NZ, TurbochargOff
 
+                ; move map left
+                LD A, VK_A
+                CALL Input.CheckKeyState
+                CALL Z, RotateLeft;.Input
+
+                ; move map right
+                LD A, VK_D
+                CALL Input.CheckKeyState
+                CALL Z, RotateRight;.Input
+
+                ; move map up
+                LD A, VK_W
+                CALL Input.CheckKeyState
+                CALL Z, IncreaseSpeed;.Input
+
+                ; move map down
+                LD A, VK_S
+                CALL Input.CheckKeyState
+                CALL Z, DecreaseSpeed;.Input
+               
                 ifdef _DEBUG
                 ; move map left
                 LD A, VK_J

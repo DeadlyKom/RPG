@@ -9,14 +9,14 @@
 ; Corrupt:
 ; Note:
 ; ----------------------------------------
-Update:         CALL Deceleration
-                CALL Input
+Update:         ; CHECK_PLAYER_FLAG INCREASE_SPEED_BIT
+                CALL Deceleration
 
                 CALL Rotation
                 CALL Game.World.Camera
 
-                CHECK_PLAYER_FLAG INCREASE_SPEED_BIT
-                CALL NZ, Dust
+                ; CHECK_PLAYER_FLAG INCREASE_SPEED_BIT
+                CALL Dust
 
                 JP Game.Object.Update.Velocity
 
