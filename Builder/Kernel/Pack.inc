@@ -56,6 +56,12 @@ Begin:          EQU $
                 include "Core/Module/Draw/Utils/PixelAddress.asm"
                 include "Core/Module/Draw/Utils/PixelAttribute.asm"
 
+                ; AI
+                include "Core/Module/AI/Include.inc"
+
+                ; SFX
+                include "Core/Module/SFX/Include.inc"
+
                 ; object
                 include "Core/Module/Object/Initialize/Include.inc"             ; ToDo перенести в страницу!
 

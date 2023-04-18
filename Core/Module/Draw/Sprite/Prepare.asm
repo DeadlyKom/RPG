@@ -308,7 +308,7 @@ Prepare:        EX DE, HL
                 RL H
                 LD L, A
 
-                ; HL = SOx + FUnit.Position.X
+                ; HL = SOx + FObject.Position.X
 .PositionX      EQU $+1
                 LD DE, #0000
                 ADD HL, DE
