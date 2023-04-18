@@ -2,7 +2,7 @@
                 ifndef _CORE_MODULE_OBJECT_SPAWN_PARTICLE_
                 define _CORE_MODULE_OBJECT_SPAWN_PARTICLE_
 ; -----------------------------------------
-; спавн объекта в мире
+; спавн частицы в мире
 ; In:
 ;   DE - смещение частицы   (D - y, E - x)
 ;   BC - параметры          (B - подтип частицы, C - )

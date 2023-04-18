@@ -40,7 +40,12 @@ EntryPoint:     ; -----------------------------------------
 
                 ; ToDo тестовый спавн игрока
                 LD DE, #5080
-                LD BC, OBJECT_PLAYER
+                LD BC, PLAYER_FACTION | OBJECT_PLAYER
+                CALL Func.SpawnObject
+
+                ; ToDo тестовый спавн противника
+                LD DE, #5080
+                LD BC, ENEMY_FACTION_A | OBJECT_NPC
                 CALL Func.SpawnObject
 
                 ; ; ToDo спавн частицы

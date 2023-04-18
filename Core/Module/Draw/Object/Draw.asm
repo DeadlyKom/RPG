@@ -21,16 +21,16 @@ Draw:           ; переход в зависимости от типа объ�
                 JP Player
                 DB #00                                                          ; dummy
                 ; 1
-                JP Decal
+                JP Player
                 DB #00                                                          ; dummy
                 ; 2
                 JP Decal
                 DB #00                                                          ; dummy
                 ; 3
-                JP Particle
+                JP Decal
                 DB #00                                                          ; dummy
                 ; 4
-                JP $
+                JP Particle
                 DB #00                                                          ; dummy
                 ; 5
                 JP $

@@ -6,6 +6,7 @@
 
                 include "Initialize.asm"
                 include "Spawn.asm"
+                include "Spawn_NPC.asm"
                 include "Spawn_Player.asm"
                 include "Spawn_Decal.asm"
                 include "Spawn_Particle.asm"

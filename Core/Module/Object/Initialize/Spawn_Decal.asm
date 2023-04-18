@@ -2,7 +2,7 @@
                 ifndef _CORE_MODULE_OBJECT_SPAWN_DECAL_
                 define _CORE_MODULE_OBJECT_SPAWN_DECAL_
 ; -----------------------------------------
-; спавн объекта в мире
+; спавн декали в мире
 ; In:
 ;   BC - параметры      (B - подтип декали, C - тип объекта)
 ;   IY - адрес объекта FObjectDecal

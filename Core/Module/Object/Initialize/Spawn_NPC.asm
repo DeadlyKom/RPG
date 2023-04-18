@@ -1,21 +1,22 @@
 
-                ifndef _CORE_MODULE_OBJECT_SPAWN_PLAYER_
-                define _CORE_MODULE_OBJECT_SPAWN_PLAYER_
+                ifndef _CORE_MODULE_OBJECT_SPAWN_NPC_
+                define _CORE_MODULE_OBJECT_SPAWN_NPC_
 ; -----------------------------------------
-; спавн игрока в мире
+; спавн NPC в мире
 ; In:
 ;   DE - позиция игрока (D - y, E - x)
-;   BC - параметры      (B - , C - )
+;   BC - параметры      (B - , C - тип объекта)
 ;   IY - адрес объекта FObject
 ; Out:
 ; Corrupt:
 ;   HL, DE, BC, AF, HL', DE', BC', AF', IY
 ; Note:
 ; -----------------------------------------
-Player:         ; -----------------------------------------
+NPC:            ; -----------------------------------------
                 ; инициализация
                 ; -----------------------------------------
-                LD (IY + FObject.Type), OBJECT_PLAYER | VISIBLE_OBJECT          ; тип юнита
+                SET VISIBLE_OBJECT_BIT, C
+                LD (IY + FObject.Type), C                                       ; тип юнита
 
                 ; установка позиции по горизонтали
                 LD A, E
@@ -50,6 +51,6 @@ Player:         ; -----------------------------------------
 
                 RET
 
-                display " - Spawn object 'PLAYER' in world:\t\t\t", /A, Player, " = busy [ ", /D, $ - Player, " bytes  ]"
+                display " - Spawn object 'NPC' in world:\t\t\t", /A, NPC, " = busy [ ", /D, $ - NPC, " bytes  ]"
 
-                endif ; ~ _CORE_MODULE_OBJECT_SPAWN_PLAYER_
+                endif ; ~ _CORE_MODULE_OBJECT_SPAWN_NPC_

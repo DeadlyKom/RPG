@@ -7,6 +7,7 @@
                 include "Tick.asm"
                 include "Update.asm"
                 include "Player/Include.inc"
+                include "NPC/Include.inc"
                 include "Decal.asm"
                 include "Particle.asm"
 

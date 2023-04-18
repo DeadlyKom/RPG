@@ -4,7 +4,7 @@
 
                 module Player
 Begin           EQU $
-                include "Player.asm"
+                include "Update.asm"
                 include "Rotation.asm"
                 include "Deceleration.asm"
                 include "Dust.asm"
