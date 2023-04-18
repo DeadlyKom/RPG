@@ -2,6 +2,8 @@
                     ifndef _CONST_GAME_
                     define _CONST_GAME_
 GameConfig          EQU Adr.GameConfig                                          ; адрес структуры конфигурации игры
+.Options            EQU GameConfig + FGameConfig.Options                        ; флаги опций
+.Graphics           EQU GameConfig + FGameConfig.Graphics                       ; флаги графики
 .Seed               EQU GameConfig + FGameConfig.Seed                           ; адрес seed текущей сессии
 .Frequency          EQU GameConfig + FGameConfig.Frequency                      ; частота шума перлина
 .SpriteRef          EQU GameConfig + FGameConfig.Sprite                         ; данные спрайта

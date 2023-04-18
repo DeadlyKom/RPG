@@ -2,18 +2,16 @@
                 ifndef _CORE_MODULE_GAME_LOOP_
                 define _CORE_MODULE_GAME_LOOP_
 ; -----------------------------------------
-; игровой цикл
+; главный игровой цикл
 ; In:
 ; Out:
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-GameLoop:       
+MainLoop:       
 .Loop           ;
-.Render         ; ************ RENDER ************
-                CHECK_RENDER_FLAG FINISHED_BIT
-                CALL Z, Render.World
-
-                JP .Loop
+.Handler        EQU $+1
+                CALL World.Loop
+                JR .Loop
 
                 endif ; ~_CORE_MODULE_GAME_LOOP_

@@ -1,6 +1,6 @@
 
-                ifndef _CORE_MODULE_GAME_INTERRUPT_
-                define _CORE_MODULE_GAME_INTERRUPT_
+                ifndef _CORE_MODULE_PAUSE_INTERRUPT_
+                define _CORE_MODULE_PAUSE_INTERRUPT_
 ; -----------------------------------------
 ; обработчик прерывания игры
 ; In:
@@ -13,19 +13,12 @@ Interrupt:      ; проверка завершённости процесса �
                 JR Z, .RenderProcess                                            ; переход, если процесс отрисовки не завершён
 
 .SwapScreens    ; ************ Swap Screens ************
-                CALL Render.Swap
-
-.Camera         ; ************ CAMERA *************
-                CALL Game.World.Horizontal
-                CALL Game.World.Vertical
-
-.Tick           ; ************* TICK *************
-                CALL Object.Tick
+                CALL Game.Render.Swap
 
 .RenderProcess  ; процесс отрисовки не завершён
 
 .Input          ; ************ Scan Input ************
-                CALL Input.Gameplay.Scan
+                CALL Game.Input.Pause.Scan
 
                 ifdef _DEBUG
 .Debug_FPS      ; ************** Draw FPS **************

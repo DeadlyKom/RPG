@@ -83,6 +83,7 @@ World:
 .Shift_X        EQU Kernel.World.Draw.Shift_X                                   ; смещение карты мира по горизонтали
 .Shift_Y        EQU Kernel.World.DrawColumn.Shift_Y                             ; смещение карты мира по вертикали
 
+; input
 Input:
 .CheckKeyState  EQU Kernel.Input.CheckKeyState
 .JumpKeys       EQU Kernel.Input.JumpKeys
@@ -161,6 +162,7 @@ Console:
 .DrawByte       EQU Kernel.Console.DrawByte
 .DrawWord       EQU Kernel.Console.DrawWord
 .DrawWordFrom   EQU Kernel.Console.DrawWordFromAdr
+.DrawString     EQU Kernel.Console.DrawString
 .SetCursor      EQU Kernel.Console.SetCursor
 .SetScreenAdr   EQU Kernel.Console.SetScreenAdr
 .SetAttribute   EQU Kernel.Console.SetAttribute

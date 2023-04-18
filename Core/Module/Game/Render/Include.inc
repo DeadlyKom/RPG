@@ -4,14 +4,12 @@
 
                 module Render
                 
-                include "World.asm"
-                include "Swap.asm"
+                include "World/Include.inc"
+                include "Pause/Include.inc"
 
                 include "Sort/Include.inc"
+                include "Swap.asm"
 
-                module Object
-                include "Object.asm"
-                endmodule
                 endmodule
 
                 endif ; ~_MODULE_GAME_RENDER_INCLUDE_

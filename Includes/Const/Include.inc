@@ -13,6 +13,7 @@
                 include "Kernel.inc"
                 include "Input.inc"
                 include "World.inc"
+                include "Config.inc"
                 include "Render.inc"
                 include "Variables.inc"
                 include "Interrupt.inc"

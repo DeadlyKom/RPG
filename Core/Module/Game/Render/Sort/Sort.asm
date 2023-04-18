@@ -23,7 +23,7 @@ Object:         ; количество обрабатываемых объект
                 CALL Quicksort
 
                 LD A, C
-.Set            LD (Game.Render.Object.Draw.Num), A
+.Set            LD (Game.Render.World.Object.Num), A
                 RET
 
                 endif ; ~_MODULE_GAME_RENDER_SORT_OBJECTS_

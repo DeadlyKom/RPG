@@ -9,8 +9,8 @@
 ; Note:
 ; -----------------------------------------
 Scan:           ; опрос виртуальных клавиш
-                ; LD DE, InputHandler
-                ; CALL Input.JumpKeys
+                LD DE, InputHandler
+                CALL Input.JumpKeys
 
                 ; ; проверка необходимости опроса мыши
                 ; LD A, (GameConfig.Options)

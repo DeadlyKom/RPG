@@ -17,7 +17,7 @@ SetUserHendler: macro Func?
                 LD BC, Func?
                 LD (UserInterrupt), BC
                 endm
-OffUserHendler: macro
+ResUserHendler: macro
                 LD BC, Interrupt_RET
                 LD (UserInterrupt), BC
                 endm

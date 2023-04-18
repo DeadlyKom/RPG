@@ -13,18 +13,6 @@ Swap:           ; отображение счётчика FPS
                 CALL FPS_Counter.Render
                 endif
 
-; .L1             EQU $+1
-;                 LD A, #08
-;                 DEC A
-;                 JR NZ, .L2
-;                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
-;                 ; ToDo спавн частицы
-;                 LD DE, #5080
-;                 LD BC, PARTICLE_DUST << 8 | OBJECT_PARTICLE
-;                 CALL Func.SpawnObject
-;                 LD A, #08
-; .L2             LD (.L1), A
-
                 CALL Screen.Swap
                 RES_RENDER_FLAG FINISHED_BIT                                    ; обнуление флага FINISHED_BIT
                 RET

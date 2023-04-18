@@ -72,10 +72,8 @@ EntryPoint:     ; -----------------------------------------
                 ; -----------------------------------------
                 ; инициализация обработчика прерываний
                 ; -----------------------------------------
-                SetUserHendler Game.Interrupt
+                SetUserHendler Game.World.Interrupt
 
                 CALL World.Generate
-
-                ; JP GameLoop                                                   ; идёт следом
 
                 endif ; ~_CORE_MODULE_GAME_ENTRY_POINT_

@@ -8,7 +8,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-World:          SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
+Pass:           SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
 
                 ; скрол карты мира в зависимости от состояний флагов
                 CHECK_WORLD_FLAG WORLD_LEFT_BIT
@@ -21,14 +21,14 @@ World:          SET_PAGE_OBJECT                                                 
                 CALL NZ, Game.World.MoveDown
 
 				; сортировка видимых объектов
-                CALL Sort.Object
+                CALL Game.Render.Sort.Object
 
                 SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
                 
                 RestoreBC                                                       ; защита от повреждения данных во время прерывания
                 CALL Draw.World
                 CALL Draw.Minimap
-                CALL Object.Draw
+                CALL Object
 
                 ; show position
                 ifdef _DEBUG
@@ -82,7 +82,7 @@ World:          SET_PAGE_OBJECT                                                 
                 CALL Console.SetCursor
                 LD A, (GameState.Objects)                                       ; количество объектов на карте мира
                 CALL Console.DrawByte
-                LD A, (Object.Draw.Num)                                         ; количество видимых объектоа на экране
+                LD A, (Object.Num)                                              ; количество видимых объектоа на экране
                 CALL Console.DrawByte
 
                 LD DE, #0500
@@ -90,7 +90,6 @@ World:          SET_PAGE_OBJECT                                                 
                 PLAYER_FLAGS_A
                 CALL Console.DrawByte
                 endif
-
 
                 ifdef _DEBUG
                 CALL FPS_Counter.Frame
