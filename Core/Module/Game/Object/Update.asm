@@ -47,11 +47,23 @@ Update:         ; переход в зависимости от типа объ�
 
                 ; расчитать новую позицию объекта, учитывая его скорость
                 LD HL, (IX + FObject.Velocity.X)
+
+                rept 4
+                SRA H
+                RR L
+                endr
+
                 LD DE, (IX + FObject.Position.X)
                 ADD HL, DE
                 LD (IX + FObject.Position.X), HL
 
                 LD HL, (IX + FObject.Velocity.Y)
+
+                rept 4
+                SRA H
+                RR L
+                endr
+                
                 LD DE, (IX + FObject.Position.Y)
                 ADD HL, DE
                 LD (IX + FObject.Position.Y), HL

@@ -9,23 +9,14 @@
 ; Corrupt:
 ; Note:
 ; ----------------------------------------
-Dust:           ;CHECK_PLAYER_FLAG TURBOCHARGING_BIT
-                LD A, (PlayerState.Speed)
-                ; JR NZ, .Turbocharging
-
+Dust:           LD A, (PlayerState.Speed)
                 CP #04
                 RET C
 
-;                 CP #20
-;                 RET NC
-
-; .Turbocharging  CP #38
-;                 RET NC
-
-.L1             EQU $+1
+.Delay          EQU $+1
                 LD A, #04
                 DEC A
-                JR NZ, .L2
+                JR NZ, .Set
 
                 ; -----------------------------------------
                 ;      7    6    5    4    3    2    1    0
@@ -72,6 +63,8 @@ Dust:           ;CHECK_PLAYER_FLAG TURBOCHARGING_BIT
                 CALL Func.SpawnObject
 
                 LD HL, (IY + FObject.Velocity.X)
+
+                ; NEG HL
                 XOR A
                 SUB L
                 LD L, A
@@ -87,12 +80,6 @@ Dust:           ;CHECK_PLAYER_FLAG TURBOCHARGING_BIT
 
                 LD (IY + FObjectParticle.Velocity.X), HL
                 LD HL, (IY + FObject.Velocity.Y)
-                ; XOR A
-                ; SUB L
-                ; LD L, A
-                ; SBC A, A
-                ; SUB H
-                ; LD H, A
 
                 rept 3
                 SRA H
@@ -102,7 +89,7 @@ Dust:           ;CHECK_PLAYER_FLAG TURBOCHARGING_BIT
                 LD (IY + FObjectParticle.Velocity.Y), HL
 
                 LD A, #04
-.L2             LD (.L1), A
+.Set            LD (.Delay), A
 
                 RET
 

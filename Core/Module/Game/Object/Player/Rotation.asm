@@ -29,6 +29,9 @@ Rotation:       ;
                 SBC A, A
                 LD D, A
 
+                RL E
+                RL D
+
                 ; cos (andle)
                 LD A, B
                 RRA
@@ -36,11 +39,15 @@ Rotation:       ;
                 LD B, A
                 CALL .CalcRotation
                 LD A, B                                                         ; освобождение регистра B
+                LD BC, (IX + FObject.Velocity.X)
+                ADD HL, BC
                 LD (IX + FObject.Velocity.X), HL
 
                 ; sin (andle)
                 ADD A, 8                                                        ; -sin α = cos(π * 0.5 + α)
                 CALL .CalcRotation
+                LD BC, (IX + FObject.Velocity.Y)
+                ADD HL, BC
                 LD (IX + FObject.Velocity.Y), HL
 
                 RET

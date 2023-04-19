@@ -8,14 +8,18 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-RotateLeft:     LD HL, PlayerState.RotationAngle
+RotateLeft:     LD A, (PlayerState.Speed)
+                OR A
+                RET Z
+                
+                LD HL, PlayerState.RotationAngle
                 LD A, (HL)
                 ADD A, #01
                 LD (HL), A
 
-                LD A, (PlayerState.Speed)
-                CP #10
-                CALL C, IncreaseSpeed
+                ; LD A, (PlayerState.Speed)
+                ; CP #10
+                ; CALL C, IncreaseSpeed
                 ; RET
 
 .Input          SET_PLAYER_FLAG ROTATE_LEFT_BIT
@@ -27,14 +31,19 @@ RotateLeft:     LD HL, PlayerState.RotationAngle
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-RotateRight:    LD HL, PlayerState.RotationAngle
+RotateRight:    
+                LD A, (PlayerState.Speed)
+                OR A
+                RET Z
+
+                LD HL, PlayerState.RotationAngle
                 LD A, (HL)
                 SUB #01
                 LD (HL), A
 
-                LD A, (PlayerState.Speed)
-                CP #10
-                CALL C, IncreaseSpeed
+                ; LD A, (PlayerState.Speed)
+                ; CP #10
+                ; CALL C, IncreaseSpeed
                 ; RET
 
 .Input          SET_PLAYER_FLAG ROTATE_RIGHT_BIT
@@ -83,14 +92,18 @@ DecreaseSpeed:  CHECK_PLAYER_FLAG TURBOCHARGING_BIT
 .Input          SET_PLAYER_FLAG DECREASE_SPEED_BIT
                 RET
 
-.HandBrake      CALL Game.Object.Player.Deceleration
+.HandBrake      CALL Game.Object.Player.Deceleration.Speed
                 LD A, (PlayerState.Speed)
                 OR A
                 RET Z
 
-                LD HL, PlayerState.RotationAngle
+                CHECK_PLAYER_FLAG ROTATE_LEFT_BIT
+                LD C, #02
+                JR NZ, .Right
+                LD C, #FE
+.Right          LD HL, PlayerState.RotationAngle
                 LD A, (HL)
-                ADD A, #02
+                ADD A, C
                 LD (HL), A
                 RET
 
