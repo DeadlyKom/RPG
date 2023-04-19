@@ -27,9 +27,14 @@ X               DB #00
 Y               DB #00
                 ends
 
-                struct FLocation16
+                struct FVector16
 Y               FValue															; для сортировки первый Y
 X               FValue
+                ends
+
+                struct FLocation16
+X               FValue
+Y               FValue															; для сортировки первый Y
                 ends
 
                 struct FFlags
