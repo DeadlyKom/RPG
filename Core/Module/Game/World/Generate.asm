@@ -63,8 +63,8 @@ Generate:       SET_PAGE_OBJECT                                                 
     
                 RET
 
-.Noise          EXX
-                CALL Math.PerlinNoise2D
+.Noise          ; EXX
+                ; CALL Math.PerlinNoise2D
 
                 ; фильтр
                 LD A, H

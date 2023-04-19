@@ -66,18 +66,7 @@ LerpNoise:      ; v1 = (x, y)
                 RR L
                 PUSH HL
 
-                ; v3 = (x, y + 1)
-                ; LD HL, IntNoiseData + FLocation32.X.Low
-                ; DEC (HL)
-                ; JR NZ, $+12
-                ; INC L
-                ; DEC (HL)
-                ; JR NZ, $+8
-                ; INC L
-                ; DEC (HL)
-                ; JR NZ, $+4
-                ; INC L
-                ; DEC (HL)
+                ; v3 = (x, y + 1) (взять старый x)
                 LD HL, (LocationX + FPNInt40.Int.Low)
                 LD (IntNoiseData + FLocation32.X.Low), HL
                 LD HL, (LocationX + FPNInt40.Int.High)

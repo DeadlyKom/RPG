@@ -38,6 +38,7 @@ MoveDown:       ; -----------------------------------------
                 ; сохранить значение
                 LD (Math.PN_LocationY + 0), HL
                 LD (Math.PN_LocationY + 2), DE
+                CALL Kernel.Math.PerlinNoise2D.Y_
 
                 ; сдвигаем спрайт мини карты на одну строку выше
                 LD HL, Adr.MinimapSpr + 4                                       ; адрес левого-нижнего байта спрайта (+1 строка)
@@ -51,7 +52,10 @@ MoveDown:       ; -----------------------------------------
                 EX DE, HL
 .RowLoop        LD B, 8
                 
-.RollLoop       CALL Generate.Noise
+.RollLoop       ; 
+                EXX
+                CALL Kernel.Math.PerlinNoise2D.X
+                CALL Generate.Noise
 
                 ; сдвиг на 1 пиксель
                 ADD A, A

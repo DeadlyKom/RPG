@@ -20,6 +20,7 @@ MoveLeft:       ; -----------------------------------------
                 ; сохранить значение
                 LD (Math.PN_LocationX + 0), HL
                 LD (Math.PN_LocationX + 2), DE
+                CALL Kernel.Math.PerlinNoise2D.X_
 
                 ; -----------------------------------------
                 ; центрирование мини карты по вертикали
@@ -39,7 +40,10 @@ MoveLeft:       ; -----------------------------------------
                 LD HL, Adr.MinimapSpr                                           ; адрес левого-вверхний байта спрайта
                 LD B, SCR_MINIMAP_SIZE_Y
 
-.RollLoop       CALL Generate.Noise
+.RollLoop       ; 
+                EXX
+                CALL Kernel.Math.PerlinNoise2D.Y
+                CALL Generate.Noise
 
                 ; сдвиг строки вправо на 1 пиксель
                 ADD A, A
