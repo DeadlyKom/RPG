@@ -10,7 +10,7 @@
 ; Note:
 ; ----------------------------------------
 Update:         ; CALL Deceleration
-                ; CALL Rotation
+                CALL RotationTo
                 ; CALL Game.World.Camera
                 ; CHECK_CONFIG_GRAPHIC_FLAG G_PARTICLE_BIT
                 ; CALL NZ, Dust

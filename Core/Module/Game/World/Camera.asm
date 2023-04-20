@@ -111,7 +111,7 @@ Horizontal:     ; скорость
                 LD (World.Shift_X), A
 
                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
-                LD IX, #C000
+                LD IX, PLAYER_ADR
                 LD HL, (IX + FObject.Position.X)
 
                 ; LD A, D
@@ -188,7 +188,7 @@ Horizontal:     ; скорость
                 LD (World.Shift_X), A
 
                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
-                LD IX, #C000
+                LD IX, PLAYER_ADR
                 LD HL, (IX + FObject.Position.X)
                 
                 ; LD A, D
@@ -290,7 +290,7 @@ Vertical:       ; скорость
                 LD (World.Shift_Y), A
 
                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
-                LD IX, #C000
+                LD IX, PLAYER_ADR
                 LD HL, (IX + FObject.Position.Y)
                 OR A
                 LD E, D
@@ -356,7 +356,7 @@ Vertical:       ; скорость
                 LD (World.Shift_Y), A
 
                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
-                LD IX, #C000
+                LD IX, PLAYER_ADR
                 LD HL, (IX + FObject.Position.Y)
                 OR A
                 LD E, D

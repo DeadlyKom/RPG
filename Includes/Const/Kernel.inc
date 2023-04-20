@@ -122,6 +122,7 @@ Math
 .Mul16x8_24     EQU Kernel.Math.Mul16x8_24
 .Mul32x8_40     EQU Kernel.Math.Mul32x8_40
 .Div8x8         EQU Kernel.Math.Div8x8
+.Atan           EQU Kernel.Math.Atan_Sector
 .PerlinNoise2D  EQU Kernel.Math.PerlinNoise2D
 .PN_Frequency   EQU Kernel.Math.Noise2D.Frequency
 .PN_LocationX   EQU Kernel.Math.Noise2D.Location.X

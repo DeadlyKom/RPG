@@ -6,6 +6,7 @@
 Begin           EQU $
                 include "Update.asm"
                 include "Movement.asm"
+                include "RotationToTarget.asm"
 
                 display " - Update object 'NPC':\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
 

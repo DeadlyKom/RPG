@@ -48,6 +48,7 @@ Begin:          EQU $
                 include "Core/Module/Math/Lerp.asm"
                 include "Core/Module/Math/PerlinNoise/Include.inc"
                 include "Core/Module/Math/Div/Div8x8.asm"
+                include "Core/Module/Math/Atan/Sector.asm"
 
                 ; input
                 include "Core/Module/Input/Include.inc"
