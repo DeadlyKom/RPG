@@ -68,7 +68,12 @@ Pass:           SET_PAGE_OBJECT                                                 
                 LD A, (PlayerState.RotationAngle)
                 AND #7F
                 CALL Console.DrawByte
-                LD A, (PlayerState.Speed)
+                SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
+                LD IX, PLAYER_ADR
+                LD A, (IX + FObject.EnginePower)
+                LD D, A
+                SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
+                LD A, D
                 CALL Console.DrawByte
 
                 ; LD DE, #0300

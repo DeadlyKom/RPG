@@ -23,6 +23,9 @@ Scan:           ; опрос виртуальных клавиш
                 ; BIT HW_MOUSE_BIT, (HL)
                 ; CALL Z, Mouse.UpdateCursor                                      ; обновить положение курсора, если мышь доступна
 
+                SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
+                LD IX, PLAYER_ADR
+
                 PLAYER_FLAGS
                 LD (HL), #00
 
@@ -35,22 +38,22 @@ Scan:           ; опрос виртуальных клавиш
                 ; move map left
                 LD A, VK_A
                 CALL Input.CheckKeyState
-                CALL Z, RotateLeft;.Input
+                CALL Z, RotateLeft
 
                 ; move map right
                 LD A, VK_D
                 CALL Input.CheckKeyState
-                CALL Z, RotateRight;.Input
+                CALL Z, RotateRight
 
                 ; move map up
                 LD A, VK_W
                 CALL Input.CheckKeyState
-                CALL Z, IncreaseSpeed;.Input
+                CALL Z, IncreaseSpeed
 
                 ; move map down
                 LD A, VK_S
                 CALL Input.CheckKeyState
-                CALL Z, DecreaseSpeed;.Input
+                CALL Z, DecreaseSpeed
                
                 ifdef _DEBUG
                 ; move map left

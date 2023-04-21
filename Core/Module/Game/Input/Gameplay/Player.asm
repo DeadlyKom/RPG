@@ -4,11 +4,13 @@
 ; -----------------------------------------
 ; поворот игрока по часовой стрелке
 ; In:
+;   IX - адрес FObject игрока
 ; Out:
 ; Corrupt:
 ; Note:
+;   включить страницу работы с объектами
 ; -----------------------------------------
-RotateLeft:     LD A, (PlayerState.Speed)
+RotateLeft:     LD A, (IX + FObject.EnginePower)
                 OR A
                 RET Z
                 
@@ -27,12 +29,14 @@ RotateLeft:     LD A, (PlayerState.Speed)
 ; -----------------------------------------
 ; поворот игрока против часовой стрелки
 ; In:
+;   IX - адрес FObject игрока
 ; Out:
 ; Corrupt:
 ; Note:
+;   включить страницу работы с объектами
 ; -----------------------------------------
 RotateRight:    
-                LD A, (PlayerState.Speed)
+                LD A, (IX + FObject.EnginePower)
                 OR A
                 RET Z
 
@@ -51,9 +55,11 @@ RotateRight:
 ; -----------------------------------------
 ; увеличить скорость игрока
 ; In:
+;   IX - адрес FObject игрока
 ; Out:
 ; Corrupt:
 ; Note:
+;   включить страницу работы с объектами
 ; -----------------------------------------
 IncreaseSpeed:  ;
                 CHECK_PLAYER_FLAG TURBOCHARGING_BIT
@@ -62,12 +68,11 @@ IncreaseSpeed:  ;
                 LD BC, MAX_FORWARD_SPEED << 8 | 2
 
 .Turbocharging  ; турбонаддув активирован
-                LD HL, PlayerState.Speed
-                LD A, (HL)
+                LD A, (IX + FObject.EnginePower)
                 ADD A, C
                 CP B
                 RET NC
-.Set            LD (HL), A
+.Set            LD (IX + FObject.EnginePower), A
                 ; RET
 
 .Input          SET_PLAYER_FLAG INCREASE_SPEED_BIT
@@ -75,25 +80,26 @@ IncreaseSpeed:  ;
 ; -----------------------------------------
 ; уменьшить скорость игрока
 ; In:
+;   IX - адрес FObject игрока
 ; Out:
 ; Corrupt:
 ; Note:
+;   включить страницу работы с объектами
 ; -----------------------------------------
 DecreaseSpeed:  CHECK_PLAYER_FLAG TURBOCHARGING_BIT
                 JR NZ, .HandBrake
-                LD HL, PlayerState.Speed
-                LD A, (HL)
+                LD A, (IX + FObject.EnginePower)
                 DEC A
                 CP 256-MAX_REVERSE_SPEED
                 RET C
-                LD (HL), A
+                LD (IX + FObject.EnginePower), A
                 ; RET
 
 .Input          SET_PLAYER_FLAG DECREASE_SPEED_BIT
                 RET
 
 .HandBrake      CALL Game.Object.Player.Deceleration.Speed
-                LD A, (PlayerState.Speed)
+                LD A, (IX + FObject.EnginePower)
                 OR A
                 RET Z
 

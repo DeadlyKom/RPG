@@ -9,7 +9,7 @@
 ; Corrupt:
 ; Note:
 ; ----------------------------------------
-Dust:           LD A, (PlayerState.Speed)
+Dust:           LD A, (IX + FObject.EnginePower)
                 CP #04
                 RET C
 

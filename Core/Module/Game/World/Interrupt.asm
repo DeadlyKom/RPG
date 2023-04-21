@@ -16,6 +16,8 @@ Interrupt:      ; проверка завершённости процесса �
                 CALL Game.Render.Swap
 
 .Camera         ; ************ CAMERA *************
+                SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
+                LD IX, PLAYER_ADR
                 CALL Game.World.Horizontal
                 CALL Game.World.Vertical
 

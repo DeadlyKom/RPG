@@ -4,6 +4,7 @@
 ; -----------------------------------------
 ; пассивное торможение игрока
 ; In:
+;   IX - адрес обрабатываемого объекта FObject
 ; Out:
 ; Corrupt:
 ; Note:
@@ -47,7 +48,7 @@ Deceleration:
                 ADD HL, DE
                 LD (IX + FObject.Velocity.Y), HL
 
-.Speed          LD A, (PlayerState.Speed)
+.Speed          LD A, (IX + FObject.EnginePower)
                 OR A
                 RET Z
                 LD C, A
@@ -60,7 +61,7 @@ Deceleration:
                 RET NZ
 
 .Apply          ADD A, C
-                LD (PlayerState.Speed), A
+                LD (IX + FObject.EnginePower), A
 
                 RET
 

@@ -23,7 +23,7 @@ Rotation:       ;
                 LD (IX + FObject.Direction), A
 
                 ; скорость
-                LD A, (PlayerState.Speed)
+                LD A, (IX + FObject.EnginePower)
                 LD E, A
                 ADD A, A
                 SBC A, A

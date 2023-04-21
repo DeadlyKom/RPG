@@ -32,9 +32,10 @@ Camera:         ;
 ; Out:
 ; Corrupt:
 ; Note:
+;   включить страницу работы с объектами
 ; ----------------------------------------
 Horizontal:     ; скорость
-                LD A, (PlayerState.Speed)
+                LD A, (IX + FObject.EnginePower)
                 OR A
                 JP P, $+5
                 NEG
@@ -110,8 +111,6 @@ Horizontal:     ; скорость
                 AND #0E
                 LD (World.Shift_X), A
 
-                SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
-                LD IX, PLAYER_ADR
                 LD HL, (IX + FObject.Position.X)
 
                 ; LD A, D
@@ -127,7 +126,6 @@ Horizontal:     ; скорость
                 OR A
                 SBC HL, DE
                 LD (IX + FObject.Position.X), HL
-                SET_SCREEN_SHADOW                                               ; включение страницы второго экрана
                 RET
 
 .IsNegative     NEG
@@ -187,8 +185,6 @@ Horizontal:     ; скорость
                 AND #0E
                 LD (World.Shift_X), A
 
-                SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
-                LD IX, PLAYER_ADR
                 LD HL, (IX + FObject.Position.X)
                 
                 ; LD A, D
@@ -203,11 +199,19 @@ Horizontal:     ; скорость
 
                 ADD HL, DE
                 LD (IX + FObject.Position.X), HL
-                SET_SCREEN_SHADOW                                               ; включение страницы второго экрана
 
                 RET
+; -----------------------------------------
+; вертикальный лерп камеры
+; In:
+;   IX - адрес FObject игрока
+; Out:
+; Corrupt:
+; Note:
+;   включить страницу работы с объектами
+; ----------------------------------------
 Vertical:       ; скорость
-                LD A, (PlayerState.Speed)
+                LD A, (IX + FObject.EnginePower)
                 OR A
                 JP P, $+5
                 NEG
@@ -289,15 +293,12 @@ Vertical:       ; скорость
                 AND #0E
                 LD (World.Shift_Y), A
 
-                SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
-                LD IX, PLAYER_ADR
                 LD HL, (IX + FObject.Position.Y)
                 OR A
                 LD E, D
                 LD D, #00
                 SBC HL, DE
                 LD (IX + FObject.Position.Y), HL
-                SET_SCREEN_SHADOW                                               ; включение страницы второго экрана
 
                 RET
 
@@ -355,7 +356,6 @@ Vertical:       ; скорость
                 AND #0E
                 LD (World.Shift_Y), A
 
-                SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
                 LD IX, PLAYER_ADR
                 LD HL, (IX + FObject.Position.Y)
                 OR A
@@ -363,7 +363,6 @@ Vertical:       ; скорость
                 LD D, #00
                 ADD HL, DE
                 LD (IX + FObject.Position.Y), HL
-                SET_SCREEN_SHADOW                                               ; включение страницы второго экрана
 
                 RET
 
