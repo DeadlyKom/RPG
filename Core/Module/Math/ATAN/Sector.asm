@@ -131,8 +131,7 @@ Atan_Sector:    ; int8_t quadrant = 0;
 
                 OR A
                 SBC HL, DE
-                JR C, .Quadrant_0
-                
+                JP M, .Quadrant_0
                 ADD HL, DE
 
                 ; if (tangent > y*21 ) return map[quadrant][1]; // tan(33.75)*32
@@ -144,7 +143,7 @@ Atan_Sector:    ; int8_t quadrant = 0;
 
                 OR A
                 SBC HL, DE
-                JR C, .Quadrant_1
+                JP M, .Quadrant_1
 
                 ; if (tangent > y*47 ) return map[quadrant][2]; // tan(56.25)*32
 .x24            EQU $+1
@@ -157,7 +156,7 @@ Atan_Sector:    ; int8_t quadrant = 0;
 
                 OR A
                 SBC HL, DE
-                JR C, .Quadrant_2
+                JP M, .Quadrant_2
 
                 ; if (tangent > y*160) return map[quadrant][3]; // tan(78.75)*32
 .x2             EQU $+1
@@ -173,7 +172,7 @@ Atan_Sector:    ; int8_t quadrant = 0;
 
                 OR A
                 SBC HL, DE
-                JR C, .Quadrant_3
+                JP M, .Quadrant_3
 
 .Quadrant_4     ADD A, #04
 .Quadrant_3     ADD A, #04
