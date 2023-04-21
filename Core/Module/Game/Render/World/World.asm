@@ -65,14 +65,18 @@ Pass:           SET_PAGE_OBJECT                                                 
                 
                 LD DE, #0200
                 CALL Console.SetCursor
-                LD A, (PlayerState.RotationAngle)
-                AND #7F
-                CALL Console.DrawByte
+                ; LD A, (PlayerState.RotationAngle)
+                ; AND #7F
+                ; CALL Console.DrawByte
                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
                 LD IX, PLAYER_ADR + OBJECT_SIZE
+                LD A, (IX + FObject.Direction)
+                LD E, A
                 LD A, (IX + FObject.EnginePower)
                 LD D, A
                 SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
+                LD A, E
+                CALL Console.DrawByte
                 LD A, D
                 CALL Console.DrawByte
 

@@ -13,11 +13,8 @@ Dust:           LD A, (IX + FObject.EnginePower)
                 CP #04
                 RET C
 
-                LD C, (IX + FObject.Direction)
-                LD A, C
-                AND #07
+                LD A, (IX + FObject.VFX)
                 DEC A
-                LD A, C
                 JR NZ, .Set
 
                 ; -----------------------------------------
@@ -90,10 +87,8 @@ Dust:           LD A, (IX + FObject.EnginePower)
 
                 LD (IY + FObjectParticle.Velocity.Y), HL
 
-                LD A, (IX + FObject.Direction)
-                ADD A, #04
-.Set            DEC A
-                LD (IX + FObject.Direction), A
+                LD A, #04
+.Set            LD (IX + FObject.VFX), A
 
                 RET
 

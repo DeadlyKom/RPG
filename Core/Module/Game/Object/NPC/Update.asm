@@ -10,21 +10,28 @@
 ; Note:
 ; ----------------------------------------
 Update:         CALL RotationTo
-                SUB (IX + FObject.Direction)
-                AND %01111000
-                JR Z, .IncreaseSpeed
-
-                ; инверсия поворота, если угол 180 град
-                LD C, 8
-                JP P, .L2
-                LD C, -8
-                NEG
-
-.L2             CP #08 << 3
+                
+                ; отсечение мусорные биты при расчётах дельт поворота
+                LD C, OBJECT_DIRECTION_MASK
+                AND C
+                LD B, A
                 LD A, C
-                JR C, .L1
+                AND (IX + FObject.Direction)
                 NEG
-.L1             
+                ADD A, B
+                JR Z, .IncreaseSpeed                                            ; переход, если дельта вращения равна 0
+
+                ; определение направления поворота
+                LD C, 3
+                JP P, .Clockwise
+                LD C, -3
+                NEG                                                             ; против часовой
+
+.Clockwise      ; проверка угла больше 180°, если угол 180 град
+                CP #08 << 3
+                LD A, C
+                JR C, $+4                                                       ; переход, если угол меньше 180°
+                NEG                                                             ; инверсия поворота
 
                 ; -----------------------------------------
                 ;      7    6    5    4    3    2    1    0

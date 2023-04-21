@@ -19,10 +19,7 @@ Rotation:       ;
                 ADD A, #08
 
                 ; установка направления
-                LD C, (IX + FObject.Direction)
-                XOR C
                 AND %01111000
-                XOR C
                 LD (IX + FObject.Direction), A
 
                 ; отсечение угла поворота

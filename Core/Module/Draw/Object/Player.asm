@@ -2,7 +2,7 @@
                 ifndef _CORE_MODULE_DRAW_OBJECT_PLAYER_
                 define _CORE_MODULE_DRAW_OBJECT_PLAYER_
 ; -----------------------------------------
-; отображение дроид-пехотинца
+; отображение машины
 ; In:
 ;   IX - указывает на структуру FObject
 ; Out:
@@ -45,7 +45,7 @@ Player:         ; сохранеие текущей страницы
                 LD DE, .SpriteInfo
                 ADD HL, DE
                 LD A, (IX + FObject.Direction)
-                AND %01111000
+                AND OBJECT_DIRECTION_MASK
                 ADD A, L
                 LD L, A
                 ADC A, H

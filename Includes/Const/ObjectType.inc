@@ -24,6 +24,8 @@ FACTION_SUBTYPE             EQU 1 << FACTION_SUBTYPE_BIT
 FACTION_MASK                EQU %11000000
 
 VISIBLE_OBJECT              EQU 1 << VISIBLE_OBJECT_BIT                         ; видимость объекта
+
+OBJECT_DIRECTION_MASK       EQU %01111000
 IDX_OBJECT_TYPE             EQU %00111110
 
                             endif ; ~_CONST_OBJECT_TYPE_

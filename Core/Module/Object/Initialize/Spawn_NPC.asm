@@ -41,16 +41,19 @@ NPC:            ; -----------------------------------------
                 XOR A
 
                 ; сброс скорости
-                LD (IY + FObject.EnginePower), #06
+                LD (IY + FObject.EnginePower), A
 
                 ; сброс направления
-                LD (IY + FObject.Direction), #04
+                LD (IY + FObject.Direction), A
 
                 ; сброс скорости
                 LD (IY + FObject.Velocity.X.Low), A
                 LD (IY + FObject.Velocity.X.High), A
                 LD (IY + FObject.Velocity.Y.Low), A
                 LD (IY + FObject.Velocity.Y.High), A
+
+                ; сброс счётчика
+                LD (IY + FObject.VFX), #04
 
                 RET
 
