@@ -5,7 +5,9 @@ World:          incbin "Core/Module/Graphics/Tile/World/Sprite/Compressed/Ground
                 display " - Ground.pack: \t\t\t\t\t", /A, World, " = busy [ ", /D, $ - World, " bytes  ]"
 Cars:
 .A              include "Core/Module/Graphics/Car/A/Include.inc"
-                display " - Car: \t\t\t\t\t\t", /A, Cars.A, " = busy [ ", /D, $ - Cars.A, " bytes  ]"
+                display " - Car A: \t\t\t\t\t\t", /A, Cars.A, " = busy [ ", /D, $ - Cars.A, " bytes  ]"
+.B              include "Core/Module/Graphics/Car/B/Include.inc"
+                display " - Car B: \t\t\t\t\t\t", /A, .B, " = busy [ ", /D, $ - .B, " bytes  ]"
 Declas:         include "Core/Module/Graphics/Tile/World/Sprite/Original/Decal/Include.inc"
                 display " - Decals: \t\t\t\t\t\t", /A, Declas, " = busy [ ", /D, $ - Declas, " bytes  ]"
 

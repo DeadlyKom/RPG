@@ -39,8 +39,11 @@ Player:         ; -----------------------------------------
 
                 XOR A
 
+                ; сброс скорости
+                LD (IY + FObject.EnginePower), A
+
                 ; сброс направления
-                LD (IY + FObject.Direction), A
+                LD (IY + FObject.Direction), #04
 
                 ; сброс скорости
                 LD (IY + FObject.Velocity.X.Low), A

@@ -3,8 +3,8 @@
                 define _CONST_PLAYER_
 
 PLAYER_ADR              EQU Adr.Object                                          ; адрес структуры FObject игрока
-MAX_FORWARD_SPEED       EQU 40
-MAX_TURBOCHARGING_SPEED EQU 60
+MAX_FORWARD_SPEED       EQU 70
+MAX_TURBOCHARGING_SPEED EQU 100
 MAX_REVERSE_SPEED       EQU 16
 
 TURBOCHARGING_BIT       EQU 0x00                                                ; флаг включения турбонаддува

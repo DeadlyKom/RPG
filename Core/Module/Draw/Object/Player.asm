@@ -23,10 +23,30 @@ Player:         ; сохранеие текущей страницы
                 ; расчёт адреса
                 ; -----------------------------------------
 
-                LD H, HIGH SpriteInfo.Car
+                ; -----------------------------------------
+                ;      7    6    5    4    3    2    1    0
+                ;   +----+----+----+----+----+----+----+----+
+                ;   | F1 | F0 | T4 | T3 | T2 | T1 | T0 | V  |
+                ;   +----+----+----+----+----+----+----+----+
+                ;
+                ;   F1,F0   [7,6]   - тип фракции
+                ;                       00 - игрок
+                ;                       01 - нейтральные/союзники
+                ;                       10 - враг 1
+                ;                       11 - враг 2
+                ;   Т4-T0   [5..1]  - тип объекта
+                ;   V       [0]     - видимость объекта
+                ; -----------------------------------------
+                LD A, (IX + FObject.Type)
+                AND FACTION_MASK
+                LD L, A
+                LD H, #00
+                ADD HL, HL
+                LD DE, .SpriteInfo
+                ADD HL, DE
                 LD A, (IX + FObject.Direction)
                 AND %01111000
-                ADD A, LOW SpriteInfo.Car
+                ADD A, L
                 LD L, A
                 ADC A, H
                 SUB L
@@ -75,7 +95,14 @@ Player:         ; сохранеие текущей страницы
                 LD A, #00
                 JP SetPage
 
+.SpriteInfo     ; PLAYER_FACTION
                 include "Core/Module/Graphics/Car/A/Sprite/Info.inc"
+                ; NEUTRAL_FACTION
+                DS 128, 0
+                ; ENEMY_FACTION_A
+                include "Core/Module/Graphics/Car/B/Sprite/Info.inc"
+                ; ENEMY_FACTION_B
+                DS 128, 0
 
                 display " - Draw object 'PLAYER':\t\t\t\t", /A, Player, " = busy [ ", /D, $ - Player, " bytes  ]"
 

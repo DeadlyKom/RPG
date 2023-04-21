@@ -232,7 +232,6 @@ Vertical:       ; скорость
                 LD A, (PlayerState.DeltaCameraY)
                 BIT 7, A
                 JR NZ, .IsNegative
-                ; NEG
 
                 ; const float Dist = Target - Current;
                 ; if( FMath::Square(Dist) < SMALL_NUMBER )

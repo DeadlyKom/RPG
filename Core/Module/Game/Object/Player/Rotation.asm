@@ -19,8 +19,17 @@ Rotation:       ;
                 ADD A, #08
 
                 ; установка направления
+                LD C, (IX + FObject.Direction)
+                XOR C
                 AND %01111000
+                XOR C
                 LD (IX + FObject.Direction), A
+
+                ; отсечение угла поворота
+                LD A, B
+.ApplySpeed     RRA
+                RRA
+                LD B, A
 
                 ; скорость
                 LD A, (IX + FObject.EnginePower)
@@ -29,14 +38,11 @@ Rotation:       ;
                 SBC A, A
                 LD D, A
 
-                RL E
-                RL D
+                ; RL E
+                ; RL D
 
                 ; cos (andle)
                 LD A, B
-                RRA
-                RRA
-                LD B, A
                 CALL .CalcRotation
                 LD A, B                                                         ; освобождение регистра B
                 LD BC, (IX + FObject.Velocity.X)

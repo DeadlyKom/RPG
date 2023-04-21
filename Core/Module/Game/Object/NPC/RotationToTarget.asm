@@ -39,9 +39,6 @@ RotationTo:     LD IY, PLAYER_ADR
                 ;   DE - дельта значений знаковое число (D - y, E - x)
                 ; Out :
                 ;   A  - номер сектора [0..15] << 3
-                CALL Math.Atan
-                LD (IX + FObject.Direction), A
-
-                RET
+                JP Math.Atan
 
                 endif ; ~_MODULE_GAME_OBJECT_NPC_ROTATION_TO_TARGET_

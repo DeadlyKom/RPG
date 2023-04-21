@@ -2,7 +2,7 @@
                 ifndef _CORE_MODULE_GRAPHICS_CAR_1_INCLUDE_
                 define _CORE_MODULE_GRAPHICS_CAR_1_INCLUDE_
 
-                module Car
+                module Car_A
 
 Anim_0          incbin "Core/Module/Graphics/Car/A/Sprite/Original/Car_0_0.spr"
 Anim_1          incbin "Core/Module/Graphics/Car/A/Sprite/Original/Car_0_1.spr"

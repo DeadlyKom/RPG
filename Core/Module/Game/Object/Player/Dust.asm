@@ -13,9 +13,11 @@ Dust:           LD A, (IX + FObject.EnginePower)
                 CP #04
                 RET C
 
-.Delay          EQU $+1
-                LD A, #04
+                LD C, (IX + FObject.Direction)
+                LD A, C
+                AND #07
                 DEC A
+                LD A, C
                 JR NZ, .Set
 
                 ; -----------------------------------------
@@ -88,8 +90,10 @@ Dust:           LD A, (IX + FObject.EnginePower)
 
                 LD (IY + FObjectParticle.Velocity.Y), HL
 
-                LD A, #04
-.Set            LD (.Delay), A
+                LD A, (IX + FObject.Direction)
+                ADD A, #04
+.Set            DEC A
+                LD (IX + FObject.Direction), A
 
                 RET
 

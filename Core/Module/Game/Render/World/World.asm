@@ -69,7 +69,7 @@ Pass:           SET_PAGE_OBJECT                                                 
                 AND #7F
                 CALL Console.DrawByte
                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
-                LD IX, PLAYER_ADR
+                LD IX, PLAYER_ADR + OBJECT_SIZE
                 LD A, (IX + FObject.EnginePower)
                 LD D, A
                 SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
