@@ -49,6 +49,7 @@ Begin:          EQU $
                 include "Core/Module/Math/PerlinNoise/Include.inc"
                 include "Core/Module/Math/Div/Div8x8.asm"
                 include "Core/Module/Math/Atan/Sector.asm"
+                include "Core/Module/Math/BoundVolume/IntersectsAABB_vs_AABB.asm"
 
                 ; input
                 include "Core/Module/Input/Include.inc"
@@ -65,6 +66,7 @@ Begin:          EQU $
 
                 ; object
                 include "Core/Module/Object/Initialize/Include.inc"             ; ToDo перенести в страницу!
+                include "Core/Module/Game/Object/Include.inc"                   ; ToDo перенести в страницу!
 
                 ; debug
                 ifdef _DEBUG

@@ -53,6 +53,11 @@ EntryPoint:     ; -----------------------------------------
                 ; LD BC, ENEMY_FACTION_A | OBJECT_NPC
                 ; CALL Func.SpawnObject
 
+                ; ; ToDo тестовый спавн противника
+                ; LD DE, #50B0
+                ; LD BC, ENEMY_FACTION_A | OBJECT_NPC
+                ; CALL Func.SpawnObject
+
                 ; ; ToDo спавн частицы
                 ; LD DE, #5080
                 ; LD BC, PARTICLE_DUST << 8 | OBJECT_PARTICLE

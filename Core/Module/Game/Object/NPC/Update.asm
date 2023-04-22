@@ -74,13 +74,13 @@ Update:         CALL RotationTo
                 JR NC, .Update
                 LD (IX + FObject.EnginePower), A
 
-.Update         CALL Game.Object.Player.Deceleration
+.Update         CALL Object.ApplyDecel
                 LD A, (IX + FObject.Direction)
-                CALL Game.Object.Player.Rotation.ApplySpeed
+                CALL Object.ApplySpeed
 
                 CHECK_CONFIG_GRAPHIC_FLAG G_PARTICLE_BIT
-                CALL NZ, Game.Object.Player.Dust
+                CALL NZ, Object.Dust
                 CALL Movement
-                JP Game.Object.Update.Velocity
+                JP Object.ApplyVelocity
 
                 endif ; ~_MODULE_GAME_OBJECT_UPDATE_NPC_

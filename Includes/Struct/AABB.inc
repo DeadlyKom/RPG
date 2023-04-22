@@ -5,8 +5,8 @@
 ; axis aligned bounding box
 
                 struct FAABB
-Y               FValue                                                          ; maxY (L), minY (H)
-X               FValue                                                          ; maxX (L), minX (H)
+Center          FVector16                                                       ; позиция центра AABB
+Size            FSize                                                           ; размер AABB по двум осям
                 ends
 
                 endif ; ~_STRUCTURE_AABB_

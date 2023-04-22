@@ -9,7 +9,7 @@
 ; Corrupt:
 ; Note:
 ; ----------------------------------------
-Particle:       BIT VISIBLE_OBJECT_BIT, (IX + FObjectParticle.Type)             ; проверка флаг видимости объекта
+DrawParticle:   BIT VISIBLE_OBJECT_BIT, (IX + FObjectParticle.Type)             ; проверка флаг видимости объекта
                 RET Z                                                           ; выход, если объект невидим
                 
                 ; сохранеие текущей страницы

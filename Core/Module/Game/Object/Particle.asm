@@ -63,7 +63,7 @@ Particle:       ; уменьшить счётчик продолжительно
                 ADD HL, DE
                 LD (IX + FObjectParticle.Position.Y), HL                           ; сохранение позиции по горизонтали
 
-                JP Game.Object.Update.Velocity
+                JP Object.ApplyVelocity
 
                 display " - Update object 'PARTICLE':\t\t\t\t", /A, Particle, " = busy [ ", /D, $ - Particle, " bytes  ]"
 

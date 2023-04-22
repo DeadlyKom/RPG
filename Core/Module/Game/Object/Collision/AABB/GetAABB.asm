@@ -1,36 +1,39 @@
 
-                ifndef _CORE_MODULE_DRAW_OBJECT_DRAW_
-                define _CORE_MODULE_DRAW_OBJECT_DRAW_
+                ifndef _MODULE_GAME_OBJECT_COLLISION_GET_AABB_
+                define _MODULE_GAME_OBJECT_COLLISION_GET_AABB_
 ; -----------------------------------------
-; отображение спрайта объекта без атрибутов
+; получение AABB объекта
 ; In:
-;   IX - указывает на структуру FObject
+;   A  - тип объекта
+;   C  - направление объекта
 ; Out:
 ; Corrupt:
+;   C, AF
 ; Note:
 ; -----------------------------------------
-Draw:           ; переход в зависимости от типа объекта
-                LD A, (IX + FObject.Type)                                       ; получим тип объекта
+GetObject:      ; переход в зависимости от типа объекта
+                LD B, A
                 AND IDX_OBJECT_TYPE
                 ADD A, A
                 LD (.Jump), A
+                LD A, B
 .Jump           EQU $+1
                 JR $
 
                 ; OBJECT_PLAYER
-                JP Pawn.Car
+                JP PawnAABB                                                     ; объект имеет коллизию
                 DB #00                                                          ; dummy
                 ; OBJECT_NPC
-                JP Pawn.Car
+                JP PawnAABB                                                     ; объект имеет коллизию
                 DB #00                                                          ; dummy
                 ; OBJECT_DECAL
-                JP DrawDecal
+                JP $                                                            ; объект не имеет коллизию
                 DB #00                                                          ; dummy
                 ; OBJECT_COLLISION
-                JP DrawDecal
+                JP DecalAABB                                                    ; объект имеет коллизию
                 DB #00                                                          ; dummy
                 ; OBJECT_PARTICLE
-                JP DrawParticle
+                JP $                                                            ; объект не имеет коллизию
                 DB #00                                                          ; dummy
                 ; 5
                 JP $
@@ -41,6 +44,4 @@ Draw:           ; переход в зависимости от типа объ�
                 ; 7
                 JP $
 
-                display " - Draw object: \t\t\t\t\t", /A, Draw, " = busy [ ", /D, $ - Draw, " bytes  ]"
-
-                endif ; ~ _CORE_MODULE_DRAW_OBJECT_DRAW_
+                endif ; ~_MODULE_GAME_OBJECT_COLLISION_GET_AABB_

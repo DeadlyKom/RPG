@@ -5,7 +5,7 @@
                 module Object
 
                 include "Draw.asm"
-                include "Player.asm"
+                include "Pawn/Include.inc"
                 include "Decal.asm"
                 include "Particle.asm"
 

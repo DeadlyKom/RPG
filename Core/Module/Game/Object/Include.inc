@@ -10,6 +10,8 @@
                 include "NPC/Include.inc"
                 include "Decal.asm"
                 include "Particle.asm"
+                include "Utils/Include.inc"
+                include "Collision/Include.inc"
 
                 endmodule
 

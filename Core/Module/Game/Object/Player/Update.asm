@@ -14,6 +14,6 @@ Update:         CALL Deceleration
                 CALL Game.World.Camera
                 CHECK_CONFIG_GRAPHIC_FLAG G_PARTICLE_BIT
                 CALL NZ, Dust
-                JP Game.Object.Update.Velocity
+                JP Object.ApplyVelocity
 
                 endif ; ~_MODULE_GAME_OBJECT_UPDATE_PLAYER_

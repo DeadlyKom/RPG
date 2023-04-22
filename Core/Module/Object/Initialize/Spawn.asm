@@ -50,19 +50,19 @@ Spawn:          ; поиск свободной ячейки
 .Jump           EQU $+1
                 JR $
 
-                ; 0
+                ; OBJECT_PLAYER
                 JP Player
                 DB #00                                                          ; dummy
-                ; 1
+                ; OBJECT_NPC
                 JP NPC
                 DB #00                                                          ; dummy
-                ; 2
+                ; OBJECT_DECAL
                 JP Decal
                 DB #00                                                          ; dummy
-                ; 3
+                ; OBJECT_COLLISION
                 JP Decal
                 DB #00                                                          ; dummy
-                ; 4
+                ; OBJECT_PARTICLE
                 JP Particle
                 DB #00                                                          ; dummy
                 ; 5

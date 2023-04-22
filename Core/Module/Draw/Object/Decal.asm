@@ -9,7 +9,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Decal:          BIT VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                ; проверка флаг видимости объекта
+DrawDecal:      BIT VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                ; проверка флаг видимости объекта
                 RET Z                                                           ; выход, если объект невидим
 
                 ; сохранеие текущей страницы

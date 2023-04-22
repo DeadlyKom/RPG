@@ -22,7 +22,9 @@ Interrupt:      ; проверка завершённости процесса �
                 CALL Game.World.Vertical
 
 .Tick           ; ************* TICK *************
-                CALL Game.Object.Tick
+                SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
+                CALL Object.Tick
+                CALL Object.Collision
 
 .RenderProcess  ; процесс отрисовки не завершён
 

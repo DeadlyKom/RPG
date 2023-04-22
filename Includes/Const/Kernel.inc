@@ -76,6 +76,17 @@ Convert:
 .PixelToScreen  EQU Kernel.Utils.PixelAddressP
 .ToAttribute    EQU Kernel.Utils.PixelAttribute
 
+; object
+Object:
+.Tick           EQU Kernel.Object.Tick                                          ; обработка тика объектов
+.Collision      EQU Kernel.Object.Collision.Handler                             ; обработка коллизии
+.Dust           EQU Kernel.Object.Player.Dust                                   ; обработка/спавн пыли
+.ApplySpeed     EQU Kernel.Object.Player.Rotation.ApplySpeed                    ; применить скорость
+.ApplyVelocity  EQU Kernel.Object.Update.Velocity                               ; применить вектор скорости
+.ApplyDecel     EQU Kernel.Object.Player.Deceleration                           ; применить торможение
+.GetSpriteInfo  EQU Kernel.Object.Pawn.GetSpriteInfo                            ; получить информацию о спрайте машины
+.DeltaPosition  EQU Kernel.Object.Utils.DeltaPosition                           ; расчёт дельт значений между двумя объектами
+
 ; world map
 World:
 .Shake_X        EQU Kernel.World.Draw.Shake_X                                   ; тряска карты мира по горизонтали
@@ -123,6 +134,7 @@ Math
 .Mul32x8_40     EQU Kernel.Math.Mul32x8_40
 .Div8x8         EQU Kernel.Math.Div8x8
 .Atan           EQU Kernel.Math.Atan_Sector
+.IntersectAABB  EQU Kernel.Math.IntersectAABB
 .PerlinNoise2D  EQU Kernel.Math.PerlinNoise2D
 .PN_Frequency   EQU Kernel.Math.Noise2D.Frequency
 .PN_LocationX   EQU Kernel.Math.Noise2D.Location.X

@@ -98,7 +98,7 @@ DecreaseSpeed:  CHECK_PLAYER_FLAG TURBOCHARGING_BIT
 .Input          SET_PLAYER_FLAG DECREASE_SPEED_BIT
                 RET
 
-.HandBrake      CALL Game.Object.Player.Deceleration.Speed
+.HandBrake      CALL Object.ApplyDecel
                 LD A, (IX + FObject.EnginePower)
                 OR A
                 RET Z
