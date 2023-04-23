@@ -12,6 +12,7 @@ OBJECT_PARTICLE             EQU 0x04 << 1                                       
 
 FACTION_TYPE_BIT            EQU 0x07                                            ; тип фракции (0 - нейтральная, 1 - враждебная)
 FACTION_SUBTYPE_BIT         EQU 0x06
+DYNAMIC_OBJECT_BIT          EQU 0x05                                            ; динамичность объекта
 VISIBLE_OBJECT_BIT          EQU 0x00                                            ; видимость объекта
 
 PLAYER_FACTION              EQU 0x00 << FACTION_SUBTYPE_BIT                     ; фракция игрока
@@ -23,9 +24,10 @@ FACTION_TYPE                EQU 1 << FACTION_TYPE_BIT
 FACTION_SUBTYPE             EQU 1 << FACTION_SUBTYPE_BIT
 FACTION_MASK                EQU %11000000
 
+DYNAMIC_OBJECT              EQU 1 << DYNAMIC_OBJECT_BIT                         ; динамичный объекта
 VISIBLE_OBJECT              EQU 1 << VISIBLE_OBJECT_BIT                         ; видимость объекта
 
 OBJECT_DIRECTION_MASK       EQU %01111000
-IDX_OBJECT_TYPE             EQU %00111110
+IDX_OBJECT_TYPE             EQU %00011110
 
                             endif ; ~_CONST_OBJECT_TYPE_

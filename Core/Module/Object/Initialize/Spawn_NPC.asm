@@ -15,6 +15,7 @@
 NPC:            ; -----------------------------------------
                 ; инициализация
                 ; -----------------------------------------
+                SET DYNAMIC_OBJECT_BIT, C
                 SET VISIBLE_OBJECT_BIT, C
                 LD (IY + FObject.Type), C                                       ; тип юнита
 

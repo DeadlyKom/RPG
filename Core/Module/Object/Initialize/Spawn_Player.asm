@@ -15,7 +15,7 @@
 Player:         ; -----------------------------------------
                 ; инициализация
                 ; -----------------------------------------
-                LD (IY + FObject.Type), OBJECT_PLAYER | VISIBLE_OBJECT          ; тип юнита
+                LD (IY + FObject.Type), OBJECT_PLAYER | DYNAMIC_OBJECT | VISIBLE_OBJECT          ; тип юнита
 
                 ; установка позиции по горизонтали
                 LD A, E

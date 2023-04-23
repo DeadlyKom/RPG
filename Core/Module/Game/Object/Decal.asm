@@ -29,7 +29,7 @@ Decal:          RES VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                
                 JP P, $+5
                 NEG
                 CP (SCR_MINIMAP_SIZE_X >> 1) + 1
-                JR NC, RemoveObject
+                JP NC, Object.Remove
 
                 ; -----------------------------------------
                 ;   значение фиксированной точки 12.4 (знаковое)    [от -2^11 до +2^11 в пикселях]
@@ -71,7 +71,7 @@ Decal:          RES VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                
                 JP P, $+5
                 NEG
                 CP (SCR_MINIMAP_SIZE_Y >> 1) + 1
-                JR NC, RemoveObject
+                JP NC, Object.Remove
 
                 ; -----------------------------------------
                 ;   значение фиксированной точки 12.4 (знаковое)    [от -2^11 до +2^11 в пикселях]
@@ -101,18 +101,6 @@ Decal:          RES VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                
 
                 SET VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                ; установка флага видимости
 
-                RET
-; -----------------------------------------
-; пометить объект как удалённый
-; In:
-; Out:
-;   сброшен флаг переполнения, объект не видим
-; Corrupt:
-; Note:
-; -----------------------------------------
-RemoveObject    LD (IX + FObjectDecal.Type), OBJECT_EMPTY_ELEMENT
-                LD HL, GameState.Objects
-                DEC (HL)
                 RET
 
                 display " - Update object 'DECAL':\t\t\t\t", /A, Decal, " = busy [ ", /D, $ - Decal, " bytes  ]"

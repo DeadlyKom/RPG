@@ -8,6 +8,7 @@
                 include "Prepare.asm"
                 include "Detection.asm"
                 include "AABB/Include.inc"
+                include "Types/Include.inc"
 
                 endmodule
 

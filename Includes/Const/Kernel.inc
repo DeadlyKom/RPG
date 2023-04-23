@@ -85,6 +85,7 @@ Object:
 .ApplyVelocity  EQU Kernel.Object.Update.Velocity                               ; применить вектор скорости
 .ApplyDecel     EQU Kernel.Object.Player.Deceleration                           ; применить торможение
 .GetSpriteInfo  EQU Kernel.Object.Pawn.GetSpriteInfo                            ; получить информацию о спрайте машины
+.Remove         EQU Kernel.Object.Utils.Remove                                  ; удаление объекта
 .DeltaPosition  EQU Kernel.Object.Utils.DeltaPosition                           ; расчёт дельт значений между двумя объектами
 
 ; world map

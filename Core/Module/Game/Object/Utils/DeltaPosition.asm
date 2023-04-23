@@ -2,12 +2,12 @@
                 ifndef _MODULE_GAME_OBJECT_UTILS_DELTA_POSITION_
                 define _MODULE_GAME_OBJECT_UTILS_DELTA_POSITION_
 ; -----------------------------------------
-; расчёт дельт значений между двумя объектами
+; расчёт дельты расстояния между двумя объектами
 ; In:
 ;   IX - адрес объекта A FObject
 ;   IY - адрес объекта B FObject
 ; Out:
-;   DE - дельта значений знаковое число (D - y, E - x)
+;   DE -  дельта расстояния знаковое (D - y, E - x)
 ; Corrupt:
 ;   HL, DE, BC, F
 ; Note:

@@ -44,14 +44,17 @@ Detection:      ; проверка наличия объектов в масси
 
                 ; AABB объектов берутся из данных спрайта или константы объекта
                 LD A, (IX + FObject.Type)                                       ; получим тип объекта
+                CP OBJECT_EMPTY_ELEMENT
+                JR Z, .Skip                                                     ; переход, если объект в процессе обработки помечен удалённым
                 LD C, (IX + FObject.Direction)
                 CALL AABB.GetObject
-                PUSH BC
+                LD (.FirstAABB), BC
 
                 LD A, (IY + FObject.Type)                                       ; получим тип объекта
+                CP OBJECT_EMPTY_ELEMENT
+                JR Z, .Skip                                                     ; переход, если объект в процессе обработки помечен удалённым
                 LD C, (IY + FObject.Direction)
                 CALL AABB.GetObject
-                POP DE
 
                 ; -----------------------------------------
                 ; проверка пересечения AABB с AABB
@@ -61,60 +64,19 @@ Detection:      ; проверка наличия объектов в масси
                 ;   IX - адрес первого объекта FObject (взятие позиций)
                 ;   IY - адрес второго объекта FObject (взятие позиций)
                 ; Out :
-                ;   BC - дельта значений знаковое число (B - y, C - x)
+                ;   BC - дельта расстояния знаковое (B - y, C - x)
                 ;   флаг переполнения сброшен, если пересекаются
                 ; -----------------------------------------
+.FirstAABB      EQU $+1
+                LD DE, #0000
                 CALL Math.IntersectAABB
-                CALL NC, .Collision
-                EXX
+                CALL NC, Types.Collision
+.Skip           EXX
 
                 DJNZ .SecondObject
 
                 DEC C
                 JR NZ, .FirstObject
-
-                RET
-
-.Collision      ;   BC - дельта значений знаковое число (B - y, C - x)
-                LD E, B
-
-                LD A, C
-                ADD A, A
-                LD C, A
-                SBC A, A
-                LD B, A
-                SLA C
-                SLA C
-                SLA C
-                LD HL, (IX + FObject.Velocity.X)
-                OR A
-                SBC HL, BC
-                LD (IX + FObject.Velocity.X), HL
-
-                LD HL, (IY + FObject.Velocity.X)
-                ADD HL, BC
-                LD (IY + FObject.Velocity.X), HL
-
-                LD A, E
-                ADD A, A
-                LD E, A
-                SBC A, A
-                LD D, A
-                SLA E
-                SLA E
-                SLA E
-                LD HL, (IX + FObject.Velocity.Y)
-                ADD HL, DE
-                LD (IX + FObject.Velocity.Y), HL
-
-                LD HL, (IY + FObject.Velocity.Y)
-                OR A
-                SBC HL, DE
-                LD (IY + FObject.Velocity.Y), HL
-
-                XOR A
-                LD (IX + FObject.EnginePower), A
-                LD (IY + FObject.EnginePower), A
 
                 RET
 

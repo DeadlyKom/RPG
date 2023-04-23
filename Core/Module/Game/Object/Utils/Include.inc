@@ -5,6 +5,7 @@
                 module Utils
                 
                 include "DeltaPosition.asm"
+                include "RemoveObject.asm"
 
                 endmodule
 

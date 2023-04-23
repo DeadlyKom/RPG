@@ -20,7 +20,7 @@ Particle:       ; уменьшить счётчик продолжительно
                 ; следующий фрейм
                 LD A, (IX + FObjectParticle.AnimFrame)
                 SUB #08
-                JP M, RemoveObject
+                JP M, Object.Remove
                 LD (IX + FObjectParticle.AnimFrame), A
 
 .Move           ; -----------------------------------------

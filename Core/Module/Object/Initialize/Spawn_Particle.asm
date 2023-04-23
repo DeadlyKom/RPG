@@ -17,7 +17,7 @@ Particle:       ; -----------------------------------------
                 ; инициализация
                 ; -----------------------------------------
                 
-                LD (IY + FObjectParticle.Type), OBJECT_PARTICLE | VISIBLE_OBJECT; тип объекта
+                LD (IY + FObjectParticle.Type), DYNAMIC_OBJECT | OBJECT_PARTICLE | VISIBLE_OBJECT   ; тип объекта
                 LD (IY + FObjectParticle.Subtype), B                            ; подтип частицы
                 LD C, B
 
