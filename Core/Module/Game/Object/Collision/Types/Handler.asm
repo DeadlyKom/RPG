@@ -13,11 +13,13 @@ Collision       ; проверка какие объекты столкнули�
                 LD A, (IX + FObject.Type)                                       ; тип первого объекта
                 XOR (IY + FObject.Type)                                         ; тип второго объекта
                 BIT DYNAMIC_OBJECT_BIT, A
-                JR NZ, .StaticDynamic                                           ; переход, если объект статический и динамический
+                JP NZ, .StaticDynamic                                           ; переход, если объект статический и динамический
 
                 ; -----------------------------------------
                 ; объекты либо динамические, либо статические (чего не мб)
                 ; -----------------------------------------
+
+                PUSH BC
 
                 ; сохранение входного значения по вертикали
                 LD A, B
@@ -68,6 +70,46 @@ Collision       ; проверка какие объекты столкнули�
                 LD (IY + FObject.Velocity.Y), HL
                 LD (IX + FObject.Velocity.Y), DE
 
+                ; уменьшить мощность в двое
+                SRA (IX + FObject.EnginePower)
+                SRA (IY + FObject.EnginePower)
+
+                ; -----------------------------------------
+                ; поворот игрока при ударе
+                ; -----------------------------------------
+                POP BC
+
+                LD A, (IX + FObject.Type)
+                AND IDX_OBJECT_TYPE
+                CP OBJECT_PLAYER
+                RET NZ
+
+                ; abs(dx)
+                LD A, C
+                OR A
+                JP P, .PositiveX
+                NEG
+                LD C, A
+.PositiveX
+                ; abs(dy)
+                LD A, B
+                OR A
+                JP P, .PositiveY
+                NEG
+                ; LD B, A
+.PositiveY
+                ; LD A, B
+                SUB C
+                SBC A, A
+                CCF
+                ADC A, #00
+
+                ; ADD A, A
+
+                LD HL, PlayerState.RotationAngle
+                ADD A, (HL)
+                LD (HL), A
+
                 RET
 
 .StaticDynamic  ; определение динамического объекта
@@ -84,6 +126,7 @@ Collision       ; проверка какие объекты столкнули�
 
 .Dynamic        LD (.DynamicObject), IX
                 LD (.StaticObject), IY
+
 .Handler        ; обработчик объектов
                 AND IDX_OBJECT_TYPE
                 ADD A, A

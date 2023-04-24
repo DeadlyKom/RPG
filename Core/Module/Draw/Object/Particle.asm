@@ -92,6 +92,6 @@ DrawParticle:   BIT VISIBLE_OBJECT_BIT, (IX + FObjectParticle.Type)             
 
                 include "Core/Module/Graphics/VFX/Include.inc"
 
-                display " - Draw object 'PARTICLE':\t\t\t\t", /A, Particle, " = busy [ ", /D, $ - Particle, " bytes  ]"
+                display " - Draw object 'PARTICLE':\t\t\t\t", /A, DrawParticle, " = busy [ ", /D, $ - DrawParticle, " bytes  ]"
 
                 endif ; ~_CORE_MODULE_DRAW_OBJECT_PARTICLE_

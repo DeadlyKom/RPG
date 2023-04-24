@@ -11,7 +11,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-DecalAABB:      LD BC, #0505
+DecalAABB:      LD BC, #0101
                 RET
 
                 endif ; ~_MODULE_GAME_OBJECT_COLLISION_GET_AABB_DECAL_

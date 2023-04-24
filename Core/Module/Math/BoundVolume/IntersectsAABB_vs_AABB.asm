@@ -72,6 +72,7 @@ IntersectAABB:  ; -----------------------------------------
 
                 ; abs(a.c.x - b.c.x) > (a.r.x + b.r.x)
                 LD A, L
+                SRL A
                 SUB E
                 RET C
 
@@ -83,7 +84,8 @@ IntersectAABB:  ; -----------------------------------------
                 LD D, A
 
                 ; abs(a.c.y - b.c.y) > (a.r.y + b.r.y)
-                LD A, L
+                LD A, H
+                SRL A
                 SUB D
                 RET C
 

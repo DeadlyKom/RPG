@@ -9,8 +9,9 @@
 ; Out:
 ;   DE -  дельта расстояния знаковое (D - y, E - x)
 ; Corrupt:
-;   HL, DE, BC, F
+;   HL, DE, BC, AF
 ; Note:
+;   важно, 1 бит сдвиг влево меньше 
 ; ----------------------------------------
 DeltaPosition:  LD HL, (IY + FObject.Position.X)
                 LD BC, (IX + FObject.Position.X)
@@ -20,7 +21,7 @@ DeltaPosition:  LD HL, (IY + FObject.Position.X)
                 ADD HL, HL
                 ADD HL, HL
                 ADD HL, HL
-                ADD HL, HL
+                ; ADD HL, HL
 
                 LD E, H
 
@@ -32,7 +33,7 @@ DeltaPosition:  LD HL, (IY + FObject.Position.X)
                 ADD HL, HL
                 ADD HL, HL
                 ADD HL, HL
-                ADD HL, HL
+                ; ADD HL, HL
 
                 LD D, H
 
