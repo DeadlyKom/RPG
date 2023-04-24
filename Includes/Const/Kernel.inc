@@ -64,7 +64,7 @@ Draw:
 .Minimap        EQU Kernel.World.Minimap                                        ; отображение миникарты
 .Sprite         EQU Kernel.Sprite.Draw                                          ; отображение спрайта без атрибутов
 .Object         EQU Kernel.Object.Draw                                          ; отображение объектов                  ToDo перенести в страницу!
-.WorldArrow     EQU Kernel.Arrow.Draw                                           ; отображение стрелки карты мира
+.WorldArrow     EQU Kernel.Arrow.Update                                         ; обновление стрелки ближайшего врага на карте мира
 
 .Prepare        EQU Kernel.Sprite.Prepare                                       ; подготовка спрайта перед выводм на экран
 .Prepare.PosX   EQU Kernel.Sprite.Prepare.PositionX                             ; положение спрайта по горизонтали

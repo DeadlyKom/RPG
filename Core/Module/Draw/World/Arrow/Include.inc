@@ -5,6 +5,9 @@
 Begin           EQU $
 
                 include "Draw.asm"
+                include "Prepare.asm"
+                include "Nearest.asm"
+                include "Update.asm"
 
                 display " - Draw UI Arrow :\t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
 
