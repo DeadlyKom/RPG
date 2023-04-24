@@ -30,6 +30,7 @@ Begin:          EQU $
                 include "Core/Module/Draw/World/DrawColumn.asm"
                 include "Core/Module/Draw/World/Functions/Include.inc"
                 include "Core/Module/Draw/World/Minimap.asm"
+                include "Core/Module/Draw/World/Arrow/Include.inc"
 
                 ; draw sprite
                 include "Core/Module/Draw/Sprite/Include.inc"

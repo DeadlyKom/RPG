@@ -3,6 +3,10 @@
                 define _CORE_MODULE_GRAPHICS_TILE_WORLD_GRAPHICS_PACK_1_
 World:          incbin "Core/Module/Graphics/Tile/World/Sprite/Compressed/Ground/Ground.pack.ar"
                 display " - Ground.pack: \t\t\t\t\t", /A, World, " = busy [ ", /D, $ - World, " bytes  ]"
+
+UI:
+.Arrow          include "Core/Module/Graphics/UI/Arrow/Include.inc"
+                display " - UI Arrow: \t\t\t\t\t\t", /A, UI.Arrow, " = busy [ ", /D, $ - UI.Arrow, " bytes  ]"
 Cars:
 .A              include "Core/Module/Graphics/Car/A/Include.inc"
                 display " - Car A: \t\t\t\t\t\t", /A, Cars.A, " = busy [ ", /D, $ - Cars.A, " bytes  ]"

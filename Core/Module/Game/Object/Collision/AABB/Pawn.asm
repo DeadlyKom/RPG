@@ -21,13 +21,13 @@ PawnAABB:       ; -----------------------------------------
 
                 LD A, (HL)                                                      ; FSprite.Info.Height
                 INC HL
-                SBC (HL)                                                        ; FSprite.Info.OffsetY
+                SUB (HL)                                                        ; FSprite.Info.OffsetY
                 SRL A
                 LD B, A
                 INC HL
                 LD A, (HL)                                                      ; FSprite.Info.Width
                 INC HL
-                SBC (HL)                                                        ; FSprite.Info.OffsetX
+                SUB (HL)                                                        ; FSprite.Info.OffsetX
                 SRL A
                 LD C, A
 

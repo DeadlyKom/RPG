@@ -39,7 +39,7 @@ EntryPoint:     ; -----------------------------------------
                 CALL Func.InitObject                                            ; инициализация работы с объектами
 
                 ; ToDo тестовый спавн игрока
-                LD DE, #5080
+                LD DE, #8060
                 LD BC, PLAYER_FACTION | OBJECT_PLAYER
                 CALL Func.SpawnObject
 
@@ -48,15 +48,15 @@ EntryPoint:     ; -----------------------------------------
                 ; LD BC, ENEMY_FACTION_A | OBJECT_NPC
                 ; CALL Func.SpawnObject
                 
-                ; ; ToDo тестовый спавн противника
-                ; LD DE, #5020
-                ; LD BC, ENEMY_FACTION_A | OBJECT_NPC
-                ; CALL Func.SpawnObject
-
                 ; ToDo тестовый спавн противника
-                LD DE, #50B0
+                LD DE, #5020
                 LD BC, ENEMY_FACTION_A | OBJECT_NPC
                 CALL Func.SpawnObject
+
+                ; ; ToDo тестовый спавн противника
+                ; LD DE, #50B0
+                ; LD BC, ENEMY_FACTION_A | OBJECT_NPC
+                ; CALL Func.SpawnObject
 
                 ; ; ToDo спавн частицы
                 ; LD DE, #5080

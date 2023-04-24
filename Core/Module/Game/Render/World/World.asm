@@ -30,6 +30,8 @@ Pass:           SET_PAGE_OBJECT                                                 
                 CALL Draw.Minimap
                 CALL Object
 
+                CALL Draw.WorldArrow
+
                 ; show position
                 ifdef _DEBUG
                 SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
