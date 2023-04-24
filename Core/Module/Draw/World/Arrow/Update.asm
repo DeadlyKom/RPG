@@ -10,6 +10,7 @@
 Update:         CALL Nearest
                 RET NC
                 CALL Prepare
-                JP Draw
+                CALL C, Draw
+                RET
 
                 endif ; ~ _CORE_MODULE_DRAW_WORLD_ARROW_UPDATE_
