@@ -72,6 +72,13 @@ Draw:
 .Prepare.SOx    EQU Kernel.Sprite.Prepare.SOx                                   ; смещение спрайта по горизонтали
 .Prepare.SOy    EQU Kernel.Sprite.Prepare.SOy                                   ; смещение спрайта по вертикали
 .Prepare.Size   EQU Kernel.Sprite.Prepare.SpriteSize                            ; размер спрайта (E - высота, D - ширина)
+
+.AttrSprOne     EQU Kernel.Charboundary.DrawSpriteOne                           ; отрисовка спрайта с атрибутами
+.AttrSprTwo     EQU Kernel.Charboundary.DrawSpriteTwo                           ; отрисовка спрайта с атрибутами (в 2х экранах)
+.AttrCharOne    EQU Kernel.Charboundary.DrawCharOne                             ; отрисовка знакоместа с атрибутами (в одном экране)
+.AttrCharTwo    EQU Kernel.Charboundary.DrawCharTwo                             ; отрисовка знакоместа с атрибутами (в двух экранах)
+.AttrStencilSpr EQU Kernel.Charboundary.DrawStencilSpr                          ; отрисовка спрайта с атрибутами
+
 Convert:
 .CharToScreen   EQU Kernel.Utils.PixelAddressC
 .PixelToScreen  EQU Kernel.Utils.PixelAddressP

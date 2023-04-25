@@ -37,6 +37,11 @@ Begin:          EQU $
                 include "Core/Module/Draw/Sprite/Functions/Include.inc"
                 include "Core/Module/Draw/Object/Include.inc"                   ; ToDo перенести в страницу!
 
+                ; draw attribute
+                include "Core/Module/Draw/Charboundary/DrawSprite.asm"
+                include "Core/Module/Draw/Charboundary/DrawCharboundary.asm"
+                include "Core/Module/Draw/Charboundary/DrawStencilSprite.asm"
+
                 ; decompressor
                 include "Core/Module/Decompressor/Forward.asm"
                 include "Core/Module/Decompressor/Backward.asm"

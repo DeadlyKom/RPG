@@ -6,6 +6,7 @@
                 
                 include "World.asm"
                 include "Object.asm"
+                include "UI/Include.inc"
 
                 endmodule
 

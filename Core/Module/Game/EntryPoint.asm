@@ -90,5 +90,6 @@ EntryPoint:     ; -----------------------------------------
                 SetUserHendler Game.World.Interrupt
 
                 CALL World.Generate
+                CALL Render.World.UI.DrawInit
 
                 endif ; ~_CORE_MODULE_GAME_ENTRY_POINT_
