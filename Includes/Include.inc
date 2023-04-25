@@ -10,7 +10,7 @@
                 ; version build
                 define BUILD 0
                 define MAJOR 0
-                define MINOR 1
+                define MINOR 2
 
                 define TAP_FILENAME "RPG.tap"                                   ; имя образа
                 define SNA_FILENAME "RPG.sna"                                   ; имя образа для отладки

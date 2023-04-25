@@ -22,8 +22,6 @@ Prepare:        PUSH DE
                 CALL Math.Atan
                 EX AF, AF'
 
-                ; LD HL, #0800
-                ; LD DE, #0600
                 XOR A
                 LD (.X), A
                 LD (.Y), A

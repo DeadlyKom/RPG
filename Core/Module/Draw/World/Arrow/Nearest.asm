@@ -9,10 +9,77 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Nearest:        ;LD IX, PLAYER_ADR
+Nearest:        ; количество обрабатываемых объектов
+                LD A, (GameState.Objects)                                       ; количество элементов в массиве объектов
+                OR A
+                RET Z                                                           ; выход, если массив пуст
+                LD (.ObjectCounter), A
+                
+                ; инициализация
+                LD HL, #FFFF
+                LD (.MinDistance), HL
+                LD IX, PLAYER_ADR
+
+                ; стартовый адрес обрабатываемого объекта
                 LD IY, PLAYER_ADR + OBJECT_SIZE
 
-                ; -----------------------------------------
+.ObjectLoop     ; проверка валидности элемента
+                LD A, (IY + FObject.Type)
+                CP OBJECT_EMPTY_ELEMENT
+                JR Z, .SkipObject
+
+                ; отсечение всех нейтральных и не NPC объектов
+                ADD A, A                                                        ; BIT FACTION_TYPE_BIT, A
+                JR NC, .NextObject                                              ; переход, если это нейтральный объект
+                AND IDX_OBJECT_TYPE << 1
+                CP OBJECT_NPC << 1
+                JR NZ, .NextObject
+
+                ; расчитать дистанцию
+                CALL .CalcDistance
+
+.NextObject     ; следующий элемент
+                LD DE, OBJECT_SIZE
+                ADD IY, DE
+
+                ; уменьшение счётчика элементов
+                LD HL, .ObjectCounter
+                DEC (HL)
+                JR NZ, .ObjectLoop
+
+
+.NearestObject  EQU $+2
+                LD IY, PLAYER_ADR + OBJECT_SIZE
+
+.Distance       LD HL, (IY + FObject.Position.X)
+                LD BC, #0800
+                OR A
+                SBC HL, BC
+
+                ADD HL, HL
+                ADD HL, HL
+                ADD HL, HL
+                LD E, H
+
+                LD HL, #0600
+                LD BC, (IY + FObject.Position.Y)
+                OR A
+                SBC HL, BC
+
+                ADD HL, HL
+                ADD HL, HL
+                ADD HL, HL
+                LD D, H
+
+                SCF
+                RET
+
+.SkipObject     ; следующий элемент
+                LD DE, OBJECT_SIZE
+                ADD IY, DE
+                JR .ObjectLoop
+
+.CalcDistance   ; -----------------------------------------
                 ;   IX - адрес объекта A FObject
                 ;   IY - адрес объекта B FObject
                 ; Out:
@@ -21,34 +88,57 @@ Nearest:        ;LD IX, PLAYER_ADR
                 ; Note:
                 ;   важно, 1 бит сдвиг влево меньше 
                 ; -----------------------------------------
-                ; CALL Object.DeltaPosition
+                CALL Object.DeltaPosition
 
-                LD HL, (IY + FObject.Position.X)
-                LD BC, #0800;(IX + FObject.Position.X)
+                ; abs(dx)
+                LD A, E
                 OR A
-                SBC HL, BC
+                JP P, $+5
+                NEG
+                LD E, A
 
-                ADD HL, HL
-                ADD HL, HL
-                ADD HL, HL
-                ; ADD HL, HL
-
-                LD E, H
-
-                LD HL, #0600;(IX + FObject.Position.Y)
-                LD BC, (IY + FObject.Position.Y)
+                ; abs(dy)
+                LD A, D
                 OR A
-                SBC HL, BC
+                JP P, $+5
+                NEG
+                LD D, A
 
-                ADD HL, HL
-                ADD HL, HL
-                ADD HL, HL
-                ; ADD HL, HL
+                LD B, D
+                LD C, #00
+                
+                ; ----------------------------------------
+                ; In:
+                ;   DE - multiplicand
+                ;   A  - multiplier
+                ; Out :
+                ;   HL - product DE * A
+                ; Corrupt :
+                ;   HL, F
+                ; ----------------------------------------
+                LD A, E
+                LD D, C
+                CALL Math.Mul16x8_16
+                PUSH HL
 
-                LD D, H
+                LD A, B
+                LD E, B
+                LD D, C
+                CALL Math.Mul16x8_16
+                POP DE
+                ADD HL, DE
+                EX DE, HL
 
-                SCF
+.MinDistance    EQU $+1
+                LD HL, #FFFF
+                OR A
+                SBC HL, DE
+                RET C
+                LD (.MinDistance), DE
+                LD (.NearestObject), IY
+
                 RET
 
+.ObjectCounter  DB #00
 
                 endif ; ~ _CORE_MODULE_DRAW_WORLD_ARROW_NEAREST_

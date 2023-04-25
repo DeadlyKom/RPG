@@ -18,9 +18,9 @@ Tick:           ; количество обрабатываемых объект
                 LD IX, Adr.Object
 
 .ObjectLoop     ; проверка валидности элемента
-                LD A, (IX + 0)
+                LD A, (IX + FObject.Type)
                 CP OBJECT_EMPTY_ELEMENT
-                JR Z, .NextObject
+                JR Z, .SkipObject
 
                 ; обновление объекта
                 CALL Update
@@ -29,14 +29,14 @@ Tick:           ; количество обрабатываемых объект
                 LD DE, OBJECT_SIZE
                 ADD IX, DE
 
-                ; уменьшение счётчика элементов
+.NextObject     ; уменьшение счётчика элементов
                 LD HL, .ObjectCounter
                 DEC (HL)
                 JR NZ, .ObjectLoop
 
                 RET
 
-.NextObject     ; следующий элемент
+.SkipObject     ; следующий элемент
                 LD DE, OBJECT_SIZE
                 ADD IX, DE
                 JR .ObjectLoop
