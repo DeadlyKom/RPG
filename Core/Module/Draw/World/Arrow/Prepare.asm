@@ -38,7 +38,7 @@ Prepare:        PUSH DE
                 LD D, B
                 LD E, A
 
-                LD HL, #0600
+                LD HL, #0680
                 OR A
                 SBC HL, DE
                 JP M, .L1
@@ -66,7 +66,7 @@ Prepare:        PUSH DE
                 LD H, C
                 LD L, A
 
-                LD BC, #0800
+                LD BC, #08C0
                 OR A
                 ADC HL, BC
                 JP P, .L4
@@ -82,17 +82,18 @@ Prepare:        PUSH DE
                 LD A, #FF
                 LD (.X), A
                 JR .Exit
-.L5             CP #0D
+.L5             CP #0C
                 JR C, .Exit
                 LD HL, #0C80
                 LD A, #FF
                 LD (.X), A
 
 .Exit           
+
 .Y              EQU $+1
                 LD A, #00
 .X              EQU $+1
-                XOR #00
+                OR #00
                 ADD A, A
                 RET
 
