@@ -9,6 +9,8 @@
 ; Note:
 ; -----------------------------------------
 DrawInit:       CALL BackBar
+                CALL SetBars
+
                 CALL BackFrame
                 XOR A
                 CALL Heart

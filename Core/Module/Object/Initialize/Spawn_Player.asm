@@ -37,6 +37,9 @@ Player:         ; -----------------------------------------
                 LD (IY + FObject.Position.Y.Low), A
                 LD (IY + FObject.Position.Y.High), D
 
+                ; установка характеристик персонажа
+                LD (IY + FObject.Character.Health), #FF
+
                 XOR A
 
                 ; сброс скорости

@@ -21,7 +21,7 @@ Object:         ; инициализация
                 
 .Loop           PUSH BC
                 LD A, (HL)
-                AND (~(OBJECT_SIZE - 1)) & 0xFF
+                AND #F8                                                         ; ToDo очищается младшие 3 бита
                 LD IXL, A
                 INC HL
                 LD A, (HL)

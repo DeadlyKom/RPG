@@ -10,6 +10,7 @@
                 include "AABB.inc"
                 include "Sprite.inc"
 
+                include "Character.inc"
                 include "BehaviorTree.inc"
 
                 include "Object.inc"

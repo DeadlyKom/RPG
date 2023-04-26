@@ -73,11 +73,11 @@ Direction       DB #00                                                          
 ; -----------------------------------------
 Velocity        FVector16                                                       ; векторная скорость                [4 байта]
 EnginePower     DB #00                                                          ; мощьность двигателя               [1 байт]
-BehaviorTree    FBehaviorTree                                                   ; состояние дерева поведения        [2 байта]
 VFX             DB #00                                                          ; счётчик VFX                       [1 байт]
-
+Character       FCharacter                                                      ; базовые характеристики            [.. байт]
+BehaviorTree    FBehaviorTree                                                   ; состояние дерева поведения        [2 байта]
                 ends
-OBJECT_SIZE     EQU 16                                                          ; размер структуры объекта
+OBJECT_SIZE     EQU 24                                                          ; размер структуры объекта
 OBJECTS_NUM     EQU Size.Object / OBJECT_SIZE
 
                 endif ; ~_STRUCTURE_UNIT_

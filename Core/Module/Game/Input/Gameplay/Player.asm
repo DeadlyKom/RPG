@@ -65,9 +65,14 @@ IncreaseSpeed:  ;
                 CHECK_PLAYER_FLAG TURBOCHARGING_BIT
                 LD BC, MAX_TURBOCHARGING_SPEED << 8 | 5
                 JR NZ, .Turbocharging
-                LD BC, MAX_FORWARD_SPEED << 8 | 2
+.L1             LD BC, MAX_FORWARD_SPEED << 8 | 2
+                JR .L2
 
-.Turbocharging  ; турбонаддув активирован
+.Turbocharging  LD A, (PlayerState.Turbo + 0)
+                OR A
+                JR Z, .L1
+.L2
+                ; турбонаддув активирован
                 LD A, (IX + FObject.EnginePower)
                 ADD A, C
                 CP B
@@ -122,6 +127,18 @@ DecreaseSpeed:  CHECK_PLAYER_FLAG TURBOCHARGING_BIT
 ; Note:
 ; -----------------------------------------
 TurbochargOn:   SET_PLAYER_FLAG TURBOCHARGING_BIT
+
+                EX AF, AF'
+                LD A, (PlayerState.Turbo + 0)
+                OR A
+                JR Z, .RET
+
+                LD HL, PlayerState.Turbo + 2
+                LD A, (HL)
+                ADD A, -1
+                LD (HL), A
+.RET            EX AF, AF'
+
                 RET
 
 ; -----------------------------------------
@@ -132,6 +149,7 @@ TurbochargOn:   SET_PLAYER_FLAG TURBOCHARGING_BIT
 ; Note:
 ; -----------------------------------------
 TurbochargOff:  RES_PLAYER_FLAG TURBOCHARGING_BIT
+
                 RET
 
                 endif ; ~_MODULE_GAME_INPUT_GAMEPLAY_PLAYER_
