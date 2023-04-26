@@ -31,6 +31,7 @@ Pass:           SET_PAGE_OBJECT                                                 
                 CALL Object
 
                 CALL Draw.WorldArrow
+                CALL UI.Draw
 
                 ; show position
                 ifdef _DEBUG

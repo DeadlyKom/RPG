@@ -10,10 +10,10 @@
 ; -----------------------------------------
 DrawInit:       CALL BackBar
                 CALL BackFrame
-                LD A, #00
+                XOR A
                 CALL Heart
                 CALL Gas
-                LD A, #01
+                XOR A
                 CALL Turbo
                 RET
 

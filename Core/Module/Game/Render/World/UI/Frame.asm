@@ -34,8 +34,6 @@ BackFrame:      LD A, Page.Graphics.Pack1
                 SET_SCREEN_BASE                                                 ; включение страницы основного экрана
 
                 LD HL, SharedBuffer
-                CALL Draw.AttrStencilSpr
-
-                RET
+                JP Draw.AttrStencilSpr
 
                 endif ; ~_MODULE_GAME_RENDER_UI_FRAME_
