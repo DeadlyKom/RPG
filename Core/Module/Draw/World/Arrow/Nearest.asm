@@ -47,10 +47,7 @@ Nearest:        ; количество обрабатываемых объект
                 DEC (HL)
                 JR NZ, .ObjectLoop
 
-
-.NearestObject  EQU $+2
-                LD IY, PLAYER_ADR + OBJECT_SIZE
-
+                LD IY, (PlayerState.NearestObject)
 .Distance       LD HL, (IY + FObject.Position.X)
                 LD BC, #0800
                 OR A
@@ -89,44 +86,7 @@ Nearest:        ; количество обрабатываемых объект
                 ;   важно, 1 бит сдвиг влево меньше 
                 ; -----------------------------------------
                 CALL Object.DeltaPosition
-
-                ; abs(dx)
-                LD A, E
-                OR A
-                JP P, $+5
-                NEG
-                LD E, A
-
-                ; abs(dy)
-                LD A, D
-                OR A
-                JP P, $+5
-                NEG
-                LD D, A
-
-                LD B, D
-                LD C, #00
-                
-                ; ----------------------------------------
-                ; In:
-                ;   DE - multiplicand
-                ;   A  - multiplier
-                ; Out :
-                ;   HL - product DE * A
-                ; Corrupt :
-                ;   HL, F
-                ; ----------------------------------------
-                LD A, E
-                LD D, C
-                CALL Math.Mul16x8_16
-                PUSH HL
-
-                LD A, B
-                LD E, B
-                LD D, C
-                CALL Math.Mul16x8_16
-                POP DE
-                ADD HL, DE
+                CALL Math.DistSquared
                 EX DE, HL
 
 .MinDistance    EQU $+1
@@ -135,7 +95,7 @@ Nearest:        ; количество обрабатываемых объект
                 SBC HL, DE
                 RET C
                 LD (.MinDistance), DE
-                LD (.NearestObject), IY
+                LD (PlayerState.NearestObject), IY
 
                 RET
 

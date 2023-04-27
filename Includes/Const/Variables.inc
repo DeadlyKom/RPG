@@ -29,6 +29,7 @@ PlayerState         EQU Adr.PlayerState
 .Health             EQU PlayerState + FPlayerState.Health                       ; уровень очков здоровья
 .Gas                EQU PlayerState + FPlayerState.Gas                          ; уровень очков бензина
 .Turbo              EQU PlayerState + FPlayerState.Turbo                        ; уровень очков ускорения
+.NearestObject      EQU PlayerState + FPlayerState.NearestObject                ; адрес ближайшего противника
 .CameraPosX         EQU PlayerState + FPlayerState.CameraPosX                   ; позиция карты мира по горизонтали
 .CameraPosY         EQU PlayerState + FPlayerState.CameraPosY                   ; позиция карты мира по вертикали
 .RotationAngle      EQU PlayerState + FPlayerState.RotationAngle                ; угол поворота игрока

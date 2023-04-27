@@ -144,6 +144,7 @@ Math
 .Div8x8         EQU Kernel.Math.Div8x8
 .Atan           EQU Kernel.Math.Atan_Sector
 .IntersectAABB  EQU Kernel.Math.IntersectAABB
+.DistSquared    EQU Kernel.Math.DistSquared
 .PerlinNoise2D  EQU Kernel.Math.PerlinNoise2D
 .PN_Frequency   EQU Kernel.Math.Noise2D.Frequency
 .PN_LocationX   EQU Kernel.Math.Noise2D.Location.X
@@ -187,6 +188,7 @@ Func
 
 .InitObject     EQU Kernel.Initialize.Object                                    ; инициализация работы с объектами      ToDo перенести в страницу!
 .SpawnObject    EQU Kernel.Initialize.Spawn                                     ; спавн объекта в мире                  ToDo перенести в страницу!
+.ApplyVehicle   EQU Kernel.Damage.ApplyVehicle                                  ; нанести урон машине игрока            ToDo перенести в страницу!
 
 ; debug
                 ifdef _DEBUG

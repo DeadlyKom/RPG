@@ -39,7 +39,7 @@ Decal:          ; ToDo не учитывается тип динамическо
 
                 ; уменьшить мощность в двое
                 SRA (IX + FObject.EnginePower)
-                SRA (IX + FObject.EnginePower)
+                ; SRA (IX + FObject.EnginePower)
 
                 ; -----------------------------------------
                 ; статический
