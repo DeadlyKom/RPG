@@ -35,7 +35,7 @@ Pass:           SET_PAGE_OBJECT                                                 
 
                 ; show position
                 ifdef _DEBUG
-                ; SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
+                SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
                 ; LD DE, #0000
                 ; CALL Console.SetCursor
                 ; LD HL, PlayerState.CameraPosX+3
@@ -90,12 +90,12 @@ Pass:           SET_PAGE_OBJECT                                                 
                 ; LD A, (PlayerState.DeltaCameraY)
                 ; CALL Console.DrawByte
                 
-                ; LD DE, #0400
-                ; CALL Console.SetCursor
-                ; LD A, (GameState.Objects)                                       ; количество объектов на карте мира
-                ; CALL Console.DrawByte
-                ; LD A, (Object.Num)                                              ; количество видимых объектоа на экране
-                ; CALL Console.DrawByte
+                LD DE, #0900
+                CALL Console.SetCursor
+                LD A, (GameState.Objects)                                       ; количество объектов на карте мира
+                CALL Console.DrawByte
+                LD A, (Object.Num)                                              ; количество видимых объектоа на экране
+                CALL Console.DrawByte
 
                 ; LD DE, #0500
                 ; CALL Console.SetCursor

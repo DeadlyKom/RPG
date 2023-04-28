@@ -45,7 +45,7 @@ Dust:           LD A, (IX + FObject.EnginePower)
                 LD A, (IX + FObject.Direction)
                 RRA
                 RRA
-                AND %00011110
+                AND OBJECT_DIRECTION_MASK >> 2
                 ADD A, LOW .Table
                 LD L, A
                 ADC A, HIGH .Table
@@ -60,6 +60,9 @@ Dust:           LD A, (IX + FObject.EnginePower)
                 ; спавн частиц пыли от колёс
                 LD BC, (PARTICLE_DUST << 8) | OBJECT_PARTICLE
                 CALL Func.SpawnObject
+                ;   IY - адрес объекта FObjectDecal
+                JR C, .RET                                                      ; выход, т.к. нет места
+
 
                 LD HL, (IY + FObject.Velocity.X)
 
@@ -86,8 +89,7 @@ Dust:           LD A, (IX + FObject.EnginePower)
                 endr
 
                 LD (IY + FObjectParticle.Velocity.Y), HL
-
-                LD A, #04
+.RET            LD A, #04
 .Set            LD (IX + FObject.VFX), A
 
                 RET

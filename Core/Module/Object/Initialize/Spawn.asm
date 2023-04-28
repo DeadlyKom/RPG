@@ -7,6 +7,7 @@
 ;   BC - параметры      (B - подтип, C - тип объекта)
 ; Out:
 ;   IY - адрес объекта
+;   если флаг переполнения C установлен, заспавнить проджектайл не удалось
 ; Corrupt:
 ;   HL, DE, BC, AF, HL', DE', BC', AF', IY
 ; Note:
@@ -15,7 +16,7 @@ Spawn:          ; поиск свободной ячейки
                 EXX
 
                 ; инициализация
-                LD HL, Adr.Object
+                LD HL, PLAYER_ADR
                 LD DE, OBJECT_SIZE - 1
                 LD BC, OBJECTS_NUM + 1                                          ; количество элементов
                 LD A, OBJECT_EMPTY_ELEMENT
@@ -25,6 +26,7 @@ Spawn:          ; поиск свободной ячейки
                 JR Z, .Spawn
                 ADD HL, DE
                 JP PE, .Loop
+                SCF                                                             ; нет место в массиве
                 RET
 
 .Spawn          ; адрес свободного элемента найден
@@ -37,7 +39,7 @@ Spawn:          ; поиск свободной ячейки
                 LD E, (HL)
                 LD A, OBJECTS_NUM
                 SUB C
-                RET C                                                           ; выход если нет место в массиве
+                RET C                                                           ; выход, если нет место в массиве
 
                 INC (HL)
                 EXX

@@ -39,6 +39,7 @@ Decal:          ; -----------------------------------------
                 LD (IY + FObjectDecal.Location.Y.Low), HL
                 LD (IY + FObjectDecal.Location.Y.High), DE
 
+                OR A                                                            ; успешный спавн
                 RET
 
                 display " - Spawn object 'DECAL' in world:\t\t\t", /A, Decal, " = busy [ ", /D, $ - Decal, " bytes  ]"

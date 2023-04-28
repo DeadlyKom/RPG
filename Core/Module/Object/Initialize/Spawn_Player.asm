@@ -57,6 +57,7 @@ Player:         ; -----------------------------------------
                 ; сброс счётчика
                 LD (IY + FObject.VFX), #04
 
+                OR A                                                            ; успешный спавн
                 RET
 
                 display " - Spawn object 'PLAYER' in world:\t\t\t", /A, Player, " = busy [ ", /D, $ - Player, " bytes  ]"

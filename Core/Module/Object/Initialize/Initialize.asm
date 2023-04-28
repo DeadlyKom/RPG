@@ -9,7 +9,7 @@
 ; Note:
 ; -----------------------------------------
 Object:         ; очистка массива объектов
-                LD HL, Adr.Object + Size.Object
+                LD HL, PLAYER_ADR + Size.Object
                 LD DE, (OBJECT_EMPTY_ELEMENT << 8) | OBJECT_EMPTY_ELEMENT
                 CALL SafeFill.b1024
 

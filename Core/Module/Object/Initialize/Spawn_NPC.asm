@@ -59,6 +59,7 @@ NPC:            ; -----------------------------------------
                 ; сброс счётчика
                 LD (IY + FObject.VFX), #04
 
+                OR A                                                            ; успешный спавн
                 RET
 
                 display " - Spawn object 'NPC' in world:\t\t\t", /A, NPC, " = busy [ ", /D, $ - NPC, " bytes  ]"

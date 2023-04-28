@@ -15,7 +15,7 @@ Tick:           ; количество обрабатываемых объект
                 LD (.ObjectCounter), A
                 
                 ; стартовый адрес обрабатываемого объекта
-                LD IX, Adr.Object
+                LD IX, PLAYER_ADR
 
 .ObjectLoop     ; проверка валидности элемента
                 LD A, (IX + FObject.Type)

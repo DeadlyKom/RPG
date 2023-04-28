@@ -87,6 +87,7 @@ Particle:       ; -----------------------------------------
                 LD (IY + FObjectParticle.AnimFrame), C
                 LD (IY + FObjectParticle.AnimCounter), B
 
+                OR A                                                            ; успешный спавн
                 RET
 
 .ParticleConst  ; PARTICLE_DUST                                                 ; 0x00
