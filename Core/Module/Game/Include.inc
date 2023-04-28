@@ -4,6 +4,7 @@
 
                 include "EntryPoint.asm"
                 include "Loop.asm"
+                include "Initialize/Include.inc"
                 include "Input/Include.inc"
                 include "Render/Include.inc"
                 include "World/Include.inc"

@@ -12,7 +12,6 @@ Begin:          EQU $
 
                 include "Input.asm"
                 include "CheckKeyState.asm"
-                ; include "CursorMove.asm"
 
                 display "\t - Cursor: \t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
 End:            EQU $

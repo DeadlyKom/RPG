@@ -10,15 +10,13 @@
 ; Note:
 ; -----------------------------------------
 Gen_PRNG:       ; установка seed
-                LD BC, (110);(GameConfig.Seed)
+                LD BC, (GameConfig.Seed)
                 CALL Math.SetSeed16
-
                 CALL Math.Rand8
-                INC A
-                ADD A, A
-                LD A, #41
+                
+                ; установка frequency
+                LD A, (GameConfig.Frequency)
                 LD (Math.PN_Frequency), A
-                LD (GameConfig.Frequency), A
 
                 LD HL, #0000
                 LD (PlayerState.CameraPosX + 1), HL

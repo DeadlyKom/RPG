@@ -53,7 +53,7 @@ DistSquared:    ; abs(dx)
 
                 RET
 
-                display " - Distance squared:\t\t\t\t", /A, DistSquared, " = busy [ ", /D, $ - DistSquared, " bytes  ]"
+                display " - Distance squared:\t\t\t\t\t", /A, DistSquared, " = busy [ ", /D, $ - DistSquared, " bytes  ]"
 
                 endmodule
 

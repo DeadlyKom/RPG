@@ -2,6 +2,16 @@
                     ifndef _CONST_GAME_
                     define _CONST_GAME_
 GameConfig          EQU Adr.GameConfig                                          ; адрес структуры конфигурации игры
+.Keys               EQU GameConfig + FGameConfig.KeyMenu                        ; массив клавиш
+.KeyUp              EQU GameConfig + FGameConfig.KeyUp                          ; клавиша по умолчанию "Вверх"
+.KeyDown            EQU GameConfig + FGameConfig.KeyDown                        ; клавиша по умолчанию "Вниз"
+.KeyLeft            EQU GameConfig + FGameConfig.KeyLeft                        ; клавиша по умолчанию "Влево"
+.KeyRight           EQU GameConfig + FGameConfig.KeyRight                       ; клавиша по умолчанию "Вправо"
+.KeySelect          EQU GameConfig + FGameConfig.KeySelect                      ; клавиша по умолчанию "выбор"
+.KeyBack            EQU GameConfig + FGameConfig.KeyBack                        ; клавиша по умолчанию "Отмена"
+.KeyAcceleration    EQU GameConfig + FGameConfig.KeyAcceleration                ; клавиша по умолчанию "ускорить"
+.KeyMenu            EQU GameConfig + FGameConfig.KeyMenu                        ; клавиша по умолчанию "меню/пауза"
+
 .Options            EQU GameConfig + FGameConfig.Options                        ; флаги опций
 .Graphics           EQU GameConfig + FGameConfig.Graphics                       ; флаги графики
 .Seed               EQU GameConfig + FGameConfig.Seed                           ; адрес seed текущей сессии
