@@ -1,6 +1,12 @@
 
                 ifndef _MODULE_GAME_INPUT_HANDLER_PAUSE_
                 define _MODULE_GAME_INPUT_HANDLER_PAUSE_
+INPUT           EQU 0x00
+INPUT_WASD      EQU 0x00
+INPUT_QAOP      EQU 0x01
+INPUT_KEMPSTON  EQU 0x02
+PARTICLE        EQU 0x01
+RESUME          EQU 0x02
 ; -----------------------------------------
 ; обработчик клавиш игры
 ; In:
@@ -17,10 +23,10 @@ InputHandler:   JR NZ, .NotProcessing                                           
                 JR Z, Up
                 CP KEY_ID_DOWN                                                  ; клавиша "вниз"
                 JR Z, Down
-                ; CP KEY_ID_LEFT                                                  ; клавиша "влево"
-                ; JP Z, Game.World.Left
-                ; CP KEY_ID_RIGHT                                                 ; клавиша "вправо"
-                ; JP Z, Game.World.Right
+                CP KEY_ID_LEFT                                                  ; клавиша "влево"
+                JP Z, Left
+                CP KEY_ID_RIGHT                                                 ; клавиша "вправо"
+                JP Z, Right
                 CP KEY_ID_SELECT                                                ; клавиша "выбор"
                 JP Z, Selected
                 ; CP KEY_ID_BACK                                                  ; клавиша "отмена/назад"
@@ -37,6 +43,9 @@ Processed:      OR A                                                            
                 RET
 Menu:           LD BC, Game.World.Loop
                 LD (Game.MainLoop.Handler), BC
+                
+                CALL Game.Render.World.UI.DrawInit
+                
                 SetUserHendler Game.World.Interrupt
                 RET
 Up:             LD HL, Game.Render.Pause.Cursor
@@ -54,11 +63,28 @@ Down:           LD HL, Game.Render.Pause.Cursor
                 DEC HL
                 INC (HL)
                 RET
+Left:           LD HL, Game.Render.Pause.Cursor.Dir
+                LD (HL), #FF
+                RET
+Right:          LD HL, Game.Render.Pause.Cursor.Dir
+                LD (HL), #01
+                RET
 Selected:       LD A, (Game.Render.Pause.Cursor)
-                CP #00
+                CP INPUT
+                JR Z, .ApplyInput
+                CP PARTICLE
                 JR Z, .ToggleParticle
-                CP #01
+                CP RESUME
                 JR Z, Menu
+                RET
+
+.ApplyInput     LD A, (Game.Render.Pause.SelectInput.Selected)
+                CP INPUT_WASD
+                JP Z, Game.Initialize.Keyboard_WASD
+                CP INPUT_QAOP
+                JP Z, Game.Initialize.Keyboard_QAOP
+                CP INPUT_KEMPSTON
+                JP Z, Game.Initialize.Kempston_8
                 RET
 
 .ToggleParticle SWAP_CONFIG_GRAPHIC_FLAG G_PARTICLE_BIT

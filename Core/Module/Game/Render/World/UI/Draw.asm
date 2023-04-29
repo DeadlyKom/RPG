@@ -43,9 +43,13 @@ Draw:           CALL AnimationBars
                 LD A, 64
 .Set3           LD (.T3), A
 
+                
+                CHECK_PLAYER_FLAG DECREASE_SPEED_BIT
+                JR NZ, .LL12
+
                 CHECK_PLAYER_FLAG TURBOCHARGING_BIT
                 JR NZ, .Set22
-
+.LL12
 .T2             EQU $+1
                 LD A, #10
                 DEC A
@@ -97,13 +101,13 @@ SetBar:         ; расчёт адреса прогресс бара
 ; -----------------------------------------
 ; установка начального уровня прогресс баров
 ; In:
+;   
 ; Out:
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
 SetBars:        ; обнуление значения жизни
-                LD BC, PlayerState.Health
-                INC C
+                LD BC, PlayerState.Health + 1
                 XOR A
                 LD (BC), A
                 INC C
@@ -111,12 +115,13 @@ SetBars:        ; обнуление значения жизни
                 DEC C
                 DEC C
 
-                LD DE, #FF01
-                CALL IncBar
+                LD A, (BC)
+                LD D, A
+                LD E, #01
+                CALL IncBar.Update
 
                 ; обнуление значения бензина
-                LD BC, PlayerState.Gas
-                INC C
+                LD BC, PlayerState.Gas + 1
                 XOR A
                 LD (BC), A
                 INC C
@@ -124,12 +129,13 @@ SetBars:        ; обнуление значения жизни
                 DEC C
                 DEC C
 
-                LD DE, #FF02
-                CALL IncBar
+                LD A, (BC)
+                LD D, A
+                LD E, #02
+                CALL IncBar.Update
 
                 ; обнуление значения турбо
-                LD BC, PlayerState.Turbo
-                INC C
+                LD BC, PlayerState.Turbo + 1
                 XOR A
                 LD (BC), A
                 INC C
@@ -137,8 +143,10 @@ SetBars:        ; обнуление значения жизни
                 DEC C
                 DEC C
 
-                LD DE, #FF03
-                JP IncBar
+                LD A, (BC)
+                LD D, A
+                LD E, #03
+                JP IncBar.Update
 ; -----------------------------------------
 ; анимация прогресс бара
 ; In:
@@ -194,6 +202,9 @@ AnimationBars:  LD E, HEALTH_BAR
 ; -----------------------------------------
 AnimationTurbo: CHECK_PLAYER_FLAG TURBOCHARGING_BIT
                 RET Z
+
+                CHECK_FLAG DECREASE_SPEED_BIT
+                RET NZ
 
                 LD A, (PlayerState.Turbo + 0)
                 OR A

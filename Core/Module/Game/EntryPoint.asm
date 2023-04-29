@@ -15,5 +15,6 @@ EntryPoint:     ; -----------------------------------------
                 CALL Initialize.Core                                            ; инициализация ядра
                 CALL Initialize.World                                           ; инициализация загруженного уровня
                 CALL Initialize.Input                                           ; инициализация управления 
+                CALL Game.Render.World.UI.DrawInit                              ; обновление UI (после инициализации всего)
 
                 endif ; ~_CORE_MODULE_GAME_ENTRY_POINT_

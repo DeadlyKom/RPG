@@ -22,7 +22,6 @@ Scan:           ; опрос виртуальных клавиш
                 LD A, (GameConfig.KeyAcceleration)
                 CALL Input.CheckKeyState
                 CALL Z, TurbochargOn
-                CALL NZ, TurbochargOff
 
                 ; move map left
                 LD A, (GameConfig.KeyLeft)

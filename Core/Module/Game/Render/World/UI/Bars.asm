@@ -43,6 +43,7 @@ BackBar:        LD A, Page.Graphics.Pack1
 ;   BC+1 - адрес предыдущего значения уровня
 ; Out:
 ; Corrupt:
+;   HL, DE, BC, AF
 ; Note:
 ; -----------------------------------------
 IncBar:         ; инкремент
@@ -55,7 +56,7 @@ IncBar:         ; инкремент
                 LD A, #FF
 .NotOverflow    LD (BC), A
 
-                ; сохранение смещения по горизонтали
+.Update         ; сохранение смещения по горизонтали
                 EX AF, AF'
                 LD A, E
                 EX AF, AF'

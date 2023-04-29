@@ -61,26 +61,31 @@ RotateRight:
 ; Note:
 ;   включить страницу работы с объектами
 ; -----------------------------------------
-IncreaseSpeed:  ;
-                CHECK_PLAYER_FLAG TURBOCHARGING_BIT
-                LD BC, MAX_TURBOCHARGING_SPEED << 8 | 5
-                JR NZ, .Turbocharging
-.L1             LD BC, MAX_FORWARD_SPEED << 8 | 2
-                JR .L2
+IncreaseSpeed:  SET_PLAYER_FLAG INCREASE_SPEED_BIT
 
-.Turbocharging  LD A, (PlayerState.Turbo + 0)
+                ; проверка активации турбонаддува
+                CHECK_FLAG TURBOCHARGING_BIT
+                LD BC, MAX_FORWARD_SPEED << 8 | 2
+                JR Z, .ApplyPower                                               ; переход, если турбонаддув не активен
+
+.Turbocharging  ; проверка наличия энергии турбонаддува
+                LD A, (PlayerState.Turbo + 0)
                 OR A
-                JR Z, .L1
-.L2
-                ; турбонаддув активирован
+                JR Z, .ApplyPower                                               ; переход, если энергия турбонаддува закончилась
+
+                ; уменьшение количество энергии турбонаддува
+                LD HL, PlayerState.Turbo + 2
+                LD A, (HL)
+                ADD A, -1
+                LD (HL), A
+                LD BC, MAX_TURBOCHARGING_SPEED << 8 | 5
+
+.ApplyPower     ; прирощение мощности двигателя
                 LD A, (IX + FObject.EnginePower)
                 ADD A, C
                 CP B
                 RET NC
-.Set            LD (IX + FObject.EnginePower), A
-                ; RET
-
-.Input          SET_PLAYER_FLAG INCREASE_SPEED_BIT
+                LD (IX + FObject.EnginePower), A
                 RET
 ; -----------------------------------------
 ; уменьшить скорость игрока
@@ -91,16 +96,15 @@ IncreaseSpeed:  ;
 ; Note:
 ;   включить страницу работы с объектами
 ; -----------------------------------------
-DecreaseSpeed:  CHECK_PLAYER_FLAG TURBOCHARGING_BIT
+DecreaseSpeed:  SET_PLAYER_FLAG DECREASE_SPEED_BIT
+
+                CHECK_FLAG TURBOCHARGING_BIT
                 JR NZ, .HandBrake
                 LD A, (IX + FObject.EnginePower)
                 DEC A
                 CP 256-MAX_REVERSE_SPEED
                 RET C
                 LD (IX + FObject.EnginePower), A
-                ; RET
-
-.Input          SET_PLAYER_FLAG DECREASE_SPEED_BIT
                 RET
 
 .HandBrake      CALL Object.ApplyDecel
@@ -109,9 +113,9 @@ DecreaseSpeed:  CHECK_PLAYER_FLAG TURBOCHARGING_BIT
                 RET Z
 
                 CHECK_PLAYER_FLAG ROTATE_LEFT_BIT
-                LD C, #02
+                LD C, #01
                 JR NZ, .Right
-                LD C, #FE
+                LD C, #FF
 .Right          LD HL, PlayerState.RotationAngle
                 LD A, (HL)
                 ADD A, C
@@ -127,18 +131,6 @@ DecreaseSpeed:  CHECK_PLAYER_FLAG TURBOCHARGING_BIT
 ; Note:
 ; -----------------------------------------
 TurbochargOn:   SET_PLAYER_FLAG TURBOCHARGING_BIT
-
-                EX AF, AF'
-                LD A, (PlayerState.Turbo + 0)
-                OR A
-                JR Z, .RET
-
-                LD HL, PlayerState.Turbo + 2
-                LD A, (HL)
-                ADD A, -1
-                LD (HL), A
-.RET            EX AF, AF'
-
                 RET
 
 ; -----------------------------------------
@@ -149,7 +141,6 @@ TurbochargOn:   SET_PLAYER_FLAG TURBOCHARGING_BIT
 ; Note:
 ; -----------------------------------------
 TurbochargOff:  RES_PLAYER_FLAG TURBOCHARGING_BIT
-
                 RET
 
                 endif ; ~_MODULE_GAME_INPUT_GAMEPLAY_PLAYER_

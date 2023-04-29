@@ -38,7 +38,11 @@ Player:         ; -----------------------------------------
                 LD (IY + FObject.Position.Y.High), D
 
                 ; установка характеристик персонажа
-                LD (IY + FObject.Character.Health), #FF
+                LD A, #FF
+                LD (IY + FObject.Character.Health), A
+                LD (PlayerState.Health), A
+                LD (PlayerState.Gas), A
+                LD (PlayerState.Turbo), A
 
                 XOR A
 

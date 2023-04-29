@@ -50,19 +50,33 @@ Menu:           ;
                 LD A, COLOR_TEXT
                 CALL Console.SetAttribute
                 
+                ; рисование пустоты
                 LD DE, #0508
                 CALL Console.SetCursor
                 LD BC, Space
                 CALL Console.DrawString
+
+                ; рисование опции инпута
                 LD DE, #0608
+                CALL Console.SetCursor
+.InputText      EQU $+1
+                LD BC, Keyboard_WASD
+                CALL Console.DrawString
+
+                ; рисование опции VFX частиц
+                LD DE, #0708
                 CALL Console.SetCursor
                 LD BC, Particle
                 CALL Console.DrawString
-                LD DE, #0708
+
+                ; рисование продолжить
+                LD DE, #0808
                 CALL Console.SetCursor
                 LD BC, Resume_Text
                 CALL Console.DrawString
-                LD DE, #0808
+
+                ; рисование пустоты
+                LD DE, #0908
                 CALL Console.SetCursor
                 LD BC, Space
                 CALL Console.DrawString
@@ -103,12 +117,59 @@ InitVariables   ; -----------------------------------------
                 JR Z, .L1
                 LD A, '+'
 .L1             LD (Particle.Value), A
+
+                LD A, (Cursor.Dir)
+                OR A
+                RET Z
+                LD C, A
+
+                ;сброс направления
+                XOR A
+                LD (Cursor.Dir), A
+
+                LD A, (Cursor)
+                CP #00                                                          ; Input
+                JR Z, SelectInput
                 RET
+
+SelectInput     LD A, (.Selected)
+                ADD A, C
+                RET M
+
+                CP #03
+                RET NC
+
+                LD (.Selected), A
+
+                ADD A, A    ; x2
+                ADD A, A    ; x4
+                ADD A, A    ; x8
+                ADD A, A    ; x16
+
+                ADD A, LOW Keyboard_WASD
+                LD E, A
+                ADC A, HIGH Keyboard_WASD
+                SUB E
+                LD D, A
+
+                LD HL, Menu.InputText
+                LD (HL), E
+                INC HL
+                LD (HL), D
+
+                RET
+
+.Selected       DB #00
+
 Space           BYTE "               \0"
+Keyboard_WASD   BYTE " Keyboard WASD \0"
+Keyboard_QAOP   BYTE " Keyboard QAOP \0"
+Kempston        BYTE " Kempston 8but \0"
 Particle        BYTE " Particle  [ ] \0"
 .Value          EQU $-4
 Resume_Text     BYTE " Resume        \0"
 Cursor          DB #00
-.Num            DB #02
+.Num            DB #03
+.Dir            DB #00
 
                 endif ; ~_MODULE_GAME_RENDER_PAUSE_MENU_

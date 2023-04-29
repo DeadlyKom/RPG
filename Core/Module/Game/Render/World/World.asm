@@ -35,6 +35,7 @@ Pass:           SET_PAGE_OBJECT                                                 
 
                 ; show position
                 ifdef _DEBUG
+                ifdef _DEBUG_EXECUTE
                 SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
                 ; LD DE, #0000
                 ; CALL Console.SetCursor
@@ -101,6 +102,7 @@ Pass:           SET_PAGE_OBJECT                                                 
                 ; CALL Console.SetCursor
                 ; PLAYER_FLAGS_A
                 ; CALL Console.DrawByte
+                endif
                 endif
 
                 ifdef _DEBUG
