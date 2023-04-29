@@ -1,10 +1,11 @@
 
-                ifndef _BUILDER_GRAPHICS_PACKAGE_
-                define _BUILDER_GRAPHICS_PACKAGE_
+                ifndef _BUILDER_GRAPHICS_PACKAGE_TILE_
+                define _BUILDER_GRAPHICS_PACKAGE_TILE_
 
                 MMU 3, Page.Graphics.Pack1                                      ; 3 bank, Page.Graphics.Pack1 (3) page
                 ORG Adr.Graphics.Pack1
                 module Package
+                module Tile
 Begin:          EQU $
 
                 ; 32 тайла максимум
@@ -29,5 +30,6 @@ Size:           EQU $ - Begin
                 savebin "Core/Module/Graphics/Tile/World/Sprite/Original/Ground/Ground.pack", Begin, Size
 
                 endmodule
+                endmodule
 
-                endif ; ~ _BUILDER_GRAPHICS_PACKAGE_
+                endif ; ~ _BUILDER_GRAPHICS_PACKAGE_TILE_

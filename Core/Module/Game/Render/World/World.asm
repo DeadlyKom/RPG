@@ -35,16 +35,16 @@ Pass:           SET_PAGE_OBJECT                                                 
 
                 ; show position
                 ifdef _DEBUG
-                ifdef _DEBUG_EXECUTE
+                ifndef _DEBUG_EXECUTE
                 SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
-                ; LD DE, #0000
-                ; CALL Console.SetCursor
-                ; LD HL, PlayerState.CameraPosX+3
-                ; CALL Console.DrawWordFrom
-                ; LD HL, PlayerState.CameraPosX+1
-                ; CALL Console.DrawWordFrom
-                ; LD A, (PlayerState.CameraPosX)
-                ; CALL Console.DrawByte
+                LD DE, #0000
+                CALL Console.SetCursor
+                LD HL, PlayerState.CameraPosX+3
+                CALL Console.DrawWordFrom
+                LD HL, PlayerState.CameraPosX+1
+                CALL Console.DrawWordFrom
+                LD A, (PlayerState.CameraPosX)
+                CALL Console.DrawByte
                 ; LD HL, World.Shift_X
                 ; LD A, (HL)
                 ; CALL Console.DrawByte

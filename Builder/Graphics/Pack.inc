@@ -9,8 +9,12 @@
                 display "\'Graphics Pack\':\t\t\t\t\t-------------------- [ ", /D, Size, " bytes ]\t [", /D, Page.Graphics.Pack1, "]\t ------------------------"
 
                 ifdef _REBUILD
+                ; tile
                 include "Core/Module/Graphics/Tile/World/Sprite/Package.inc"
                 include "Core/Module/Graphics/Tile/World/Sprite/Compress.inc"
+
+                ; weapon UI
+                include "Core/Module/Graphics/UI/Weapon/Compress.inc"
                 endif
 Begin:          EQU $
 

@@ -7,6 +7,7 @@
                 include "Core.asm"
                 include "World.asm"
                 include "Input.asm"
+                include "Player.asm"
 
                 endmodule
 

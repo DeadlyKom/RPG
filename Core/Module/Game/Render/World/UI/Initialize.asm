@@ -17,6 +17,9 @@ DrawInit:       CALL BackBar
                 CALL Gas
                 XOR A
                 CALL Turbo
+
+                LD A, (PlayerState.Slot)
+                CALL Slot
                 RET
 
                 endif ; ~_MODULE_GAME_RENDER_UI_INITIALIZE_

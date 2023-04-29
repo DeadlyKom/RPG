@@ -8,6 +8,8 @@ UI:
                 display " - World UI 'Arrow':\t\t\t\t\t", /A, UI.Arrow, " = busy [ ", /D, $ - UI.Arrow, " bytes  ]"
 .World          include "Core/Module/Graphics/UI/World/Include.inc"
                 display " - World UI:\t\t\t\t\t\t", /A, .World, " = busy [ ", /D, $ - .World, " bytes  ]"
+.Weapon         include "Core/Module/Graphics/UI/Weapon/Include.inc"
+                display " - Weapon UI:\t\t\t\t\t\t", /A, .Weapon, " = busy [ ", /D, $ - .Weapon, " bytes  ]"
 Cars:
 .A              include "Core/Module/Graphics/Car/A/Include.inc"
                 display " - Car A:\t\t\t\t\t\t", /A, Cars.A, " = busy [ ", /D, $ - Cars.A, " bytes  ]"
