@@ -32,8 +32,8 @@ Update:         ; переход в зависимости от типа объ�
                 ; OBJECT_PARTICLE
                 JP Particle
                 DB #00                                                          ; dummy
-                ; 5
-                JP .RET
+                ; OBJECT_MINE
+                JP Mine
                 DB #00                                                          ; dummy
                 ; 6
                 JP .RET

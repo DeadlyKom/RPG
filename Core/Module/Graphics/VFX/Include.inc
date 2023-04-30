@@ -8,7 +8,7 @@
                 include "Core/Module/Graphics/VFX/Smoke/Info.inc"
 
 Table:          ; PARTICLE_DUST                                                 ; 0x00
-                DW SpriteInfo.Dust                                                     
+                DW SpriteInfo.Dust
                 ; PARTICLE_SMOKE                                                ; 0x01
                 DW SpriteInfo.Smoke
 

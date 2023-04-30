@@ -11,15 +11,15 @@
 ; ----------------------------------------
 Camera:         ;
                 LD HL, (IX + FObject.Position.X)
-                ADD HL, HL
                 LD A, H
+                ADD A, A
                 SUB SCR_CAMERA_CENTER_X + SCR_WORLD_POS_X
                 LD (PlayerState.DeltaCameraX), A
 
                 ;
                 LD HL, (IX + FObject.Position.Y)
-                ADD HL, HL
                 LD A, H
+                ADD A, A
                 SUB SCR_CAMERA_CENTER_Y + SCR_WORLD_POS_Y+1
                 LD (PlayerState.DeltaCameraY), A
 

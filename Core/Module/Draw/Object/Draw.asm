@@ -32,8 +32,8 @@ Draw:           ; переход в зависимости от типа объ�
                 ; OBJECT_PARTICLE
                 JP DrawParticle
                 DB #00                                                          ; dummy
-                ; 5
-                JP $
+                ; OBJECT_MINE
+                JP DrawMine
                 DB #00                                                          ; dummy
                 ; 6
                 JP $

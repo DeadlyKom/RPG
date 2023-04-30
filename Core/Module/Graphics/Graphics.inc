@@ -15,6 +15,9 @@ Cars:
                 display " - Car A:\t\t\t\t\t\t", /A, Cars.A, " = busy [ ", /D, $ - Cars.A, " bytes  ]"
 .B              include "Core/Module/Graphics/Car/B/Include.inc"
                 display " - Car B:\t\t\t\t\t\t", /A, .B, " = busy [ ", /D, $ - .B, " bytes  ]"
+Weapon:
+.Mine           include "Core/Module/Graphics/Weapon/Include.inc"
+                display " - Weapon 'Mine':\t\t\t\t\t", /A, Weapon.Mine, " = busy [ ", /D, $ - Weapon.Mine, " bytes  ]"
 Declas:         include "Core/Module/Graphics/Tile/World/Sprite/Original/Decal/Include.inc"
                 display " - Decals:\t\t\t\t\t\t", /A, Declas, " = busy [ ", /D, $ - Declas, " bytes  ]"
 VFX:

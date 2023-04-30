@@ -67,8 +67,8 @@ Spawn:          ; поиск свободной ячейки
                 ; OBJECT_PARTICLE
                 JP Particle
                 DB #00                                                          ; dummy
-                ; 5
-                JP $
+                ; OBJECT_MINE
+                JP Mine
                 DB #00                                                          ; dummy
                 ; 6
                 JP $

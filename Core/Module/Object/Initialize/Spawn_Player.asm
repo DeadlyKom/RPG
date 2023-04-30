@@ -16,6 +16,7 @@ Player:         ; -----------------------------------------
                 ; инициализация
                 ; -----------------------------------------
                 LD (IY + FObject.Type), OBJECT_PLAYER | DYNAMIC_OBJECT | VISIBLE_OBJECT          ; тип юнита
+                LD (IY + FObject.Flags), NOT_DECAL_FLAG                         ; установка флагов
 
                 ; установка позиции по горизонтали
                 LD A, E

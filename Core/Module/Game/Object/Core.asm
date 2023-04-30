@@ -1,23 +1,57 @@
 
-                ifndef _MODULE_GAME_OBJECT_PLAYER_DUST_
-                define _MODULE_GAME_OBJECT_PLAYER_DUST_
+                ifndef _MODULE_GAME_OBJECT_CORE_
+                define _MODULE_GAME_OBJECT_CORE_
+Begin           EQU $
 ; -----------------------------------------
-; спавн пыли от колёс
+; обновление позиции мины
+; In:
+;   IX - адрес обрабатываемого объекта FObjectInteraction
+; Out:
+; Corrupt:
+; Note:
+; ----------------------------------------
+UpdateOffset:   ; -----------------------------------------
+                ; расчёт смещения относительно камеры
+                ; -----------------------------------------
+
+                LD A, (PlayerState.DeltaCameraPixX)
+                LD DE, (IX + FObject.Position.X)
+                LD L, A
+                ADD A, A
+                SBC A, A
+                LD H, A
+                ADD HL, HL
+                ADD HL, HL
+                ADD HL, HL
+                ADD HL, DE
+                LD (IX + FObject.Position.X), HL                                ; сохранение позиции по горизонтали
+
+                ; -----------------------------------------
+                ; расчёт смещения по высоте
+                ; -----------------------------------------
+
+                LD A, (PlayerState.DeltaCameraPixY)
+                LD DE, (IX + FObject.Position.Y)
+                LD L, A
+                ADD A, A
+                SBC A, A
+                LD H, A
+                ADD HL, HL
+                ADD HL, HL
+                ADD HL, HL
+                ADD HL, DE
+                LD (IX + FObject.Position.Y), HL                                ; сохранение позиции по горизонтали
+
+                RET
+; -----------------------------------------
+; получить смещение сокета позади машины
 ; In:
 ;   IX - адрес обрабатываемого объекта FObject
 ; Out:
 ; Corrupt:
 ; Note:
 ; ----------------------------------------
-Dust:           LD A, (IX + FObject.EnginePower)
-                CP #04
-                RET C
-
-                LD A, (IX + FObject.VFX)
-                DEC A
-                JR NZ, .Set
-
-                ; -----------------------------------------
+GetBackSoket:   ; -----------------------------------------
                 ;      7    6    5    4    3    2    1    0
                 ;   +----+----+----+----+----+----+----+----+
                 ;   | .. | B3 | B2 | B1 | B0 | .. | .. | .. |
@@ -52,45 +86,10 @@ Dust:           LD A, (IX + FObject.EnginePower)
                 SUB L
                 LD H, A
 
-                ;
+                ; чтение смещения
                 LD E, (HL)
                 INC HL
                 LD D, (HL)
-
-                ; спавн частиц пыли от колёс
-                LD BC, (PARTICLE_DUST << 8) | OBJECT_PARTICLE
-                CALL Func.SpawnObject
-                ;   IY - адрес объекта FObjectDecal
-                JR C, .RET                                                      ; выход, т.к. нет места
-
-
-                LD HL, (IY + FObject.Velocity.X)
-
-                ; NEG HL
-                XOR A
-                SUB L
-                LD L, A
-                SBC A, A
-                SUB H
-                LD H, A
-                LD L, H
-
-                rept 3
-                SRA H
-                RR L
-                endr
-
-                LD (IY + FObjectParticle.Velocity.X), HL
-                LD HL, (IY + FObject.Velocity.Y)
-
-                rept 3
-                SRA H
-                RR L
-                endr
-
-                LD (IY + FObjectParticle.Velocity.Y), HL
-.RET            LD A, #04
-.Set            LD (IX + FObject.VFX), A
 
                 RET
 
@@ -111,4 +110,6 @@ Dust:           LD A, (IX + FObject.EnginePower)
                 DW ((0)  & 0xFF) << 8 | ((0)  & 0xFF)                           ; 1110 - 315.0°   down-right
                 DW ((1)  & 0xFF) << 8 | ((-2) & 0xFF)                           ; 1111 - 337.5°
 
-                endif ; ~_MODULE_GAME_OBJECT_PLAYER_DUST_
+                display " - Update code:\t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
+
+                endif ; ~_MODULE_GAME_OBJECT_CORE_

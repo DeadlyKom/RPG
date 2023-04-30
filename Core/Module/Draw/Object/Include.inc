@@ -8,6 +8,7 @@
                 include "Pawn/Include.inc"
                 include "Decal.asm"
                 include "Particle.asm"
+                include "Mine.asm"
 
                 endmodule
 

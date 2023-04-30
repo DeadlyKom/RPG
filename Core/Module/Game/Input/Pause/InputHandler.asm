@@ -5,8 +5,9 @@ INPUT           EQU 0x00
 INPUT_WASD      EQU 0x00
 INPUT_QAOP      EQU 0x01
 INPUT_KEMPSTON  EQU 0x02
-PARTICLE        EQU 0x01
-RESUME          EQU 0x02
+SLOT            EQU 0x01
+PARTICLE        EQU 0x02
+RESUME          EQU 0x03
 ; -----------------------------------------
 ; обработчик клавиш игры
 ; In:
@@ -72,6 +73,8 @@ Right:          LD HL, Game.Render.Pause.Cursor.Dir
 Selected:       LD A, (Game.Render.Pause.Cursor)
                 CP INPUT
                 JR Z, .ApplyInput
+                CP SLOT
+                JR Z, .ApplySlot
                 CP PARTICLE
                 JR Z, .ToggleParticle
                 CP RESUME
@@ -85,6 +88,10 @@ Selected:       LD A, (Game.Render.Pause.Cursor)
                 JP Z, Game.Initialize.Keyboard_QAOP
                 CP INPUT_KEMPSTON
                 JP Z, Game.Initialize.Kempston_8
+                RET
+
+.ApplySlot      LD A, (Game.Render.Pause.SelectSlot.Selected)
+                LD (PlayerState.Slot), A
                 RET
 
 .ToggleParticle SWAP_CONFIG_GRAPHIC_FLAG G_PARTICLE_BIT

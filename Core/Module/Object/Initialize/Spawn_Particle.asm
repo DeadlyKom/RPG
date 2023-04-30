@@ -18,37 +18,11 @@ Particle:       ; -----------------------------------------
                 ; -----------------------------------------
                 
                 LD (IY + FObjectParticle.Type), DYNAMIC_OBJECT | OBJECT_PARTICLE | VISIBLE_OBJECT   ; тип объекта
+                LD (IY + FObjectParticle.Flags), NOT_DECAL_FLAG                 ; установка флагов
                 LD (IY + FObjectParticle.Subtype), B                            ; подтип частицы
                 LD C, B
 
-                ; установка позиции по горизонтали
-                LD HL, (IX + FObject.Position.X)
-                RL E
-                SBC A, A
-                LD B, A
-                LD A, E
-                LD E, C
-                rept 3
-                ADD A, A
-                RL B
-                endr
-                LD C, A
-                ADD HL, BC
-                LD (IY + FObjectParticle.Position.X), HL
-                
-                ;  установка позиции по вертикали
-                LD HL, (IX + FObject.Position.Y)
-                RL D
-                SBC A, A
-                LD B, A
-                LD A, D
-                rept 3
-                ADD A, A
-                RL B
-                endr
-                LD C, A
-                ADD HL, BC
-                LD (IY + FObjectParticle.Position.Y), HL
+                CALL CalcPosition
 
                 XOR A
 

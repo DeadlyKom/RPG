@@ -31,5 +31,6 @@
                 include "ObjectType.inc"
                 include "ObjectType_Decal.inc"
                 include "ObjectType_Particle.inc"
+                include "ObjectType_Interaction.inc"
 
                 endif ; ~_CONST_INCLUDES_

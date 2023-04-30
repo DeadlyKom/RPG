@@ -88,7 +88,8 @@ Convert:
 Object:
 .Tick           EQU Kernel.Object.Tick                                          ; обработка тика объектов
 .Collision      EQU Kernel.Object.Collision.Handler                             ; обработка коллизии
-.Dust           EQU Kernel.Object.Player.Dust                                   ; обработка/спавн пыли
+.Spawn_Dust     EQU Kernel.Object.Player.Spawn_Dust                             ; спавн пыли
+.Spawn_Mine     EQU Kernel.Object.Player.Spawn_Mine                             ; спавн мины
 .ApplySpeed     EQU Kernel.Object.Player.Rotation.ApplySpeed                    ; применить скорость
 .ApplyVelocity  EQU Kernel.Object.Update.Velocity                               ; применить вектор скорости
 .ApplyDecel     EQU Kernel.Object.Player.Deceleration                           ; применить торможение

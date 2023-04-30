@@ -79,7 +79,7 @@ Update:         CALL RotationTo
                 CALL Object.ApplySpeed
 
                 CHECK_CONFIG_GRAPHIC_FLAG G_PARTICLE_BIT
-                CALL NZ, Object.Dust
+                CALL NZ, Object.Spawn_Dust
                 CALL Movement
                 JP Object.ApplyVelocity
 

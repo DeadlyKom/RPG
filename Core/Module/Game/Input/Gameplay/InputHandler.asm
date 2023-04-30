@@ -21,8 +21,8 @@ InputHandler:   JR NZ, .NotProcessing                                           
                 ; JP Z, Game.World.Left
                 ; CP KEY_ID_RIGHT                                                 ; клавиша "вправо"
                 ; JP Z, Game.World.Right
-                ; CP KEY_ID_SELECT                                                ; клавиша "выбор"
-                ; JP Z, $
+                CP KEY_ID_SELECT                                                ; клавиша "выбор"
+                JP Z, Spawn
                 ; CP KEY_ID_BACK                                                  ; клавиша "отмена/назад"
                 ; JP Z, $
                 ; CP KEY_ID_ACCELERATION                                          ; клавиша "ускорить"
@@ -40,6 +40,12 @@ Menu:           LD A, #B7       ; OR A
                 LD BC, Game.Pause.Loop
                 LD (Game.MainLoop.Handler), BC
                 SetUserHendler Game.Pause.Interrupt
+                RET
+Spawn:          LD IX, PLAYER_ADR
+                SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
+                LD A, (PlayerState.Slot)
+                CP Game.Render.World.UI.SLOT_MINE
+                JP Z, Object.Spawn_Mine
                 RET
 
                 endif ; ~_MODULE_GAME_INPUT_HANDLER_GAMEPLAY_

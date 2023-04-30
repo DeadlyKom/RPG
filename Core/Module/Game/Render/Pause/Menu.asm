@@ -38,6 +38,11 @@ Menu:           ;
                 LD A, #37           ; SCF
                 LD (.First), A
 
+                ; инициализация текущего состояния
+                LD A, (PlayerState.Slot)
+                LD (SelectSlot.Selected), A
+                CALL SelectSlot.Calc
+
 .Rendered       ifdef _DEBUG
                 CALL FPS_Counter.Frame
                 endif
@@ -63,20 +68,27 @@ Menu:           ;
                 LD BC, Keyboard_WASD
                 CALL Console.DrawString
 
-                ; рисование опции VFX частиц
+                ; рисование слот оружия
                 LD DE, #0708
+                CALL Console.SetCursor
+.SlotText       EQU $+1
+                LD BC, Slot_None
+                CALL Console.DrawString
+
+                ; рисование опции VFX частиц
+                LD DE, #0808
                 CALL Console.SetCursor
                 LD BC, Particle
                 CALL Console.DrawString
 
                 ; рисование продолжить
-                LD DE, #0808
+                LD DE, #0908
                 CALL Console.SetCursor
                 LD BC, Resume_Text
                 CALL Console.DrawString
 
                 ; рисование пустоты
-                LD DE, #0908
+                LD DE, #0A08
                 CALL Console.SetCursor
                 LD BC, Space
                 CALL Console.DrawString
@@ -130,6 +142,8 @@ InitVariables   ; -----------------------------------------
                 LD A, (Cursor)
                 CP #00                                                          ; Input
                 JR Z, SelectInput
+                CP #01                                                          ; Slot
+                JR Z, SelectSlot
                 RET
 
 SelectInput     LD A, (.Selected)
@@ -158,6 +172,34 @@ SelectInput     LD A, (.Selected)
                 LD (HL), D
 
                 RET
+.Selected       DB #00
+
+SelectSlot      LD A, (.Selected)
+                ADD A, C
+                RET M
+
+                CP #05
+                RET NC
+
+                LD (.Selected), A
+
+.Calc           ADD A, A    ; x2
+                ADD A, A    ; x4
+                ADD A, A    ; x8
+                ADD A, A    ; x16
+
+                ADD A, LOW Slot_None
+                LD E, A
+                ADC A, HIGH Slot_None
+                SUB E
+                LD D, A
+
+                LD HL, Menu.SlotText
+                LD (HL), E
+                INC HL
+                LD (HL), D
+
+                RET
 
 .Selected       DB #00
 
@@ -165,11 +207,16 @@ Space           BYTE "               \0"
 Keyboard_WASD   BYTE " Keyboard WASD \0"
 Keyboard_QAOP   BYTE " Keyboard QAOP \0"
 Kempston        BYTE " Kempston 8but \0"
+Slot_None       BYTE " None          \0"
+Slot_MachineGun BYTE " Machine Gun   \0"
+Slot_Mine       BYTE " Mine          \0"
+Slot_Rocket     BYTE " Rocket        \0"
+Slot_RepairKit  BYTE " Repair Kit    \0"
 Particle        BYTE " Particle  [ ] \0"
 .Value          EQU $-4
 Resume_Text     BYTE " Resume        \0"
 Cursor          DB #00
-.Num            DB #03
+.Num            DB #04
 .Dir            DB #00
 
                 endif ; ~_MODULE_GAME_RENDER_PAUSE_MENU_

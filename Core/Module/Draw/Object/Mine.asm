@@ -1,15 +1,15 @@
 
-                ifndef _CORE_MODULE_DRAW_OBJECT_PARTICLE_
-                define _CORE_MODULE_DRAW_OBJECT_PARTICLE_
+                ifndef _CORE_MODULE_DRAW_OBJECT_MINE_
+                define _CORE_MODULE_DRAW_OBJECT_MINE_
 ; -----------------------------------------
 ; обновление частицы
 ; In:
-;   IX - адрес обрабатываемого объекта FObjectParticle
+;   IX - адрес обрабатываемого объекта FObjectInteraction
 ; Out:
 ; Corrupt:
 ; Note:
 ; ----------------------------------------
-DrawParticle:   BIT VISIBLE_OBJECT_BIT, (IX + FObjectParticle.Type)             ; проверка флаг видимости объекта
+DrawMine:       BIT VISIBLE_OBJECT_BIT, (IX + FObjectInteraction.Type)          ; проверка флаг видимости объекта
                 RET Z                                                           ; выход, если объект невидим
                 
                 ; сохранеие текущей страницы
@@ -17,35 +17,29 @@ DrawParticle:   BIT VISIBLE_OBJECT_BIT, (IX + FObjectParticle.Type)             
                 LD (.RestoreMemPage), A                                         ; сохранение страницы спрайта
 
                 ; подготовка позиции вывода объекта
-                LD HL, (IX + FObjectParticle.Position.X)
+                LD HL, (IX + FObjectInteraction.Position.X)
                 LD (Draw.Prepare.PosX), HL                                      ; сохранение позиции юнита по горизонтали
-                LD HL, (IX + FObjectParticle.Position.Y)
-                LD DE, (IX + FObjectParticle.Height)
-                ADD HL, DE
+                LD HL, (IX + FObjectInteraction.Position.Y)
                 LD (Draw.Prepare.PosY), HL                                      ; сохранение позиции юнита по вертикали
 
                 ; -----------------------------------------
                 ; расчёт адреса
                 ; -----------------------------------------
                 
-                ; расчёт адреса анимации
-                LD A, (IX + FObjectParticle.Subtype)
+                ; расчёт адреса спрайта
+                LD A, (IX + FObjectInteraction.Subtype)
                 ADD A, A
-                ADD A, LOW VFX.Table
+                ADD A, LOW .Table
                 LD L, A
-                ADC A, HIGH VFX.Table
+                ADC A, HIGH .Table
                 SUB L
                 LD H, A
 
-                ; расчёт адреса фрейма анимации 
-                LD A, (IX + FObjectParticle.AnimFrame)
-                ADD A, (HL)
+                ; чтение адреса спрайта
+                LD A, (HL)
                 INC HL
                 LD H, (HL)
                 LD L, A
-                ADC A, H
-                SUB L
-                LD H, A
 
                 ; -----------------------------------------
                 ; чтение информации о спрайте
@@ -90,8 +84,11 @@ DrawParticle:   BIT VISIBLE_OBJECT_BIT, (IX + FObjectParticle.Type)             
                 LD A, #00
                 JP SetPage
 
-                include "Core/Module/Graphics/VFX/Include.inc"
+.Table          ; INTERACTION_MINE                                              ; 0x00
+                DW SpriteInfo.Weapon.Mine
 
-                display " - Draw object 'PARTICLE':\t\t\t\t", /A, DrawParticle, " = busy [ ", /D, $ - DrawParticle, " bytes  ]"
+                include "Core/Module/Graphics/Weapon/Original/Info.inc"
 
-                endif ; ~_CORE_MODULE_DRAW_OBJECT_PARTICLE_
+                display " - Draw object 'MINE':\t\t\t\t", /A, DrawMine, " = busy [ ", /D, $ - DrawMine, " bytes  ]"
+
+                endif ; ~_CORE_MODULE_DRAW_OBJECT_MINE_

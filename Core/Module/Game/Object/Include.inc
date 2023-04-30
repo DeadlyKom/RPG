@@ -4,12 +4,14 @@
 
                 module Object
                 
+                include "Core.asm"
                 include "Tick.asm"
                 include "Update.asm"
                 include "Player/Include.inc"
                 include "NPC/Include.inc"
                 include "Decal.asm"
                 include "Particle.asm"
+                include "Mine.asm"
                 include "Utils/Include.inc"
                 include "Collision/Include.inc"
 

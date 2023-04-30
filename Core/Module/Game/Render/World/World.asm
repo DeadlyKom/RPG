@@ -37,14 +37,14 @@ Pass:           SET_PAGE_OBJECT                                                 
                 ifdef _DEBUG
                 ifndef _DEBUG_EXECUTE
                 SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
-                LD DE, #0000
-                CALL Console.SetCursor
-                LD HL, PlayerState.CameraPosX+3
-                CALL Console.DrawWordFrom
-                LD HL, PlayerState.CameraPosX+1
-                CALL Console.DrawWordFrom
-                LD A, (PlayerState.CameraPosX)
-                CALL Console.DrawByte
+                ; LD DE, #0000
+                ; CALL Console.SetCursor
+                ; LD HL, PlayerState.CameraPosX+3
+                ; CALL Console.DrawWordFrom
+                ; LD HL, PlayerState.CameraPosX+1
+                ; CALL Console.DrawWordFrom
+                ; LD A, (PlayerState.CameraPosX)
+                ; CALL Console.DrawByte
                 ; LD HL, World.Shift_X
                 ; LD A, (HL)
                 ; CALL Console.DrawByte
@@ -91,7 +91,7 @@ Pass:           SET_PAGE_OBJECT                                                 
                 ; LD A, (PlayerState.DeltaCameraY)
                 ; CALL Console.DrawByte
                 
-                LD DE, #0900
+                LD DE, #0A00
                 CALL Console.SetCursor
                 LD A, (GameState.Objects)                                       ; количество объектов на карте мира
                 CALL Console.DrawByte

@@ -43,13 +43,15 @@ Prepare:        ; -----------------------------------------
                 JR NC, .NextObject
 
                 ; является ли объект декалью
-                AND IDX_OBJECT_TYPE >> 1
-                CP OBJECT_DECAL >> 1
-                JR Z, .IsDecal                                                  ; переход если объект, является декалью
+                INC E                                                           ; .Flags
+                LD A, (DE)
+                ADD A, A                                                        ; BIT DECAL_FLAG_BIT, A
+                JR C, .IsDecal                                                  ; переход если объект, является декалью
 
 .Copy           ; копирование адреса объекта
-                INC E                                                           ; FObjectDecal.Position.Y
+                INC E                                                           ; .Position.Y
                 LD (HL), E
+                DEC E
                 DEC E
                 INC L
                 LD (HL), D
@@ -101,7 +103,7 @@ Prepare:        ; -----------------------------------------
                 LD (HL), D
 
                 LD L, A
-
+                DEC E
                 JR .NextObject
 
                 endif ; ~_MODULE_GAME_RENDER_SORT_PREPARE_

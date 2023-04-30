@@ -24,24 +24,10 @@ Particle:       ; уменьшить счётчик продолжительно
                 LD (IX + FObjectParticle.AnimFrame), A
 
 .Move           ; -----------------------------------------
-                ; расчёт смещения частицы относительно камеры
+                ; расчёт смещения относительно камеры
                 ; -----------------------------------------
 
-                LD A, (PlayerState.DeltaCameraPixX)
-                LD DE, (IX + FObjectParticle.Position.X)
-                LD L, A
-                ADD A, A
-                SBC A, A
-                LD H, A
-                ADD HL, HL
-                ADD HL, HL
-                ADD HL, HL
-                ADD HL, DE
-                LD (IX + FObjectParticle.Position.X), HL                           ; сохранение позиции по горизонтали
-
-                ; -----------------------------------------
                 ; расчёт смещения частицы по высоте
-                ; -----------------------------------------
                 LD HL, (IX + FObjectParticle.Height)
                 LD A, (IX + FObjectParticle.Gravity)
                 LD E, A
@@ -51,18 +37,7 @@ Particle:       ; уменьшить счётчик продолжительно
                 ADD HL, DE
                 LD (IX + FObjectParticle.Height), HL
 
-                LD A, (PlayerState.DeltaCameraPixY)
-                LD DE, (IX + FObjectParticle.Position.Y)
-                LD L, A
-                ADD A, A
-                SBC A, A
-                LD H, A
-                ADD HL, HL
-                ADD HL, HL
-                ADD HL, HL
-                ADD HL, DE
-                LD (IX + FObjectParticle.Position.Y), HL                           ; сохранение позиции по горизонтали
-
+                CALL UpdateOffset
                 JP Object.ApplyVelocity
 
                 display " - Update object 'PARTICLE':\t\t\t\t", /A, Particle, " = busy [ ", /D, $ - Particle, " bytes  ]"
