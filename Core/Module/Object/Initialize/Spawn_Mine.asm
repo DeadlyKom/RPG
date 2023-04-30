@@ -4,7 +4,8 @@
 ; -----------------------------------------
 ; спавн декали "мины" в мире
 ; In:
-;   BC - параметры      (B - подтип декали, C - тип объекта)
+;   DE - смещение частицы   (D - y, E - x)
+;   BC - параметры          (B - подтип декали, C - тип объекта)
 ;   IX - адрес объекта копирования позиции FObject
 ;   IY - адрес объекта FObjectInteraction
 ; Out:
@@ -21,7 +22,9 @@ Mine:           ; -----------------------------------------
                 LD (IY + FObjectInteraction.Subtype), B                         ; подтип декали
                 LD (IY + FObjectInteraction.Lifetime), #40                      ; время жизни объекта
 
-                CALL CalcPosition
+                CALL Func.WorldPosition
+                LD (IY + FObjectInteraction.Position.Y), HL
+                LD (IY + FObjectInteraction.Position.X), DE
 
                 OR A                                                            ; успешный спавн
                 RET

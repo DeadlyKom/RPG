@@ -15,9 +15,9 @@ Car:            ; сохранеие текущей страницы
 
                 ; подготовка позиции вывода объекта
                 LD HL, (IX + FObject.Position.X)
-                LD (Draw.Prepare.PosX), HL                                      ; сохранение позиции юнита по горизонтали
+                LD (Draw.Prepare.PosX), HL                                      ; сохранение позиции по горизонтали
                 LD HL, (IX + FObject.Position.Y)
-                LD (Draw.Prepare.PosY), HL                                      ; сохранение позиции юнита по вертикали
+                LD (Draw.Prepare.PosY), HL                                      ; сохранение позиции по вертикали
 
                 ; -----------------------------------------
                 ; расчёт адреса
@@ -57,17 +57,21 @@ Car:            ; сохранеие текущей страницы
                 LD D, (HL)                                                      ; FSprite.Data.High
                 EX DE, HL
 
+
                 ; -----------------------------------------
                 ; подготовка спрайта перед выводом
                 ; -----------------------------------------
-
+                PUSH IX
                 CALL Draw.Prepare                                               ; проверка и подготовка спрайта перед отрисовкой
                 CALL C, Draw.Sprite                                             ; если все проверки успешны, отрисовка спрайта
 
                 ; востановление страницы
 .RestoreMemPage EQU $+1
                 LD A, #00
-                JP SetPage
+                CALL SetPage
+
+                POP IX
+                JP MuzzleFlash
 
                 display " - Draw object 'CAR':\t\t\t\t\t", /A, Car, " = busy [ ", /D, $ - Car, " bytes  ]"
 

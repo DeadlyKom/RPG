@@ -3,30 +3,30 @@
                 define _CORE_MODULE_OBJECT_CORE_
 Begin           EQU $
 ; -----------------------------------------
-; спавн частицы в мире
+; приведение к мировой впозиции
 ; In:
 ;   DE - смещение частицы   (D - y, E - x)
 ;   IX - адрес объекта копирования позиции FObject
-;   IY - адрес объекта FObject
 ; Out:
+;   HL - новая позиция по вертикали
+;   DE - новая позиция по горизонтали
 ; Corrupt:
 ;   HL, DE, BC, AF
 ; Note:
 ; -----------------------------------------
-CalcPosition:   ; установка позиции по горизонтали
+WorldPosition:   ; установка позиции по горизонтали
                 LD HL, (IX + FObject.Position.X)
                 RL E
                 SBC A, A
                 LD B, A
                 LD A, E
-                LD E, C
                 rept 3
                 ADD A, A
                 RL B
                 endr
                 LD C, A
                 ADD HL, BC
-                LD (IY + FObject.Position.X), HL
+                PUSH HL
                 
                 ;  установка позиции по вертикали
                 LD HL, (IX + FObject.Position.Y)
@@ -40,7 +40,7 @@ CalcPosition:   ; установка позиции по горизонтали
                 endr
                 LD C, A
                 ADD HL, BC
-                LD (IY + FObject.Position.Y), HL
+                POP DE
 
                 RET
 

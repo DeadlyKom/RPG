@@ -18,11 +18,11 @@ DrawParticle:   BIT VISIBLE_OBJECT_BIT, (IX + FObjectParticle.Type)             
 
                 ; подготовка позиции вывода объекта
                 LD HL, (IX + FObjectParticle.Position.X)
-                LD (Draw.Prepare.PosX), HL                                      ; сохранение позиции юнита по горизонтали
+                LD (Draw.Prepare.PosX), HL                                      ; сохранение позиции по горизонтали
                 LD HL, (IX + FObjectParticle.Position.Y)
                 LD DE, (IX + FObjectParticle.Height)
                 ADD HL, DE
-                LD (Draw.Prepare.PosY), HL                                      ; сохранение позиции юнита по вертикали
+                LD (Draw.Prepare.PosY), HL                                      ; сохранение позиции по вертикали
 
                 ; -----------------------------------------
                 ; расчёт адреса

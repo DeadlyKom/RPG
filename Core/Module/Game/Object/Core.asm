@@ -48,6 +48,7 @@ UpdateOffset:   ; -----------------------------------------
 ; In:
 ;   IX - адрес обрабатываемого объекта FObject
 ; Out:
+;   DE - смещение (D - y, E - x)
 ; Corrupt:
 ; Note:
 ; ----------------------------------------
@@ -109,7 +110,18 @@ GetBackSoket:   ; -----------------------------------------
                 DW ((-3) & 0xFF) << 8 | ((3)  & 0xFF)                           ; 1101 - 292.5°
                 DW ((0)  & 0xFF) << 8 | ((0)  & 0xFF)                           ; 1110 - 315.0°   down-right
                 DW ((1)  & 0xFF) << 8 | ((-2) & 0xFF)                           ; 1111 - 337.5°
+; -----------------------------------------
+; получить смещение сокета позади машины
+; In:
+;   IX - адрес объекта FObject
+; Out:
+;   DE - смещение (D - y, E - x)
+; Corrupt:
+; Note:
+; ----------------------------------------
+GetFireSoket:   LD DE, #0000
+                RET
 
-                display " - Update code:\t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
+                display " - Update core:\t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
 
                 endif ; ~_MODULE_GAME_OBJECT_CORE_

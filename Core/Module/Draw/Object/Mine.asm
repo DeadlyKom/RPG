@@ -18,9 +18,9 @@ DrawMine:       BIT VISIBLE_OBJECT_BIT, (IX + FObjectInteraction.Type)          
 
                 ; подготовка позиции вывода объекта
                 LD HL, (IX + FObjectInteraction.Position.X)
-                LD (Draw.Prepare.PosX), HL                                      ; сохранение позиции юнита по горизонтали
+                LD (Draw.Prepare.PosX), HL                                      ; сохранение позиции по горизонтали
                 LD HL, (IX + FObjectInteraction.Position.Y)
-                LD (Draw.Prepare.PosY), HL                                      ; сохранение позиции юнита по вертикали
+                LD (Draw.Prepare.PosY), HL                                      ; сохранение позиции по вертикали
 
                 ; -----------------------------------------
                 ; расчёт адреса

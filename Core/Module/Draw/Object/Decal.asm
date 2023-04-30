@@ -18,9 +18,9 @@ DrawDecal:      BIT VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                
 
                 ; подготовка позиции вывода объекта
                 LD HL, (IX + FObjectDecal.Position.X)
-                LD (Draw.Prepare.PosX), HL                                      ; сохранение позиции юнита по горизонтали
+                LD (Draw.Prepare.PosX), HL                                      ; сохранение позиции по горизонтали
                 LD HL, (IX + FObjectDecal.Position.Y)
-                LD (Draw.Prepare.PosY), HL                                      ; сохранение позиции юнита по вертикали
+                LD (Draw.Prepare.PosY), HL                                      ; сохранение позиции по вертикали
 
                 ; -----------------------------------------
                 ; расчёт адреса

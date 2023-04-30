@@ -6,6 +6,7 @@
 
                 include "Car.asm"
                 include "GetSpriteInfo.asm"
+                include "MuzzleFlash.asm"
 
                 endmodule
 

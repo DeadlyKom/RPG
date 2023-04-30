@@ -43,6 +43,31 @@ Scan:           ; опрос виртуальных клавиш
                 CALL Input.CheckKeyState
                 CALL Z, DecreaseSpeed
 
+
+                ; турбонаддув
+                LD A, VK_O
+                CALL Input.CheckKeyState
+                CALL Z, .RotateLeft
+
+                ; move map left
+                LD A, VK_P
+                CALL Input.CheckKeyState
+                CALL Z, .RotateRight
+
+                ; move map left
+                LD A, VK_I
+                CALL Input.CheckKeyState
+                CALL Z, .OnOff
+
                 RET
+.RotateLeft     DEC (IX + FObject.MuzzleFlash)
+                RET
+.RotateRight    INC (IX + FObject.MuzzleFlash)
+                RET
+.OnOff          LD A, (IX + FObject.Flags)
+                XOR %01000000
+                LD (IX + FObject.Flags), A
+                RET
+
 
                 endif ; ~_MODULE_GAME_INPUT_GAMEPLAY_SCAN_

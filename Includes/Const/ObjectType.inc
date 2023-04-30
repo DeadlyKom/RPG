@@ -17,6 +17,7 @@ DYNAMIC_OBJECT_BIT          EQU 0x05                                            
 VISIBLE_OBJECT_BIT          EQU 0x00                                            ; видимость объекта
 
 DECAL_FLAG_BIT              EQU 0x07                                            ; объект является декалью
+FIRE_BIT                    EQU 0x06                                            ; объект ведёт огонь по цели
 
 PLAYER_FACTION              EQU 0x00 << FACTION_SUBTYPE_BIT                     ; фракция игрока
 NEUTRAL_FACTION             EQU 0x01 << FACTION_SUBTYPE_BIT                     ; нейтральная фракция

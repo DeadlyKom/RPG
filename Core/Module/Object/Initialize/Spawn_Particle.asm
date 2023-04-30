@@ -20,9 +20,10 @@ Particle:       ; -----------------------------------------
                 LD (IY + FObjectParticle.Type), DYNAMIC_OBJECT | OBJECT_PARTICLE | VISIBLE_OBJECT   ; тип объекта
                 LD (IY + FObjectParticle.Flags), NOT_DECAL_FLAG                 ; установка флагов
                 LD (IY + FObjectParticle.Subtype), B                            ; подтип частицы
-                LD C, B
 
-                CALL CalcPosition
+                CALL Func.WorldPosition
+                LD (IY + FObjectParticle.Position.Y), HL
+                LD (IY + FObjectParticle.Position.X), DE
 
                 XOR A
 
@@ -37,6 +38,7 @@ Particle:       ; -----------------------------------------
                 LD (IY + FObjectParticle.Height.High), A
 
                 ; определение адреса константных данных частицы
+                LD E, (IY + FObjectParticle.Subtype)
                 LD A, E
                 ADD A, A ; x2
                 ADD A, E ; x3

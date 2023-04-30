@@ -189,6 +189,7 @@ Func
 .Right.x0       EQU Kernel.Functions.NoShiftRight.x0
 
 .InitObject     EQU Kernel.Initialize.Object                                    ; инициализация работы с объектами      ToDo перенести в страницу!
+.WorldPosition  EQU Kernel.Initialize.WorldPosition                             ; привести к мировой позиции            ToDo перенести в страницу!
 .SpawnObject    EQU Kernel.Initialize.Spawn                                     ; спавн объекта в мире                  ToDo перенести в страницу!
 .ApplyVehicle   EQU Kernel.Damage.ApplyVehicle                                  ; нанести урон машине игрока            ToDo перенести в страницу!
 

@@ -27,5 +27,7 @@ VFX:
                 display " - Smoke:\t\t\t\t\t\t", /A, .Smoke, " = busy [ ", /D, $ - .Smoke, " bytes  ]"
 .Explosion      include "Core/Module/Graphics/VFX/Explosion/Include.inc"
                 display " - Explosion:\t\t\t\t\t\t", /A, .Explosion, " = busy [ ", /D, $ - .Explosion, " bytes  ]"
+.MuzzleFlash    include "Core/Module/Graphics/VFX/MuzzleFlash/Include.inc"
+                display " - MuzzleFlash:\t\t\t\t\t", /A, .MuzzleFlash, " = busy [ ", /D, $ - .MuzzleFlash, " bytes  ]"
 
                 endif ; ~ _CORE_MODULE_GRAPHICS_TILE_WORLD_GRAPHICS_PACK_1_
