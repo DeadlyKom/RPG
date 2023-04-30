@@ -16,9 +16,11 @@ Mine:           ; уменьшить счётчик продолжительно
 
                 DEC (IX + FObjectInteraction.Lifetime)
                 JP NZ, UpdateOffset                                             ; переход, если время жизни объекта не вышло
-                
+
                 ; уничтожение объекта
-                JP Object.Remove
+                CALL Object.Remove
+
+                JP Object.Spawn_Explosion
 
                 display " - Update object 'MINE':\t\t\t\t", /A, Mine, " = busy [ ", /D, $ - Mine, " bytes  ]"
 

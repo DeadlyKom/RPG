@@ -68,6 +68,8 @@ Particle:       ; -----------------------------------------
                 FParticleConst { #FE, (#07 - 1) << 3,  #05 }
                 ; PARTICLE_SMOKE                                                ; 0x01
                 FParticleConst { #F7, (#07 - 1) << 3,  #05 }
+                ; PARTICLE_EXPLOSION                                            ; 0x02
+                FParticleConst { #F1, (#04 - 1) << 3,  #03 }
 
                 display " - Spawn object 'PARTICLE' in world :\t\t\t", /A, Decal, " = busy [ ", /D, $ - Decal, " bytes  ]"
 

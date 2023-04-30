@@ -9,6 +9,7 @@ Begin           EQU $
                 include "Deceleration.asm"
                 include "Spawn_Dust.asm"
                 include "Spawn_Mine.asm"
+                include "Spawn_Explosion.asm"
 
                 display " - Update object 'PLAYER':\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
 

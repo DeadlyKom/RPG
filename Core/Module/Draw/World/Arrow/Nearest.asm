@@ -18,6 +18,8 @@ Nearest:        ; количество обрабатываемых объект
                 ; инициализация
                 LD HL, #FFFF
                 LD (.MinDistance), HL
+                INC HL
+                LD (PlayerState.NearestObject), HL
                 LD IX, PLAYER_ADR
 
                 ; стартовый адрес обрабатываемого объекта
@@ -48,6 +50,11 @@ Nearest:        ; количество обрабатываемых объект
                 JR NZ, .ObjectLoop
 
                 LD IY, (PlayerState.NearestObject)
+
+                LD A, IYL
+                OR IYH
+                RET Z
+
 .Distance       LD HL, (IY + FObject.Position.X)
                 LD BC, #0800
                 OR A

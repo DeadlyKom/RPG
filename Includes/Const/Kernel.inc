@@ -90,6 +90,7 @@ Object:
 .Collision      EQU Kernel.Object.Collision.Handler                             ; обработка коллизии
 .Spawn_Dust     EQU Kernel.Object.Player.Spawn_Dust                             ; спавн пыли
 .Spawn_Mine     EQU Kernel.Object.Player.Spawn_Mine                             ; спавн мины
+.Spawn_Explosion EQU Kernel.Object.Player.Spawn_Explosion                       ; спавн взрыва
 .ApplySpeed     EQU Kernel.Object.Player.Rotation.ApplySpeed                    ; применить скорость
 .ApplyVelocity  EQU Kernel.Object.Update.Velocity                               ; применить вектор скорости
 .ApplyDecel     EQU Kernel.Object.Player.Deceleration                           ; применить торможение
