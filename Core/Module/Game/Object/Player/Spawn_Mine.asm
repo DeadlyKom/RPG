@@ -10,7 +10,7 @@
 ; Note:
 ; ----------------------------------------
 Spawn_Mine:     ; получение смещение относительно пивата машины
-                CALL Kernel.Object.GetBackSoket
+                CALL Kernel.Object.GetBackSocket
 
                 ; спавн мины
                 LD BC, (INTERACTION_MINE << 8) | OBJECT_MINE

@@ -10,7 +10,7 @@
 ; Note:
 ; ----------------------------------------
 Spawn_Explosion ; получение смещение относительно пивата машины
-                CALL Kernel.Object.GetBackSoket
+                CALL Kernel.Object.GetBackSocket
 
                 ; спавн мины
                 LD BC, (PARTICLE_EXPLOSION << 8) | OBJECT_PARTICLE

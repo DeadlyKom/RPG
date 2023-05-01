@@ -16,7 +16,7 @@ World:          ; -----------------------------------------
 
                 ; ToDo тестовый спавн игрока
                 LD DE, #8060
-                LD BC, PLAYER_FACTION | OBJECT_PLAYER
+                LD BC, OBJECT_PLAYER
                 CALL Func.SpawnObject
 
                 ; ; ToDo тестовый спавн противника

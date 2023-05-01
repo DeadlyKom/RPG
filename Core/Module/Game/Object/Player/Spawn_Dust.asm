@@ -18,7 +18,7 @@ Spawn_Dust:     LD A, (IX + FObject.EnginePower)
                 JR NZ, .Set
 
                 ; получение смещение относительно пивата машины
-                CALL Kernel.Object.GetBackSoket
+                CALL Kernel.Object.GetBackSocket
 
                 ; спавн частиц пыли от колёс
                 LD BC, (PARTICLE_DUST << 8) | OBJECT_PARTICLE

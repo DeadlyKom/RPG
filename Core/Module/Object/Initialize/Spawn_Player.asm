@@ -15,7 +15,7 @@
 Player:         ; -----------------------------------------
                 ; инициализация
                 ; -----------------------------------------
-                LD (IY + FObject.Type), OBJECT_PLAYER | DYNAMIC_OBJECT | VISIBLE_OBJECT          ; тип юнита
+                LD (IY + FObject.Type), PLAYER_FACTION | OBJECT_PLAYER | DYNAMIC_OBJECT | VISIBLE_OBJECT          ; тип юнита
                 LD (IY + FObject.Flags), NOT_DECAL_FLAG                         ; установка флагов
 
                 ; установка позиции по горизонтали
@@ -47,7 +47,7 @@ Player:         ; -----------------------------------------
                 LD (IY + FObject.EnginePower), A
 
                 ; сброс направления
-                LD (IY + FObject.Direction), A
+                LD (IY + FObject.Direction), 2 << 3
 
                 ; сброс скорости
                 LD (IY + FObject.Velocity.X.Low), A
