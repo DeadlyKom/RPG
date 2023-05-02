@@ -7,6 +7,7 @@
 ;   A  - тип объекта
 ;   C  - направление объекта
 ; Out:
+;   DE - смещение AABB (D - y, E - x)
 ;   BC - размер AABB (B - y, C - x)
 ; Corrupt:
 ; Note:
@@ -21,13 +22,13 @@ PawnAABB:       ; -----------------------------------------
 
                 LD A, (HL)                                                      ; FSprite.Info.Height
                 INC HL
-                SUB (HL)                                                        ; FSprite.Info.OffsetY
+                LD D, (HL)                                                      ; FSprite.Info.OffsetY
                 SRL A
                 LD B, A
                 INC HL
                 LD A, (HL)                                                      ; FSprite.Info.Width
                 INC HL
-                SUB (HL)                                                        ; FSprite.Info.OffsetX
+                LD E, (HL)                                                      ; FSprite.Info.OffsetX
                 SRL A
                 LD C, A
 

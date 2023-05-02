@@ -42,6 +42,9 @@ Begin:          EQU $
                 include "Core/Module/Draw/Charboundary/DrawCharboundary.asm"
                 include "Core/Module/Draw/Charboundary/DrawStencilSprite.asm"
 
+                ; draw line
+                include "Core/Module/Utils/Debug/DrawLine.asm"
+
                 ; decompressor
                 include "Core/Module/Decompressor/Forward.asm"
                 include "Core/Module/Decompressor/Backward.asm"

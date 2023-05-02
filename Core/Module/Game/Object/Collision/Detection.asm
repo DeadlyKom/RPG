@@ -48,27 +48,40 @@ Detection:      ; проверка наличия объектов в масси
                 JR Z, .Skip                                                     ; переход, если объект в процессе обработки помечен удалённым
                 LD C, (IX + FObject.Direction)
                 CALL AABB.GetObject
-                LD (.FirstAABB), BC
+                ; -----------------------------------------
+                ;   DE - смещение AABB (D - y, E - x)
+                ;   BC - размер AABB (B - y, C - x)
+                ; -----------------------------------------
 
                 LD A, (IY + FObject.Type)                                       ; получим тип объекта
                 CP OBJECT_EMPTY_ELEMENT
                 JR Z, .Skip                                                     ; переход, если объект в процессе обработки помечен удалённым
+                PUSH DE
+                PUSH BC
                 LD C, (IY + FObject.Direction)
                 CALL AABB.GetObject
+                ; -----------------------------------------
+                ;   DE - смещение AABB (D - y, E - x)
+                ;   BC - размер AABB (B - y, C - x)
+                ; -----------------------------------------
+                EX DE, HL
+                EX (SP), HL
+                PUSH HL
+                PUSH BC
 
                 ; -----------------------------------------
                 ; проверка пересечения AABB с AABB
                 ; In :
-                ;   DE - размер первого AABB (D - y, E - x)
-                ;   BC - размер второго AABB (B - y, C - x)
+                ;   SP + 6 - смещение первого AABB  (High - y, Low - x)
+                ;   SP + 4 - смещение второго AABB  (High - y, Low - x)
+                ;   SP + 2 - размер первого AABB    (High - y, Low - x)
+                ;   SP + 0 - размер второго AABB    (High - y, Low - x)
                 ;   IX - адрес первого объекта FObject (взятие позиций)
                 ;   IY - адрес второго объекта FObject (взятие позиций)
                 ; Out :
                 ;   BC - дельта расстояния знаковое (B - y, C - x)
                 ;   флаг переполнения сброшен, если пересекаются
                 ; -----------------------------------------
-.FirstAABB      EQU $+1
-                LD DE, #0000
                 CALL Math.IntersectAABB
                 CALL NC, Types.Collision
 .Skip           EXX

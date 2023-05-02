@@ -24,26 +24,26 @@ World:          ; -----------------------------------------
                 ; LD BC, ENEMY_FACTION_A | OBJECT_NPC
                 ; CALL Func.SpawnObject
                 
-                ; ; ToDo тестовый спавн противника
-                ; LD DE, #5020
-                ; LD BC, ENEMY_FACTION_A | OBJECT_NPC
-                ; CALL Func.SpawnObject
+                ; ToDo тестовый спавн противника
+                LD DE, #5020
+                LD BC, ENEMY_FACTION_A | OBJECT_NPC
+                CALL Func.SpawnObject
 
-                ; ; ToDo тестовый спавн противника
-                ; LD DE, #50B0
-                ; LD BC, ENEMY_FACTION_A | OBJECT_NPC
-                ; CALL Func.SpawnObject
+                ; ToDo тестовый спавн противника
+                LD DE, #50B0
+                LD BC, ENEMY_FACTION_A | OBJECT_NPC
+                CALL Func.SpawnObject
 
                 ; ; ToDo спавн частицы
                 ; LD DE, #5080
                 ; LD BC, PARTICLE_DUST << 8 | OBJECT_PARTICLE
                 ; CALL Func.SpawnObject
                 
-                ; ToDo спавн декали
+                ; ; ToDo спавн декали
                 ; LD BC, OBJECT_COLLISION
-                ; LD HL, #0010
+                ; LD HL, #000C
                 ; LD (Math.PN_LocationX + 0), HL
-                ; LD HL, #0010
+                ; LD HL, #0016
                 ; LD (Math.PN_LocationY + 0), HL
                 ; LD HL, #1000
                 ; LD (Math.PN_LocationX + 2), HL

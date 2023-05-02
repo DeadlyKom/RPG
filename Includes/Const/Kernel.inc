@@ -65,6 +65,7 @@ Draw:
 .Sprite         EQU Kernel.Sprite.Draw                                          ; отображение спрайта без атрибутов
 .Object         EQU Kernel.Object.Draw                                          ; отображение объектов                  ToDo перенести в страницу!
 .WorldArrow     EQU Kernel.Arrow.Update                                         ; обновление стрелки ближайшего врага на карте мира
+.Line           EQU Kernel.DrawLine                                             ; отображение линии
 
 .Prepare        EQU Kernel.Sprite.Prepare                                       ; подготовка спрайта перед выводм на экран
 .Prepare.PosX   EQU Kernel.Sprite.Prepare.PositionX                             ; положение спрайта по горизонтали

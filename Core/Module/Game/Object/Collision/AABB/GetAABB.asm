@@ -7,6 +7,8 @@
 ;   A  - тип объекта
 ;   C  - направление объекта
 ; Out:
+;   DE - смещение AABB (D - y, E - x)
+;   BC - размер AABB (B - y, C - x)
 ; Corrupt:
 ;   C, AF
 ; Note:

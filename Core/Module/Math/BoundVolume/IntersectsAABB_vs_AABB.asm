@@ -6,8 +6,11 @@
 ; -----------------------------------------
 ; проверка пересечения AABB с AABB
 ; In :
-;   DE - размер первого AABB (D - y, E - x)
-;   BC - размер второго AABB (B - y, C - x)
+;   SP + 8 - смещение первого AABB  (High - y, Low - x)
+;   SP + 6 - смещение второго AABB  (High - y, Low - x)
+;   SP + 4 - размер первого AABB    (High - y, Low - x)
+;   SP + 2 - размер второго AABB    (High - y, Low - x)
+;   SP + 0 - адрес возврата
 ;   IX - адрес первого объекта FObject (взятие позиций)
 ;   IY - адрес второго объекта FObject (взятие позиций)
 ; Out :
@@ -33,19 +36,31 @@
 ;     return true;
 ; }
 ; -----------------------------------------
-IntersectAABB:  ; -----------------------------------------
-                
+IntersectAABB:  POP HL
+                LD (.ReturnAddress), HL
+
+                ; -----------------------------------------
+
+                POP BC                                                          ;   BC - размер второго AABB (B - y, C - x)
+                POP DE                                                          ;   DE - размер первого AABB (D - y, E - x)
+
                 ; a.r.x + b.r.x
                 LD A, E
+                LD (.arx), A
                 ADD A, C
-                LD E, A
+                LD L, A
+                LD A, C
+                LD (.brx), A
 
                 ; a.r.y + b.r.y
                 LD A, D
+                LD (.ary), A
                 ADD A, B
-                LD D, A
+                LD H, A
+                LD A, B
+                LD (.bry), A
 
-                PUSH DE
+                LD (.L1), HL
 
                 ; -----------------------------------------
                 ;   IX - адрес объекта A FObject
@@ -56,13 +71,69 @@ IntersectAABB:  ; -----------------------------------------
                 ; Note:
                 ;   важно, 1 бит сдвиг влево меньше 
                 ; -----------------------------------------
-                CALL Object.DeltaPosition
+                POP DE                                                          ; смещение второго AABB  (D - y, E - x)
+                POP BC                                                          ; смещение первого AABB  (B - y, C - x)
 
+                ; CALL Object.DeltaPosition
+                LD HL, (IY + FObject.Position.X)
+                ADD HL, HL
+                ADD HL, HL
+                ADD HL, HL
+                ADD HL, HL
+                LD A, H
+                ADD A, E
+.brx            EQU $+1
+                ADD A, #00
+                LD E, A
+
+                LD HL, (IX + FObject.Position.X)
+                ADD HL, HL
+                ADD HL, HL
+                ADD HL, HL
+                ADD HL, HL
+                LD A, H
+                ADD A, C
+.arx            EQU $+1
+                ADD A, #00
+                LD L, A
+
+                LD A, E
+                SUB L
+                LD E, A
+
+                LD HL, (IY + FObject.Position.Y)
+                ADD HL, HL
+                ADD HL, HL
+                ADD HL, HL
+                ADD HL, HL
+                LD A, H
+                ADD A, D
+.bry            EQU $+1
+                ADD A, #00
+                LD D, A
+
+                LD HL, (IX + FObject.Position.Y)
+                ADD HL, HL
+                ADD HL, HL
+                ADD HL, HL
+                ADD HL, HL
+                LD A, H
+                ADD A, B
+.ary            EQU $+1
+                ADD A, #00
+
+                LD L, A
+                LD A, D
+                SUB L
+                LD D, A
+
+.L1             EQU $+1
+                LD HL, #0000
+
+                ; сохранение дельты расстояния
                 LD B, D
                 LD C, E
                 ; -----------------------------------------
-
-                POP HL
 
                 ; abs(a.c.x - b.c.x)
                 LD A, E
@@ -73,9 +144,9 @@ IntersectAABB:  ; -----------------------------------------
 
                 ; abs(a.c.x - b.c.x) > (a.r.x + b.r.x)
                 LD A, L
-                SRL A
                 SUB E
-                RET C
+                ; RET C
+                JR C, .RET
 
                 ; abs(a.c.y - b.c.y)
                 LD A, D
@@ -86,11 +157,11 @@ IntersectAABB:  ; -----------------------------------------
 
                 ; abs(a.c.y - b.c.y) > (a.r.y + b.r.y)
                 LD A, H
-                SRL A
                 SUB D
-                RET C
-
-                RET
+                ; RET C
+.RET
+.ReturnAddress  EQU $+1
+                JP #0000
 
                 display " - Intersects AABB vs AABB:\t\t\t\t", /A, IntersectAABB, " = busy [ ", /D, $ - IntersectAABB, " bytes  ]"
 
