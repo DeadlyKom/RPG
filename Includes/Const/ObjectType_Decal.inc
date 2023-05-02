@@ -17,4 +17,6 @@ OBJECT_DITCH_A  EQU 0x0B | DECAL_FLAG                                           
 OBJECT_SCULL_B  EQU 0x0C | DECAL_FLAG                                           ; череп B
 OBJECT_DITCH_B  EQU 0x0B | DECAL_FLAG                                           ; канава B
 
+IDX_OBJECT_SUBTYPE  EQU %01111111
+
                 endif ; ~_CONST_OBJECT_TYPE_DECAL_

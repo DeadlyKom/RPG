@@ -62,19 +62,9 @@ IntersectAABB:  POP HL
 
                 LD (.L1), HL
 
-                ; -----------------------------------------
-                ;   IX - адрес объекта A FObject
-                ;   IY - адрес объекта B FObject
-                ; Out:
-                ;   DE - дельта расстояния знаковое (D - y, E - x)
-                ;   HL, DE, BC, AF
-                ; Note:
-                ;   важно, 1 бит сдвиг влево меньше 
-                ; -----------------------------------------
                 POP DE                                                          ; смещение второго AABB  (D - y, E - x)
                 POP BC                                                          ; смещение первого AABB  (B - y, C - x)
 
-                ; CALL Object.DeltaPosition
                 LD HL, (IY + FObject.Position.X)
                 ADD HL, HL
                 ADD HL, HL

@@ -12,6 +12,7 @@
 
                 ifdef _SHOW_DEBUG
                 define SHOW_FPS                                                 ; отображать FPS
+                ; define SHOW_COLLISION_AABB                                      ; отобразить AABB коллизии
                 endif
 
                 define ENABLE_MUSIC                                             ; разрешить музыку

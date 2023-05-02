@@ -46,7 +46,7 @@ Detection:      ; проверка наличия объектов в масси
                 LD A, (IX + FObject.Type)                                       ; получим тип объекта
                 CP OBJECT_EMPTY_ELEMENT
                 JR Z, .Skip                                                     ; переход, если объект в процессе обработки помечен удалённым
-                LD C, (IX + FObject.Direction)
+                LD C, (IX + FObject.Direction)                                  ; Subtype для декали
                 CALL AABB.GetObject
                 ; -----------------------------------------
                 ;   DE - смещение AABB (D - y, E - x)
@@ -58,7 +58,7 @@ Detection:      ; проверка наличия объектов в масси
                 JR Z, .Skip                                                     ; переход, если объект в процессе обработки помечен удалённым
                 PUSH DE
                 PUSH BC
-                LD C, (IY + FObject.Direction)
+                LD C, (IY + FObject.Direction)                                  ; Subtype для декали
                 CALL AABB.GetObject
                 ; -----------------------------------------
                 ;   DE - смещение AABB (D - y, E - x)

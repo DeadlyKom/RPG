@@ -74,7 +74,7 @@ Generate:       SET_PAGE_OBJECT                                                 
 
                 ; спавн на песке
                 LD A, L
-                CP #D0              ; кактусы
+                CP #D0                  ; кактусы
                 JR NZ, .IsDecal
 
 .IsCactus       LD A, R
@@ -116,15 +116,12 @@ Generate:       SET_PAGE_OBJECT                                                 
                 LD B, OBJECT_STONE_A    ; камень 1
                 JR Z, .Collision
                 ; SUB #05
-                ; LD B, #OBJECT_STONE_B   ; камень 2
+                ; LD B, OBJECT_STONE_B    ; камень 2
                 ; JR Z, .Collision
                 ; SUB #06
                 ; LD B, OBJECT_STONE_C    ; камень 3
                 ; JR Z, .Collision
                 SUB #07
-                LD B, #0E           ; камень 4
-                JR Z, .Collision
-                SUB #08
                 LD B, OBJECT_DITCH_A    ; канава 1
                 JR NZ, .Skip
 

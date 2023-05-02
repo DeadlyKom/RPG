@@ -20,7 +20,6 @@ Decal:          RES VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                
                 OR A
                 SBC HL, BC
                 LD A, L
-                ; DEC A                                                           ; смещение на 1 тайл
                 EX AF, AF'
                 LD BC, ((SCR_MINIMAP_SIZE_X - (SCR_WORLD_SIZE_X << 1)) >> 1) + 2
                 ADD HL, BC
@@ -57,6 +56,8 @@ Decal:          RES VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                
                 RET NC
                 ADD A, SCR_WORLD_SIZE_X + 1
                 RET NC
+
+                ; -----------------------------------------
 
                 LD BC, (PlayerState.CameraPosY + 1)
                 LD HL, (IX + FObjectDecal.Location.Y.Low)

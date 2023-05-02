@@ -13,8 +13,8 @@
                 include "Generate.asm"
                 include "Interrupt.asm"
 
-                include "Generate/MoveRight.asm"
                 include "Generate/MoveUp.asm"
+                include "Generate/MoveRight.asm"
                 include "Generate/MoveDown.asm"
                 include "Generate/MoveLeft.asm"
 

@@ -65,7 +65,7 @@ Prepare:        LD HL, SortBuffer
                 LD (HL), D
                 INC L
 
-                ifdef _DEBUG
+                ifdef SHOW_COLLISION_AABB
                 CALL DrawAABB 
                 endif
 
@@ -84,6 +84,16 @@ Prepare:        LD HL, SortBuffer
 
                 RET
 
+                ifdef SHOW_COLLISION_AABB
+; -----------------------------------------
+; отобразить AABB коллизии
+; In:
+;   HL  - начальная точка   (H - y, L - x)
+;   DE  - конечна точка     (D - y, E - x)
+; Out:
+; Corrupt:
+;   HL, DE, BC, HL', DE', BC'
+; -----------------------------------------
 DrawAABB        PUSH HL
                 PUSH DE
                 PUSH BC
@@ -145,7 +155,6 @@ DrawAABB        PUSH HL
                 POP DE
                 POP HL
                 RET
-
 ; -----------------------------------------
 ; нарисовать прямоугольник
 ; In:
@@ -204,5 +213,6 @@ DrawRectangle:  LD (.Start), HL
 
 .Start          DW #0000                                                        ; High - y, Low - x
 .End            DW #0000                                                        ; High - y, Low - x
+                endif
 
                 endif ; ~_MODULE_GAME_OBJECT_COLLISION_PREPARE_
