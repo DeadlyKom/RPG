@@ -4,6 +4,7 @@
 ; -----------------------------------------
 ; применить урон транспортному средству игрока
 ; In:
+;   IX - адрес объекта FObject
 ; Out:
 ; Corrupt:
 ; Note:
@@ -45,12 +46,8 @@ ApplyVehicle:   LD HL, (IY + FObject.Velocity.X)
                 LD DE, #01C0
                 CALL Math.Mul16x8_16
 
-                LD A, H
-                NEG
-                LD HL, PlayerState.Health + 2
-                ADD A, (HL)
-                LD (HL), A
-
-                RET
+                LD A, (IX + FObject.Character.Health)
+                SUB H
+                JR Apply
 
                 endif ; ~ _CORE_MODULE_OBJECT_DAMAGE_APPLY_VEHICLE_

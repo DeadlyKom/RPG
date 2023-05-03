@@ -193,6 +193,7 @@ Func
 .WorldPosition  EQU Kernel.Initialize.WorldPosition                             ; привести к мировой позиции            ToDo перенести в страницу!
 .SpawnObject    EQU Kernel.Initialize.Spawn                                     ; спавн объекта в мире                  ToDo перенести в страницу!
 .ApplyVehicle   EQU Kernel.Damage.ApplyVehicle                                  ; нанести урон машине игрока            ToDo перенести в страницу!
+.ApplyExplosion EQU Kernel.Damage.ApplyExplosion                                ; нанести урон машине игрока            ToDo перенести в страницу!
 
 ; debug
                 ifdef _DEBUG

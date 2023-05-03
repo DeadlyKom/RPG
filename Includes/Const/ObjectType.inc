@@ -35,6 +35,8 @@ FLAG_DECAL                  EQU 1 << FLAG_DECAL_BIT                             
 FLAG_NOT_DECAL              EQU 0 << FLAG_DECAL_BIT                             ; флаг, объект не является декалью
 FLAG_DYNAMIC_OBJECT         EQU 1 << FLAG_DYNAMIC_OBJECT_BIT                    ; флаг, объект является динамическим
 FLAG_STATIC_OBJECT          EQU 0 << FLAG_DYNAMIC_OBJECT_BIT                    ; флаг, объект является статическим
+FLAG_COLLISION_OBJECT       EQU 1 << FLAG_COLLISION_BIT                         ; флаг, объект имеет коллизию
+FLAG_NOT_COLLISION_OBJECT   EQU 0 << FLAG_COLLISION_BIT                         ; флаг, объект не имеет коллизию
 
 STATE_FIRE                  EQU 1 << STATE_FIRE_BIT
 

@@ -9,9 +9,23 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Remove          LD (IX + FObjectDecal.Type), OBJECT_EMPTY_ELEMENT
+Remove          ;
+                LD A, (IX + FObjectDecal.Type)
+                AND IDX_OBJECT_TYPE
+                JP Z, .SpawnPlayer                                              ; OBJECT_PLAYER
+
+                LD (IX + FObjectDecal.Type), OBJECT_EMPTY_ELEMENT
                 LD HL, GameState.Objects
                 DEC (HL)
                 RET
+
+.SpawnPlayer    CALL Game.Initialize.Player
+                CALL Game.Render.World.UI.DrawInit                              ; обновление UI (после инициализации всего)
+                
+                SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
+                LD DE, #8060
+                LD BC, OBJECT_PLAYER
+                LD IY, PLAYER_ADR
+                JP Kernel.Initialize.Player
 
                 endif ; ~_MODULE_GAME_OBJECT_UTILS_REMOVE_OBJECT_

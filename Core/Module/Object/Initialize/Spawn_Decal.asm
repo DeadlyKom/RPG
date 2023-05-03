@@ -16,10 +16,11 @@ Decal:          ; -----------------------------------------
                 ; -----------------------------------------
                 LD (IY + FObjectDecal.Type), C                                  ; тип объекта
                 LD A, B
-                AND %10000000
+                AND %11100000
                 LD (IY + FObjectParticle.Flags), A                              ; установка флагов
-                RES FLAG_DECAL_BIT, B
-                LD (IY + FObjectParticle.Subtype), B                            ; подтип частицы
+                LD A, B
+                AND %00011111
+                LD (IY + FObjectParticle.Subtype), A                            ; подтип частицы
 
                 ; правки по горизонтали
                 LD HL, (Math.PN_LocationX + 0)

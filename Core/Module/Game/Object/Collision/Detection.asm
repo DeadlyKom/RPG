@@ -40,12 +40,22 @@ Detection:      ; проверка наличия объектов в масси
                 LD IYH, A
                 INC L
 
+                PUSH HL
+                PUSH DE
+                PUSH BC
+
                 EXX
 
                 ; AABB объектов берутся из данных спрайта или константы объекта
                 LD A, (IX + FObject.Type)                                       ; получим тип объекта
                 CP OBJECT_EMPTY_ELEMENT
                 JR Z, .Skip                                                     ; переход, если объект в процессе обработки помечен удалённым
+
+                ; возможна ситуация, когда объект удалился и на его месте появился другой
+                ; проверим что возможный новый объект имеет коллизию
+                BIT FLAG_COLLISION_BIT, (IX + FObjectParticle.Flags)
+                JR Z, .Skip                                                     ; переход, если объект в процессе обработки не имеет коллизию
+
                 LD C, (IX + FObject.Direction)                                  ; Subtype для декали
                 CALL AABB.GetObject
                 ; -----------------------------------------
@@ -56,6 +66,11 @@ Detection:      ; проверка наличия объектов в масси
                 LD A, (IY + FObject.Type)                                       ; получим тип объекта
                 CP OBJECT_EMPTY_ELEMENT
                 JR Z, .Skip                                                     ; переход, если объект в процессе обработки помечен удалённым
+                ; возможна ситуация, когда объект удалился и на его месте появился другой
+                ; проверим что возможный новый объект имеет коллизию
+                BIT FLAG_COLLISION_BIT, (IY + FObjectParticle.Flags)
+                JR Z, .Skip                                                     ; переход, если объект в процессе обработки не имеет коллизию
+
                 PUSH DE
                 PUSH BC
                 LD C, (IY + FObject.Direction)                                  ; Subtype для декали
@@ -85,6 +100,10 @@ Detection:      ; проверка наличия объектов в масси
                 CALL Math.IntersectAABB
                 CALL NC, Types.Collision
 .Skip           EXX
+
+                POP BC
+                POP DE
+                POP HL
 
                 DJNZ .SecondObject
 

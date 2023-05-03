@@ -53,7 +53,7 @@ Prepare:        LD HL, SortBuffer
                 ; OBJECT_PARTICLE
                 JR .NextObject                                                  ; объект не имеет коллизию
                 ; OBJECT_MINE
-                JR .NextObject                                                  ; объект не имеет коллизию
+                JR .Copy                                                        ; объект имеет коллизию
                 ; 6
                 JR $
                 ; 7

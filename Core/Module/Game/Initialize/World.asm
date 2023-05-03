@@ -19,20 +19,20 @@ World:          ; -----------------------------------------
                 LD BC, OBJECT_PLAYER
                 CALL Func.SpawnObject
 
-                ; ; ToDo тестовый спавн противника
-                ; LD DE, #9020
-                ; LD BC, ENEMY_FACTION_A | OBJECT_NPC
-                ; CALL Func.SpawnObject
+                ; ToDo тестовый спавн противника
+                LD DE, #9020
+                LD BC, ENEMY_FACTION_A | OBJECT_NPC
+                CALL Func.SpawnObject
                 
-                ; ; ToDo тестовый спавн противника
-                ; LD DE, #5020
-                ; LD BC, ENEMY_FACTION_A | OBJECT_NPC
-                ; CALL Func.SpawnObject
+                ; ToDo тестовый спавн противника
+                LD DE, #5020
+                LD BC, ENEMY_FACTION_A | OBJECT_NPC
+                CALL Func.SpawnObject
 
-                ; ; ToDo тестовый спавн противника
-                ; LD DE, #50B0
-                ; LD BC, ENEMY_FACTION_A | OBJECT_NPC
-                ; CALL Func.SpawnObject
+                ; ToDo тестовый спавн противника
+                LD DE, #50B0
+                LD BC, ENEMY_FACTION_A | OBJECT_NPC
+                CALL Func.SpawnObject
 
                 ; ; ToDo спавн частицы
                 ; LD DE, #5080
@@ -40,7 +40,7 @@ World:          ; -----------------------------------------
                 ; CALL Func.SpawnObject
                 
                 ; ; ToDo спавн декали
-                ; LD BC, OBJECT_COLLISION
+                ; LD BC, (FLAG_COLLISION_OBJECT << 8) | OBJECT_COLLISION
                 ; LD HL, #000C
                 ; LD (Math.PN_LocationX + 0), HL
                 ; LD HL, #0016

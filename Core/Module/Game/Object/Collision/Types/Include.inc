@@ -6,6 +6,7 @@
 
                 include "Handler.asm"
                 include "Decal.asm"
+                include "Mine.asm"
 
                 endmodule
 

@@ -81,6 +81,7 @@ Generate:       SET_PAGE_OBJECT                                                 
                 AND #03
                 SUB #01
                 ADC A, #00
+                OR FLAG_COLLISION_OBJECT
                 LD B, A
                 JR .Collision
 

@@ -10,10 +10,6 @@
 ; Note:
 ; ----------------------------------------
 Mine:           ; уменьшить счётчик продолжительности фрейма
-                LD A, (IX + FObjectInteraction.Lifetime)
-                INC A
-                JP Z, UpdateOffset                                              ; переход, если объект не уничтожается
-
                 DEC (IX + FObjectInteraction.Lifetime)
                 JP NZ, UpdateOffset                                             ; переход, если время жизни объекта не вышло
 

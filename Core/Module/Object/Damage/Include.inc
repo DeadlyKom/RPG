@@ -5,6 +5,8 @@
                 module Damage
 
                 include "ApplyVehicle.asm"
+                include "ApplyExplosion.asm"
+                include "Apply.asm"
 
                 endmodule
 

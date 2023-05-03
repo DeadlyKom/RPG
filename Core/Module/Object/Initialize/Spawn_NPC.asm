@@ -16,8 +16,8 @@ NPC:            ; -----------------------------------------
                 ; инициализация
                 ; -----------------------------------------
                 SET VISIBLE_OBJECT_BIT, C
-                LD (IY + FObject.Type), C                                       ; тип юнита
-                LD (IY + FObject.Flags), FLAG_NOT_DECAL | FLAG_DYNAMIC_OBJECT_BIT ; установка флагов
+                LD (IY + FObject.Type), C                                                               ; тип юнита
+                LD (IY + FObject.Flags), FLAG_NOT_DECAL | FLAG_DYNAMIC_OBJECT | FLAG_COLLISION_OBJECT   ; установка флагов
 
                 ; установка позиции по горизонтали
                 LD A, E
@@ -49,6 +49,10 @@ NPC:            ; -----------------------------------------
 
                 ; сброс направления
                 LD (IY + FObject.Direction), A
+                LD (IY + FObject.MuzzleFlash), A
+
+                ; сброс состояний
+                LD (IY + FObject.State), A
 
                 ; сброс скорости
                 LD (IY + FObject.Velocity.X.Low), A

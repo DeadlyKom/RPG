@@ -17,10 +17,10 @@ Mine:           ; -----------------------------------------
                 ; инициализация
                 ; -----------------------------------------
                 SET VISIBLE_OBJECT_BIT, C
-                LD (IY + FObjectInteraction.Type), C                            ; тип объекта
-                LD (IY + FObjectInteraction.Flags), FLAG_DECAL                  ; установка флагов
-                LD (IY + FObjectInteraction.Subtype), B                         ; подтип декали
-                LD (IY + FObjectInteraction.Lifetime), #40                      ; время жизни объекта
+                LD (IY + FObjectInteraction.Type), C                                    ; тип объекта
+                LD (IY + FObjectInteraction.Flags), FLAG_DECAL | FLAG_COLLISION_OBJECT  ; установка флагов
+                LD (IY + FObjectInteraction.Subtype), B                                 ; подтип декали
+                LD (IY + FObjectInteraction.Lifetime), LIFETIME_MINE                    ; время жизни объекта
 
                 CALL Func.WorldPosition
                 LD (IY + FObjectInteraction.Position.Y), HL

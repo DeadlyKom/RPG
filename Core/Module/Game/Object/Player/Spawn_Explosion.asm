@@ -9,10 +9,8 @@
 ; Corrupt:
 ; Note:
 ; ----------------------------------------
-Spawn_Explosion ; получение смещение относительно пивата машины
-                CALL Kernel.Object.GetBackSocket
-
-                ; спавн мины
+Spawn_Explosion ; спавн мины
+                LD DE, #0000
                 LD BC, (PARTICLE_EXPLOSION << 8) | OBJECT_PARTICLE
                 JP Func.SpawnObject
 
