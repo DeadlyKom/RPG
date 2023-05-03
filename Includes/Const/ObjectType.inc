@@ -13,28 +13,32 @@ OBJECT_MINE                 EQU 0x05 << 1                                       
 
 FACTION_TYPE_BIT            EQU 0x07                                            ; тип фракции (0 - нейтральная, 1 - враждебная)
 FACTION_SUBTYPE_BIT         EQU 0x06
-DYNAMIC_OBJECT_BIT          EQU 0x05                                            ; динамичность объекта
-VISIBLE_OBJECT_BIT          EQU 0x00                                            ; видимость объекта
+VISIBLE_OBJECT_BIT          EQU 0x00                                            ; объект является видимым
 
-DECAL_FLAG_BIT              EQU 0x07                                            ; объект является декалью
-FIRE_BIT                    EQU 0x06                                            ; объект ведёт огонь по цели
+FLAG_DECAL_BIT              EQU 0x07                                            ; флаг, объект является декалью
+FLAG_DYNAMIC_OBJECT_BIT     EQU 0x06                                            ; флаг, объект является динамическим
+FLAG_COLLISION_BIT          EQU 0x05                                            ; флаг, объект имеет коллизию
+
+STATE_FIRE_BIT              EQU 0x07                                            ; состояние, объект ведёт огонь по цели
 
 PLAYER_FACTION              EQU 0x00 << FACTION_SUBTYPE_BIT                     ; фракция игрока
 NEUTRAL_FACTION             EQU 0x01 << FACTION_SUBTYPE_BIT                     ; нейтральная фракция
 ENEMY_FACTION_A             EQU 0x02 << FACTION_SUBTYPE_BIT                     ; враждебная фракция А
 ENEMY_FACTION_B             EQU 0x03 << FACTION_SUBTYPE_BIT                     ; враждебная фракция Б
 
-DECAL_FLAG                  EQU 1 << DECAL_FLAG_BIT                             ; флаг, объект является декалью
-NOT_DECAL_FLAG              EQU 0 << DECAL_FLAG_BIT                             ; флаг, объект не является декалью
-
 FACTION_TYPE                EQU 1 << FACTION_TYPE_BIT
 FACTION_SUBTYPE             EQU 1 << FACTION_SUBTYPE_BIT
 FACTION_MASK                EQU %11000000
-
-DYNAMIC_OBJECT              EQU 1 << DYNAMIC_OBJECT_BIT                         ; динамичный объекта
 VISIBLE_OBJECT              EQU 1 << VISIBLE_OBJECT_BIT                         ; видимость объекта
 
+FLAG_DECAL                  EQU 1 << FLAG_DECAL_BIT                             ; флаг, объект является декалью
+FLAG_NOT_DECAL              EQU 0 << FLAG_DECAL_BIT                             ; флаг, объект не является декалью
+FLAG_DYNAMIC_OBJECT         EQU 1 << FLAG_DYNAMIC_OBJECT_BIT                    ; флаг, объект является динамическим
+FLAG_STATIC_OBJECT          EQU 0 << FLAG_DYNAMIC_OBJECT_BIT                    ; флаг, объект является статическим
+
+STATE_FIRE                  EQU 1 << STATE_FIRE_BIT
+
 OBJECT_DIRECTION_MASK       EQU %01111000
-IDX_OBJECT_TYPE             EQU %00011110
+IDX_OBJECT_TYPE             EQU %00111110
 
                             endif ; ~_CONST_OBJECT_TYPE_

@@ -64,9 +64,9 @@ Scan:           ; опрос виртуальных клавиш
                 RET
 .RotateRight    INC (IX + FObject.MuzzleFlash)
                 RET
-.OnOff          LD A, (IX + FObject.Flags)
-                XOR %01000000
-                LD (IX + FObject.Flags), A
+.OnOff          LD A, (IX + FObject.State)
+                XOR STATE_FIRE
+                LD (IX + FObject.State), A
                 RET
 
 

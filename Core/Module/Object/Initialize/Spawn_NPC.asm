@@ -15,10 +15,9 @@
 NPC:            ; -----------------------------------------
                 ; инициализация
                 ; -----------------------------------------
-                SET DYNAMIC_OBJECT_BIT, C
                 SET VISIBLE_OBJECT_BIT, C
                 LD (IY + FObject.Type), C                                       ; тип юнита
-                LD (IY + FObject.Flags), NOT_DECAL_FLAG                         ; установка флагов
+                LD (IY + FObject.Flags), FLAG_NOT_DECAL | FLAG_DYNAMIC_OBJECT_BIT ; установка флагов
 
                 ; установка позиции по горизонтали
                 LD A, E

@@ -10,7 +10,7 @@
 ; Note:
 ; -----------------------------------------
 MuzzleFlash:    ; проверка ведёния огоня
-                BIT FIRE_BIT, (IX + FObject.Flags)
+                BIT STATE_FIRE_BIT, (IX + FObject.State)
                 RET Z                                                           ; выход если объект не ведёт огонь
 
                 ; сохранеие текущей страницы

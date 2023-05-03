@@ -17,8 +17,8 @@ Particle:       ; -----------------------------------------
                 ; инициализация
                 ; -----------------------------------------
                 
-                LD (IY + FObjectParticle.Type), DYNAMIC_OBJECT | OBJECT_PARTICLE | VISIBLE_OBJECT   ; тип объекта
-                LD (IY + FObjectParticle.Flags), NOT_DECAL_FLAG                 ; установка флагов
+                LD (IY + FObjectParticle.Type), OBJECT_PARTICLE | VISIBLE_OBJECT      ; тип объекта
+                LD (IY + FObjectParticle.Flags), FLAG_NOT_DECAL | FLAG_DYNAMIC_OBJECT ; установка флагов
                 LD (IY + FObjectParticle.Subtype), B                            ; подтип частицы
 
                 CALL Func.WorldPosition

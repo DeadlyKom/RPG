@@ -18,7 +18,7 @@ Mine:           ; -----------------------------------------
                 ; -----------------------------------------
                 SET VISIBLE_OBJECT_BIT, C
                 LD (IY + FObjectInteraction.Type), C                            ; тип объекта
-                LD (IY + FObjectInteraction.Flags), DECAL_FLAG                  ; установка флагов
+                LD (IY + FObjectInteraction.Flags), FLAG_DECAL                  ; установка флагов
                 LD (IY + FObjectInteraction.Subtype), B                         ; подтип декали
                 LD (IY + FObjectInteraction.Lifetime), #40                      ; время жизни объекта
 
