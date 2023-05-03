@@ -104,66 +104,79 @@ GetBackSocket:  LD HL, .Table
 ; Corrupt:
 ; Note:
 ; ----------------------------------------
-GetFireSocket:  LD DE, #0000
-                RET
-;                 LD HL, .Table
+GetFireSocket:  
+                LD HL, .Table
+                LD A, (IX + FObject.MuzzleFlash)
+                ADD A, -4 << 4
+                RRA
+                ; -----------------------------------------
+                ;      7    6    5    4    3    2    1    0
+                ;   +----+----+----+----+----+----+----+----+
+                ;   | B3 | B2 | B1 | B0 | .. | .. | .. | .. |
+                ;   +----+----+----+----+----+----+----+----+
+                ;
+                ;   B3-B0   [7..4]  - направление
+                ;                       0000 - 0.0°     right
+                ;                       0001 - 22.5°
+                ;                       0010 - 45.0°    up-right
+                ;                       0011 - 67.5°
+                ;                       0100 - 90.0°    up
+                ;                       0101 - 112.5°
+                ;                       0110 - 135.0°   up-left
+                ;                       0111 - 157.5°
+                ;                       1000 - 180.0°   left
+                ;                       1001 - 202.5°
+                ;                       1010 - 225.0°   down-left
+                ;                       1011 - 247.0°
+                ;                       1100 - 270.0°   down
+                ;                       1101 - 292.5°
+                ;                       1110 - 315.0°   down-right
+                ;                       1111 - 337.5°
+                ; -----------------------------------------
+                JP GetSocket
+.Table          lua allpass
 
-;                 LD A, (IX + FObject.MuzzleFlash)
-;                 CPL
-;                 AND #F0
-;                 LD C, A
+                function calc(angle, radius, offsetX, offsetY)
+                    local cos = math.cos(math.rad(angle))
+                    local sin = math.sin(math.rad(angle))
+                    local valueX = (math.floor(cos * radius))
+                    local valueY = (math.floor(sin * radius))
+                    local value = (((valueY + offsetY) % 256) * 256) + ((valueX + offsetX) % 256)
+                    _pc("DW " .. value)
+                    --print (string.format("DW #%.2X%.2X \t(%.1f, %.1f)", valueY % 256, valueX % 256, valueX, valueY))
+                end
+                
+                local radius = 6
+                local offsetX = 0
+                local offsetY = -3
 
-;                 LD A, (IX + FObject.Direction)
-;                 ADD A, A
-;                 AND #F0
-;                 SUB C
-;                 AND #F0
-;                 RRA
-;                 ; -----------------------------------------
-;                 ;      7    6    5    4    3    2    1    0
-;                 ;   +----+----+----+----+----+----+----+----+
-;                 ;   | B3 | B2 | B1 | B0 | .. | .. | .. | .. |
-;                 ;   +----+----+----+----+----+----+----+----+
-;                 ;
-;                 ;   B3-B0   [7..4]  - направление
-;                 ;                       0000 - 0.0°     right
-;                 ;                       0001 - 22.5°
-;                 ;                       0010 - 45.0°    up-right
-;                 ;                       0011 - 67.5°
-;                 ;                       0100 - 90.0°    up
-;                 ;                       0101 - 112.5°
-;                 ;                       0110 - 135.0°   up-left
-;                 ;                       0111 - 157.5°
-;                 ;                       1000 - 180.0°   left
-;                 ;                       1001 - 202.5°
-;                 ;                       1010 - 225.0°   down-left
-;                 ;                       1011 - 247.0°
-;                 ;                       1100 - 270.0°   down
-;                 ;                       1101 - 292.5°
-;                 ;                       1110 - 315.0°   down-right
-;                 ;                       1111 - 337.5°
-;                 ; -----------------------------------------
-;                 JP GetSocket
-; .Table          DW ((6)  & 0xFF) << 8 | ((0) & 0xFF)                            ; 0000 - 0.0°     right
-;                 DW ((4) & 0xFF) << 8 | ((0) & 0xFF)                             ; 0001 - 22.5°
-;                 DW ((11) & 0xFF) << 8 | ((0) & 0xFF)                            ; 0010 - 45.0°    up-right
-;                 DW ((10) & 0xFF) << 8 | ((2)  & 0xFF)                           ; 0011 - 67.5°
-;                 DW ((10) & 0xFF) << 8 | ((2)  & 0xFF)                           ; 0100 - 90.0°    up
-;                 DW ((7) & 0xFF) << 8 | ((3) & 0xFF)                            ; 0101 - 112.5°
-;                 DW ((7) & 0xFF) << 8 | ((5) & 0xFF)                           ; 0110 - 135.0°   up-left
-;                 DW ((10) & 0xFF) << 8 | ((5) & 0xFF)                           ; 0111 - 157.5°
-;                 DW ((8)  & 0xFF) << 8 | ((5) & 0xFF)                           ; 1000 - 180.0°   left
-;                 DW ((10)  & 0xFF) << 8 | ((-2) & 0xFF)                           ; 1001 - 202.5°
-;                 DW ((10) & 0xFF) << 8 | ((0) & 0xFF)                           ; 1010 - 225.0°   down-left
-;                 DW ((9) & 0xFF) << 8 | ((1) & 0xFF)                           ; 1011 - 247.0°
-;                 DW ((7) & 0xFF) << 8 | ((2)  & 0xFF)                           ; 1100 - 270.0°   down
-;                 DW ((5) & 0xFF) << 8 | ((3)  & 0xFF)                           ; 1101 - 292.5°
-;                 DW ((6)  & 0xFF) << 8 | ((1)  & 0xFF)                           ; 1110 - 315.0°   down-right
-;                 DW ((4)  & 0xFF) << 8 | ((2) & 0xFF)                           ; 1111 - 337.5°
+                for i = 0, 15 do
+                    calc(22.5 * i, radius, offsetX, offsetY)
+                end
+
+                endlua
+
+                ; DW (( 0) & 0xFF) << 8 | ((10) & 0xFF)                           ; 0000 - 0.0°     right
+                ; DW (( 4) & 0xFF) << 8 | (( 9) & 0xFF)                           ; 0001 - 22.5°
+                ; DW ((11) & 0xFF) << 8 | (( 0) & 0xFF)                           ; 0010 - 45.0°    up-right
+                ; DW ((10) & 0xFF) << 8 | (( 2) & 0xFF)                           ; 0011 - 67.5°
+                ; DW ((10) & 0xFF) << 8 | (( 2) & 0xFF)                           ; 0100 - 90.0°    up
+                ; DW (( 7) & 0xFF) << 8 | (( 3) & 0xFF)                           ; 0101 - 112.5°
+                ; DW (( 7) & 0xFF) << 8 | (( 5) & 0xFF)                           ; 0110 - 135.0°   up-left
+                ; DW ((10) & 0xFF) << 8 | (( 5) & 0xFF)                           ; 0111 - 157.5°
+                ; DW (( 8) & 0xFF) << 8 | (( 5) & 0xFF)                           ; 1000 - 180.0°   left
+                ; DW ((10) & 0xFF) << 8 | ((-2) & 0xFF)                           ; 1001 - 202.5°
+                ; DW ((10) & 0xFF) << 8 | (( 0) & 0xFF)                           ; 1010 - 225.0°   down-left
+                ; DW (( 9) & 0xFF) << 8 | (( 1) & 0xFF)                           ; 1011 - 247.0°
+                ; DW (( 7) & 0xFF) << 8 | (( 2) & 0xFF)                           ; 1100 - 270.0°   down
+                ; DW (( 5) & 0xFF) << 8 | (( 3) & 0xFF)                           ; 1101 - 292.5°
+                ; DW (( 6) & 0xFF) << 8 | (( 1) & 0xFF)                           ; 1110 - 315.0°   down-right
+                ; DW (( 4) & 0xFF) << 8 | (( 2) & 0xFF)                           ; 1111 - 337.5°
                 
 ; -----------------------------------------
 ; получить смещение сокета
 ; In:
+;   A  - направление
 ;   HL - адрес таблицы
 ;   IX - адрес объекта FObject
 ; Out:

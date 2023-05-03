@@ -1,7 +1,7 @@
 
                 module SpriteInfo 
 MuzzleFlash:            
-                FSprite { { 9,  0-5,  8,  0+12 }, 0, { Page.Graphics.Pack1, Graphics.MuzzleFlash.Anim_0_0 } }
+                FSprite { { 9,  0-6,  8,  0+12 }, 0, { Page.Graphics.Pack1, Graphics.MuzzleFlash.Anim_0_0 } }
                 FSprite { { 8,  0-5,  8,  0+12 }, 0, { Page.Graphics.Pack1, Graphics.MuzzleFlash.Anim_0_1 } }
                 FSprite { { 8,  0-5,  6,  0+16 }, 0, { Page.Graphics.Pack1, Graphics.MuzzleFlash.Anim_1_0 } }
                 FSprite { { 8,  0-5,  6,  0+16 }, 0, { Page.Graphics.Pack1, Graphics.MuzzleFlash.Anim_1_1 } }
