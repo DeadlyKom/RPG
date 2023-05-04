@@ -10,6 +10,7 @@
                 include "Memory.inc"
                 include "Player.inc"
                 include "Render.inc"
+                include "Game.inc"
                 include "Gameplay.inc"
                 include "Interrupt.inc"
                 include "Config_Graphics.inc"

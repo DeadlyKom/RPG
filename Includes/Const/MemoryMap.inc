@@ -5,6 +5,7 @@
 ; bank 01 (#4000 - #7FFF)
 Adr:
 .StackTop       EQU MemBank_01 + Size.Stack                                     ; расположение стека
+.SortBuffer     EQU SortBuffer                                                  ; адрес буфера сортировки
 .SharedBuffer   EQU SharedBuffer                                                ; адрес буфера общего назначения
 .RenderBuffer   EQU RenderBuffer                                                ; адрес буфера отображения
 .Port_7FFD      EQU PORT_7FFD                                                   ; адрес хранения номера странички

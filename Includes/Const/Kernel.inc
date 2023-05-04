@@ -43,13 +43,17 @@ Interrupt_RET   EQU Kernel.Interrupt.Handler.RET
 ReturnAddress   EQU Kernel.Interrupt.Handler.ReturnAddress
 TickCounterRef  EQU Kernel.Interrupt.Handler.TickCounterPtr                     ; счётчик тиков 1/50
 
+; initialize
+Execute
+.MainMenu       EQU Kernel.Initialize.Execute                                   ; запуск главного меню
+
 ; generation
-Generation:
-.ScrAdr         EQU Kernel.Tables.Gen_ScrAdr                                    ; генерация адресов экрана (строк)      ToDo перенести в страницу!
-.PRNG           EQU Kernel.Tables.Gen_PRNG                                      ; генерация PRNG карты мира             ToDo перенести в страницу!
-.ShiftTable     EQU Kernel.Tables.Gen_ShiftTable                                ; генерация таблицы сдвигов             ToDo перенести в страницу!
-.MulSprTable    EQU Kernel.Tables.Gen_MulSprTable                               ; генерация таблицы умножения для спрайтов  ToDo перенести в страницу!
-.WorldSprite    EQU Kernel.Tables.Gen_WorldSpr                                  ; генерация спрайтов для карты мира     ToDo перенести в страницу!
+; Generation:
+; .ScrAdr         EQU Kernel.Tables.Gen_ScrAdr                                    ; генерация адресов экрана (строк)      ToDo перенести в страницу!
+; .PRNG           EQU Kernel.Tables.Gen_PRNG                                      ; генерация PRNG карты мира             ToDo перенести в страницу!
+; .ShiftTable     EQU Kernel.Tables.Gen_ShiftTable                                ; генерация таблицы сдвигов             ToDo перенести в страницу!
+; .MulSprTable    EQU Kernel.Tables.Gen_MulSprTable                               ; генерация таблицы умножения для спрайтов  ToDo перенести в страницу!
+; .WorldSprite    EQU Kernel.Tables.Gen_WorldSpr                                  ; генерация спрайтов для карты мира     ToDo перенести в страницу!
 
 ; tables
 Table:
@@ -63,8 +67,8 @@ Draw:
 .World          EQU Kernel.World.Draw                                           ; отображение карты миры
 .Minimap        EQU Kernel.World.Minimap                                        ; отображение миникарты
 .Sprite         EQU Kernel.Sprite.Draw                                          ; отображение спрайта без атрибутов
-.Object         EQU Kernel.Object.Draw                                          ; отображение объектов                  ToDo перенести в страницу!
-.WorldArrow     EQU Kernel.Arrow.Update                                         ; обновление стрелки ближайшего врага на карте мира
+; .Object         EQU Kernel.Object.Draw                                          ; отображение объектов                  ToDo перенести в страницу!
+; .WorldArrow     EQU Kernel.Arrow.Update                                         ; обновление стрелки ближайшего врага на карте мира ToDo перенести в страницу!
 .Line           EQU Kernel.DrawLine                                             ; отображение линии
 
 .Prepare        EQU Kernel.Sprite.Prepare                                       ; подготовка спрайта перед выводм на экран
@@ -86,18 +90,18 @@ Convert:
 .ToAttribute    EQU Kernel.Utils.PixelAttribute
 
 ; object
-Object:
-.Tick           EQU Kernel.Object.Tick                                          ; обработка тика объектов
-.Collision      EQU Kernel.Object.Collision.Handler                             ; обработка коллизии
-.Spawn_Dust     EQU Kernel.Object.Player.Spawn_Dust                             ; спавн пыли
-.Spawn_Mine     EQU Kernel.Object.Player.Spawn_Mine                             ; спавн мины
-.Spawn_Explosion EQU Kernel.Object.Player.Spawn_Explosion                       ; спавн взрыва
-.ApplySpeed     EQU Kernel.Object.Player.Rotation.ApplySpeed                    ; применить скорость
-.ApplyVelocity  EQU Kernel.Object.Update.Velocity                               ; применить вектор скорости
-.ApplyDecel     EQU Kernel.Object.Player.Deceleration                           ; применить торможение
-.GetSpriteInfo  EQU Kernel.Object.Pawn.GetSpriteInfo                            ; получить информацию о спрайте машины
-.Remove         EQU Kernel.Object.Utils.Remove                                  ; удаление объекта
-.DeltaPosition  EQU Kernel.Object.Utils.DeltaPosition                           ; расчёт дельт значений между двумя объектами
+; Object:
+; .Tick           EQU Kernel.Object.Tick                                          ; обработка тика объектов
+; .Collision      EQU Kernel.Object.Collision.Handler                             ; обработка коллизии
+; .Spawn_Dust     EQU Kernel.Object.Player.Spawn_Dust                             ; спавн пыли
+; .Spawn_Mine     EQU Kernel.Object.Player.Spawn_Mine                             ; спавн мины
+; .Spawn_Explosion EQU Kernel.Object.Player.Spawn_Explosion                       ; спавн взрыва
+; .ApplySpeed     EQU Kernel.Object.Player.Rotation.ApplySpeed                    ; применить скорость
+; .ApplyVelocity  EQU Kernel.Object.Update.Velocity                               ; применить вектор скорости
+; .ApplyDecel     EQU Kernel.Object.Player.Deceleration                           ; применить торможение
+; .GetSpriteInfo  EQU Kernel.Object.Pawn.GetSpriteInfo                            ; получить информацию о спрайте машины
+; .Remove         EQU Kernel.Object.Utils.Remove                                  ; удаление объекта
+; .DeltaPosition  EQU Kernel.Object.Utils.DeltaPosition                           ; расчёт дельт значений между двумя объектами
 
 ; world map
 World:
@@ -189,11 +193,11 @@ Func
 .Right.x2       EQU Kernel.Functions.NoShiftRight.x2
 .Right.x0       EQU Kernel.Functions.NoShiftRight.x0
 
-.InitObject     EQU Kernel.Initialize.Object                                    ; инициализация работы с объектами      ToDo перенести в страницу!
-.WorldPosition  EQU Kernel.Initialize.WorldPosition                             ; привести к мировой позиции            ToDo перенести в страницу!
-.SpawnObject    EQU Kernel.Initialize.Spawn                                     ; спавн объекта в мире                  ToDo перенести в страницу!
-.ApplyVehicle   EQU Kernel.Damage.ApplyVehicle                                  ; нанести урон машине игрока            ToDo перенести в страницу!
-.ApplyExplosion EQU Kernel.Damage.ApplyExplosion                                ; нанести урон машине игрока            ToDo перенести в страницу!
+; .InitObject     EQU Kernel.Initialize.Object                                    ; инициализация работы с объектами      ToDo перенести в страницу!
+; .WorldPosition  EQU Kernel.Initialize.WorldPosition                             ; привести к мировой позиции            ToDo перенести в страницу!
+; .SpawnObject    EQU Kernel.Initialize.Spawn                                     ; спавн объекта в мире                  ToDo перенести в страницу!
+; .ApplyVehicle   EQU Kernel.Damage.ApplyVehicle                                  ; нанести урон машине игрока            ToDo перенести в страницу!
+; .ApplyExplosion EQU Kernel.Damage.ApplyExplosion                                ; нанести урон машине игрока            ToDo перенести в страницу!
 
 ; debug
                 ifdef _DEBUG

@@ -1,6 +1,6 @@
 
-                ifndef _CORE_MODULE_GAME_PAUSE_INTERRUPT_
-                define _CORE_MODULE_GAME_PAUSE_INTERRUPT_
+                ifndef _CORE_MODULE_GAME_INTERRUPT_MAIN_MENU_
+                define _CORE_MODULE_GAME_INTERRUPT_MAIN_MENU_
 ; -----------------------------------------
 ; обработчик прерывания игры
 ; In:
@@ -18,7 +18,7 @@ Interrupt:      ; проверка завершённости процесса �
 .RenderProcess  ; процесс отрисовки не завершён
 
 .Input          ; ************ Scan Input ************
-                CALL Game.Input.Pause.Scan
+                CALL Input.Scan
 
                 ifdef _DEBUG
 .Debug_FPS      ; ************** Draw FPS **************
@@ -27,4 +27,4 @@ Interrupt:      ; проверка завершённости процесса �
 
                 RET
     
-                endif ; ~ _CORE_MODULE_GAME_PAUSE_INTERRUPT_
+                endif ; ~ _CORE_MODULE_GAME_INTERRUPT_MAIN_MENU_

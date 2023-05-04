@@ -1,6 +1,6 @@
 
-                ifndef _BUILDER_KERNEL_PACK_
-                define _BUILDER_KERNEL_PACK_
+                ifndef _BUILDER_PACK_2_
+                define _BUILDER_PACK_2_
 
                 MMU 2, Page.Module.Kernel                                       ; 1 bank, Page.Module.Kernel (2) page
                 ORG Adr.Interrupt
@@ -18,24 +18,27 @@ Begin:          EQU $
                 include "Core/Module/Memory/MemcpyFastLDIR.asm"
                 include "Core/Module/Memory/MemcpySprite.asm"
 
+                ; initialize
+                include "Core/Module/Game/Initialize/Main Menu/Include.inc"
+
                 ; generation
-                include "Core/Module/Table/Gen_PRNG.asm"
-                include "Core/Module/Table/Gen_ScrAdr.asm"
-                include "Core/Module/Table/Gen_ShiftTable.asm"
-                include "Core/Module/Table/Gen_WorldSprite.asm"
-                include "Core/Module/Table/Gen_MultiplySpriteTable.asm"
+                include "Core/Module/Table/Gen_PRNG.asm"                        ; ToDo перенести в страницу!
+                include "Core/Module/Table/Gen_ScrAdr.asm"                      ; ToDo перенести в страницу!
+                include "Core/Module/Table/Gen_ShiftTable.asm"                  ; ToDo перенести в страницу!
+                include "Core/Module/Table/Gen_WorldSprite.asm"                 ; ToDo перенести в страницу!
+                include "Core/Module/Table/Gen_MultiplySpriteTable.asm"         ; ToDo перенести в страницу!
 
                 ; draw world map
                 include "Core/Module/Draw/World/Draw.asm"
                 include "Core/Module/Draw/World/DrawColumn.asm"
                 include "Core/Module/Draw/World/Functions/Include.inc"
                 include "Core/Module/Draw/World/Minimap.asm"
-                include "Core/Module/Draw/World/Arrow/Include.inc"
+                ; include "Core/Module/Draw/World/Arrow/Include.inc"              ; ToDo перенести в страницу!
 
                 ; draw sprite
                 include "Core/Module/Draw/Sprite/Include.inc"
                 include "Core/Module/Draw/Sprite/Functions/Include.inc"
-                include "Core/Module/Draw/Object/Include.inc"                   ; ToDo перенести в страницу!
+                ; include "Core/Module/Draw/Object/Include.inc"                   ; ToDo перенести в страницу!
 
                 ; draw attribute
                 include "Core/Module/Draw/Charboundary/DrawSprite.asm"
@@ -50,16 +53,16 @@ Begin:          EQU $
                 include "Core/Module/Decompressor/Backward.asm"
 
                 ; math
+                include "Core/Module/Math/Lerp.asm"
                 include "Core/Module/Math/Mul/16x8_16.asm"
                 include "Core/Module/Math/RNG/Rand8.asm"
                 include "Core/Module/Math/Mul/16x8_24.asm"
                 include "Core/Module/Math/Mul/32x8_40.asm"
-                include "Core/Module/Math/Lerp.asm"
-                include "Core/Module/Math/PerlinNoise/Include.inc"
                 include "Core/Module/Math/Div/Div8x8.asm"
                 include "Core/Module/Math/Atan/Sector.asm"
-                include "Core/Module/Math/BoundVolume/IntersectsAABB_vs_AABB.asm"
+                include "Core/Module/Math/PerlinNoise/Include.inc"
                 include "Core/Module/Math/Sqrt/DistSquared.asm"
+                include "Core/Module/Math/BoundVolume/IntersectsAABB_vs_AABB.asm"
 
                 ; input
                 include "Core/Module/Input/Include.inc"
@@ -75,9 +78,9 @@ Begin:          EQU $
                 include "Core/Module/SFX/Include.inc"
 
                 ; object
-                include "Core/Module/Object/Initialize/Include.inc"             ; ToDo перенести в страницу!
-                include "Core/Module/Object/Damage/Include.inc"                 ; ToDo перенести в страницу!
-                include "Core/Module/Game/Object/Include.inc"                   ; ToDo перенести в страницу!
+                ; include "Core/Module/Object/Initialize/Include.inc"             ; ToDo перенести в страницу!
+                ; include "Core/Module/Object/Damage/Include.inc"                 ; ToDo перенести в страницу!
+                ; include "Core/Module/Game/Object/Include.inc"                   ; ToDo перенести в страницу!
 
                 ; debug
                 ifdef _DEBUG
@@ -93,4 +96,4 @@ Size:           EQU $ - Begin
 
                 endmodule
 
-                endif ; ~ _BUILDER_KERNEL_PACK_
+                endif ; ~ _BUILDER_PACK_2_

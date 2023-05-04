@@ -1,6 +1,6 @@
 
-                ifndef _CORE_MODULE_GAME_LOOP_PAUSE_
-                define _CORE_MODULE_GAME_LOOP_PAUSE_
+                ifndef _CORE_MODULE_GAME_LOOP_MAIN_MENU_
+                define _CORE_MODULE_GAME_LOOP_MAIN_MENU_
 ; -----------------------------------------
 ; игровой цикл
 ; In:
@@ -12,6 +12,6 @@ Loop:
 .Render         ; ************ RENDER ************
                 CHECK_RENDER_FLAG FINISHED_BIT
                 RET NZ
-                JP Game.Render.Pause.Draw
+                JP Render.Draw
 
-                endif ; ~_CORE_MODULE_GAME_LOOP_PAUSE_
+                endif ; ~_CORE_MODULE_GAME_LOOP_MAIN_MENU_

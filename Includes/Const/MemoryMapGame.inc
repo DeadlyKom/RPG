@@ -23,8 +23,8 @@ MinimapSpr      EQU #0080                                                       
 GameConfig      EQU 0x020                                                       ; размер переменных конфигурации игры
 GameState       EQU #0020                                                       ; размер переменных состояния игры
 PlayerState     EQU #0080                                                       ; размер переменных состояния игрока
-                module Module
-                endmodule
+EntryPoint      EQU #0100                                                       ; размер базового блока кода
+SharedPoint     EQU #1000 - Size.EntryPoint                                     ; размер общего блока кода
                 endmodule
 
                 module Adr
@@ -36,6 +36,7 @@ ShiftTable      EQU Adr.PRNG + Size.PRNG                                        
 MultiplySprite  EQU Adr.ShiftTable + Size.ShiftTable                            ; адрес таблицы умножения для расчёта размера спрайта (без учёта маски) (128 свободно)
 PlayerState     EQU Adr.MultiplySprite + Size.MultiplySprite                    ; адрес переменных состояния игрока
 EntryPoint      EQU Adr.PlayerState + Size.PlayerState                          ; адрес точки входа
+SharedPoint     EQU Adr.EntryPoint + Size.EntryPoint                            ; адрес общей точки входа (код переносится из страниц для запуска)
 WorldSprTable   EQU #FC00                                                       ; адрес таблицы спрайтов карты мира (тайлопары)
 WorldTilepair   EQU Adr.WorldSprTable - Size.WorldTilepair                      ; адрес таблицы поиска тайлопар
 WorldSpr        EQU Adr.WorldTilepair - Size.WorldSpr                           ; адрес спрайтов карты мира (тайлопары)
@@ -43,7 +44,7 @@ MinimapSpr      EQU RenderBuffer + Size.MinimapSpr                              
                 module Module
 Game:
 .Main           EQU Adr.EntryPoint                                              ; адрес модуля "основной блок"
-
+.Shared         EQU Adr.SharedPoint                                             ; адрес модуля "общего блока"
                 endmodule
                 endmodule
 

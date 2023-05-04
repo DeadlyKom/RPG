@@ -9,6 +9,9 @@
                 include "MemoryMapGame.inc"
                 include "MemoryMapObject.inc"
                 include "MemoryMapGraphics.inc"
+                include "MemoryMapPack_0.inc"
+                include "MemoryMapPack_1.inc"
+                include "MemoryMapPack_6.inc"
 
                 include "Kernel.inc"
                 include "Input.inc"

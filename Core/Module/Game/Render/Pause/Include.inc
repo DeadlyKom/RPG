@@ -2,9 +2,10 @@
                 ifndef _MODULE_GAME_RENDER_PAUSE_MENU_INCLUDE_
                 define _MODULE_GAME_RENDER_PAUSE_MENU_INCLUDE_
 
-                module Pause
+                module Pause                                                    ; вынести в страницу 
+                                                                                ; базовы блок копируется в нижнию часть ОЗУ
 
-                include "Menu.asm"
+                include "Draw.asm"
 
                 endmodule
 

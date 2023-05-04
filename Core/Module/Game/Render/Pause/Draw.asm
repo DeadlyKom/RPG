@@ -16,7 +16,7 @@ COLOR_TEXT       EQU ((TEXT_FLASH << 7) | (TEXT_BRIGHT << 6) | (TEXT_PAPER << 3)
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Menu:           ;
+Draw:           ;
 .First          EQU $
                 OR A                ; B7
                 JR C, .ShowMenu

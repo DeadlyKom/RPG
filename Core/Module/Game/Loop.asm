@@ -10,10 +10,10 @@
 ; -----------------------------------------
 MainLoop:       
 .Loop           ;
-.Handler        EQU $+1
-                CALL World.Loop
+.Address        EQU $+1
+                CALL #0000
                 JR .Loop
 
-                display " - Game 'MainLoop':\t\t\t\t\t", /A, MainLoop, " = busy [ ", /D, $ - MainLoop, " bytes  ]"
+                display "\t- Game 'MainLoop':\t\t\t\t", /A, MainLoop, " = busy [ ", /D, $ - MainLoop, " bytes  ]"
 
                 endif ; ~_CORE_MODULE_GAME_LOOP_
