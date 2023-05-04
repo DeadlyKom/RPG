@@ -107,6 +107,4 @@ MoveDown:       ; -----------------------------------------
                 LD BC, Adr.MinimapSpr + 1 + 4 * 20 - 4                          ; адрес левой-нижней грани видимой части карты мира (-1 строка)
                 JP MoveUp.AdaptTilepair
 
-                display " - Move down: \t\t\t\t\t", /A, MoveDown, " = busy [ ", /D, $ - MoveDown, " bytes  ]"
-
                 endif ; ~_MODULE_GAME_WORLD_GENERATE_MOVE_DOWN_

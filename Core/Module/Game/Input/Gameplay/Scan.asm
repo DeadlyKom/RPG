@@ -69,5 +69,4 @@ Scan:           ; опрос виртуальных клавиш
                 LD (IX + FObject.State), A
                 RET
 
-
                 endif ; ~_MODULE_GAME_INPUT_GAMEPLAY_SCAN_

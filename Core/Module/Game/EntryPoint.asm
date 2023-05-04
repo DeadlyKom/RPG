@@ -19,4 +19,6 @@ EntryPoint:     ; -----------------------------------------
                 
                 CALL Game.Render.World.UI.DrawInit                              ; обновление UI (после инициализации всего)
 
+                display " - Game 'EntryPoint':\t\t\t\t\t", /A, EntryPoint, " = busy [ ", /D, $ - EntryPoint, " bytes  ]"
+
                 endif ; ~_CORE_MODULE_GAME_ENTRY_POINT_

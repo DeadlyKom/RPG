@@ -121,8 +121,6 @@ DecreaseSpeed:  SET_PLAYER_FLAG DECREASE_SPEED_BIT
                 ADD A, C
                 LD (HL), A
                 RET
-
-
 ; -----------------------------------------
 ; активация турбонаддува
 ; In:
@@ -132,7 +130,6 @@ DecreaseSpeed:  SET_PLAYER_FLAG DECREASE_SPEED_BIT
 ; -----------------------------------------
 TurbochargOn:   SET_PLAYER_FLAG TURBOCHARGING_BIT
                 RET
-
 ; -----------------------------------------
 ; деактивация турбонаддува
 ; In:

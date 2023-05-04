@@ -110,5 +110,4 @@ ResetStateKeys: ; обнуление состояний виртуальных �
 
                 RET
 
-
                 endif ; ~_MODULE_GAME_INITIALIZE_INPUT_

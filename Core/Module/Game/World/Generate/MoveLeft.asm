@@ -230,6 +230,4 @@ MoveLeft:       ; -----------------------------------------
 
                 RET
 
-                display " - Move left: \t\t\t\t\t", /A, MoveLeft, " = busy [ ", /D, $ - MoveLeft, " bytes  ]"
-
                 endif ; ~_MODULE_GAME_WORLD_GENERATE_MOVE_LEFT_

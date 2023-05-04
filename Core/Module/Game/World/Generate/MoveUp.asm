@@ -305,6 +305,4 @@ MoveUp:         ; -----------------------------------------
                 error "must be within single 256 byte block"
                 endif
 
-                display " - Move up: \t\t\t\t\t\t", /A, MoveUp, " = busy [ ", /D, $ - MoveUp, " bytes  ]"
-
                 endif ; ~_MODULE_GAME_WORLD_GENERATE_MOVE_UP_

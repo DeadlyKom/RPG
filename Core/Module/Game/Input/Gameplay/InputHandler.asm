@@ -32,7 +32,6 @@ InputHandler:   JR NZ, .NotProcessing                                           
 
 .NotProcessing  SCF
                 RET
-
 Processed:      OR A                                                            ; сброс флага переполнения (произведена обработка клавиши)
                 RET
 Menu:           LD A, #B7       ; OR A

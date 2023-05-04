@@ -14,4 +14,6 @@ MainLoop:
                 CALL World.Loop
                 JR .Loop
 
+                display " - Game 'MainLoop':\t\t\t\t\t", /A, MainLoop, " = busy [ ", /D, $ - MainLoop, " bytes  ]"
+
                 endif ; ~_CORE_MODULE_GAME_LOOP_

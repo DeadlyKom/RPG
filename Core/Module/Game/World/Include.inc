@@ -3,7 +3,7 @@
                 define _MODULE_GAME_WORLD_INCLUDE_
 
                 module World
-                
+Begin           EQU $
                 ifdef _DEBUG
                 include "Move.asm"
                 endif
@@ -17,6 +17,8 @@
                 include "Generate/MoveRight.asm"
                 include "Generate/MoveDown.asm"
                 include "Generate/MoveLeft.asm"
+
+                display " - Game 'World':\t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
 
                 endmodule
 
