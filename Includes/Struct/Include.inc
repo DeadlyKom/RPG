@@ -7,6 +7,7 @@
                 include "Game.inc"
                 include "Player.inc"
 
+                include "Font.inc"
                 include "AABB.inc"
                 include "Sprite.inc"
 

@@ -8,13 +8,13 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Execute:        SET_PAGE_MAIN_MENU                                              ; включить страницу работы с главным меню
+MainMenu:       SET_PAGE_MAIN_MENU                                              ; включить страницу работы с главным меню
                 LD HL, Adr.MainMenu
                 LD DE, Adr.Module.Game.Shared
                 LD BC, Packs.MainMenu.Size
                 PUSH DE
                 JP Memcpy.FastLDIR
 
-                display " - Game execute 'Main Menu':\t\t\t\t", /A, Execute, " = busy [ ", /D, $ - Execute, " bytes  ]"
+                display " - Game execute 'Main Menu':\t\t\t\t", /A, MainMenu, " = busy [ ", /D, $ - MainMenu, " bytes  ]"
 
                 endif ; ~_MODULE_GAME_INITIALIZE_MAIN_MENU_EXECUTE_

@@ -13,6 +13,8 @@ Input:          ; настройка обработчика ввода
                 AND INPUT_MASK
                 CP INPUT_KEYBOARD
                 JR Z, Keyboard_WASD
+                CP INPUT_REDEFINE_KEYS
+                RET Z
                 CP INPUT_KEMPSTON_8
                 JR Z, Kempston_8
 
@@ -23,6 +25,19 @@ Input:          ; настройка обработчика ввода
                 LD (GameConfig.Options), A
                 JR Input
 
+.SetRedefineKeys; установка клавиатуры (переназначеные клавиши)
+                LD A, (GameConfig.Options)
+                AND INPUT_MASK_INV
+                OR INPUT_REDEFINE_KEYS
+                LD (GameConfig.Options), A
+                JR Input
+
+.SetKempston8   ; установка 8 кнопочного кемстона
+                LD A, (GameConfig.Options)
+                AND INPUT_MASK_INV
+                OR INPUT_KEMPSTON_8
+                LD (GameConfig.Options), A
+                JR Input
 ; -----------------------------------------
 ; инициализация управление клавиатурой WASD
 ; In:

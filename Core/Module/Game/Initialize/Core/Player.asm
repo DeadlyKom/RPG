@@ -19,7 +19,7 @@ Player:         ; очистка буфера
                 LD (PlayerState.Gas), A
                 LD (PlayerState.Turbo), A
 
-                LD A, Game.Render.World.UI.SLOT_MINE
+                LD A, SLOT_MINE
                 LD (PlayerState.Slot), A
 
                 LD HL, #0000

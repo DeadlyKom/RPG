@@ -8,7 +8,25 @@
 
                 display "\'Pack 6\':\t\t\t\t\t\t-------------------- [ ", /D, Size6, " bytes ]\t [", /D, Page.Module.Pack6, "]\t ------------------------"
 Begin6:         EQU $
+                ; graphic
+                include "Core/Module/Graphics/Font/Include.inc"
+                
+                ; draw
+                include "Core/Module/Draw/String/DrawChar.asm"
+                include "Core/Module/Draw/String/DrawString.asm"
+
+                ; initialize
+                include "Core/Module/Game/Initialize/Include.inc"
+
+                ; menu
                 include "Core/Module/Game/Main Menu/Include.inc"
+
+                ; generation
+                include "Core/Module/Table/Gen_PRNG.asm"
+                include "Core/Module/Table/Gen_ScrAdr.asm"
+                include "Core/Module/Table/Gen_ShiftTable.asm"
+                include "Core/Module/Table/Gen_WorldSprite.asm"
+                include "Core/Module/Table/Gen_MultiplySpriteTable.asm"
 End6:           EQU $
 Size6:          EQU End6 - Begin6
 

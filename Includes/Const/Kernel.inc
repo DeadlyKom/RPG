@@ -45,14 +45,13 @@ TickCounterRef  EQU Kernel.Interrupt.Handler.TickCounterPtr                     
 
 ; initialize
 Execute
-.MainMenu       EQU Kernel.Initialize.Execute                                   ; запуск главного меню
+.Core           EQU Kernel.Execute.Core                                         ; запуск инициализации игры
+.Player         EQU Kernel.Execute.Player                                       ; запуск инициализации игрока
+.Input          EQU Kernel.Execute.Input                                        ; запуск инициализации управления
+.MainMenu       EQU Kernel.Execute.MainMenu                                     ; запуск главного меню
 
 ; generation
 ; Generation:
-; .ScrAdr         EQU Kernel.Tables.Gen_ScrAdr                                    ; генерация адресов экрана (строк)      ToDo перенести в страницу!
-; .PRNG           EQU Kernel.Tables.Gen_PRNG                                      ; генерация PRNG карты мира             ToDo перенести в страницу!
-; .ShiftTable     EQU Kernel.Tables.Gen_ShiftTable                                ; генерация таблицы сдвигов             ToDo перенести в страницу!
-; .MulSprTable    EQU Kernel.Tables.Gen_MulSprTable                               ; генерация таблицы умножения для спрайтов  ToDo перенести в страницу!
 ; .WorldSprite    EQU Kernel.Tables.Gen_WorldSpr                                  ; генерация спрайтов для карты мира     ToDo перенести в страницу!
 
 ; tables
@@ -115,6 +114,7 @@ Input:
 .CheckKeyState  EQU Kernel.Input.CheckKeyState
 .JumpKeys       EQU Kernel.Input.JumpKeys
 .ArrayKeys      EQU Kernel.Input.JumpKeys.LastKey
+.JumpHandlerKey EQU Kernel.Input.JumpHandlerKey
 Kempston:
 .CheckKeyState  EQU Kernel.Kempston.CheckKeyState
 Keyboard:

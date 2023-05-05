@@ -63,8 +63,8 @@ DrawLine:       ; инициализация
                 EXX
                 EX AF, AF'
                 POP DE
-                LD L, D
                 LD H, HIGH Adr.ScrAdrTable
+                LD L, D
                 LD A, (HL)
                 INC H
                 LD D, (HL)

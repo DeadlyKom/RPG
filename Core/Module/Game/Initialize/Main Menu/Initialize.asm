@@ -1,6 +1,6 @@
 
-                ifndef _CORE_MODULE_GAME_MAIN_MENU_INITIALIZE_
-                define _CORE_MODULE_GAME_MAIN_MENU_INITIALIZE_
+                ifndef _CORE_MODULE_GAME_INITIALIZE_MAIN_MENU_
+                define _CORE_MODULE_GAME_INITIALIZE_MAIN_MENU_
 ; -----------------------------------------
 ; инициализация главного меню
 ; In:
@@ -8,7 +8,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Initialize:     ; установка бордюра
+MainMenu:       ; установка бордюра
                 BORDER BLACK
 
                 ; инициализация главного цикла
@@ -19,4 +19,4 @@ Initialize:     ; установка бордюра
 
                 RET
 
-                endif ; ~_CORE_MODULE_GAME_MAIN_MENU_INITIALIZE_
+                endif ; ~_CORE_MODULE_GAME_INITIALIZE_MAIN_MENU_

@@ -16,6 +16,14 @@ SetPage:        macro Page?
                 LD (BC), A
                 OUT (C), A
                 endm
+SetPort:        macro Page?, Screen?
+                LD BC, Adr.Port_7FFD
+                LD A, (BC)
+                AND ~(SCREEN_MASK | PAGE_MASK)
+                OR Page? | (Screen? << SCREEN_BIT)
+                LD (BC), A
+                OUT (C), A
+                endm
 ; включение страницы масива объектов
 SET_PAGE_OBJECT macro
                 CALL SetPage0
@@ -30,6 +38,12 @@ SET_PAGE_GRAPHICS macro
 ; включение страницы с главным меню
 ; -----------------------------------------
 SET_PAGE_MAIN_MENU macro 
+                CALL SetPage6
+                endm
+; -----------------------------------------
+; включение страницы инициализации
+; -----------------------------------------
+SET_PAGE_INITIALIZE macro 
                 CALL SetPage6
                 endm
 ; -----------------------------------------

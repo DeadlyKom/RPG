@@ -10,7 +10,8 @@ Pack6           EQU PAGE_6                                                      
                 endmodule
 
                 module Adr
-MainMenu        EQU Module.Pack6                                                ; адрес расположения блока "главного меню"
+Font            EQU Module.Pack6                                                ; адрес расположения блока шрифта
+MainMenu        EQU Packs.MainMenu.Begin                                        ; адрес расположения блока "главного меню"
                 module Module
 Pack6:          EQU MemBank_03                                                  ; адрес пакета №6
 

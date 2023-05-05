@@ -12,12 +12,12 @@ EntryPoint:     ; -----------------------------------------
                 ; инициализация
                 ; -----------------------------------------
                 HALT
+                CALL Execute.Core                                               ; инициализация ядра
+                CALL Execute.Player                                             ; инициализация игрока
                 CALL Execute.MainMenu                                           ; инициализация и запуск главного меню
+                CALL Execute.Input                                              ; инициализация управления
                 
-                ; CALL Initialize.Player                                          ; инициализация игрока
-                ; CALL Initialize.Core                                            ; инициализация ядра
                 ; CALL Initialize.World                                           ; инициализация загруженного уровня
-                ; CALL Initialize.Input                                           ; инициализация управления
                 ; CALL Game.Render.World.UI.DrawInit                              ; обновление UI (после инициализации всего)
 
                 display "\t- Game 'EntryPoint':\t\t\t\t", /A, EntryPoint, " = busy [ ", /D, $ - EntryPoint, " bytes  ]"

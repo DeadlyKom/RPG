@@ -18,15 +18,9 @@ Begin:          EQU $
                 include "Core/Module/Memory/MemcpyFastLDIR.asm"
                 include "Core/Module/Memory/MemcpySprite.asm"
 
-                ; initialize
+                ; execute
+                include "Core/Module/Game/Initialize/Core/Include.inc"
                 include "Core/Module/Game/Initialize/Main Menu/Include.inc"
-
-                ; generation
-                include "Core/Module/Table/Gen_PRNG.asm"                        ; ToDo перенести в страницу!
-                include "Core/Module/Table/Gen_ScrAdr.asm"                      ; ToDo перенести в страницу!
-                include "Core/Module/Table/Gen_ShiftTable.asm"                  ; ToDo перенести в страницу!
-                include "Core/Module/Table/Gen_WorldSprite.asm"                 ; ToDo перенести в страницу!
-                include "Core/Module/Table/Gen_MultiplySpriteTable.asm"         ; ToDo перенести в страницу!
 
                 ; draw world map
                 include "Core/Module/Draw/World/Draw.asm"
