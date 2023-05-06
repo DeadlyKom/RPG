@@ -18,6 +18,7 @@ CheckKeyState:      RLA
                     AND %00111000
                     OR INSTRUCTION_BIT
                     LD (.BIT), A
+                    XOR A
                     IN A, (#1F)
                     CPL
 .BIT                EQU $+1                 ; BIT n, A

@@ -14,15 +14,23 @@ InputHandler:   JR NZ, .NotProcessing                                           
                 EX AF, AF'                                                      ; переключится на ID виртуальной клавиши
 
                 CP KEY_ID_SELECT_1                                              ; клавиша "1"
-                JR Z, Select_1
+                JP Z, Select_1
                 CP KEY_ID_SELECT_2                                              ; клавиша "2"
-                JR Z, Select_2
+                JP Z, Select_2
                 CP KEY_ID_SELECT_3                                              ; клавиша "3"
-                JR Z, Select_3
+                JP Z, Select_3
                 CP KEY_ID_SELECT_4                                              ; клавиша "4"
-                JR Z, Select_4
+                JP Z, Select_4
+                CP KEY_ID_SELECT_5                                              ; клавиша "5"
+                JP Z, Select_5
+                CP KEY_ID_SELECT_6                                              ; клавиша "6"
+                JP Z, Select_6
+                CP KEY_ID_SELECT_7                                              ; клавиша "7"
+                JP Z, Select_7
+                CP KEY_ID_SELECT_8                                              ; клавиша "8"
+                JP Z, Select_8
                 CP KEY_ID_SELECT_9                                              ; клавиша "9"
-                JR Z, Select_9
+                JP Z, Select_9
 
 .NotProcessing  SCF
                 RET
@@ -35,6 +43,8 @@ Select_1:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
                 RET C
                 CP Packs.MainMenu.Render.MENU_TYPE_MAIN >> 1
                 JP Z, StartGame
+                CP Packs.MainMenu.Render.MENU_TYPE_REDEFINE >> 1
+                JP Z, RedefineUp
                 CP Packs.MainMenu.Render.MENU_TYPE_OPTIONS >> 1
                 JP Z, Keyboard
                 RET
@@ -45,6 +55,8 @@ Select_2:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
                 JP Z, Continue
                 CP Packs.MainMenu.Render.MENU_TYPE_OPTIONS >> 1
                 JP Z, Kempston8
+                CP Packs.MainMenu.Render.MENU_TYPE_REDEFINE >> 1
+                JP Z, RedefineDown
                 RET
 Select_3:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
                 SRL A
@@ -53,21 +65,47 @@ Select_3:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
                 JP Z, Options
                 CP Packs.MainMenu.Render.MENU_TYPE_OPTIONS >> 1
                 JP Z, RedefineKeys
+                CP Packs.MainMenu.Render.MENU_TYPE_REDEFINE >> 1
+                JP Z, RedefineLeft
                 RET
 Select_4:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
                 SRL A
                 RET C
                 CP Packs.MainMenu.Render.MENU_TYPE_OPTIONS >> 1
                 JP Z, Options.Back
+                CP Packs.MainMenu.Render.MENU_TYPE_REDEFINE >> 1
+                JP Z, RedefineRight
                 RET
-
+Select_5:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
+                SRL A
+                RET C
+                CP Packs.MainMenu.Render.MENU_TYPE_REDEFINE >> 1
+                JP Z, RedefineSelect
+                RET
+Select_6:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
+                SRL A
+                RET C
+                CP Packs.MainMenu.Render.MENU_TYPE_REDEFINE >> 1
+                JP Z, RedefineBack
+                RET
+Select_7:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
+                SRL A
+                RET C
+                CP Packs.MainMenu.Render.MENU_TYPE_REDEFINE >> 1
+                JP Z, RedefineAccel
+                RET
+Select_8:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
+                SRL A
+                RET C
+                CP Packs.MainMenu.Render.MENU_TYPE_REDEFINE >> 1
+                JP Z, RedefineMenu
+                RET
 Select_9:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
                 SRL A
                 RET C
                 CP Packs.MainMenu.Render.MENU_TYPE_REDEFINE >> 1
-                JP Z, Options
+                JP Z, RedefineOpBack
                 RET
-
 Continue:       LD A, Packs.MainMenu.Render.MENU_TYPE_CONTINUE | Packs.MainMenu.Render.MENU_FADEOUT_FLAG
                 LD (Packs.MainMenu.Render.Draw.MenuType), A
                 RET
@@ -90,5 +128,37 @@ RedefineKeys:   LD A, Packs.MainMenu.Render.MENU_TYPE_REDEFINE | Packs.MainMenu.
                 
                 SET_PAGE_INITIALIZE                                             ; включить страницу работы с инициализациями
                 JP Packs.Initialize.Input.SetRedefineKeys
+
+RedefineUp:     LD DE, GameConfig.KeyUp
+                JR TryRedefine
+RedefineDown:   LD DE, GameConfig.KeyDown
+                JR TryRedefine
+RedefineLeft:   LD DE, GameConfig.KeyLeft
+                JR TryRedefine
+RedefineRight:  LD DE, GameConfig.KeyRight
+                JR TryRedefine
+RedefineSelect: LD DE, GameConfig.KeySelect
+                JR TryRedefine
+RedefineBack:   LD DE, GameConfig.KeyBack
+                JR TryRedefine
+RedefineAccel:  LD DE, GameConfig.KeyAcceleration
+                JR TryRedefine
+RedefineMenu:   LD DE, GameConfig.KeyMenu
+                JR TryRedefine
+TryRedefine     LD HL, RedefineFlag
+                LD A, (HL)
+                OR A
+                RET NZ
+                
+                LD (HL), #FF
+                EX DE, HL
+                LD (HL), VK_NONE | 0x80
+                RET
+RedefineOpBack: LD HL, RedefineFlag
+                LD A, (HL)
+                OR A
+                JR Z, Options
+                RET
+RedefineFlag    DB #00
 
                 endif ; ~_MODULE_GAME_INPUT_HANDLER_MAIN_MENU_

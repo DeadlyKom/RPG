@@ -5,8 +5,11 @@
                 module Kempston
 Begin:          EQU $
                 include "CheckKeyState.asm"
+                include "PressedKey.asm"
+                include "Initialize.asm"
 
                 display "\t - Kempston : \t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
+
                 endmodule
 
                 endif ; ~_INPUT_KEMPSTON_INCLUDE_

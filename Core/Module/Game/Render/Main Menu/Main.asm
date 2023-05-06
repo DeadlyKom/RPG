@@ -26,7 +26,7 @@ Main:           ; -----------------------------------------
                 CALL Packs.DrawString
 
                 LD HL, .VersionText
-                LD DE, #B6D0
+                LD DE, #B7D0
                 CALL Packs.DrawString
                 
                 XOR A

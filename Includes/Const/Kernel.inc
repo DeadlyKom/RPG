@@ -116,13 +116,18 @@ Input:
 .ArrayKeys      EQU Kernel.Input.JumpKeys.LastKey
 .JumpHandlerKey EQU Kernel.Input.JumpHandlerKey
 Kempston:
+.Initialize     EQU Kernel.Kempston.Initialize                                  ; инициализация кемпстон джойстика
 .CheckKeyState  EQU Kernel.Kempston.CheckKeyState
+.GetPressedKey  EQU Kernel.Kempston.GetPressedKey
+.WaitPressedKey EQU Kernel.Kempston.WaitPressedKey
+.WaitReleasedKey EQU Kernel.Kempston.WaitReleasedKey                            ; ожидание отпускание ранее нажатой клавиши
+.AnyKeyPressed  EQU Kernel.Kempston.AnyKeyPressed                               ; проверка нажатия либой клавиши
 Keyboard:
 .CheckKeyState  EQU Kernel.Keyboard.CheckKeyState
 .GetPressedKey  EQU Kernel.Keyboard.GetPressedKey
 .WaitPressedKey EQU Kernel.Keyboard.WaitPressedKey
 .WaitReleasedKey EQU Kernel.Keyboard.WaitReleasedKey                            ; ожидание отпускание ранее нажатой клавиши
-.AnyKeyPressed  EQU Kernel.Keyboard.AnyKeyPressed                               ; проверка нажатия какая либо клавиши
+.AnyKeyPressed  EQU Kernel.Keyboard.AnyKeyPressed                               ; проверка нажатия либой клавиши
 Mouse:
 .Initialize     EQU Kernel.Mouse.Initialize
 .UpdateCursor   EQU Kernel.Mouse.UpdateCursor

@@ -18,6 +18,7 @@
                 include "World.inc"
                 include "Config.inc"
                 include "Render.inc"
+                include "Hardware.inc"
                 include "Variables.inc"
                 include "Interrupt.inc"
 

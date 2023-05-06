@@ -15,6 +15,7 @@ KEY_ID_SELECT_9 EQU 0x08
 
                 include "Scan.asm"
                 include "InputHandler.asm"
+                include "RedefineKeys.asm"
 
                 endmodule
 
