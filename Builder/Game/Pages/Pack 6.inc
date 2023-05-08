@@ -8,6 +8,7 @@
 
                 display "\'Pack 6\':\t\t\t\t\t\t-------------------- [ ", /D, Size6, " bytes ]\t [", /D, Page.Module.Pack6, "]\t ------------------------"
 Begin6:         EQU $
+
                 ; graphic
                 include "Core/Module/Graphics/Font/Include.inc"
                 
@@ -18,8 +19,9 @@ Begin6:         EQU $
                 ; initialize
                 include "Core/Module/Game/Initialize/Include.inc"
 
-                ; menu
-                include "Core/Module/Game/Main Menu/Include.inc"
+                ; shared block code
+                include "Core/Module/Game/Main Menu/Include.inc"                ; menu
+                include "Core/Module/Game/Settlement/Include.inc"               ; settlement
 
                 ; generation
                 include "Core/Module/Table/Gen_PRNG.asm"

@@ -1,8 +1,8 @@
 
-                ifndef _MODULE_GAME_RENDER_MAIN_MENU_DRAW_
-                define _MODULE_GAME_RENDER_MAIN_MENU_DRAW_
+                ifndef _MODULE_GAME_RENDER_SETTLEMENT_DRAW_
+                define _MODULE_GAME_RENDER_SETTLEMENT_DRAW_
 ; -----------------------------------------
-; отображение меню
+; отображение поселение
 ; In:
 ; Out:
 ; Corrupt:
@@ -23,20 +23,18 @@ Draw:           ; счётчик отображаемого экрана
                 JR .Processed
                 
 .BaseDraw       SetPort PAGE_6, 1                                               ; включить 6 страницу и показать теневой экран
-.MenuType       EQU $+1
-                LD A, MENU_TYPE_MAIN
-                SRL A
-                JP C, Fadeout
-                CP MENU_TYPE_MAIN >> 1
-                CALL Z, Main
-                CP MENU_TYPE_START >> 1
-                CALL Z, StartGame
-                CP MENU_TYPE_CONTINUE >> 1
-                CALL Z, Continue
-                CP MENU_TYPE_OPTIONS >> 1
-                CALL Z, Options
-                CP MENU_TYPE_REDEFINE >> 1
-                CALL Z, RedefineKeys
+; .MenuType       EQU $+1
+;                 LD A, MENU_TYPE_MAIN
+;                 SRL A
+;                 JP C, Fadeout
+;                 CP MENU_TYPE_MAIN >> 1
+;                 CALL Z, Main
+;                 CP MENU_TYPE_CONTINUE >> 1
+;                 CALL Z, Continue
+;                 CP MENU_TYPE_OPTIONS >> 1
+;                 CALL Z, Options
+;                 CP MENU_TYPE_REDEFINE >> 1
+;                 CALL Z, RedefineKeys
 
 .Processed      ifdef _DEBUG
                 CALL FPS_Counter.Frame
@@ -47,4 +45,4 @@ Draw:           ; счётчик отображаемого экрана
 
 .Counter        DB #00
 
-                endif ; ~_MODULE_GAME_RENDER_MAIN_MENU_DRAW_
+                endif ; ~_MODULE_GAME_RENDER_SETTLEMENT_DRAW_

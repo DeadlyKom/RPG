@@ -21,6 +21,7 @@ Begin:          EQU $
                 ; execute
                 include "Core/Module/Game/Initialize/Core/Include.inc"
                 include "Core/Module/Game/Initialize/Main Menu/Include.inc"
+                include "Core/Module/Game/Initialize/Settlement/Include.inc"
 
                 ; draw world map
                 include "Core/Module/Draw/World/Draw.asm"

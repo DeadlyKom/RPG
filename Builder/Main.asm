@@ -19,6 +19,7 @@
                 ; define ENABLE_MOUSE                                             ; разрешить мышь
                 define ENABLE_KEMSTON_JOYSTICK_SEGA                             ; разрешить использовать расширенный Кемстон Джойстик (SEGA 8 bits)
                 
+                include "LUA/Include.inc"
                 include "Includes/Include.inc"
 
                 display "-------------------------------------------------------------------------------------------------------------------------------"

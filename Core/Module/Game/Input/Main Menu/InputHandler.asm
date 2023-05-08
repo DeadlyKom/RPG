@@ -106,6 +106,9 @@ Select_9:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
                 CP Packs.MainMenu.Render.MENU_TYPE_REDEFINE >> 1
                 JP Z, RedefineOpBack
                 RET
+StartGame:      LD A, Packs.MainMenu.Render.MENU_TYPE_START | Packs.MainMenu.Render.MENU_FADEOUT_FLAG
+                LD (Packs.MainMenu.Render.Draw.MenuType), A
+                RET
 Continue:       LD A, Packs.MainMenu.Render.MENU_TYPE_CONTINUE | Packs.MainMenu.Render.MENU_FADEOUT_FLAG
                 LD (Packs.MainMenu.Render.Draw.MenuType), A
                 RET
@@ -115,8 +118,6 @@ Options:        LD A, Packs.MainMenu.Render.MENU_TYPE_OPTIONS | Packs.MainMenu.R
 .Back           LD A, Packs.MainMenu.Render.MENU_TYPE_MAIN | Packs.MainMenu.Render.MENU_FADEOUT_FLAG
                 LD (Packs.MainMenu.Render.Draw.MenuType), A
                 RET
-
-StartGame:      RET
 Keyboard:       SET_PAGE_INITIALIZE                                             ; включить страницу работы с инициализациями
                 CALL Packs.Initialize.Input.SetKeyboard
                 JR Options.Back
