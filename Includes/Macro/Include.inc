@@ -11,6 +11,7 @@
                 include "Player.inc"
                 include "Render.inc"
                 include "Game.inc"
+                include "Menu.inc"
                 include "Hardware.inc"
                 include "Gameplay.inc"
                 include "Interrupt.inc"

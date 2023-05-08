@@ -88,6 +88,9 @@ Convert:
 .CharToScreen   EQU Kernel.Utils.PixelAddressC
 .PixelToScreen  EQU Kernel.Utils.PixelAddressP
 .ToAttribute    EQU Kernel.Utils.PixelAttribute
+.NumberToString_8 EQU Kernel.Utils.B2D8                                         ; преобразовать 8-битное число в строку
+.NumberToString_16 EQU Kernel.Utils.B2D16                                       ; преобразовать 16-битное число в строку
+.ConvertedStr   EQU Kernel.Utils.B2DBUF
 
 ; object
 ; Object:

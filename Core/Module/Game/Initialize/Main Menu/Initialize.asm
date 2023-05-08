@@ -9,7 +9,7 @@
 ; Note:
 ; -----------------------------------------
 MainMenu:       ; установка бордюра
-                BORDER BLACK
+                BORDER BLACK ; WHITE
 
                 ; инициализация главного цикла
                 SetMainLoop Packs.MainMenu.Loop

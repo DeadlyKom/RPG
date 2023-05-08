@@ -159,7 +159,7 @@
         [0xD0B8] = 0x70,  -- и
         [0xD0B9] = 0x72,  -- й
         [0xD0BA] = 0x73,  -- к
-        [0xD0BB] = 0x74,  -- л
+        [0xD0BB] = 0x75,  -- л
         [0xD0BC] = 0x76,  -- м
         [0xD0BD] = 0x77,  -- н
         [0xD0BE] = 0x4F,  -- о
@@ -188,7 +188,13 @@
 
     -- Get a value by ID
     function get(char)
-        return Map[char]
+        -- return Map[char]
+        if Map[char] == nil then
+            print (string.format("error %i", char))
+            return 0;
+        else
+            return Map[char]
+        end
         -- return assert(Map[id]).value
     end
 
@@ -201,14 +207,15 @@
                 word = byte
             elseif word > 0 then
                 word = word * 256 + byte
-                print (string.format("%s,  %s", word, get(word)))
+                --print (string.format("%s,  %s", word, get(word)))
                 _pc("DB " .. get(word) + 32)
                 word = 0
             else
                 local byte = get(string.byte(char) - 31)
                 _pc("DB " .. byte + 32)
-                print (string.format("%s,  %s", char, byte))
+                --print (string.format("%s,  %s", char, byte))
             end
         end
+        _pc("DB #00")
     end
     endlua

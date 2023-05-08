@@ -1,6 +1,6 @@
 
-                ifndef _CONST_CONGIF_
-                define _CONST_CONGIF_
+                ifndef _CONST_CONFIG_
+                define _CONST_CONFIG_
 INPUT_KEYBOARD      EQU 0x00
 INPUT_REDEFINE_KEYS EQU 0x01
 INPUT_KEMPSTON_5    EQU 0x02
@@ -12,4 +12,4 @@ G_PARTICLE_BIT      EQU 0x00                                                    
 G_PARTICLE_ON       EQU 1 << G_PARTICLE_BIT                                     ; флаг вкл VFX частиц
 G_PARTICLE_OFF      EQU 0 << G_PARTICLE_BIT                                     ; флаг выкл VFX частиц
 
-                endif ; ~_CONST_CONGIF_
+                endif ; ~_CONST_CONFIG_

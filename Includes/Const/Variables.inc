@@ -1,6 +1,6 @@
 
-                    ifndef _CONST_GAME_
-                    define _CONST_GAME_
+                    ifndef _CONST_GAME_VARIABLES_
+                    define _CONST_GAME_VARIABLES_
 GameConfig          EQU Adr.GameConfig                                          ; адрес структуры конфигурации игры
 .Keys               EQU GameConfig + FGameConfig.KeyMenu                        ; массив клавиш
 .KeyUp              EQU GameConfig + FGameConfig.KeyUp                          ; клавиша по умолчанию "Вверх"
@@ -33,7 +33,13 @@ GameState           EQU Adr.GameState                                           
 .Gameplay           EQU GameState + FGameState.Gameplay                         ; флаги геймплея
 .Hardware           EQU GameState + FGameState.Hardware                         ; флаги железа
 .Objects            EQU GameState + FGameState.Objects                          ; количество объектов в массиве
-
+.MenuFlags          EQU GameState + FGameState.MenuFlags                        ; флаги меню
+.Cursor             EQU GameState + FGameState.Cursor                           ; позиция курсора (в режиме выбора)
+.Cursor.Old         EQU GameState + FGameState.Cursor.Old                       ; прошлая позиция курсора (в режиме выбора) 
+.Cursor.Num         EQU GameState + FGameState.Cursor.Num                       ; количество позиций выбора
+.Cursor.Dir         EQU GameState + FGameState.Cursor.Dir                       ; направление движения (для инпута)
+                                                                                ;   #01 - вперёд (+1 позиция)
+                                                                                ;   #FF - назда (-1 позиция)
 PlayerState         EQU Adr.PlayerState
 .InputFlags         EQU PlayerState + FPlayerState.InputFlags                   ; флаги управления игроком
 .Health             EQU PlayerState + FPlayerState.Health                       ; уровень очков здоровья
@@ -52,4 +58,4 @@ PlayerState         EQU Adr.PlayerState
 .DebugX             EQU PlayerState + FPlayerState.DebugX                       ; отладочная информация
 .DebugY             EQU PlayerState + FPlayerState.DebugY                       ; отладочная информация
 
-                    endif ; ~_CONST_GAME_
+                    endif ; ~_CONST_GAME_VARIABLES_

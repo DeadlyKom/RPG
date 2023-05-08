@@ -1,6 +1,6 @@
 
-                ifndef _MODULE_GAME_INPUT_HANDLER_MAIN_MENU_
-                define _MODULE_GAME_INPUT_HANDLER_MAIN_MENU_
+                ifndef _MODULE_GAME_INPUT_HANDLER_MAIN_MENU_SELECTION_MODE_
+                define _MODULE_GAME_INPUT_HANDLER_MAIN_MENU_SELECTION_MODE_
 ; -----------------------------------------
 ; обработчик клавиш игры
 ; In:
@@ -9,7 +9,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-InputHandler:   JR NZ, .NotProcessing                                           ; переход, если виртуальная клавиша отжата
+IH_SelMode:     JR NZ, .NotProcessing                                           ; переход, если виртуальная клавиша отжата
 .Processing     ; опрос нажатой виртуальной клавиши
                 EX AF, AF'                                                      ; переключится на ID виртуальной клавиши
 
@@ -34,10 +34,6 @@ InputHandler:   JR NZ, .NotProcessing                                           
 
 .NotProcessing  SCF
                 RET
-
-Processed:      OR A                                                            ; сброс флага переполнения (произведена обработка клавиши)
-                RET
-
 Select_1:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
                 SRL A
                 RET C
@@ -106,7 +102,13 @@ Select_9:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
                 CP Packs.MainMenu.Render.MENU_TYPE_REDEFINE >> 1
                 JP Z, RedefineOpBack
                 RET
-StartGame:      LD A, Packs.MainMenu.Render.MENU_TYPE_START | Packs.MainMenu.Render.MENU_FADEOUT_FLAG
+StartGame:      SET_MENU_FLAG MENU_STARTUP_BIT                                  ; установка флага первичной инициализации
+
+                ; включить режим опроса игровых клавиш
+                LD HL, InputFlag
+                LD (HL), INPUT_MODE_GAME_KEYS
+
+                LD A, Packs.MainMenu.Render.MENU_TYPE_START | Packs.MainMenu.Render.MENU_FADEOUT_FLAG
                 LD (Packs.MainMenu.Render.Draw.MenuType), A
                 RET
 Continue:       LD A, Packs.MainMenu.Render.MENU_TYPE_CONTINUE | Packs.MainMenu.Render.MENU_FADEOUT_FLAG
@@ -146,20 +148,21 @@ RedefineAccel:  LD DE, GameConfig.KeyAcceleration
                 JR TryRedefine
 RedefineMenu:   LD DE, GameConfig.KeyMenu
                 JR TryRedefine
-TryRedefine     LD HL, RedefineFlag
+TryRedefine     LD HL, InputFlag
                 LD A, (HL)
-                OR A
-                RET NZ
+                CP INPUT_MODE_REDEFINE_KEYS
+                RET Z
                 
-                LD (HL), #FF
+                LD (HL), INPUT_MODE_REDEFINE_KEYS
+                INC HL
+                LD (HL), A
+
                 EX DE, HL
                 LD (HL), VK_NONE | 0x80
                 RET
-RedefineOpBack: LD HL, RedefineFlag
-                LD A, (HL)
-                OR A
-                JR Z, Options
-                RET
-RedefineFlag    DB #00
+RedefineOpBack: LD A, (InputFlag)
+                CP INPUT_MODE_REDEFINE_KEYS
+                RET Z
+                JR Options
 
-                endif ; ~_MODULE_GAME_INPUT_HANDLER_MAIN_MENU_
+                endif ; ~_MODULE_GAME_INPUT_HANDLER_MAIN_MENU_SELECTION_MODE_

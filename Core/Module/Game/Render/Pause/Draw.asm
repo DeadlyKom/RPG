@@ -21,6 +21,14 @@ Draw:           ;
                 OR A                ; B7
                 JR C, .ShowMenu
 
+                ; первичая инициализация
+                LD HL, GameState.Cursor
+                LD (HL), #00                                                    ; текущая позиция
+                INC L
+                LD (HL), #04                                                    ; количество позиций
+                INC L
+                LD (HL), #00                                                    ; направление
+
                 CALL Screen.SetPageShadow
                 CALL FadeoutScreen
 
@@ -93,7 +101,7 @@ Draw:           ;
                 LD BC, Space
                 CALL Console.DrawString
 
-                LD A, (Cursor)
+                LD A, (GameState.Cursor)
                 ADD A, #06
                 LD D, A
                 LD E, #08
@@ -130,16 +138,16 @@ InitVariables   ; -----------------------------------------
                 LD A, '+'
 .L1             LD (Particle.Value), A
 
-                LD A, (Cursor.Dir)
+                LD A, (GameState.Cursor.Dir)
                 OR A
                 RET Z
                 LD C, A
 
                 ;сброс направления
                 XOR A
-                LD (Cursor.Dir), A
+                LD (GameState.Cursor.Dir), A
 
-                LD A, (Cursor)
+                LD A, (GameState.Cursor)
                 CP #00                                                          ; Input
                 JR Z, SelectInput
                 CP #01                                                          ; Slot
@@ -215,8 +223,5 @@ Slot_RepairKit  BYTE " Repair Kit    \0"
 Particle        BYTE " Particle  [ ] \0"
 .Value          EQU $-4
 Resume_Text     BYTE " Resume        \0"
-Cursor          DB #00
-.Num            DB #04
-.Dir            DB #00
 
                 endif ; ~_MODULE_GAME_RENDER_PAUSE_MENU_

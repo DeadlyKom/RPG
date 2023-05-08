@@ -63,15 +63,20 @@ ScanRedefine:   LD HL, .Table
                 ; ожидание отпускание ранее нажатой клавиши
 .WaitKeyboard   CALL Keyboard.GetPressedKey
                 JR C, .WaitKeyboard
+
                 ; проверка наличия кемстон джойстика
                 CHECK_HARDWARE_FLAG HARDWARE_KEMPSTON_BIT
                 JR Z, .Skip
+
+                ; ожидание отпускание ранее нажатой клавиши
 .WaitKempston   CALL Kempston.GetPressedKey
                 JR C, .WaitKempston
 .Skip
                 ; сброс флага опроса клавиш
-                LD HL, RedefineFlag
-                LD (HL), #00
+                LD HL, OldInputFlag
+                LD A, (HL)
+                DEC HL
+                LD (HL), A
                 RET
 
 .IsCollision    JP SFX.BEEP.Fail

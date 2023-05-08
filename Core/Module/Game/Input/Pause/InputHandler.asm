@@ -49,13 +49,13 @@ Menu:           LD BC, Game.World.Loop
                 
                 SetUserHendler Game.World.Interrupt
                 RET
-Up:             LD HL, Game.Render.Pause.Cursor
+Up:             LD HL, GameState.Cursor
                 LD A, (HL)
                 OR A
                 RET Z
                 DEC (HL)
                 RET
-Down:           LD HL, Game.Render.Pause.Cursor
+Down:           LD HL, GameState.Cursor
                 LD A, (HL)
                 INC A
                 INC HL
@@ -64,13 +64,13 @@ Down:           LD HL, Game.Render.Pause.Cursor
                 DEC HL
                 INC (HL)
                 RET
-Left:           LD HL, Game.Render.Pause.Cursor.Dir
-                LD (HL), #FF
+Left:           LD HL, GameState.Cursor.Dir
+                LD (HL), CURSOR_DEC
                 RET
-Right:          LD HL, Game.Render.Pause.Cursor.Dir
-                LD (HL), #01
+Right:          LD HL, GameState.Cursor.Dir
+                LD (HL), CURSOR_INC
                 RET
-Selected:       LD A, (Game.Render.Pause.Cursor)
+Selected:       LD A, (GameState.Cursor)
                 CP INPUT
                 JR Z, .ApplyInput
                 CP SLOT

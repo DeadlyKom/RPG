@@ -72,6 +72,9 @@ Begin:          EQU $
                 ; SFX
                 include "Core/Module/SFX/Include.inc"
 
+                ; utils
+                include "Core/Module/Utils/ConvertNumberToString.asm"
+
                 ; object
                 ; include "Core/Module/Object/Initialize/Include.inc"             ; ToDo перенести в страницу!
                 ; include "Core/Module/Object/Damage/Include.inc"                 ; ToDo перенести в страницу!

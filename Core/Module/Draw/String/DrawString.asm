@@ -12,7 +12,6 @@
 ;   ширина симвала не более 8 пикселей
 ; -----------------------------------------
 DrawString:     
-
 .CharLoop       ; проверка конца строки
                 LD A, (HL)
                 OR A
@@ -24,57 +23,6 @@ DrawString:
                 INC HL
                 PUSH HL
                 PUSH DE
-
-                ; расчёт адреса символа
-                LD C, A
-                LD B, #00
-                LD L, A
-                LD H, B
-                ADD HL, HL  ; x2
-                ADD HL, BC  ; x3
-                LD A, H
-                OR HIGH Adr.Font
-                LD H, A
-
-                ; чтение данных о символе
-                LD E, (HL)                                                      ; FFont.Size
-                INC HL
-                XOR A
-                RRD
-                LD D, A
-                LD B, (HL)                                                      ; FFont.Offset + 0
-                RLD
-                INC HL
-                LD C, (HL)                                                      ; FFont.Offset + 1
-                ADD HL, BC
-
-                ; -----------------------------------------
-                ; D  - смещение по высоте
-                ; E  - размер спрайта (высота/ширина)
-                ; HL - адрес спрайта
-                ; -----------------------------------------
-                
-                ; выделим высоту символа
-                LD A, E
-                RRA
-                RRA
-                RRA
-                RRA
-                AND #0F
-                LD B, A
-
-                ; сохраним ширину символа
-                LD A, E
-                AND #0F
-                INC A
-                EX AF, AF'
-
-                ; добавить смещение по высоте
-                LD A, D
-                POP DE
-                PUSH DE
-                ADD A, D
-                LD D, A
 
                 CALL DrawChar
 

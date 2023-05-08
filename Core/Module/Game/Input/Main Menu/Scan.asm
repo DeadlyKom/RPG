@@ -8,14 +8,21 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Scan:           ; проверка на включенный режим выбора клавиш
-                LD HL, RedefineFlag
-                LD A, (HL)
-                OR A
-                JP NZ, ScanRedefine
+Scan:           ; проверка режима опроса клавиатуры
+                LD A, (InputFlag)
+                CP INPUT_MODE_SELECT_KEYS
+                JR Z, .SelectionMode
+                CP INPUT_MODE_NUMBER_KEYS
+                JR Z, $
+                CP INPUT_MODE_REDEFINE_KEYS
+                JP Z, ScanRedefine                                              ; переход, если выбран режим переназначения клавиш
+
+                ; опрос игровых клавиш
+                LD DE, IH_GameMode
+                JP Input.JumpKeys
                 
-                ; опрос виртуальных клавиш
-                LD DE, InputHandler
+.SelectionMode  ; опрос виртуальных клавиш
+                LD DE, IH_SelMode
 ; -----------------------------------------
 ; обработчик нажатия/отжатия виртуальной клавиши
 ; In :
