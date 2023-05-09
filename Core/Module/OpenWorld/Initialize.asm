@@ -1,6 +1,6 @@
 
-                ifndef _CORE_MODULE_GENERATE_WORLD_INITIALIZE_
-                define _CORE_MODULE_GENERATE_WORLD_INITIALIZE_
+                ifndef _CORE_MODULE_OPEN_WORLDD_INITIALIZE_
+                define _CORE_MODULE_OPEN_WORLD_INITIALIZE_
 ; -----------------------------------------
 ; инициализация работы с поселениями
 ; In:
@@ -17,4 +17,4 @@
                 LD HL, GameState.Settlement
                 LD (HL), #00
 
-                endif ; ~ _CORE_MODULE_GENERATE_WORLD_INITIALIZE_
+                endif ; ~ _CORE_MODULE_OPEN_WORLD_INITIALIZE_

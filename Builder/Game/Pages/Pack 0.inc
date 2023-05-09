@@ -10,7 +10,7 @@
 Begin0:         EQU $
 
                 ; generator
-                include "Core/Module/Generate/Include.inc"
+                include "Core/Module/OpenWorld/Include.inc"
 End0:           EQU $
 Size0:          EQU End0 - Begin0
 

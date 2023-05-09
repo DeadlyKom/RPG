@@ -40,6 +40,7 @@ Location        FLocation32                                                     
 ;   RT      [0]     - радио вышка
 ; -----------------------------------------
 Building        DB #00                                                          ; доступные строения для поселения  [1 байт]
+Seed            FValue                                                          ; ключ генератора                   [2 байта]
                 ends
 
                 endif ; ~_STRUCTURE_SETTLEMENT_

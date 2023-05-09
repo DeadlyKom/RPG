@@ -154,6 +154,8 @@ Mouse:
 ; math
 Math
 .Rand8          EQU Kernel.Math.Rand8
+.PopSeed        EQU Kernel.Math.PopSeed
+.PushSeed       EQU Kernel.Math.PushSeed
 .SetSeed16      EQU Kernel.Math.SetSeed16
 .Lerp           EQU Kernel.Math.Lerp
 .Mul16x8_16     EQU Kernel.Math.Mul16x8_16

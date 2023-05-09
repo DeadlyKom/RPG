@@ -1,5 +1,5 @@
-                ifndef _CORE_MODULE_GENERATE_WORLD_
-                define _CORE_MODULE_GENERATE_WORLD_
+                ifndef _CORE_MODULE_OPEN_WORLD_GENERATE_
+                define _CORE_MODULE_OPEN_WORLD_GENERATE_
 ; -----------------------------------------
 ; генерация мира игры
 ; In:
@@ -7,7 +7,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-World:          ; инициализация мира
+Generate:       ; инициализация мира
                 include "Initialize.asm"
 
                 ; ToDo переделать на нормальный
@@ -31,9 +31,15 @@ World:          ; инициализация мира
 
                 ; доступные строения в поселении
                 LD (IX + FSettlement.Building), BUILDING_ENTRANCE | BUILDING_RESIDENTIAL_AREA | BUILDING_WAREHOUSE | BUILDING_SHOPPING_AREA | BUILDING_BAR | BUILDING_WORKSHOP | BUILDING_PRISON | BUILDING_RADIO_TOWER
-                
+
+                ; генерация ключа
+                CALL Math.Rand8
+                LD (IX + FSettlement.Seed.Low), A
+                CALL Math.Rand8
+                LD (IX + FSettlement.Seed.High), A
+
                 RET
 
                 display " - Generate 'WORLD':\t\t\t\t\t", /A, World, " = busy [ ", /D, $ - World, " bytes  ]"
 
-                endif ; ~ _CORE_MODULE_GENERATE_WORLD_
+                endif ; ~ _CORE_MODULE_OPEN_WORLD_GENERATE_

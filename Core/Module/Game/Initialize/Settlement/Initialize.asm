@@ -17,6 +17,9 @@ Settlement:     ; установка бордюра
                 ; инициализация обработчика прерываний
                 SetUserHendler Packs.Settlement.Interrupt
 
+                ; сохранение состояние таблицы генерации
+                CALL Math.PushSeed
+
                 RET
 
                 endif ; ~_CORE_MODULE_GAME_INITIALIZE_SETTLEMENT_
