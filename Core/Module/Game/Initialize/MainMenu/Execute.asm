@@ -9,7 +9,7 @@
 ; Note:
 ; -----------------------------------------
 MainMenu:       SET_PAGE_MAIN_MENU                                              ; включить страницу работы с главным меню
-                LD HL, Adr.MainMenu
+                LD HL, Adr.Block6.MainMenu
                 LD DE, Adr.Module.Game.Shared
                 LD BC, Packs.MainMenu.Size
                 PUSH DE

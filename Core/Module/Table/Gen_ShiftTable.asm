@@ -1,5 +1,5 @@
-                ifndef _CORE_MODULE_TABLE_GENERATION_SHIFT_TABLE_
-                define _CORE_MODULE_TABLE_GENERATION_SHIFT_TABLE_
+                ifndef _CORE_MODULE_TABLE_GENERATOR_SHIFT_TABLE_
+                define _CORE_MODULE_TABLE_GENERATOR_SHIFT_TABLE_
 
                 module Tables
 ; -----------------------------------------
@@ -49,8 +49,8 @@ Gen_ShiftTable: ;
 
                 RET
 
-                display " - Shift table generation:\t\t\t\t", /A, Gen_ShiftTable, " = busy [ ", /D, $ - Gen_ShiftTable, " bytes  ]"
+                display " - Shift table generator:\t\t\t\t", /A, Gen_ShiftTable, " = busy [ ", /D, $ - Gen_ShiftTable, " bytes  ]"
 
                 endmodule
 
-                endif ; ~ _CORE_MODULE_TABLE_GENERATION_SHIFT_TABLE_
+                endif ; ~ _CORE_MODULE_TABLE_GENERATOR_SHIFT_TABLE_

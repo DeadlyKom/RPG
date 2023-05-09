@@ -3,12 +3,14 @@
                 define _BUILDER_PACK_0_
 
                 MMU 3, Page.Module.Pack0                                        ; 3 bank, Page.Module.Pack0 (0) page
-                ORG Adr.Module.Pack0
+                ORG Adr.Block0.Code
                 module Packs
 
                 display "\'Pack 0\':\t\t\t\t\t\t-------------------- [ ", /D, Size0, " bytes ]\t [", /D, Page.Module.Pack0, "]\t ------------------------"
 Begin0:         EQU $
-                ; include "Core/Module/Game/Include.inc"
+
+                ; generator
+                include "Core/Module/Generate/Include.inc"
 End0:           EQU $
 Size0:          EQU End0 - Begin0
 

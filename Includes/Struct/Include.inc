@@ -6,6 +6,7 @@
                 include "Config.inc"
                 include "Game.inc"
                 include "Player.inc"
+                include "Settlement.inc"
 
                 include "Font.inc"
                 include "AABB.inc"

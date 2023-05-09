@@ -2,7 +2,7 @@
                 ifndef _MATH_PERLIN_NOISE_2D_FUNC_
                 define _MATH_PERLIN_NOISE_2D_FUNC_
 ; -----------------------------------------
-; noise generation
+; noise generator
 ; In :
 ;   FNoise2D.Frequency - range [0 .. 255]
 ;   FNoise2D.Location  - 32-bit values of the offset axes

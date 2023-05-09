@@ -39,7 +39,7 @@ Location        FLocation32                                                     
 ;   PR      [1]     - тюрьма
 ;   RT      [0]     - радио вышка
 ; -----------------------------------------
-Building        DB #00
+Building        DB #00                                                          ; доступные строения для поселения  [1 байт]
                 ends
 
                 endif ; ~_STRUCTURE_SETTLEMENT_

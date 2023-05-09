@@ -11,8 +11,13 @@ Pack6           EQU PAGE_6                                                      
 
                 module Adr
 Font            EQU Module.Pack6                                                ; адрес расположения блока шрифта
-MainMenu        EQU Packs.MainMenu.Begin                                        ; адрес расположения блока "главного меню"
+               
+                module Block6
+MainMenu        EQU Packs.MainMenu.Begin                                        ; адрес расположения блока "главное меню"
+PlayGame        EQU Packs.PlayGame.Begin                                        ; адрес расположения блока "начало игры"
 Settlement      EQU Packs.Settlement.Begin                                      ; адрес расположения блока "поселение"
+
+                endmodule
                 module Module
 Pack6:          EQU MemBank_03                                                  ; адрес пакета №6
 

@@ -40,4 +40,6 @@
                 include "ObjectType_Particle.inc"
                 include "ObjectType_Interaction.inc"
 
+                include "Settlement.inc"
+
                 endif ; ~_CONST_INCLUDES_

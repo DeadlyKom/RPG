@@ -1,5 +1,5 @@
-                ifndef _CORE_MODULE_TABLE_GENERATION_SCREEN_ADDRESS_
-                define _CORE_MODULE_TABLE_GENERATION_SCREEN_ADDRESS_
+                ifndef _CORE_MODULE_TABLE_GENERATOR_SCREEN_ADDRESS_
+                define _CORE_MODULE_TABLE_GENERATOR_SCREEN_ADDRESS_
 
                 module Tables
 ; -----------------------------------------
@@ -80,7 +80,7 @@ Gen_ScrAdr:     ; -----------------------------------------
 
                 RET
 
-                display " - Screen address table generation:\t\t\t", /A, Gen_ScrAdr, " = busy [ ", /D, $ - Gen_ScrAdr, " bytes  ]"
+                display " - Screen address table generator:\t\t\t", /A, Gen_ScrAdr, " = busy [ ", /D, $ - Gen_ScrAdr, " bytes  ]"
                 endmodule
 
-                endif ; ~ _CORE_MODULE_TABLE_GENERATION_SCREEN_ADDRESS_
+                endif ; ~ _CORE_MODULE_TABLE_GENERATOR_SCREEN_ADDRESS_

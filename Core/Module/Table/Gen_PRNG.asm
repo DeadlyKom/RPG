@@ -1,5 +1,5 @@
-                ifndef _CORE_MODULE_TABLE_GENERATION_PRNG_
-                define _CORE_MODULE_TABLE_GENERATION_PRNG_
+                ifndef _CORE_MODULE_TABLE_GENERATOR_PRNG_
+                define _CORE_MODULE_TABLE_GENERATOR_PRNG_
 
                 module Tables
 ; -----------------------------------------
@@ -31,8 +31,8 @@ Gen_PRNG:       ; установка seed
 
                 RET
 
-                display " - PRNG generation: \t\t\t\t\t", /A, Gen_PRNG, " = busy [ ", /D, $ - Gen_PRNG, " bytes  ]"
+                display " - PRNG generator: \t\t\t\t\t", /A, Gen_PRNG, " = busy [ ", /D, $ - Gen_PRNG, " bytes  ]"
 
                 endmodule
 
-                endif ; ~ _CORE_MODULE_TABLE_GENERATION_PRNG_
+                endif ; ~ _CORE_MODULE_TABLE_GENERATOR_PRNG_

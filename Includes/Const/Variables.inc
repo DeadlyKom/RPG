@@ -33,6 +33,7 @@ GameState           EQU Adr.GameState                                           
 .Gameplay           EQU GameState + FGameState.Gameplay                         ; флаги геймплея
 .Hardware           EQU GameState + FGameState.Hardware                         ; флаги железа
 .Objects            EQU GameState + FGameState.Objects                          ; количество объектов в массиве
+.Settlement         EQU GameState + FGameState.Settlement                       ; количество поселений в массиве
 .MenuID             EQU GameState + FGameState.MenuID                           ; тип меню
 .MenuFlags          EQU GameState + FGameState.MenuFlags                        ; флаги меню
 .Cursor             EQU GameState + FGameState.Cursor                           ; позиция курсора (в режиме выбора)
@@ -42,6 +43,7 @@ GameState           EQU Adr.GameState                                           
                                                                                 ;   #01 - вперёд (+1 позиция)
                                                                                 ;   #FF - назда (-1 позиция)
 PlayerState         EQU Adr.PlayerState
+.SettlementID       EQU PlayerState + FPlayerState.SettlementID                 ; номер поселения в котором находится игрок
 .InputFlags         EQU PlayerState + FPlayerState.InputFlags                   ; флаги управления игроком
 .Health             EQU PlayerState + FPlayerState.Health                       ; уровень очков здоровья
 .Gas                EQU PlayerState + FPlayerState.Gas                          ; уровень очков бензина

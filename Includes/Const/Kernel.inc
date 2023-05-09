@@ -52,8 +52,9 @@ Execute
 .PlayGame       EQU Kernel.Execute.PlayGame                                     ; запуск игры (первичный)
 .Settlement     EQU Kernel.Execute.Settlement                                   ; запуск поселение
 
-; generation
-; Generation:
+; generate
+Generate:
+.World          EQU Kernel.Execute.Gen_World                                    ; запуск генерации мира
 ; .WorldSprite    EQU Kernel.Tables.Gen_WorldSpr                                  ; генерация спрайтов для карты мира     ToDo перенести в страницу!
 
 ; tables

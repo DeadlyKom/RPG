@@ -10,6 +10,11 @@ Pack0           EQU PAGE_0                                                      
                 endmodule
 
                 module Adr
+
+                module Block0
+Code            EQU Adr.Settlement + Size.Settlement                            ; адрес блока "генерацией мира"
+
+                endmodule
                 module Module
 Pack0:          EQU MemBank_03                                                  ; адрес пакета №0
 

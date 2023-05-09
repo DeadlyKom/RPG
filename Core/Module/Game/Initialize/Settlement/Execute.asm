@@ -9,7 +9,7 @@
 ; Note:
 ; -----------------------------------------
 Settlement:     SET_PAGE_SETTLEMENT                                             ; включить страницу работы с поселением
-                LD HL, Adr.Settlement
+                LD HL, Adr.Block6.Settlement
                 LD DE, Adr.Module.Game.Shared
                 LD BC, Packs.Settlement.Size
                 PUSH DE

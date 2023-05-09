@@ -21,9 +21,10 @@ Begin6:         EQU $
 
                 ; shared block code
                 include "Core/Module/Game/MainMenu/Include.inc"                 ; menu
+                include "Core/Module/Game/PlayGame/Include.inc"                 ; play game
                 include "Core/Module/Game/Settlement/Include.inc"               ; settlement
 
-                ; generation
+                ; generator
                 include "Core/Module/Table/Gen_PRNG.asm"
                 include "Core/Module/Table/Gen_ScrAdr.asm"
                 include "Core/Module/Table/Gen_ShiftTable.asm"

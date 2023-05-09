@@ -1,5 +1,5 @@
-                ifndef _CORE_MODULE_TABLE_GENERATION_WORLD_SPRITE_
-                define _CORE_MODULE_TABLE_GENERATION_WORLD_SPRITE_
+                ifndef _CORE_MODULE_TABLE_GENERATOR_WORLD_SPRITE_
+                define _CORE_MODULE_TABLE_GENERATOR_WORLD_SPRITE_
 
                 module Tables
 ; -----------------------------------------
@@ -434,4 +434,4 @@ TableTilepairs  DB #00, #00 ; 0
 
                 endmodule
 
-                endif ; ~ _CORE_MODULE_TABLE_GENERATION_WORLD_SPRITE_
+                endif ; ~ _CORE_MODULE_TABLE_GENERATOR_WORLD_SPRITE_
