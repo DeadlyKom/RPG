@@ -6,11 +6,11 @@
 Begin           EQU $
 
                 DISP Adr.Module.Game.Shared                                     ; модификация адреса компиляции с блока общего кода
-                include "Core/Module/Game/Initialize/Main Menu/Initialize.asm"  ; первый, точка входа
+                include "Core/Module/Game/Initialize/MainMenu/Initialize.asm"   ; первый, точка входа
                 include "Loop.asm"
                 include "Interrupt.asm"
-                include "Core/Module/Game/Render/Main Menu/Include.inc"
-                include "Core/Module/Game/Input/Main Menu/Include.inc"
+                include "Core/Module/Game/Render/MainMenu/Include.inc"
+                include "Core/Module/Game/Input/MainMenu/Include.inc"
                 ENT                                                             ; отмена модификации адреса компиляции
 Size            EQU $-Begin
 

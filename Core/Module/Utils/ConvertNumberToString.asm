@@ -118,7 +118,7 @@ B2DBUF:         DS 21                                                           
 B2DEND:         DS 1                                                            ; space for terminating 0
 FIXBUF:         DS 8                                                            ;
 
-                display " - Convert number to string: \t\t\t\t\t", /A, NumberToString, " = busy [ ", /D, $ - NumberToString, " bytes  ]"
+                display " - Convert number to string:\t\t\t\t", /A, NumberToString, " = busy [ ", /D, $ - NumberToString, " bytes  ]"
 
                 endmodule
 

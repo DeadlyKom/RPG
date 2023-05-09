@@ -49,6 +49,7 @@ Execute
 .Player         EQU Kernel.Execute.Player                                       ; запуск инициализации игрока
 .Input          EQU Kernel.Execute.Input                                        ; запуск инициализации управления
 .MainMenu       EQU Kernel.Execute.MainMenu                                     ; запуск главного меню
+.PlayGame       EQU Kernel.Execute.PlayGame                                     ; запуск игры (первичный)
 .Settlement     EQU Kernel.Execute.Settlement                                   ; запуск поселение
 
 ; generation

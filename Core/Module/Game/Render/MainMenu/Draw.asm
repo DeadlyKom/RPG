@@ -23,19 +23,22 @@ Draw:           ; счётчик отображаемого экрана
                 JR .Processed
                 
 .BaseDraw       SetPort PAGE_6, 1                                               ; включить 6 страницу и показать теневой экран
-.MenuType       EQU $+1
-                LD A, MENU_TYPE_MAIN
-                SRL A
-                JP C, Fadeout
-                CP MENU_TYPE_MAIN >> 1
+                
+                ; проверка бита затемнения
+                CHECK_MENU_FLAG MENU_FADEOUT_BIT
+                JP NZ, Fadeout
+
+                ; какое меню отображаем?
+                LD A, (GameState.MenuID)
+                CP MENU_ID_MAIN
                 CALL Z, Main
-                CP MENU_TYPE_START >> 1
+                CP MENU_ID_START
                 CALL Z, StartGame
-                CP MENU_TYPE_CONTINUE >> 1
+                CP MENU_ID_CONTINUE
                 CALL Z, Continue
-                CP MENU_TYPE_OPTIONS >> 1
+                CP MENU_ID_OPTIONS
                 CALL Z, Options
-                CP MENU_TYPE_REDEFINE >> 1
+                CP MENU_ID_REDEFINE
                 CALL Z, RedefineKeys
 
 .Processed      ifdef _DEBUG

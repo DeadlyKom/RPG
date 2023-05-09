@@ -20,7 +20,7 @@ Begin6:         EQU $
                 include "Core/Module/Game/Initialize/Include.inc"
 
                 ; shared block code
-                include "Core/Module/Game/Main Menu/Include.inc"                ; menu
+                include "Core/Module/Game/MainMenu/Include.inc"                 ; menu
                 include "Core/Module/Game/Settlement/Include.inc"               ; settlement
 
                 ; generation

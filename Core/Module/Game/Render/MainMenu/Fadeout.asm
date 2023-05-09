@@ -17,8 +17,8 @@ Fadeout:        LD HL, .Counter
 
                 LD HL, .Counter
                 LD (HL), #04
-                LD HL, Packs.MainMenu.Render.Draw.MenuType
-                RES 0, (HL)
+                
+                RES_MENU_FLAG MENU_FADEOUT_BIT                                  ; сброс флага включение эффекта затемнения
                 RET
 
 .Animation      LD HL, #4000

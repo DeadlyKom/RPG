@@ -2,7 +2,7 @@
                 ifndef _MODULE_GAME_INITIALIZE_SETTLEMENT_EXECUTE_
                 define _MODULE_GAME_INITIALIZE_SETTLEMENT_EXECUTE_
 ; -----------------------------------------
-; запуск главного меню
+; запуск меню поселения
 ; In:
 ; Out:
 ; Corrupt:

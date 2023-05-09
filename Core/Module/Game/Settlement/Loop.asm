@@ -2,7 +2,7 @@
                 ifndef _CORE_MODULE_GAME_LOOP_SETTLEMENT_
                 define _CORE_MODULE_GAME_LOOP_SETTLEMENT_
 ; -----------------------------------------
-; игровой цикл
+; игровой цикл поселения
 ; In:
 ; Out:
 ; Corrupt:

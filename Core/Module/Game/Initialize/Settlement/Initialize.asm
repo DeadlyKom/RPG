@@ -1,6 +1,6 @@
 
-                ifndef _CORE_MODULE_GAME_INITIALIZE_MAIN_MENU_
-                define _CORE_MODULE_GAME_INITIALIZE_MAIN_MENU_
+                ifndef _CORE_MODULE_GAME_INITIALIZE_SETTLEMENT_
+                define _CORE_MODULE_GAME_INITIALIZE_SETTLEMENT_
 ; -----------------------------------------
 ; инициализация поселения
 ; In:
@@ -19,4 +19,4 @@ Settlement:     ; установка бордюра
 
                 RET
 
-                endif ; ~_CORE_MODULE_GAME_INITIALIZE_MAIN_MENU_
+                endif ; ~_CORE_MODULE_GAME_INITIALIZE_SETTLEMENT_

@@ -7,6 +7,7 @@
                 include "Core/Base.asm"
                 include "Core/Input.asm"
                 include "Core/Player.asm"
+                include "Core/PlayGame.asm"
 
                 endmodule
 

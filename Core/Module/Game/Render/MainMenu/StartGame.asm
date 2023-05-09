@@ -7,7 +7,7 @@ DIFFICULTY_ID   EQU 0x02
 SETTLES_NUM_ID  EQU 0x03
 PLAY_ID         EQU 0x04
 ; -----------------------------------------
-; отображение продолжить
+; отображение начала игры
 ; In:
 ; Out:
 ; Corrupt:
@@ -59,7 +59,6 @@ StartGame:      ; проверка флага первичной инициал�
                 LD HL, .SettlementsNum
                 LD DE, #3E10
                 CALL Packs.DrawString
-                
 
                 ; LD HL, .DistSettlements
                 ; LD DE, #3E10

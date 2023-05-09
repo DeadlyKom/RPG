@@ -28,6 +28,15 @@ Player:         SET_PAGE_INITIALIZE                                             
 ; -----------------------------------------
 Input:          SET_PAGE_INITIALIZE                                             ; включить страницу работы с инициализациями
                 JP Packs.Initialize.Input
+; -----------------------------------------
+; запуск инициализация начало игры
+; In:
+; Out:
+; Corrupt:
+; Note:
+; -----------------------------------------
+PlayGame:       SET_PAGE_INITIALIZE                                             ; включить страницу работы с инициализациями
+                JP Packs.Initialize.PlayGame
 
                 display " - Game execute 'Base':\t\t\t\t", /A, Core, " = busy [ ", /D, $ - Core, " bytes  ]"
 

@@ -88,7 +88,7 @@ Selected:       LD HL, GameState.Cursor
                 CP Packs.MainMenu.Render.KEY_GEN_ID
                 JR Z, .KeyGen_RND
                 CP Packs.MainMenu.Render.PLAY_ID
-                JR Z, $
+                JP Z, .StartGame
 
                 RET
 
@@ -99,8 +99,13 @@ Selected:       LD HL, GameState.Cursor
 
                 SET_MENU_FLAG MENU_STARTUP_BIT                                  ; установка флага первичной инициализации
                 RET
-Back:           LD A, Packs.MainMenu.Render.MENU_TYPE_MAIN | Packs.MainMenu.Render.MENU_FADEOUT_FLAG
-                LD (Packs.MainMenu.Render.Draw.MenuType), A
+
+.StartGame      SET_MENU_FLAG MENU_LOOP_BIT                                     ; установка флага завершения цикла
+                RET
+Back:           LD A, MENU_ID_MAIN
+                LD (GameState.MenuID), A
+
+                SET_MENU_FLAG MENU_FADEOUT_BIT                                  ; установка флага включение эффекта затемнения
                 
                 ; включить режим выбора цифрами
                 LD HL, InputFlag

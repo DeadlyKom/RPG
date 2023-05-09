@@ -9,13 +9,17 @@
 ; Note:
 ; -----------------------------------------
 MainMenu:       ; установка бордюра
-                BORDER BLACK ; WHITE
+                BORDER BLACK
 
                 ; инициализация главного цикла
                 SetMainLoop Packs.MainMenu.Loop
 
                 ; инициализация обработчика прерываний
                 SetUserHendler Packs.MainMenu.Interrupt
+
+                ; инициализация стартового ID меню
+                LD A, MENU_ID_MAIN
+                LD (GameState.MenuID), A
 
                 RET
 

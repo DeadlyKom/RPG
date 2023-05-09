@@ -34,91 +34,125 @@ IH_SelMode:     JR NZ, .NotProcessing                                           
 
 .NotProcessing  SCF
                 RET
-Select_1:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
-                SRL A
-                RET C
-                CP Packs.MainMenu.Render.MENU_TYPE_MAIN >> 1
+Select_1:       ; проверка бита затемнения
+                CHECK_MENU_FLAG MENU_FADEOUT_BIT
+                RET NZ
+
+                ; обрабатываемое меню
+                LD A, (GameState.MenuID)
+                CP MENU_ID_MAIN
                 JP Z, StartGame
-                CP Packs.MainMenu.Render.MENU_TYPE_REDEFINE >> 1
+                CP MENU_ID_REDEFINE
                 JP Z, RedefineUp
-                CP Packs.MainMenu.Render.MENU_TYPE_OPTIONS >> 1
+                CP MENU_ID_OPTIONS
                 JP Z, Keyboard
                 RET
-Select_2:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
-                SRL A
-                RET C
-                CP Packs.MainMenu.Render.MENU_TYPE_MAIN >> 1
+Select_2:       ; проверка бита затемнения
+                CHECK_MENU_FLAG MENU_FADEOUT_BIT
+                RET NZ
+
+                ; обрабатываемое меню
+                LD A, (GameState.MenuID)
+                CP MENU_ID_MAIN
                 JP Z, Continue
-                CP Packs.MainMenu.Render.MENU_TYPE_OPTIONS >> 1
+                CP MENU_ID_OPTIONS
                 JP Z, Kempston8
-                CP Packs.MainMenu.Render.MENU_TYPE_REDEFINE >> 1
+                CP MENU_ID_REDEFINE
                 JP Z, RedefineDown
                 RET
-Select_3:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
-                SRL A
-                RET C
-                CP Packs.MainMenu.Render.MENU_TYPE_MAIN >> 1
+Select_3:       ; проверка бита затемнения
+                CHECK_MENU_FLAG MENU_FADEOUT_BIT
+                RET NZ
+
+                ; обрабатываемое меню
+                LD A, (GameState.MenuID)
+                CP MENU_ID_MAIN
                 JP Z, Options
-                CP Packs.MainMenu.Render.MENU_TYPE_OPTIONS >> 1
+                CP MENU_ID_OPTIONS
                 JP Z, RedefineKeys
-                CP Packs.MainMenu.Render.MENU_TYPE_REDEFINE >> 1
+                CP MENU_ID_REDEFINE
                 JP Z, RedefineLeft
                 RET
-Select_4:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
-                SRL A
-                RET C
-                CP Packs.MainMenu.Render.MENU_TYPE_OPTIONS >> 1
+Select_4:       ; проверка бита затемнения
+                CHECK_MENU_FLAG MENU_FADEOUT_BIT
+                RET NZ
+
+                ; обрабатываемое меню
+                LD A, (GameState.MenuID)
+                CP MENU_ID_OPTIONS
                 JP Z, Options.Back
-                CP Packs.MainMenu.Render.MENU_TYPE_REDEFINE >> 1
+                CP MENU_ID_REDEFINE
                 JP Z, RedefineRight
                 RET
-Select_5:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
-                SRL A
-                RET C
-                CP Packs.MainMenu.Render.MENU_TYPE_REDEFINE >> 1
+Select_5:       ; проверка бита затемнения
+                CHECK_MENU_FLAG MENU_FADEOUT_BIT
+                RET NZ
+
+                ; обрабатываемое меню
+                LD A, (GameState.MenuID)
+                CP MENU_ID_REDEFINE
                 JP Z, RedefineSelect
                 RET
-Select_6:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
-                SRL A
-                RET C
-                CP Packs.MainMenu.Render.MENU_TYPE_REDEFINE >> 1
+Select_6:       ; проверка бита затемнения
+                CHECK_MENU_FLAG MENU_FADEOUT_BIT
+                RET NZ
+
+                ; обрабатываемое меню
+                LD A, (GameState.MenuID)
+                CP MENU_ID_REDEFINE
                 JP Z, RedefineBack
                 RET
-Select_7:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
-                SRL A
-                RET C
-                CP Packs.MainMenu.Render.MENU_TYPE_REDEFINE >> 1
+Select_7:       ; проверка бита затемнения
+                CHECK_MENU_FLAG MENU_FADEOUT_BIT
+                RET NZ
+
+                ; обрабатываемое меню
+                LD A, (GameState.MenuID)
+                CP MENU_ID_REDEFINE
                 JP Z, RedefineAccel
                 RET
-Select_8:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
-                SRL A
-                RET C
-                CP Packs.MainMenu.Render.MENU_TYPE_REDEFINE >> 1
+Select_8:       ; проверка бита затемнения
+                CHECK_MENU_FLAG MENU_FADEOUT_BIT
+                RET NZ
+
+                ; обрабатываемое меню
+                LD A, (GameState.MenuID)
+                CP MENU_ID_REDEFINE
                 JP Z, RedefineMenu
                 RET
-Select_9:       LD A, (Packs.MainMenu.Render.Draw.MenuType)
-                SRL A
-                RET C
-                CP Packs.MainMenu.Render.MENU_TYPE_REDEFINE >> 1
+Select_9:       ; проверка бита затемнения
+                CHECK_MENU_FLAG MENU_FADEOUT_BIT
+                RET NZ
+
+                ; обрабатываемое меню
+                LD A, (GameState.MenuID)
+                CP MENU_ID_REDEFINE
                 JP Z, RedefineOpBack
                 RET
-StartGame:      SET_MENU_FLAG MENU_STARTUP_BIT                                  ; установка флага первичной инициализации
+StartGame:      SET_MENU_FLAGS MENU_STARTUP | MENU_FADEOUT                      ; установка флага первичной инициализации и эффекта затемнения
 
                 ; включить режим опроса игровых клавиш
                 LD HL, InputFlag
                 LD (HL), INPUT_MODE_GAME_KEYS
 
-                LD A, Packs.MainMenu.Render.MENU_TYPE_START | Packs.MainMenu.Render.MENU_FADEOUT_FLAG
-                LD (Packs.MainMenu.Render.Draw.MenuType), A
+                LD A, MENU_ID_START
+                LD (GameState.MenuID), A
+
                 RET
-Continue:       LD A, Packs.MainMenu.Render.MENU_TYPE_CONTINUE | Packs.MainMenu.Render.MENU_FADEOUT_FLAG
-                LD (Packs.MainMenu.Render.Draw.MenuType), A
+Continue:       LD A, MENU_ID_CONTINUE
+                LD (GameState.MenuID), A
+
+                SET_MENU_FLAG MENU_FADEOUT_BIT                                  ; установка флага включение эффекта затемнения
                 RET
-Options:        LD A, Packs.MainMenu.Render.MENU_TYPE_OPTIONS | Packs.MainMenu.Render.MENU_FADEOUT_FLAG
-                LD (Packs.MainMenu.Render.Draw.MenuType), A
+Options:        LD A, MENU_ID_OPTIONS
+                LD (GameState.MenuID), A
+
+                SET_MENU_FLAG MENU_FADEOUT_BIT                                  ; установка флага включение эффекта затемнения
                 RET
-.Back           LD A, Packs.MainMenu.Render.MENU_TYPE_MAIN | Packs.MainMenu.Render.MENU_FADEOUT_FLAG
-                LD (Packs.MainMenu.Render.Draw.MenuType), A
+.Back           LD A, MENU_ID_MAIN
+                LD (GameState.MenuID), A
+
+                SET_MENU_FLAG MENU_FADEOUT_BIT                                  ; установка флага включение эффекта затемнения
                 RET
 Keyboard:       SET_PAGE_INITIALIZE                                             ; включить страницу работы с инициализациями
                 CALL Packs.Initialize.Input.SetKeyboard
@@ -126,8 +160,10 @@ Keyboard:       SET_PAGE_INITIALIZE                                             
 Kempston8:      SET_PAGE_INITIALIZE                                             ; включить страницу работы с инициализациями
                 CALL Packs.Initialize.Input.SetKempston8
                 JR Options.Back
-RedefineKeys:   LD A, Packs.MainMenu.Render.MENU_TYPE_REDEFINE | Packs.MainMenu.Render.MENU_FADEOUT_FLAG
-                LD (Packs.MainMenu.Render.Draw.MenuType), A
+RedefineKeys:   LD A, MENU_ID_REDEFINE
+                LD (GameState.MenuID), A
+
+                SET_MENU_FLAG MENU_FADEOUT_BIT                                  ; установка флага включение эффекта затемнения
                 
                 SET_PAGE_INITIALIZE                                             ; включить страницу работы с инициализациями
                 JP Packs.Initialize.Input.SetRedefineKeys

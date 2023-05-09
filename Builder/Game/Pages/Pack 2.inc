@@ -20,7 +20,7 @@ Begin:          EQU $
 
                 ; execute
                 include "Core/Module/Game/Initialize/Core/Include.inc"
-                include "Core/Module/Game/Initialize/Main Menu/Include.inc"
+                include "Core/Module/Game/Initialize/MainMenu/Include.inc"
                 include "Core/Module/Game/Initialize/Settlement/Include.inc"
 
                 ; draw world map
@@ -49,8 +49,8 @@ Begin:          EQU $
 
                 ; math
                 include "Core/Module/Math/Lerp.asm"
-                include "Core/Module/Math/Mul/16x8_16.asm"
                 include "Core/Module/Math/RNG/Rand8.asm"
+                include "Core/Module/Math/Mul/16x8_16.asm"
                 include "Core/Module/Math/Mul/16x8_24.asm"
                 include "Core/Module/Math/Mul/32x8_40.asm"
                 include "Core/Module/Math/Div/Div8x8.asm"

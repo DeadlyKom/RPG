@@ -6,7 +6,7 @@
 Begin           EQU $
 
                 DISP Adr.Module.Game.Shared                                     ; модификация адреса компиляции с блока общего кода
-                include "Core/Module/Game/Initialize/Settlement/Initialize.asm"  ; первый, точка входа
+                include "Core/Module/Game/Initialize/Settlement/Initialize.asm" ; первый, точка входа
                 include "Loop.asm"
                 include "Interrupt.asm"
                 include "Core/Module/Game/Render/Settlement/Include.inc"

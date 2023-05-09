@@ -13,6 +13,7 @@
                 include "MemoryMapPack_1.inc"
                 include "MemoryMapPack_6.inc"
 
+                include "Menu.inc"
                 include "Game.inc"
                 include "Kernel.inc"
                 include "Input.inc"

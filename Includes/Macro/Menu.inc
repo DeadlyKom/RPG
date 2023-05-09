@@ -12,7 +12,7 @@ SetMainLoop:    macro Func?
                 LD (Game.MainLoop.Address), BC
                 endm
 ; -----------------------------------------
-; установка HL на Game флаги
+; установка HL на Menu флаги
 ; In:
 ; Out:
 ; Corrupt:
@@ -21,7 +21,7 @@ MENU_FLAGS      macro
                 LD HL, GameState.MenuFlags
                 endm
 ; -----------------------------------------
-; прочитать значения Game флагов в аккумулятор
+; прочитать значения Menu флагов в аккумулятор
 ; In:
 ; Out:
 ; Corrupt:
@@ -30,7 +30,7 @@ MENU_FLAGS_A    macro
                 LD A, (GameState.MenuFlags)
                 endm
 ; -----------------------------------------
-; проверка Game флага
+; проверка Menu флага
 ; In:
 ; Out:
 ; Corrupt:
@@ -40,7 +40,7 @@ CHECK_MENU_FLAG macro FlagBit?
                 CHECK_FLAG FlagBit?
                 endm
 ; -----------------------------------------
-; проверка Game флагов
+; проверка Menu флагов
 ; In:
 ; Out:
 ; Corrupt:
@@ -50,7 +50,7 @@ CHECK_MENU_FLAGS macro Flags?
                 CHECK_FLAGS Flags?
                 endm
 ; -----------------------------------------
-; проверка Game флага используя аккумулятор
+; проверка Menu флага используя аккумулятор
 ; In:
 ; Out:
 ; Corrupt:
@@ -60,7 +60,7 @@ CHECK_MENU_FLAG_A macro FlagBit?
                 CHECK_FLAG_A FlagBit?
                 endm
 ; -----------------------------------------
-; установка Game флага
+; установка Menu флага
 ; In:
 ; Out:
 ; Corrupt:
@@ -70,7 +70,17 @@ SET_MENU_FLAG   macro FlagBit?
                 SET_FLAG FlagBit?
                 endm
 ; -----------------------------------------
-; сброс Game флага
+; установка Menu флагов
+; In:
+; Out:
+; Corrupt:
+; -----------------------------------------
+SET_MENU_FLAGS  macro Flags?
+                MENU_FLAGS
+                SET_FLAGS Flags?
+                endm
+; -----------------------------------------
+; сброс Menu флага
 ; In:
 ; Out:
 ; Corrupt:
