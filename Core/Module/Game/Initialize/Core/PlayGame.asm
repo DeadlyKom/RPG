@@ -11,6 +11,8 @@
 PlayGame:       ; ToDo
                 ; генерация карты и окружения
 
+                CALL VFX.Diagonal
+
                 CLS_4000
                 ATTR_4000_IPB WHITE, BLACK, 0
 

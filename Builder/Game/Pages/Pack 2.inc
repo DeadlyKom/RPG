@@ -72,6 +72,9 @@ Begin:          EQU $
                 ; SFX
                 include "Core/Module/SFX/Include.inc"
 
+                ; VFX
+                include "Core/Module/VFX/Include.inc"
+
                 ; utils
                 include "Core/Module/Utils/ConvertNumberToString.asm"
 
