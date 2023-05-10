@@ -1,8 +1,8 @@
 
-                ifndef _CORE_MODULE_OPEN_WORLD_UTILS_GET_SETTLEMENT_
-                define _CORE_MODULE_OPEN_WORLD_UTILS_GET_SETTLEMENT_
+                ifndef _CORE_MODULE_OPEN_WORLD_UTILS_CALC_SETTLEMENT_
+                define _CORE_MODULE_OPEN_WORLD_UTILS_CALC_SETTLEMENT_
 ; -----------------------------------------
-; получение адреса поселения по ID
+; расчёт адреса поселения по ID
 ; In:
 ;   A  - ID поселения
 ; Out:
@@ -10,7 +10,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-GetSettlement:  ; SETTLEMENT_SIZE = 16
+CalcSettlement: ; SETTLEMENT_SIZE = 16
                 ADD A, A    ; x2
                 ADD A, A    ; x4
                 LD IX, Adr.Settlement >> 2
@@ -24,4 +24,4 @@ GetSettlement:  ; SETTLEMENT_SIZE = 16
 
                 RET
 
-                endif ; ~ _CORE_MODULE_OPEN_WORLD_UTILS_GET_SETTLEMENT_
+                endif ; ~ _CORE_MODULE_OPEN_WORLD_UTILS_CALC_SETTLEMENT_

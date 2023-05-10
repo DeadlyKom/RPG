@@ -90,9 +90,6 @@ Convert:
 .CharToScreen   EQU Kernel.Utils.PixelAddressC
 .PixelToScreen  EQU Kernel.Utils.PixelAddressP
 .ToAttribute    EQU Kernel.Utils.PixelAttribute
-.NumberToString_8 EQU Kernel.Utils.B2D8                                         ; преобразовать 8-битное число в строку
-.NumberToString_16 EQU Kernel.Utils.B2D16                                       ; преобразовать 16-битное число в строку
-.ConvertedStr   EQU Kernel.Utils.B2DBUF
 
 ; object
 ; Object:
@@ -214,6 +211,16 @@ Func
 ; .SpawnObject    EQU Kernel.Initialize.Spawn                                     ; спавн объекта в мире                  ToDo перенести в страницу!
 ; .ApplyVehicle   EQU Kernel.Damage.ApplyVehicle                                  ; нанести урон машине игрока            ToDo перенести в страницу!
 ; .ApplyExplosion EQU Kernel.Damage.ApplyExplosion                                ; нанести урон машине игрока            ToDo перенести в страницу!
+
+; utils
+Utils
+.Strcpy         EQU Kernel.Utils.String.Copy                                    ; копирование строки
+.GetWidth       EQU Kernel.Utils.String.GetWidth                                ; длина строки в пикселях (нужно вкл страницу шрифтов)
+.GetLength      EQU Kernel.Utils.String.GetLength                               ; длина строки
+.GetStringID    EQU Kernel.Utils.String.GetStringID                             ; поиск строки в масиве по индексу
+.ToString_8     EQU Kernel.Utils.String.B2D8                                    ; преобразовать 8-битное число в строку
+.ToString_16    EQU Kernel.Utils.String.B2D16                                   ; преобразовать 16-битное число в строку
+.StrBuffer      EQU Kernel.Utils.String.B2DBUF                                  ; буфер строки после преобразования чиста в строку
 
 ; debug
                 ifdef _DEBUG

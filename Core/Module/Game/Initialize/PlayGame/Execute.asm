@@ -8,7 +8,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-PlayGame:       SET_PAGE_INITIALIZE                                             ; включить страницу работы с инициализациями
+PlayGame:       SET_PAGE_BLOK_6                                                 ; включение страницы с блоком кода
                 LD HL, Adr.Block6.PlayGame
                 LD DE, Adr.Module.Game.Shared
                 LD BC, Packs.PlayGame.Size

@@ -8,7 +8,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Settlement:     SET_PAGE_SETTLEMENT                                             ; включить страницу работы с поселением
+Settlement:     SET_PAGE_BLOK_6                                                 ; включение страницы с блоком кода
                 LD HL, Adr.Block6.Settlement
                 LD DE, Adr.Module.Game.Shared
                 LD BC, Packs.Settlement.Size

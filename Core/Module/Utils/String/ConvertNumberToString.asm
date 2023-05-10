@@ -1,8 +1,6 @@
 
-                ifndef _UTILS_CONVERT_NUMBER_TO_STRING_
-                define _UTILS_CONVERT_NUMBER_TO_STRING_
-
-                module Utils
+                ifndef _CORE_MODULE_UTILS_STRING_CONVERT_NUMBER_TO_STRING_
+                define _CORE_MODULE_UTILS_STRING_CONVERT_NUMBER_TO_STRING_
 ; -----------------------------------------
 ; преобразовать числов в строку
 ; In:
@@ -118,8 +116,4 @@ B2DBUF:         DS 21                                                           
 B2DEND:         DS 1                                                            ; space for terminating 0
 FIXBUF:         DS 8                                                            ;
 
-                display " - Convert number to string:\t\t\t\t", /A, NumberToString, " = busy [ ", /D, $ - NumberToString, " bytes  ]"
-
-                endmodule
-
-                endif ; ~_UTILS_CONVERT_NUMBER_TO_STRING_
+                endif ; ~_CORE_MODULE_UTILS_STRING_CONVERT_NUMBER_TO_STRING_

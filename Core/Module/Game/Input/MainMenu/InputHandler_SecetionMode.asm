@@ -154,10 +154,10 @@ Options:        LD A, MENU_ID_OPTIONS
 
                 SET_MENU_FLAG MENU_FADEOUT_BIT                                  ; установка флага включение эффекта затемнения
                 RET
-Keyboard:       SET_PAGE_INITIALIZE                                             ; включить страницу работы с инициализациями
+Keyboard:       SET_PAGE_BLOK_6                                                 ; включение страницы с блоком кода
                 CALL Packs.Initialize.Input.SetKeyboard
                 JR Options.Back
-Kempston8:      SET_PAGE_INITIALIZE                                             ; включить страницу работы с инициализациями
+Kempston8:      SET_PAGE_BLOK_6                                                 ; включение страницы с блоком кода
                 CALL Packs.Initialize.Input.SetKempston8
                 JR Options.Back
 RedefineKeys:   LD A, MENU_ID_REDEFINE
@@ -165,7 +165,7 @@ RedefineKeys:   LD A, MENU_ID_REDEFINE
 
                 SET_MENU_FLAG MENU_FADEOUT_BIT                                  ; установка флага включение эффекта затемнения
                 
-                SET_PAGE_INITIALIZE                                             ; включить страницу работы с инициализациями
+                SET_PAGE_BLOK_6                                                 ; включение страницы с блоком кода
                 JP Packs.Initialize.Input.SetRedefineKeys
 
 RedefineUp:     LD DE, GameConfig.KeyUp

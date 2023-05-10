@@ -7,7 +7,8 @@ Begin           EQU $
 
                 include "GetName.asm"
                 include "SetGenerateKey.asm"
-                include "GetSettlement.asm"
+                include "CalcSettlement.asm"
+                include "ShuffleCoordinates.asm"
 
                 display " - Open world utils:\t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
 

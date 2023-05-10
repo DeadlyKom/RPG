@@ -90,7 +90,7 @@ Base:           ; -----------------------------------------
                 SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
                 CLS_C000
                 ATTR_C000_IPB WHITE, BLACK, 0
-                SET_PAGE_INITIALIZE                                             ; включить страницу работы с инициализациями
+                SET_PAGE_BLOK_6                                                 ; включение страницы с блоком кода
                 RET
 .SizeCLS        EQU $-.CLS
 

@@ -5,6 +5,7 @@
                 module Render
 
                 include "Draw.asm"
+                include "DisplayLocation.asm"
 
                 endmodule
 

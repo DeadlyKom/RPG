@@ -43,7 +43,8 @@ GameState           EQU Adr.GameState                                           
                                                                                 ;   #01 - вперёд (+1 позиция)
                                                                                 ;   #FF - назда (-1 позиция)
 PlayerState         EQU Adr.PlayerState
-.SettlementID       EQU PlayerState + FPlayerState.SettlementID                 ; номер поселения в котором находится игрок
+.SettlementID       EQU PlayerState + FPlayerState.SettlementID                 ; ID поселения в котором находится игрок
+.SettlementLocation EQU PlayerState + FPlayerState.SettlementLocation           ; ID места в котором находится игрок
 .InputFlags         EQU PlayerState + FPlayerState.InputFlags                   ; флаги управления игроком
 .Health             EQU PlayerState + FPlayerState.Health                       ; уровень очков здоровья
 .Gas                EQU PlayerState + FPlayerState.Gas                          ; уровень очков бензина

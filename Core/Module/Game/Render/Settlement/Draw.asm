@@ -22,18 +22,15 @@ Draw:           ; счётчик отображаемого экрана
                 CALL Memcpy.FastLDIR
                 JR .Processed
                 
-.BaseDraw       SetPort PAGE_0, 1                                               ; включить 6 страницу и показать теневой экран
+.BaseDraw       SetPort PAGE_6, 1                                               ; включить 6 страницу и показать теневой экран
 
-                ; получение имени поселения
+                SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами 
+                ; расчёт адреса поселения в котором находится игрок
                 LD A, (PlayerState.SettlementID)
-                CALL Packs.OpenWorld.Utils.GetSettlement
-                CALL Packs.OpenWorld.Utils.GetSettleName
-
-                SET_PAGE_INITIALIZE                                             ; включить страницу работы с инициализациями
+                CALL Packs.OpenWorld.Utils.CalcSettlement
                 
-                LD HL, Adr.SortBuffer
-                LD DE, #1A10
-                CALL Packs.DrawString
+                ; отображение место нахождения игрока
+                CALL DisplayLoc
 
 .Processed      ifdef _DEBUG
                 CALL FPS_Counter.Frame

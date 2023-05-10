@@ -194,7 +194,7 @@ UpdateKeyGen:   ; проверка что курсор на позиции
                 CALL Packs.DrawString
 
 .Draw           LD HL, (GameConfig.Seed)
-                CALL Convert.NumberToString_16
+                CALL Utils.ToString_16
                 EX DE, HL
                 XOR A
                 LD (HL), A
@@ -229,7 +229,7 @@ UpdateFreqGen:  ; проверка что курсор на позиции
                 CALL Packs.DrawString
 
 .Draw           LD A, (GameConfig.Frequency)
-                CALL Convert.NumberToString_8
+                CALL Utils.ToString_8
                 EX DE, HL
                 XOR A
                 LD (HL), A
