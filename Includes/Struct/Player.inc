@@ -23,6 +23,8 @@ DeltaCameraPixX DB #00                                                          
 DeltaCameraY    DB #00                                                          ; дельта камеры по вертикали                    [1 байт]
 DeltaCameraPixY DB #00                                                          ; дельта камеры по вертикали * 0.125            [1 байт]
                                                                                 ; (фактическая) в пикселях
+GameTime        FTime                                                           ; внутреннее время игры                         [8 байт]
+SessionTime     FTime                                                           ; время сессии игры                             [8 байт]
 DebugX          DW #00
 DebugY          DW #00
                 ends

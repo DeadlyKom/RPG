@@ -43,6 +43,14 @@ Handler:        ; ********** HANDLER IM 2 *********
                 INC HL
                 LD (.TickCounterPtr), HL
 
+                ; внутриигровой счётчик времени
+                LD IX, PlayerState.GameTime
+                CALL Utils.TimeTick
+
+                ; сесионный счётчик времени
+                LD IX, PlayerState.SessionTime
+                CALL Utils.TimeTick
+
                 ; ********* USER INTERRUPT ********
 
 .UserInterrupt  EQU $+1

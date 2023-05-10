@@ -5,6 +5,7 @@
                 include "Base.inc"
                 include "Config.inc"
                 include "Game.inc"
+                include "Time.inc"
                 include "Player.inc"
                 include "Settlement.inc"
 

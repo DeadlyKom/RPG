@@ -32,6 +32,9 @@ Draw:           ; счётчик отображаемого экрана
                 ; отображение место нахождения игрока
                 CALL DisplayLoc
 
+                ;
+                CALL DisplayTime
+
 .Processed      ifdef _DEBUG
                 CALL FPS_Counter.Frame
                 endif

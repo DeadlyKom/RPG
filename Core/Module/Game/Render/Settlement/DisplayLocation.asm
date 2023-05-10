@@ -21,12 +21,12 @@ DisplayLoc:     SET_PAGE_OBJECT                                                 
                 LD DE, Adr.RenderBuffer + 0x80
                 PUSH DE
                 CALL Utils.Strcpy
-                DEC DE
+                DEC E
                 EX DE, HL
                 LD (HL), ':'
-                INC HL
+                INC L
                 LD (HL), ' '
-                INC HL
+                INC L
             
                 ; получение имени поселения
                 CALL Packs.OpenWorld.Utils.GetSettleName

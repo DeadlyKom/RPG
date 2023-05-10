@@ -58,6 +58,8 @@ PlayerState         EQU Adr.PlayerState
 .DeltaCameraPixX    EQU PlayerState + FPlayerState.DeltaCameraPixX              ; дельта камеры по горизонтали * 0.125 (фактическая) в пикселях
 .DeltaCameraY       EQU PlayerState + FPlayerState.DeltaCameraY                 ; дельта камеры и игрока по вертикали в знакоместах
 .DeltaCameraPixY    EQU PlayerState + FPlayerState.DeltaCameraPixY              ; дельта камеры по вертикали * 0.125 (фактическая) в пикселях
+.GameTime           EQU PlayerState + FPlayerState.GameTime                     ; внутреннее время игры
+.SessionTime        EQU PlayerState + FPlayerState.SessionTime                  ; время сессии игры
 
 .DebugX             EQU PlayerState + FPlayerState.DebugX                       ; отладочная информация
 .DebugY             EQU PlayerState + FPlayerState.DebugY                       ; отладочная информация

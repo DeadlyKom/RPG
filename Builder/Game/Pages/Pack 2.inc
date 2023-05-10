@@ -77,6 +77,7 @@ Begin:          EQU $
                 include "Core/Module/VFX/Include.inc"
 
                 ; utils
+                include "Core/Module/Utils/Time/Include.inc"
                 include "Core/Module/Utils/String/Include.inc"
 
                 ; object

@@ -2,10 +2,10 @@
                 ifndef _BUILDER_INCLUDES_
                 define _BUILDER_INCLUDES_
 
-                include "Const/Include.inc"
-                include "Config/Include.inc"
-                include "Macro/Include.inc"
                 include "Struct/Include.inc"
+                include "Config/Include.inc"
+                include "Const/Include.inc"
+                include "Macro/Include.inc"
 
                 ; version build
                 define BUILD 0
