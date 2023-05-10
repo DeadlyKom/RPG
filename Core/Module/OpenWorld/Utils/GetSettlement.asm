@@ -12,9 +12,13 @@
 ; -----------------------------------------
 GetSettlement:  ; SETTLEMENT_SIZE = 16
                 ADD A, A    ; x2
+                ADD A, A    ; x4
+                LD IX, Adr.Settlement >> 2
+                ADD A, IXL
                 LD IXL, A
-                LD IXH, #00
-                ADD IX, IX  ; x4
+                ADC A, IXH
+                SUB IXL
+                LD IXH, A
                 ADD IX, IX  ; x8
                 ADD IX, IX  ; x16
 

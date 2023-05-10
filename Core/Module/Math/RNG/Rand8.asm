@@ -35,6 +35,31 @@ SetSeed16:      LD HL, Rand8.Table
 
                 RET
 ; -----------------------------------------
+; set 80-bit seed
+; In :
+;   HLHL' - пакет 1
+;   DEDE' - пакет 2
+;   BC - seed
+; Out :
+; Corrupt :
+;   IY
+; Note:
+; -----------------------------------------
+SetSeed80:      LD IY, Rand8.Table
+                LD (IY + 0), C
+                LD (IY + 1), B
+                LD (IY + 2), H
+                LD (IY + 3), L
+                LD (IY + 4), D
+                LD (IY + 5), E
+                EXX
+                LD (IY + 6), H
+                LD (IY + 7), L
+                LD (IY + 8), D
+                LD (IY + 9), E
+                EXX
+                RET
+; -----------------------------------------
 ; сохранить состояние таблицы генерации
 ; In :
 ;   BC - seed

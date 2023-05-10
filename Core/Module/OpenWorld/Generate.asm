@@ -40,6 +40,6 @@ Generate:       ; инициализация мира
 
                 RET
 
-                display " - Generate 'WORLD':\t\t\t\t\t", /A, World, " = busy [ ", /D, $ - World, " bytes  ]"
+                display " - Generate 'WORLD':\t\t\t\t\t", /A, Generate, " = busy [ ", /D, $ - Generate, " bytes  ]"
 
                 endif ; ~ _CORE_MODULE_OPEN_WORLD_GENERATE_

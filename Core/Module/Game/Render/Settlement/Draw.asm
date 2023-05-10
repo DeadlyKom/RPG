@@ -22,19 +22,18 @@ Draw:           ; счётчик отображаемого экрана
                 CALL Memcpy.FastLDIR
                 JR .Processed
                 
-.BaseDraw       SetPort PAGE_6, 1                                               ; включить 6 страницу и показать теневой экран
-; .MenuType       EQU $+1
-;                 LD A, MENU_TYPE_MAIN
-;                 SRL A
-;                 JP C, Fadeout
-;                 CP MENU_TYPE_MAIN >> 1
-;                 CALL Z, Main
-;                 CP MENU_TYPE_CONTINUE >> 1
-;                 CALL Z, Continue
-;                 CP MENU_TYPE_OPTIONS >> 1
-;                 CALL Z, Options
-;                 CP MENU_TYPE_REDEFINE >> 1
-;                 CALL Z, RedefineKeys
+.BaseDraw       SetPort PAGE_0, 1                                               ; включить 6 страницу и показать теневой экран
+
+                ; получение имени поселения
+                LD A, (PlayerState.SettlementID)
+                CALL Packs.OpenWorld.Utils.GetSettlement
+                CALL Packs.OpenWorld.Utils.GetSettleName
+
+                SET_PAGE_INITIALIZE                                             ; включить страницу работы с инициализациями
+                
+                LD HL, Adr.SortBuffer
+                LD DE, #1A10
+                CALL Packs.DrawString
 
 .Processed      ifdef _DEBUG
                 CALL FPS_Counter.Frame

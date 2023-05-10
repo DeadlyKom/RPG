@@ -11,6 +11,9 @@ Begin0:         EQU $
 
                 ; generator
                 include "Core/Module/OpenWorld/Include.inc"
+
+                ; text
+                include "Core/Module/Text/Settlement/Include.inc"               ; для поселений
 End0:           EQU $
 Size0:          EQU End0 - Begin0
 
