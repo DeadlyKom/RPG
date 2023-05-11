@@ -34,6 +34,9 @@ Player:         ; очистка буфера
                 LD A, SLOT_MINE
                 LD (PlayerState.Slot), A
 
+                LD A, #04
+                LD (PlayerState.CharacterID), A
+
                 LD HL, #0000
                 LD (PlayerState.CameraPosX + 1), HL
                 LD HL, #0000

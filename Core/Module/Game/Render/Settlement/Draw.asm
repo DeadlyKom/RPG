@@ -24,12 +24,18 @@ Draw:           ; счётчик отображаемого экрана
                 
 .BaseDraw       SetPort PAGE_6, 1                                               ; включить 6 страницу и показать теневой экран
 
-                ; ; проверка флага первичной инициализации
-                ; CHECK_MENU_FLAG MENU_STARTUP_BIT
-                ; JR Z, .Draw
-                ; RES_FLAG MENU_STARTUP_BIT                                       ; сброс флага первичной инициализации
+                ; проверка флага первичной инициализации
+                CHECK_MENU_FLAG MENU_STARTUP_BIT
+                JR Z, .NotStartup
+                RES_FLAG MENU_STARTUP_BIT                                       ; сброс флага первичной инициализации
 
-                SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами 
+                LD A, CHAR_STATE_NONE
+                LD (GameState.CharacterState), A
+
+                LD A, (PlayerState.CharacterID)
+                LD (GameState.CharacterID), A
+
+.NotStartup     SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами 
                 ; расчёт адреса поселения в котором находится игрок
                 LD A, (PlayerState.SettlementID)
                 CALL Packs.OpenWorld.Utils.CalcSettlement

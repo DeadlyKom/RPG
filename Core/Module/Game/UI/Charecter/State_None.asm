@@ -12,30 +12,19 @@ StateNone:      LD HL, .Delay
                 DEC (HL)
                 RET NZ
 
+                LD (HL), #03
+
                 LD A, (GameState.CharacterState)
+                LD C, A
+                ADD A, %01000000
                 AND CHAR_FRAME_MASK << 6
-                JR NZ, .NotBlink
-
-                ; рандом хлопанья глазами
-                EXX
-                CALL Math.Rand8
-                EXX
-                CP #28                                                          ; чем меньше тем реже
-                JR NC, .NotBlink
-
-                LD (HL), #06
-                LD A, (GameState.CharacterState)
-                AND CHAR_STATE_MASK
-                OR %01000000
+                XOR C
+                AND CHAR_FRAME_MASK << 6
+                XOR C
                 LD (GameState.CharacterState), A
+
                 RET
 
-.NotBlink       LD (HL), #20
-                LD A, (GameState.CharacterState)
-                AND CHAR_STATE_MASK
-                LD (GameState.CharacterState), A
-                RET
-
-.Delay          DB #08
+.Delay          DB #03
 
                 endif ; ~_CORE_MODULE_GAME_UI_CHARECTER_TICK_STATE_NONE_

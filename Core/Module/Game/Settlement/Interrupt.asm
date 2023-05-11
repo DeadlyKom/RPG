@@ -22,6 +22,7 @@ Interrupt:      ; проверка завершённости процесса �
 
 .UI             ; ************** UI Tick **************
                 CALL UI.CharTick
+                CALL .Anim
 
                 ifdef _DEBUG
 .Debug_FPS      ; ************** Draw FPS **************
@@ -29,5 +30,30 @@ Interrupt:      ; проверка завершённости процесса �
                 endif
 
                 RET
+
+.Anim           LD HL, .Delay
+                DEC (HL)
+                RET NZ
+
+                LD A, (GameState.CharacterState)
+                AND CHAR_STATE_MASK
+                JR Z, .NextPlayer
+
+.SetChange      LD (HL), #10
+                LD A, CHAR_STATE_NONE
+                LD (GameState.CharacterState), A
+                RET
+
+.NextPlayer     LD A, (GameState.CharacterID)
+                DEC A
+                JP P, $+5
+                LD A, #04
+                LD (GameState.CharacterID), A
+
+                LD A, CHAR_STATE_IDLE
+                LD (GameState.CharacterState), A
+                RET
+
+.Delay          DB #20
     
                 endif ; ~ _CORE_MODULE_GAME_INTERRUPT_SETTLEMENT_

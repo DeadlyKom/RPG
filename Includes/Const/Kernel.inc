@@ -82,7 +82,8 @@ Draw:
 
 .AttrSprOne     EQU Kernel.Charboundary.DrawSpriteOne                           ; отрисовка спрайта с атрибутами
 .AttrSprTwo     EQU Kernel.Charboundary.DrawSpriteTwo                           ; отрисовка спрайта с атрибутами (в 2х экранах)
-.AttrCharOne    EQU Kernel.Charboundary.DrawCharOne                             ; отрисовка знакоместа с атрибутами (в одном экране)
+.CharOne        EQU Kernel.Charboundary.DrawCharOne                             ; отрисовка знакоместа без атрибутов (в одном экране)
+.AttrCharOne    EQU Kernel.Charboundary.DrawCharOne_A                           ; отрисовка знакоместа с атрибутами (в одном экране)
 .AttrCharTwo    EQU Kernel.Charboundary.DrawCharTwo                             ; отрисовка знакоместа с атрибутами (в двух экранах)
 .AttrStencilSpr EQU Kernel.Charboundary.DrawStencilSpr                          ; отрисовка спрайта с атрибутами
 

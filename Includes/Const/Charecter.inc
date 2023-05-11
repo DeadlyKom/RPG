@@ -2,9 +2,10 @@
                 ifndef _CONST_CHARECTER_
                 define _CONST_CHARECTER_
 CHAR_STATE_NONE     EQU 0x00
-CHAR_STATE_IDLE     EQU 0x00
-CHAR_STATE_TOLK     EQU 0x00
+CHAR_STATE_IDLE     EQU 0x01
+CHAR_STATE_TOLK     EQU 0x02
 
+CHAR_WOMAN          EQU 0x00
 
 ; -----------------------------------------
 ;      7    6    5    4    3    2    1    0

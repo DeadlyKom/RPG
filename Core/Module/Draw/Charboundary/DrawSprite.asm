@@ -20,7 +20,7 @@ DrawSpriteOne:  CALL Convert.CharToScreen
                 LD B, C
 
 .Box_1          PUSH DE
-                CALL DrawCharOne
+                CALL DrawCharOne_A
                 INC HL
                 POP DE
                 INC E
