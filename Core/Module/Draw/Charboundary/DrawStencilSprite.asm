@@ -16,15 +16,15 @@ DrawStencilSpr: LD E, (HL)
                 INC HL
                 LD D, (HL)
 
-                LD A, E
-                OR D
-                RET Z
-
                 INC HL
                 LD C, (HL)
                 INC HL
                 LD B, (HL)
                 INC HL
+
+                LD A, C
+                OR B
+                RET Z
 
                 CALL Convert.CharToScreen
     
@@ -33,7 +33,7 @@ DrawStencilSpr: LD E, (HL)
                 LD B, C
 
 .Box_1          PUSH DE
-                CALL DrawCharOne
+                CALL DrawCharOne_A
                 INC HL
                 POP DE
                 INC E

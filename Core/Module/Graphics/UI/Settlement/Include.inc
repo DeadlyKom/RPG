@@ -8,11 +8,15 @@
                 ifdef _REBUILD
 Frame           EQU $
                 include "Compress.inc"
-
+ArtFrame_0      EQU $
+ArtFrame_1      EQU $
                 else
 Frame           EQU $
                 incbin "Compressed/Frame.spr.ar"
-
+ArtFrame_0      EQU $
+                incbin "Compressed/ArtFrame_0.spr.ar"
+ArtFrame_1      EQU $
+                incbin "Compressed/ArtFrame_1.spr.ar"
                 endif
 
                 endmodule

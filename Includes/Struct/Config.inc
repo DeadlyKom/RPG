@@ -37,7 +37,7 @@ Options         DB #00                                                          
 Graphics        DB #00                                                          ; флаги графических настроек                        [1 байт]
 Seed            DW #0000                                                        ; seed для генерации текущей сессии                 [2 байт]
 Frequency       DB #00                                                          ; частота шума перлина (устаревшая)                 [1 байт]
-
+Screen          DB #C0                                                          ; текущий адрес рабочего окна                       [1 байт]
 ; -----------------------------------------
 ; младший байт (offset) - FSprite.Offset
 ; старший байт (flags)  - FSprite.Data.Page / FCompositeSpriteInfo.Flags

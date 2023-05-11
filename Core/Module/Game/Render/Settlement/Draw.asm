@@ -50,6 +50,7 @@ Draw:           ; счётчик отображаемого экрана
 
                 ;
                 CALL DisplayFrame
+                CALL DisplayArtFrame
 
 .Draw           ;
                 CALL DisplayTime

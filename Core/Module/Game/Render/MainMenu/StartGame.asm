@@ -287,16 +287,16 @@ UpdateDif:      ; проверка что курсор на позиции
 .Value          DB #00
 .Table          DW .Easy, .Normal, .Nightmare, .Hardcore
 .Easy           lua allpass
-                Convert("лёгкая")
+                Convert("лёгко")
                 endlua
 .Normal         lua allpass
-                Convert("нормальная")
+                Convert("нормально")
                 endlua
 .Nightmare      lua allpass
-                Convert("кошмарная")
+                Convert("кошмарно")
                 endlua
 .Hardcore       lua allpass
-                Convert("ужасная")
+                Convert("ужасно")
                 endlua
 ClearText       BYTE "^^^^^^^^^\0"
 

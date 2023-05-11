@@ -88,6 +88,8 @@ Draw:
 .AttrStencilSpr EQU Kernel.Charboundary.DrawStencilSpr                          ; отрисовка спрайта с атрибутами
 
 Convert:
+.SetBaseScreen  EQU Kernel.Utils.SetBaseScreen                                  ; установка работы с основным экраном
+.SetShadowScreen EQU Kernel.Utils.SetShadowScreen                               ; установка работы с теневым экраном
 .CharToScreen   EQU Kernel.Utils.PixelAddressC
 .PixelToScreen  EQU Kernel.Utils.PixelAddressP
 .ToAttribute    EQU Kernel.Utils.PixelAttribute

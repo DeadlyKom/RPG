@@ -7,6 +7,7 @@
                 include "Draw.asm"
                 include "DisplayTime.asm"
                 include "DisplayFrame.asm"
+                include "DisplayArtFrame.asm"
                 include "DisplayLocation.asm"
                 include "DisplayCharecter.asm"
 

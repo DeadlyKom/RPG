@@ -6,47 +6,48 @@
                 module Charecter
 
                 ifdef _REBUILD
-Charecter_0     EQU $
+_0              EQU $
                 incbin "Original/Charecter_0_0.spr"
                 incbin "Original/Charecter_0_1.spr"
                 incbin "Original/Charecter_0_2.spr"
                 incbin "Original/Charecter_0_3.spr"
-Charecter_0_    EQU $ - Charecter_0
-                savebin "Core/Module/Graphics/UI/Charecter/Original/Charecter_0.pack", Charecter_0, Charecter_0_
+_0_             EQU $ - _0
+                savebin "Core/Module/Graphics/UI/Charecter/Original/Charecter_0.pack", _0, _0_
 
-Charecter_1     EQU $
+_1              EQU $
                 incbin "Original/Charecter_1_0.spr"
                 incbin "Original/Charecter_1_1.spr"
                 incbin "Original/Charecter_1_2.spr"
                 incbin "Original/Charecter_1_3.spr"
-Charecter_1_    EQU $ - Charecter_1
-                savebin "Core/Module/Graphics/UI/Charecter/Original/Charecter_1.pack", Charecter_1, Charecter_1_
+_1_             EQU $ - _1
+                savebin "Core/Module/Graphics/UI/Charecter/Original/Charecter_1.pack", _1, _1_
 
-Charecter_2     EQU $
+_2              EQU $
                 incbin "Original/Charecter_2_0.spr"
                 incbin "Original/Charecter_2_1.spr"
                 incbin "Original/Charecter_2_2.spr"
                 incbin "Original/Charecter_2_3.spr"
-Charecter_2_    EQU $ - Charecter_2
-                savebin "Core/Module/Graphics/UI/Charecter/Original/Charecter_2.pack", Charecter_2, Charecter_2_
+_2_             EQU $ - _2
+                savebin "Core/Module/Graphics/UI/Charecter/Original/Charecter_2.pack", _2, _2_
 
-Charecter_3     EQU $
+_3              EQU $
                 incbin "Original/Charecter_3_0.spr"
                 incbin "Original/Charecter_3_1.spr"
                 incbin "Original/Charecter_3_2.spr"
                 incbin "Original/Charecter_3_3.spr"
-Charecter_3_    EQU $ - Charecter_3
-                savebin "Core/Module/Graphics/UI/Charecter/Original/Charecter_3.pack", Charecter_3, Charecter_3_
+_3_             EQU $ - _3
+                savebin "Core/Module/Graphics/UI/Charecter/Original/Charecter_3.pack", _3, _3_
 
-Charecter_4     EQU $
+_4              EQU $
                 incbin "Original/Charecter_4_0.spr"
                 incbin "Original/Charecter_4_1.spr"
                 incbin "Original/Charecter_4_2.spr"
                 incbin "Original/Charecter_4_3.spr"
-Charecter_4_    EQU $ - Charecter_4
-                savebin "Core/Module/Graphics/UI/Charecter/Original/Charecter_4.pack", Charecter_4, Charecter_4_
+_4_             EQU $ - _4
+                savebin "Core/Module/Graphics/UI/Charecter/Original/Charecter_4.pack", _4, _4_
 
                 include "Compress.inc"
+
                 else
 _0              incbin "Compressed/Charecter_0.pack.ar"
 _1              incbin "Compressed/Charecter_1.pack.ar"
