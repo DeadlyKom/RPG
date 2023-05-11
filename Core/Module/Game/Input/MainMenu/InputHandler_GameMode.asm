@@ -100,7 +100,7 @@ Selected:       LD HL, GameState.Cursor
                 SET_MENU_FLAG MENU_STARTUP_BIT                                  ; установка флага первичной инициализации
                 RET
 
-.StartGame      SET_MENU_FLAG MENU_LOOP_BIT                                     ; установка флага завершения цикла
+.StartGame      SET_MENU_FLAGS MENU_LOOP | MENU_STARTUP | MENU_UPDTAE           ; установка флага завершения цикла, первичной инициализации, обновления
                 RET
 Back:           LD A, MENU_ID_MAIN
                 LD (GameState.MenuID), A

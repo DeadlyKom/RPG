@@ -10,7 +10,7 @@
 ; Note:
 ; -----------------------------------------
 Gen_WorldSpr:   SHOW_SHADOW_SCREEN                                              ; отображение теневого экрана
-                SET_PAGE_GRAPHICS                                               ; включить страницу графики
+                SET_PAGE_GRAPHICS_1                                             ; включить страницу графики
 
                 ; распаковк графики
                 LD HL, Adr.Graphics.Pack1

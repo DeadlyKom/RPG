@@ -15,8 +15,9 @@ Heart:          ; стартовый адрес спрайта
                 JR Z, $+5
                 LD HL, Graphics.UI.Heart._1 
                 ; установить страницу графики
-                LD A, Page.Graphics.Pack1
-                CALL SetPage
+                ; LD A, Page.Graphics.Pack1
+                ; CALL SetPage
+                SET_PAGE_GRAPHICS_1                                             ; включить страницу графики
                 
                 ; копирование спрайта в буфер общего назначения
                 LD DE, SharedBuffer
@@ -47,8 +48,9 @@ Heart:          ; стартовый адрес спрайта
 ; Note:
 ; -----------------------------------------
 Gas:            ; установить страницу графики
-                LD A, Page.Graphics.Pack1
-                CALL SetPage
+                ; LD A, Page.Graphics.Pack1
+                ; CALL SetPage
+                SET_PAGE_GRAPHICS_1                                             ; включить страницу графики
                 
                 ; копирование спрайта в буфер общего назначения
                 LD HL, Graphics.UI.Gas
@@ -86,8 +88,9 @@ Turbo:          ; стартовый адрес спрайта
                 JR Z, $+5
                 LD HL, Graphics.UI.Turbo._1 
                 ; установить страницу графики
-                LD A, Page.Graphics.Pack1
-                CALL SetPage
+                ; LD A, Page.Graphics.Pack1
+                ; CALL SetPage
+                SET_PAGE_GRAPHICS_1                                             ; включить страницу графики
                 
                 ; копирование спрайта в буфер общего назначения
                 LD DE, SharedBuffer

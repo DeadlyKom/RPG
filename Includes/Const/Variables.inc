@@ -34,6 +34,8 @@ GameState           EQU Adr.GameState                                           
 .Hardware           EQU GameState + FGameState.Hardware                         ; флаги железа
 .Objects            EQU GameState + FGameState.Objects                          ; количество объектов в массиве
 .Settlement         EQU GameState + FGameState.Settlement                       ; количество поселений в массиве
+.CharacterID        EQU GameState + FGameState.CharacterID                      ; ID отображаемого персонажа
+.CharacterState     EQU GameState + FGameState.CharacterState                   ; состояние отображаемого персонажа
 .MenuID             EQU GameState + FGameState.MenuID                           ; тип меню
 .MenuFlags          EQU GameState + FGameState.MenuFlags                        ; флаги меню
 .Cursor             EQU GameState + FGameState.Cursor                           ; позиция курсора (в режиме выбора)

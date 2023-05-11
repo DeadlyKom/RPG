@@ -22,6 +22,7 @@
                 include "Render.inc"
                 include "Hardware.inc"
                 include "Variables.inc"
+                include "Charecter.inc"
                 include "Interrupt.inc"
 
                 include "RenderBuffer.inc"

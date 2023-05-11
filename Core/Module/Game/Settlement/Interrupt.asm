@@ -20,6 +20,9 @@ Interrupt:      ; проверка завершённости процесса �
 .Input          ; ************ Scan Input ************
                 CALL Input.Scan
 
+.UI             ; ************** UI Tick **************
+                CALL UI.CharTick
+
                 ifdef _DEBUG
 .Debug_FPS      ; ************** Draw FPS **************
                 CALL FPS_Counter.Tick

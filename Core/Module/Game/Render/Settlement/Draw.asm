@@ -24,16 +24,31 @@ Draw:           ; счётчик отображаемого экрана
                 
 .BaseDraw       SetPort PAGE_6, 1                                               ; включить 6 страницу и показать теневой экран
 
+                ; ; проверка флага первичной инициализации
+                ; CHECK_MENU_FLAG MENU_STARTUP_BIT
+                ; JR Z, .Draw
+                ; RES_FLAG MENU_STARTUP_BIT                                       ; сброс флага первичной инициализации
+
                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами 
                 ; расчёт адреса поселения в котором находится игрок
                 LD A, (PlayerState.SettlementID)
                 CALL Packs.OpenWorld.Utils.CalcSettlement
+
+                ; проверка флага обновления
+                CHECK_MENU_FLAG MENU_UPDTAE_BIT
+                JR Z, .Draw
+                RES_FLAG MENU_UPDTAE_BIT                                        ; сброс флага первичной инициализации
                 
                 ; отображение место нахождения игрока
                 CALL DisplayLoc
 
                 ;
+                CALL DisplayFrame
+
+.Draw           ;
                 CALL DisplayTime
+                ;
+                CALL DisplayChar
 
 .Processed      ifdef _DEBUG
                 CALL FPS_Counter.Frame

@@ -67,6 +67,9 @@ Begin:          EQU $
                 include "Core/Module/Draw/Utils/PixelAddress.asm"
                 include "Core/Module/Draw/Utils/PixelAttribute.asm"
 
+                ; animation UI
+                include "Core/Module/Game/UI/Include.inc"
+
                 ; AI
                 include "Core/Module/AI/Include.inc"
 

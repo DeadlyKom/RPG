@@ -1,33 +1,37 @@
 
                 ifndef _CORE_MODULE_GRAPHICS_TILE_WORLD_GRAPHICS_PACK_1_
                 define _CORE_MODULE_GRAPHICS_TILE_WORLD_GRAPHICS_PACK_1_
-World:          incbin "Core/Module/Graphics/Tile/World/Sprite/Compressed/Ground/Ground.pack.ar"
+World:          incbin "Tile/World/Sprite/Compressed/Ground/Ground.pack.ar"
                 display " - Ground.pack:\t\t\t\t\t", /A, World, " = busy [ ", /D, $ - World, " bytes  ]"
 UI:
-.Arrow          include "Core/Module/Graphics/UI/Arrow/Include.inc"
+.Arrow          include "UI/Arrow/Include.inc"
                 display " - World UI 'Arrow':\t\t\t\t\t", /A, UI.Arrow, " = busy [ ", /D, $ - UI.Arrow, " bytes  ]"
-.World          include "Core/Module/Graphics/UI/World/Include.inc"
+.World          include "UI/World/Include.inc"
                 display " - World UI:\t\t\t\t\t\t", /A, .World, " = busy [ ", /D, $ - .World, " bytes  ]"
-.Weapon         include "Core/Module/Graphics/UI/Weapon/Include.inc"
+.Weapon         include "UI/Weapon/Include.inc"
                 display " - Weapon UI:\t\t\t\t\t\t", /A, .Weapon, " = busy [ ", /D, $ - .Weapon, " bytes  ]"
+.SettleFrame    include "UI/Settlement/Include.inc"
+                display " - Settlement UI:\t\t\t\t\t", /A, .SettleFrame, " = busy [ ", /D, $ - .SettleFrame, " bytes  ]"
+.Charecters     include "UI/Charecter/Include.inc"
+                display " - Charecters UI:\t\t\t\t\t", /A, .Charecters, " = busy [ ", /D, $ - .Charecters, " bytes  ]"
 Cars:
-.A              include "Core/Module/Graphics/Car/A/Include.inc"
+.A              include "Car/A/Include.inc"
                 display " - Car A:\t\t\t\t\t\t", /A, Cars.A, " = busy [ ", /D, $ - Cars.A, " bytes  ]"
-.B              include "Core/Module/Graphics/Car/B/Include.inc"
+.B              include "Car/B/Include.inc"
                 display " - Car B:\t\t\t\t\t\t", /A, .B, " = busy [ ", /D, $ - .B, " bytes  ]"
 Weapon:
-.Mine           include "Core/Module/Graphics/Weapon/Include.inc"
+.Mine           include "Weapon/Include.inc"
                 display " - Weapon 'Mine':\t\t\t\t\t", /A, Weapon.Mine, " = busy [ ", /D, $ - Weapon.Mine, " bytes  ]"
-Declas:         include "Core/Module/Graphics/Tile/World/Sprite/Original/Decal/Include.inc"
+Declas:         include "Tile/World/Sprite/Original/Decal/Include.inc"
                 display " - Decals:\t\t\t\t\t\t", /A, Declas, " = busy [ ", /D, $ - Declas, " bytes  ]"
 VFX:
-.Dust           include "Core/Module/Graphics/VFX/Dust/Include.inc"
+.Dust           include "VFX/Dust/Include.inc"
                 display " - Dust:\t\t\t\t\t\t", /A, VFX.Dust, " = busy [ ", /D, $ - VFX.Dust, " bytes  ]"
-.Smoke          include "Core/Module/Graphics/VFX/Smoke/Include.inc"
+.Smoke          include "VFX/Smoke/Include.inc"
                 display " - Smoke:\t\t\t\t\t\t", /A, .Smoke, " = busy [ ", /D, $ - .Smoke, " bytes  ]"
-.Explosion      include "Core/Module/Graphics/VFX/Explosion/Include.inc"
+.Explosion      include "VFX/Explosion/Include.inc"
                 display " - Explosion:\t\t\t\t\t\t", /A, .Explosion, " = busy [ ", /D, $ - .Explosion, " bytes  ]"
-.MuzzleFlash    include "Core/Module/Graphics/VFX/MuzzleFlash/Include.inc"
+.MuzzleFlash    include "VFX/MuzzleFlash/Include.inc"
                 display " - MuzzleFlash:\t\t\t\t\t", /A, .MuzzleFlash, " = busy [ ", /D, $ - .MuzzleFlash, " bytes  ]"
 
                 endif ; ~ _CORE_MODULE_GRAPHICS_TILE_WORLD_GRAPHICS_PACK_1_

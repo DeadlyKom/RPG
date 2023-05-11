@@ -6,7 +6,9 @@
 
                 include "Draw.asm"
                 include "DisplayTime.asm"
+                include "DisplayFrame.asm"
                 include "DisplayLocation.asm"
+                include "DisplayCharecter.asm"
 
                 endmodule
 

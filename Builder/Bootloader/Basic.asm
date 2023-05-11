@@ -51,7 +51,7 @@ StartBoot:      DI
                 ; загрузка графики
                 ; -----------------------------------------
                 ifndef _DEBUG
-                SET_PAGE_GRAPHICS                                               ; включить страницу графики
+                SET_PAGE_GRAPHICS_1                                             ; включить страницу графики
                 LD IX, Adr.Graphics.Pack1
                 LD DE, Graphics.Size
                 LD A, #FF

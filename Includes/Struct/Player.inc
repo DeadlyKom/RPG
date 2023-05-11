@@ -5,6 +5,7 @@
                 struct FPlayerState
 SettlementID    DB #00                                                          ; ID поселения в котором находится игрок        [1 байт]
 SettlementLocation  DB #00                                                      ; ID места в котором находится игрок            [1 байт]
+CharacterID     DB #00                                                          ; ID вид персонажа                              [1 байт]
 InputFlags      DB #00                                                          ; флаги управления игроком                      [1 байт]
 Health          DW #0000                                                        ; уровень очков здоровья                        [2 байта]
 Health.Value    DB #00                                                          ; значение увеличения/уменьшения                [1 байт]

@@ -173,6 +173,9 @@ Decompressor
 .Forward        EQU Kernel.Decompressor.Forward
 .Backward       EQU Kernel.Decompressor.Backward
 
+; UI animation
+UI
+.CharTick       EQU Kernel.UI.Charecter.Tick                                    ; тик анимации персонажа
 ; AI
 AI
 .SetBTS_UNKNOW  EQU Kernel.AI.SetBTS_UNKNOW

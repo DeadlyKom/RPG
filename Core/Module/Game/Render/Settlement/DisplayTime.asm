@@ -11,7 +11,9 @@ COLUMN_TIME     EQU WIDTH_TIME >> 1
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-DisplayTime:    LD DE, (ROW_TIME * 8) << 8
+DisplayTime:    SET_PAGE_BLOK_6                                                 ; включение страницы с блоком кода
+
+                LD DE, (ROW_TIME * 8) << 8
                 LD HL, .ClearText
                 CALL Packs.DrawString
 

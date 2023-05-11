@@ -9,8 +9,9 @@ BarRowNum       EQU  62
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-BackBar:        LD A, Page.Graphics.Pack1
-                CALL SetPage
+BackBar:        ; LD A, Page.Graphics.Pack1
+                ; CALL SetPage
+                SET_PAGE_GRAPHICS_1                                             ; включить страницу графики
                 
                 ; копирование спрайта в буфер общего назначения
                 LD HL, Graphics.UI.Bar
