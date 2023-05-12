@@ -48,14 +48,18 @@ Draw:           ; счётчик отображаемого экрана
                 ; отображение место нахождения игрока
                 CALL DisplayLoc
 
-                ;
+                ; отображение рамок
                 CALL DisplayFrame
                 CALL DisplayArtFrame
 
-.Draw           ;
+.Draw           ; обновление секущего внутреигрового времни
                 CALL DisplayTime
-                ;
+
+                ; отображение персонажа
                 CALL DisplayChar
+
+                ; отображение доступных построек в поселении
+                CALL DisplayBuildLst
 
 .Processed      ifdef _DEBUG
                 CALL FPS_Counter.Frame

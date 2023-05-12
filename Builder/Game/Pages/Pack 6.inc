@@ -14,7 +14,6 @@ Begin6:         EQU $
                 
                 ; draw
                 include "Core/Module/Draw/String/DrawChar.asm"
-                include "Core/Module/Draw/String/DrawString.asm"
 
                 ; initialize
                 include "Core/Module/Game/Initialize/Include.inc"

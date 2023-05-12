@@ -19,6 +19,9 @@ SizeSettle      EQU $ - BeginSettle
 
                 endif
 
+                include "Original/Build.inc"                                    ; строения
+                include "Original/Options.inc"                                  ; разные варианты
+
                 display " - Text 'Settlement':\t\t\t\t\t", /A, BeginSettle, " = busy [ ", /D, SizeSettle, " bytes  ]"
 
                 endmodule

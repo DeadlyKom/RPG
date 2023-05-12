@@ -7,6 +7,7 @@ ROW_HEADER      EQU 16
 ; -----------------------------------------
 ; отображение место нахождения игрока
 ; In:
+;   IX - указывает на структуру FSettlement
 ; Out:
 ; Corrupt:
 ; Note:
@@ -14,8 +15,8 @@ ROW_HEADER      EQU 16
 DisplayLoc:     SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
 
                 ; получение места нахождения игрока
-                LD A, (PlayerState.SettlementLocation)
-                LD HL, Packs.BuildText
+                LD A, (PlayerState.SettlementLocID)
+                LD HL, Packs.Text.Build
                 CALL Utils.GetStringID
 
                 LD DE, Adr.RenderBuffer + 0x80
@@ -46,8 +47,12 @@ DisplayLoc:     SET_PAGE_OBJECT                                                 
                 LD D, ROW_HEADER * 8
                 
                 LD HL, Adr.RenderBuffer + 0x80
-                CALL Packs.DrawString
-                
-                RET
+                ; -----------------------------------------
+                ; отображение символа
+                ; In:
+                ;   HL - адрес строки
+                ;   DE - координаты в пикселях (D - y, E - x)
+                ; -----------------------------------------
+                JP Draw.String
 
                 endif ; ~_MODULE_GAME_RENDER_SETTLEMENT_DISPLAY_LOCATION_

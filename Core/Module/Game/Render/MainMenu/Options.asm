@@ -9,25 +9,27 @@
 ; Note:
 ; -----------------------------------------
 Options:        ; -----------------------------------------
+                ; отображение символа
+                ; In:
                 ;   HL - адрес строки
                 ;   DE - координаты в пикселях (D - y, E - x)
                 ; -----------------------------------------
 
                 LD HL, .KeyboardText
                 LD DE, #1A10
-                CALL Packs.DrawString
+                CALL Draw.String
 
                 LD HL, .KempstonText
                 LD DE, #2310
-                CALL Packs.DrawString
+                CALL Draw.String
 
                 LD HL, .RedefineText
                 LD DE, #2C10
-                CALL Packs.DrawString
+                CALL Draw.String
 
                 LD HL, .BackText
                 LD DE, #3510
-                CALL Packs.DrawString
+                CALL Draw.String
 
                 XOR A
                 RET

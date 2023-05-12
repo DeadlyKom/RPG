@@ -12,6 +12,7 @@
                 include "Font.inc"
                 include "AABB.inc"
                 include "Sprite.inc"
+                include "Dialog.inc"
 
                 include "Character.inc"
                 include "BehaviorTree.inc"

@@ -9,25 +9,27 @@
 ; Note:
 ; -----------------------------------------
 Main:           ; -----------------------------------------
+                ; отображение символа
+                ; In:
                 ;   HL - адрес строки
                 ;   DE - координаты в пикселях (D - y, E - x)
                 ; -----------------------------------------
 
                 LD HL, .StartGameText
                 LD DE, #1A10
-                CALL Packs.DrawString
+                CALL Draw.String
 
                 LD HL, .ContinueText
                 LD DE, #2310
-                CALL Packs.DrawString
+                CALL Draw.String
 
                 LD HL, .OptionsText
                 LD DE, #2C10
-                CALL Packs.DrawString
+                CALL Draw.String
 
                 LD HL, .VersionText
                 LD DE, #B7D0
-                CALL Packs.DrawString
+                CALL Draw.String
                 
                 XOR A
                 RET

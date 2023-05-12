@@ -7,22 +7,29 @@ COLUMN_TIME     EQU WIDTH_TIME >> 1
 ; -----------------------------------------
 ; отображение текущего времени
 ; In:
+;   IX - указывает на структуру FSettlement
 ; Out:
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-DisplayTime:    SET_PAGE_BLOK_6                                                 ; включение страницы с блоком кода
+DisplayTime:    ; SET_PAGE_BLOK_6                                                 ; включение страницы с блоком кода
 
                 LD DE, (ROW_TIME * 8) << 8
                 LD HL, .ClearText
-                CALL Packs.DrawString
+                ; -----------------------------------------
+                ; отображение символа
+                ; In:
+                ;   HL - адрес строки
+                ;   DE - координаты в пикселях (D - y, E - x)
+                ; -----------------------------------------
+                CALL Draw.String
 
-                LD IX, PlayerState.GameTime
+                LD IY, PlayerState.GameTime
                 LD HL, Adr.RenderBuffer + 0x80
                 PUSH HL
 
                 ; часы
-                LD C, (IX + FTime.Hour)
+                LD C, (IY + FTime.Hour)
                 LD A, C
                 AND #F0
                 JR Z, .SkipFirst
@@ -41,7 +48,7 @@ DisplayTime:    SET_PAGE_BLOK_6                                                 
                 INC L
 
                 ; секунды
-                LD A, (IX + FTime.Interrupt)
+                LD A, (IY + FTime.Interrupt)
                 CP 25
                 LD (HL), #BF
                 JR C, $+4
@@ -49,7 +56,7 @@ DisplayTime:    SET_PAGE_BLOK_6                                                 
                 INC L
 
                 ; минуты
-                LD C, (IX + FTime.Minutes)
+                LD C, (IY + FTime.Minutes)
                 LD A, C
                 AND #F0
                 RRCA
@@ -81,9 +88,14 @@ DisplayTime:    SET_PAGE_BLOK_6                                                 
                 LD D, ROW_TIME * 8
 
                 LD HL, Adr.RenderBuffer + 0x80
-                CALL Packs.DrawString
 
-                RET
+                ; -----------------------------------------
+                ; отображение символа
+                ; In:
+                ;   HL - адрес строки
+                ;   DE - координаты в пикселях (D - y, E - x)
+                ; -----------------------------------------
+                JP Draw.String
 .ClearText      BYTE "^^^^^^\0"
 
                 endif ; ~_MODULE_GAME_RENDER_SETTLEMENT_DISPLAY_TIME_

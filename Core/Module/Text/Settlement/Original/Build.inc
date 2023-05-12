@@ -1,7 +1,7 @@
 
                 ifndef _CORE_MODULE_TEXT_SETTLEMENT_BUILD_
                 define _CORE_MODULE_TEXT_SETTLEMENT_BUILD_
-BuildText
+Build
 .Entrance       lua allpass
                 Convert("Главный вход")
                 endlua

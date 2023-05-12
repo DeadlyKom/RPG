@@ -12,9 +12,11 @@ Begin0:         EQU $
                 ; generator
                 include "Core/Module/OpenWorld/Include.inc"
 
+                ; dialog system
+                include "Core/Module/Dialog/Include.inc"
+
                 ; text
                 include "Core/Module/Text/Settlement/Include.inc"               ; для поселений
-                include "Core/Module/Text/Settlement/Original/Build.inc"        ; строения
 End0:           EQU $
 Size0:          EQU End0 - Begin0
 

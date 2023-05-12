@@ -10,6 +10,7 @@
                 include "DisplayArtFrame.asm"
                 include "DisplayLocation.asm"
                 include "DisplayCharecter.asm"
+                include "DisplayBuildList.asm"
 
                 endmodule
 

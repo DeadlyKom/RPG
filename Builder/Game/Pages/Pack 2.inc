@@ -44,6 +44,9 @@ Begin:          EQU $
                 ; draw line
                 include "Core/Module/Utils/Debug/DrawLine.asm"
 
+                ; draw string
+                include "Core/Module/Draw/String/DrawString.asm"
+
                 ; decompressor
                 include "Core/Module/Decompressor/Forward.asm"
                 include "Core/Module/Decompressor/Backward.asm"

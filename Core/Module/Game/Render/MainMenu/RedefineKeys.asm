@@ -43,7 +43,13 @@ RedefineKeys:   ; инициализация
                 CALL DrawKey
 .Skip           POP DE
                 POP HL
-                CALL Packs.DrawString
+                ; -----------------------------------------
+                ; отображение символа
+                ; In:
+                ;   HL - адрес строки
+                ;   DE - координаты в пикселях (D - y, E - x)
+                ; -----------------------------------------
+                CALL Draw.String
                 EXX
 
                 POP HL
@@ -131,10 +137,13 @@ DrawKey:        LD A, (BC)
                 ADD A, #70
                 LD E, A
 
+                ; -----------------------------------------
                 ; отображение символа
+                ; In:
                 ;   HL - адрес строки
                 ;   DE - координаты в пикселях (D - y, E - x)
-                JP Packs.DrawString
+                ; -----------------------------------------
+                JP Draw.String
 
 SelectKey:      LD HL, (TickCounterRef)
                 LD BC, (.OldTickCounter)
@@ -182,10 +191,13 @@ Clear:          LD A, (BC)
                 AND %11111000
                 LD E, A
 
+                ; -----------------------------------------
                 ; отображение символа
+                ; In:
                 ;   HL - адрес строки
                 ;   DE - координаты в пикселях (D - y, E - x)
-                CALL Packs.DrawString
+                ; -----------------------------------------
+                CALL Draw.String
                 POP DE
                 RET
 .Space          BYTE "^^^^^^^^^^^^\0"

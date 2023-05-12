@@ -40,25 +40,31 @@ StartGame:      ; проверка флага первичной инициал�
                 ; основное отображение
                 ; -----------------------------------------
 
+                ; -----------------------------------------
+                ; отображение символа
+                ; In:
+                ;   HL - адрес строки
+                ;   DE - координаты в пикселях (D - y, E - x)
+                ; -----------------------------------------
                 LD HL, .MapGenerator
                 LD DE, #0808
-                CALL Packs.DrawString
+                CALL Draw.String
 
                 LD HL, .KeyGenerator
                 LD DE, #2310
-                CALL Packs.DrawString
+                CALL Draw.String
 
                 LD HL, .FreqGenerator
                 LD DE, #2C10
-                CALL Packs.DrawString
+                CALL Draw.String
 
                 LD HL, .Difficulty
                 LD DE, #3510
-                CALL Packs.DrawString
+                CALL Draw.String
 
                 LD HL, .SettlementsNum
                 LD DE, #3E10
-                CALL Packs.DrawString
+                CALL Draw.String
 
                 ; LD HL, .DistSettlements
                 ; LD DE, #3E10
@@ -78,7 +84,7 @@ StartGame:      ; проверка флага первичной инициал�
 
                 LD HL, .Play
                 LD DE, #4710
-                CALL Packs.DrawString
+                CALL Draw.String
                 ; -----------------------------------------
                 ; обновление
                 ; -----------------------------------------
@@ -162,7 +168,7 @@ UpdateCursor:   LD HL, GameState.Cursor
                 LD D, A
                 LD E, #08
                 LD A, C
-                JP Packs.DrawChar
+                JP Draw.Char
 UpdateKeyGen:   ; проверка что курсор на позиции
                 LD HL, GameState.Cursor
                 LD A, (HL)
@@ -191,7 +197,13 @@ UpdateKeyGen:   ; проверка что курсор на позиции
 
 .Clear          LD DE, #23A0
                 LD HL, ClearText
-                CALL Packs.DrawString
+                ; -----------------------------------------
+                ; отображение символа
+                ; In:
+                ;   HL - адрес строки
+                ;   DE - координаты в пикселях (D - y, E - x)
+                ; -----------------------------------------
+                CALL Draw.String
 
 .Draw           LD HL, (GameConfig.Seed)
                 CALL Utils.ToString_16
@@ -200,7 +212,13 @@ UpdateKeyGen:   ; проверка что курсор на позиции
                 LD (HL), A
                 SBC HL, BC
                 LD DE, #23A0
-                JP Packs.DrawString
+                ; -----------------------------------------
+                ; отображение символа
+                ; In:
+                ;   HL - адрес строки
+                ;   DE - координаты в пикселях (D - y, E - x)
+                ; -----------------------------------------
+                JP Draw.String
 UpdateFreqGen:  ; проверка что курсор на позиции
                 LD HL, GameState.Cursor
                 LD A, (HL)
@@ -226,7 +244,13 @@ UpdateFreqGen:  ; проверка что курсор на позиции
 
 .Clear          LD DE, #2CA0
                 LD HL, ClearText
-                CALL Packs.DrawString
+                ; -----------------------------------------
+                ; отображение символа
+                ; In:
+                ;   HL - адрес строки
+                ;   DE - координаты в пикселях (D - y, E - x)
+                ; -----------------------------------------
+                CALL Draw.String
 
 .Draw           LD A, (GameConfig.Frequency)
                 CALL Utils.ToString_8
@@ -235,7 +259,13 @@ UpdateFreqGen:  ; проверка что курсор на позиции
                 LD (HL), A
                 SBC HL, BC
                 LD DE, #2CA0
-                JP Packs.DrawString
+                ; -----------------------------------------
+                ; отображение символа
+                ; In:
+                ;   HL - адрес строки
+                ;   DE - координаты в пикселях (D - y, E - x)
+                ; -----------------------------------------
+                JP Draw.String
 UpdateDif:      ; проверка что курсор на позиции
                 LD HL, GameState.Cursor
                 LD A, (HL)
@@ -267,7 +297,13 @@ UpdateDif:      ; проверка что курсор на позиции
 
 .Clear          LD DE, #35A0
                 LD HL, ClearText
-                CALL Packs.DrawString
+                ; -----------------------------------------
+                ; отображение символа
+                ; In:
+                ;   HL - адрес строки
+                ;   DE - координаты в пикселях (D - y, E - x)
+                ; -----------------------------------------
+                CALL Draw.String
 
 .Draw           LD A, (.Value)
                 ADD A, A
@@ -282,7 +318,13 @@ UpdateDif:      ; проверка что курсор на позиции
 
                 LD HL, #35A0
                 EX DE, HL
-                JP Packs.DrawString
+                ; -----------------------------------------
+                ; отображение символа
+                ; In:
+                ;   HL - адрес строки
+                ;   DE - координаты в пикселях (D - y, E - x)
+                ; -----------------------------------------
+                JP Draw.String
 
 .Value          DB #00
 .Table          DW .Easy, .Normal, .Nightmare, .Hardcore

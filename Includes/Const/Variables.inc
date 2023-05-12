@@ -47,7 +47,7 @@ GameState           EQU Adr.GameState                                           
                                                                                 ;   #FF - назда (-1 позиция)
 PlayerState         EQU Adr.PlayerState
 .SettlementID       EQU PlayerState + FPlayerState.SettlementID                 ; ID поселения в котором находится игрок
-.SettlementLocation EQU PlayerState + FPlayerState.SettlementLocation           ; ID места в котором находится игрок
+.SettlementLocID    EQU PlayerState + FPlayerState.SettlementLocID              ; ID места в котором находится игрок
 .CharacterID        EQU PlayerState + FGameState.CharacterID                    ; ID персонажа
 .InputFlags         EQU PlayerState + FPlayerState.InputFlags                   ; флаги управления игроком
 .Health             EQU PlayerState + FPlayerState.Health                       ; уровень очков здоровья
