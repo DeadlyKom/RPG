@@ -6,8 +6,11 @@
 Begin           EQU $
                 include "Draw.asm"
                 include "Up.asm"
+                include "Down.asm"
+                include "Prev.asm"
+                include "Next.asm"
 
-                display " - Dialog cursor:\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
+                display " - Dialog cursor:\t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
 
                 endmodule
 

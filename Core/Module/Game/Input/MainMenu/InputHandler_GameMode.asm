@@ -42,47 +42,14 @@ IH_GameMode:    JR NZ, .NotProcessing                                           
 
 Processed:      OR A                                                            ; сброс флага переполнения (произведена обработка клавиши)
                 RET
-Up:             LD HL, GameState.Cursor
-                LD A, (HL)
-                OR A
-                JR Z, Processed
-
-                ; сохранение предыдущей позиции
-                INC L
-                LD (HL), A
-                DEC L
-                DEC (HL)
-
-                ; сброс направления (если были)
-                LD HL, GameState.Cursor.Dir
-                LD (HL), #00
+Up:             CALL Cursor.Up
                 JR Processed
-Down:           LD HL, GameState.Cursor
-                LD A, (HL)
-                INC A
-                INC L
-                INC L
-                CP (HL)
-                JR NC, Processed
-
-                ; сохранение предыдущей позиции
-                DEC L
-                DEC A
-                LD (HL), A
-                DEC L
-
-                INC (HL)
-
-                ; сброс направления (если были)
-                LD HL, GameState.Cursor.Dir
-                LD (HL), #00
+Down:           CALL Cursor.Down
                 JR Processed
-Left:           LD HL, GameState.Cursor.Dir
-                LD (HL), CURSOR_DEC
-                RET
-Right:          LD HL, GameState.Cursor.Dir
-                LD (HL), CURSOR_INC
-                RET
+Left:           JP Cursor.Prev
+                JR Processed
+Right:          CALL Cursor.Next
+                JR Processed
 Selected:       LD HL, GameState.Cursor
                 LD A, (HL)
                 CP Packs.MainMenu.Render.KEY_GEN_ID

@@ -156,6 +156,10 @@ Mouse:
 ; cursor draw and logic
 Cursor
 .Draw           EQU Kernel.Cursor.Draw                                          ; отображение курсора
+.Up             EQU Kernel.Cursor.Up                                            ; перемещение курсор выше на позицию
+.Down           EQU Kernel.Cursor.Down                                          ; перемещение курсор ниже на позицию
+.Prev           EQU Kernel.Cursor.Prev                                          ; изменение значения на предыдущее
+.Next           EQU Kernel.Cursor.Next                                          ; изменение значения на следующее
 
 ; math
 Math
