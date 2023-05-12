@@ -31,15 +31,43 @@ DisplayBuildLst SET_PAGE_OBJECT                                                 
                 ;   PR      [1]     - тюрьма
                 ;   RT      [0]     - радио вышка
                 ; -----------------------------------------
-                LD IY, .Struct
-                LD (IY + FDialog.OptionsSize), .OptionsNum
-
-                LD A, (IX + FSettlement.Building)
-                LD L, A
+                LD L, (IX + FSettlement.Building)
                 LD H, #FF
                 LD (.Available), HL
 
-                LD (IY + FDialog.FirstElement), #06
+                ; подсчёт количество бит в байте
+                LD A, L
+                LD BC, #0801                                                    ; +1 т.к. 1 дополнительная опция "выход в пустош"
+.CalcBits       ADD A, A
+                JR NC, $+3
+                INC C
+                DJNZ .CalcBits
+
+                ; ToDo обновляется 1 раз
+                ; инициализация курсора
+                LD HL, GameState.Cursor
+                LD (HL), #FF                                                    ; текущая позиция
+                INC L
+                LD (HL), C                                                      ; количество позиций
+                INC L
+                LD (HL), #00                                                    ; предыдущая позиция
+                INC L
+                LD (HL), #00                                                    ; верхняя граница
+                INC L
+                LD (HL), LIST_HEIGHT / HEIGHT_ROW                               ; доступная высота (вкл)
+                INC L
+                LD (HL), COLUMN_BUILD - 8                                       ; положение по горизонтали
+                INC L
+                LD (HL), ROW_BUILD                                              ; положение по вертикали
+                INC L
+                LD (HL), #00                                                    ; направление
+                
+                ; инициализация структуры диалога
+                LD IY, .Struct
+                LD (IY + FDialog.OptionsSize), .OptionsNum
+
+                LD A, (GameState.Cursor.Top)
+                LD (IY + FDialog.FirstElement), A
 
                 LD A, (PlayerState.SettlementLocID)
                 LD (IY + FDialog.SkipElement), A
@@ -70,6 +98,5 @@ DisplayBuildLst SET_PAGE_OBJECT                                                 
                 { LIST_WIDTH, LIST_HEIGHT },
                 HEIGHT_ROW
                 }
-.FirstElement   EQU .Struct + FDialog.FirstElement
 
                 endif ; ~_MODULE_GAME_RENDER_SETTLEMENT_DISPLAY_BUILD_LIST_

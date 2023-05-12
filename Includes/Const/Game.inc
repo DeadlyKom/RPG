@@ -8,10 +8,17 @@ MENU_STARTUP_BIT    EQU 0x00                                                    
 MENU_UPDTAE_BIT     EQU 0x01                                                    ; бит, обновления меню
 MENU_LOOP_BIT       EQU 0x02                                                    ; бит, завершения цикла меню
 MENU_FADEOUT_BIT    EQU 0x03                                                    ; бит, эффекта затемнения
+MENU_SCROLL_BIT     EQU 0x04                                                    ; бит, необходимости скролла
+MENU_SCROLL_DIR_BIT EQU 0x05                                                    ; бит, направления скролла
+                                                                                ; 0 - вверх
+                                                                                ; 1 - вниз
 
 MENU_STARTUP    EQU 1 << MENU_STARTUP_BIT
 MENU_UPDTAE     EQU 1 << MENU_UPDTAE_BIT
 MENU_LOOP       EQU 1 << MENU_LOOP_BIT
 MENU_FADEOUT    EQU 1 << MENU_FADEOUT_BIT
+MENU_SCROLL     EQU 1 << MENU_SCROLL_BIT
+MENU_SCROLL_UP  EQU 0 << MENU_SCROLL_DIR_BIT
+MENU_SCROLL_DOWN EQU 1 << MENU_SCROLL_DIR_BIT
 
                 endif ; ~_CONST_GAME_

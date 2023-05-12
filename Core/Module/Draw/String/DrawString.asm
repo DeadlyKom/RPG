@@ -17,6 +17,8 @@ DrawChar:       PUSH AF
                 LD A, (Adr.Port_7FFD)
                 LD (.RestoreMemPage), A                                         ; сохранение страницы спрайта
 
+                SET_PAGE_BLOK_6                                                 ; включение страницы с блоком кода
+
                 POP AF
                 CALL Packs.DrawChar
 

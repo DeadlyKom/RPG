@@ -29,6 +29,10 @@ Draw:           ; счётчик отображаемого экрана
                 JR Z, .NotStartup
                 RES_FLAG MENU_STARTUP_BIT                                       ; сброс флага первичной инициализации
 
+                ; -----------------------------------------
+                ; первичная инициализация
+                ; -----------------------------------------
+
                 LD A, CHAR_STATE_NONE
                 LD (GameState.CharacterState), A
 
@@ -52,14 +56,17 @@ Draw:           ; счётчик отображаемого экрана
                 CALL DisplayFrame
                 CALL DisplayArtFrame
 
+                ; отображение доступных построек в поселении
+                CALL DisplayBuildLst
+
 .Draw           ; обновление секущего внутреигрового времни
                 CALL DisplayTime
 
                 ; отображение персонажа
                 CALL DisplayChar
 
-                ; отображение доступных построек в поселении
-                CALL DisplayBuildLst
+                ; отображение курсора
+                CALL Cursor.Draw
 
 .Processed      ifdef _DEBUG
                 CALL FPS_Counter.Frame

@@ -12,12 +12,16 @@ HEIGHT_ROW      EQU 9                                                           
 Draw:           LD HL, GameState.Cursor
                 LD A, (HL)
                 INC L
-                INC A
-                JR Z, .Draw
-                DEC A
-
+                INC L
                 CP (HL)
                 RET Z                                                           ; позиция не изменилась
+
+                ; проверка на первичную отрисовку
+                EX AF, AF'
+                LD A, (HL)
+                INC A
+                JR Z, .Draw
+                EX AF, AF'
 
                 PUSH AF
                 PUSH HL
@@ -32,6 +36,7 @@ Draw:           LD HL, GameState.Cursor
                 LD C, '>' - 32
 
 .DrawCursor     ; положение курсора
+                INC L
                 INC L
                 INC L
                 LD E, (HL)
