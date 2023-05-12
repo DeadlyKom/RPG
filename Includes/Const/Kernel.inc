@@ -153,6 +153,10 @@ Mouse:
 ; .MoveLeft       EQU Kernel.Input.Cursor.MoveLeft
 ; .MoveRight      EQU Kernel.Input.Cursor.MoveRight
 
+; cursor draw and logic
+Cursor
+.Draw           EQU Kernel.Cursor.Draw                                          ; отображение курсора
+
 ; math
 Math
 .Rand8          EQU Kernel.Math.Rand8

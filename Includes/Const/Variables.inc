@@ -42,6 +42,8 @@ GameState           EQU Adr.GameState                                           
 .Cursor             EQU GameState + FGameState.Cursor                           ; позиция курсора (в режиме выбора)
 .Cursor.Old         EQU GameState + FGameState.Cursor.Old                       ; прошлая позиция курсора (в режиме выбора) 
 .Cursor.Num         EQU GameState + FGameState.Cursor.Num                       ; количество позиций выбора
+.Cursor.Coord.X   EQU GameState + FGameState.Cursor.Coord + 0                   ; позиция курсора по горизонтали (в пикселях)
+.Cursor.Coord.Y   EQU GameState + FGameState.Cursor.Coord + 1                   ; позиция курсора по вертикали (в пикселях)
 .Cursor.Dir         EQU GameState + FGameState.Cursor.Dir                       ; направление движения (для инпута)
                                                                                 ;   #01 - вперёд (+1 позиция)
                                                                                 ;   #FF - назда (-1 позиция)
