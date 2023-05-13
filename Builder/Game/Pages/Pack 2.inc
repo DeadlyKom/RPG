@@ -61,6 +61,7 @@ Begin:          EQU $
                 include "Core/Module/Math/Mul/16x8_24.asm"
                 include "Core/Module/Math/Mul/32x8_40.asm"
                 include "Core/Module/Math/Div/Div8x8.asm"
+                include "Core/Module/Math/Div/DivFix8x8.asm"
                 include "Core/Module/Math/Atan/Sector.asm"
                 include "Core/Module/Math/Sqrt/DistSquared.asm"
                 include "Core/Module/Math/PerlinNoise/Include.inc"

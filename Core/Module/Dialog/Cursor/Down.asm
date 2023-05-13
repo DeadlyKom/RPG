@@ -47,6 +47,9 @@ Down:           LD HL, GameState.Cursor
                 LD HL, GameState.Cursor.Dir
                 LD (HL), #00
 
+                ; установка флага обновления скрола
+                SET_MENU_FLAG MENU_UPDATE_SCROLL_BIT
+
                 RET
 
 .ScrollDown     ; увеличение верхней позиции

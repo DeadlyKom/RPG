@@ -23,7 +23,10 @@ Draw:           ; счётчик отображаемого экрана
                 JP .Processed
                 
 .BaseDraw       SetPort PAGE_6, 1                                               ; включить 6 страницу и показать теневой экран
-
+                
+                ; обновление положения локальной ID
+                CALL CalcCursorID
+                
                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
                 
                 ; расчёт адреса поселения в котором находится игрок
@@ -68,7 +71,9 @@ Draw:           ; счётчик отображаемого экрана
 
                 ; позиция курсора
                 LD A, #00
-                LD (GameState.CursorID), A
+                LD (GameState.CursorID+0), A
+                LD (GameState.CursorID+1), A
+                LD (GameState.CursorID+2), A
 
                 ; ToDo тестовые настройки
                 LD A, CHAR_STATE_NONE
@@ -82,7 +87,7 @@ Draw:           ; счётчик отображаемого экрана
 
 .NotStartup     ; проверка флага обновления
                 CHECK_MENU_FLAG MENU_UPDTAE_BIT
-                JR Z, .Draw
+                JR Z, .NotUpdateMenu
                 RES_FLAG MENU_UPDTAE_BIT                                        ; сброс флага первичной инициализации
                 
                 ; отображение место нахождения игрока
@@ -97,6 +102,15 @@ Draw:           ; счётчик отображаемого экрана
                 CALL ClearBuildList
                 CALL DisplayBuildLst
 
+.NotUpdateMenu  ; проверка флага обновление скрола
+                CHECK_MENU_FLAG MENU_UPDATE_SCROLL_BIT
+                JR Z, .Draw
+                RES_FLAG MENU_UPDATE_SCROLL_BIT                                 ; сброс флага обновление скрола
+
+                ; отображение скрола
+                CALL ClearScroll
+                CALL DisplayScroll
+
 .Draw           ; обновление секущего внутреигрового времни
                 CALL DisplayTime
 
@@ -106,20 +120,18 @@ Draw:           ; счётчик отображаемого экрана
                 ; отображение курсора
                 CALL Cursor.Draw
 
-                CALL CalcCursorID
-
 .Processed      ifdef _DEBUG
                 CALL FPS_Counter.Frame
                 endif
 
-                ifdef _DEBUG
-                LD DE, #0000
-                CALL Console.SetCursor
-                LD A, (GameState.CursorID)
-                CALL Console.DrawByte
-                LD A, (PlayerState.SettlementLocID)
-                CALL Console.DrawByte
-                endif
+                ; ifdef _DEBUG
+                ; LD DE, #0100
+                ; CALL Console.SetCursor
+                ; LD A, (GameState.CursorID)
+                ; CALL Console.DrawByte
+                ; LD A, (PlayerState.SettlementLocID)
+                ; CALL Console.DrawByte
+                ; endif
 
                 SET_RENDER_FLAG FINISHED_BIT                                    ; установка флага завершения отрисовки
                 RET
@@ -174,6 +186,7 @@ CalcCursorID:   ; расчёт текущее положение курсора
                 INC L
                 INC L
                 ADD A, (HL)
+                LD (GameState.CursorID+2), A
                 CP C
                 JR C, $+3
                 INC A

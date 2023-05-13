@@ -173,6 +173,7 @@ Math
 .Mul16x8_24     EQU Kernel.Math.Mul16x8_24
 .Mul32x8_40     EQU Kernel.Math.Mul32x8_40
 .Div8x8         EQU Kernel.Math.Div8x8
+.DivFix8x8      EQU Kernel.Math.DivFix8x8
 .Atan           EQU Kernel.Math.Atan_Sector
 .IntersectAABB  EQU Kernel.Math.IntersectAABB
 .DistSquared    EQU Kernel.Math.DistSquared
