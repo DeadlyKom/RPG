@@ -9,7 +9,7 @@
                 display "\'Pack 0\':\t\t\t\t\t\t-------------------- [ ", /D, Size0, " bytes ]\t [", /D, Page.Module.Pack0, "]\t ------------------------"
 Begin0:         EQU $
 
-                ; generator
+                ; open world
                 include "Core/Module/OpenWorld/Include.inc"
 
                 ; dialog system

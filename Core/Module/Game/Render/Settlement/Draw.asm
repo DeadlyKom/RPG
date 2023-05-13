@@ -115,13 +115,9 @@ Draw:           ; счётчик отображаемого экрана
                 ifdef _DEBUG
                 LD DE, #0000
                 CALL Console.SetCursor
-                LD A, (GameState.CursorID+0)
+                LD A, (GameState.CursorID)
                 CALL Console.DrawByte
-                LD A, (GameState.CursorID+1)
-                CALL Console.DrawByte
-                LD A, (PlayerState.SettlementLocID+0)
-                CALL Console.DrawByte
-                LD A, (PlayerState.SettlementLocID+1)
+                LD A, (PlayerState.SettlementLocID)
                 CALL Console.DrawByte
                 endif
 
@@ -169,10 +165,8 @@ ClearBlock      INC C
 
                 RET
 
-CalcCursorID:   SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
-    
-                ; расчёт текущее положение курсора
-                LD A, (GameState.CursorID + 1)
+CalcCursorID:   ; расчёт текущее положение курсора
+                LD A, (GameState.CursorID+1)
                 LD C, A
                 LD HL, GameState.Cursor
                 LD A, (HL)
@@ -183,34 +177,7 @@ CalcCursorID:   SET_PAGE_OBJECT                                                 
                 CP C
                 JR C, $+3
                 INC A
-                LD (GameState.CursorID + 0), A
-                INC A
-                LD B, A
-
-                ;
-                LD L, (IX + FSettlement.Building)
-                LD H, #FF
-                LD (.Available), HL
-                LD HL, .Available
-
-                ;
-                LD A, -1
-                LD C, -1
-
-.Loop           INC A
-                INC C
-                BIT 3, A
-                JR Z, $+4
-                INC HL
-                XOR A
-                SRL (HL)
-                JR NC, .Loop
-                DJNZ .Loop
-                LD A, C
-                LD (PlayerState.SettlementLocID + 1), A
-
+                LD (GameState.CursorID+0), A
                 RET
-
-.Available      DW #0000
 
                 endif ; ~_MODULE_GAME_RENDER_SETTLEMENT_DRAW_
