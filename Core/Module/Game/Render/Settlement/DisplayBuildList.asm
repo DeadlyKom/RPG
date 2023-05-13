@@ -1,10 +1,10 @@
 
                 ifndef _MODULE_GAME_RENDER_SETTLEMENT_DISPLAY_BUILD_LIST_
                 define _MODULE_GAME_RENDER_SETTLEMENT_DISPLAY_BUILD_LIST_
-COLUMN_BUILD    EQU 7 * 8
-ROW_BUILD       EQU 18 * 8
-LIST_WIDTH      EQU 24 * 8                                                      ; доступная ширина дял списка (в пикселях)
-LIST_HEIGHT     EQU 5 * 8                                                       ; доступная высота дял списка (в пикселях)
+COLUMN_BUILD    EQU 7
+ROW_BUILD       EQU 18
+LIST_WIDTH      EQU 24                                                          ; доступная ширина дял списка (в знакоместах)
+LIST_HEIGHT     EQU 5                                                           ; доступная высота дял списка (в знакоместах)
 HEIGHT_ROW      EQU 9                                                           ; высота строки (в пикселях)
 ; -----------------------------------------
 ; отображение списка доступных построек
@@ -35,33 +35,6 @@ DisplayBuildLst SET_PAGE_OBJECT                                                 
                 LD H, #FF
                 LD (.Available), HL
 
-                ; подсчёт количество бит в байте
-                LD A, L
-                LD BC, #0801                                                    ; +1 т.к. 1 дополнительная опция "выход в пустош"
-.CalcBits       ADD A, A
-                JR NC, $+3
-                INC C
-                DJNZ .CalcBits
-
-                ; ToDo обновляется 1 раз
-                ; инициализация курсора
-                LD HL, GameState.Cursor
-                LD (HL), #FF                                                    ; текущая позиция
-                INC L
-                LD (HL), C                                                      ; количество позиций
-                INC L
-                LD (HL), #00                                                    ; предыдущая позиция
-                INC L
-                LD (HL), #00                                                    ; верхняя граница
-                INC L
-                LD (HL), LIST_HEIGHT / HEIGHT_ROW                               ; доступная высота (вкл)
-                INC L
-                LD (HL), COLUMN_BUILD - 8                                       ; положение по горизонтали
-                INC L
-                LD (HL), ROW_BUILD                                              ; положение по вертикали
-                INC L
-                LD (HL), #00                                                    ; направление
-                
                 ; инициализация структуры диалога
                 LD IY, .Struct
                 LD (IY + FDialog.OptionsSize), .OptionsNum
@@ -72,8 +45,8 @@ DisplayBuildLst SET_PAGE_OBJECT                                                 
                 LD A, (PlayerState.SettlementLocID)
                 LD (IY + FDialog.SkipElement), A
 
-                LD (IY + FDialog.Coord.Y), ROW_BUILD
-                LD (IY + FDialog.Size.Height), LIST_HEIGHT
+                LD (IY + FDialog.Coord.Y), ROW_BUILD * 8
+                LD (IY + FDialog.Size.Height), LIST_HEIGHT * 8
                 
                 JP Packs.Dialog.Display
 
@@ -94,9 +67,37 @@ DisplayBuildLst SET_PAGE_OBJECT                                                 
                 .Available,
                 #00,                                                            ; первый элемент
                 #00,                                                            ; пропускаемый элемент
-                { COLUMN_BUILD, ROW_BUILD },
-                { LIST_WIDTH, LIST_HEIGHT },
+                { COLUMN_BUILD * 8, ROW_BUILD * 8 },
+                { LIST_WIDTH * 8, LIST_HEIGHT * 8 },
                 HEIGHT_ROW
                 }
+
+ClearBuildList  SCREEN_ADR_HL #4000, COLUMN_BUILD * 8, ROW_BUILD * 8
+                LD C, LIST_HEIGHT * 8
+.RowLoop        LD E, L
+                XOR A
+                LD B, LIST_WIDTH
+.Loop           LD (HL), A
+                INC L
+                DJNZ .Loop
+
+                LD L, E
+
+                ; классический метод "DOWN HL" 25/59
+                INC H
+                LD A, H
+                AND #07
+                JP NZ, $+12
+                LD A, L
+                SUB #E0
+                LD L, A
+                SBC A, A
+                AND #F8
+                ADD A, H
+                LD H, A
+
+                DEC C
+                JR NZ, .RowLoop
+                RET
 
                 endif ; ~_MODULE_GAME_RENDER_SETTLEMENT_DISPLAY_BUILD_LIST_

@@ -24,6 +24,12 @@ Draw:           ; счётчик отображаемого экрана
                 
 .BaseDraw       SetPort PAGE_6, 1                                               ; включить 6 страницу и показать теневой экран
 
+                SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами 
+                
+                ; расчёт адреса поселения в котором находится игрок
+                LD A, (PlayerState.SettlementID)
+                CALL Packs.OpenWorld.Utils.CalcSettlement
+
                 ; проверка флага первичной инициализации
                 CHECK_MENU_FLAG MENU_STARTUP_BIT
                 JR Z, .NotStartup
@@ -33,18 +39,44 @@ Draw:           ; счётчик отображаемого экрана
                 ; первичная инициализация
                 ; -----------------------------------------
 
+                ; подсчёт количество бит в байте
+                LD A, (IX + FSettlement.Building)
+                LD BC, #0800                                                    ; +1 т.к. 1 дополнительная опция "выход в пустош"
+                                                                                ; -1 т.к. не отображается опция в которой находимся
+.CalcBits       ADD A, A
+                JR NC, $+3
+                INC C
+                DJNZ .CalcBits
+
+                ; инициализация курсора
+                LD HL, GameState.Cursor
+                LD (HL), #00                                                    ; текущая позиция
+                INC L
+                LD (HL), C                                                      ; количество позиций
+                INC L
+                LD (HL), #FF                                                    ; предыдущая позиция
+                INC L
+                LD (HL), #00                                                    ; верхняя граница
+                INC L
+                LD (HL), (LIST_HEIGHT * 8) / HEIGHT_ROW                         ; доступная высота (вкл)
+                INC L
+                LD (HL), (COLUMN_BUILD * 8) - 8                                 ; положение по горизонтали
+                INC L
+                LD (HL), ROW_BUILD * 8                                          ; положение по вертикали
+                INC L
+                LD (HL), #00                                                    ; направление
+
+                ; ToDo тестовые настройки
                 LD A, CHAR_STATE_NONE
                 LD (GameState.CharacterState), A
 
                 LD A, (PlayerState.CharacterID)
                 LD (GameState.CharacterID), A
 
-.NotStartup     SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами 
-                ; расчёт адреса поселения в котором находится игрок
-                LD A, (PlayerState.SettlementID)
-                CALL Packs.OpenWorld.Utils.CalcSettlement
+                LD A, #01
+                LD (PlayerState.SettlementLocID), A
 
-                ; проверка флага обновления
+.NotStartup     ; проверка флага обновления
                 CHECK_MENU_FLAG MENU_UPDTAE_BIT
                 JR Z, .Draw
                 RES_FLAG MENU_UPDTAE_BIT                                        ; сброс флага первичной инициализации
@@ -57,6 +89,7 @@ Draw:           ; счётчик отображаемого экрана
                 CALL DisplayArtFrame
 
                 ; отображение доступных построек в поселении
+                CALL ClearBuildList
                 CALL DisplayBuildLst
 
 .Draw           ; обновление секущего внутреигрового времни

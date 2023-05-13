@@ -32,6 +32,11 @@ Display:        ; инициализация
 
 .SkipLoop       SRL (HL)
                 DEC (IY + FDialog.SkipElement)
+                JR NZ, $+8
+                INC DE
+                INC DE
+                DEC (IY + FDialog.OptionsSize)
+                RET Z
                 DEC (IY + FDialog.OptionsSize)
                 RET Z                                                           ; выход, если количество элементов в масиве равно 0
                 

@@ -28,13 +28,8 @@ Down:           LD HL, GameState.Cursor
                 ; проверяем выход за доступный предел
                 INC L
                 INC L
-                EX AF, AF'
                 INC L
-                LD A, (HL)
-                ADD A, C
-                LD C, A
-                EX AF, AF'
-                CP C
+                CP (HL)
                 JR NC, .ScrollDown
 
                 ; сохранение предыдущей позиции
@@ -54,12 +49,12 @@ Down:           LD HL, GameState.Cursor
 
                 RET
 
-.ScrollDown     SET_MENU_FLAGS MENU_UPDTAE | MENU_SCROLL | MENU_SCROLL_DOWN     ; установка флага обновления, необходимости скролить меню вниз
-
-                ; увеличение верхней позиции
+.ScrollDown     ; увеличение верхней позиции
                 DEC L
                 INC (HL)
-                
+
+                ; установка флага обновления, необходимости скролить меню вниз
+                SET_MENU_FLAGS MENU_UPDTAE | MENU_SCROLL | MENU_SCROLL_DOWN
                 JR .Reset
 
                 endif ; ~_CORE_MODULE_DIALOG_CURSOR_DOWN_

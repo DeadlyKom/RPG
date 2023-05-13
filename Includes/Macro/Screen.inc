@@ -5,6 +5,9 @@ BORDER          macro Color?
                 LD A, Color?
                 OUT (#FE), A
                 endm
+SCREEN_ADR_HL   macro ScreenAddress?, X?, Y?
+                LD HL, ScreenAddress? + (((Y? >> 3) & 0x18) << 8) + ((Y? & 0x07) << 8) + ((Y? & 0x38) << 2) + (X? >> 3)
+                endm
 CLS_4000        macro
                 LD HL, #4000 + #1800
                 LD DE, #0000

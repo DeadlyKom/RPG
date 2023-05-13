@@ -52,6 +52,7 @@ Draw:           LD HL, GameState.Cursor
                 DJNZ .Mult
 
                 ADD A, D
+                INC A
                 LD D, A
                 LD A, C
 
