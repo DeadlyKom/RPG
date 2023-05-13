@@ -2,7 +2,7 @@
                 ifndef _CORE_MODULE_DIALOG_DISPLAY_
                 define _CORE_MODULE_DIALOG_DISPLAY_
 ; -----------------------------------------
-; отображение списка доступных построек
+; отображение списка доступных опций
 ; In:
 ;   IY - указатель на структуру FDialog
 ; Out:

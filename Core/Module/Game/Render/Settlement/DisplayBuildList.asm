@@ -43,6 +43,7 @@ DisplayBuildLst SET_PAGE_OBJECT                                                 
                 LD (IY + FDialog.FirstElement), A
 
                 LD A, (PlayerState.SettlementLocID)
+                INC A
                 LD (IY + FDialog.SkipElement), A
 
                 LD (IY + FDialog.Coord.Y), ROW_BUILD * 8
@@ -73,31 +74,7 @@ DisplayBuildLst SET_PAGE_OBJECT                                                 
                 }
 
 ClearBuildList  SCREEN_ADR_HL #4000, COLUMN_BUILD * 8, ROW_BUILD * 8
-                LD C, LIST_HEIGHT * 8
-.RowLoop        LD E, L
-                XOR A
-                LD B, LIST_WIDTH
-.Loop           LD (HL), A
-                INC L
-                DJNZ .Loop
-
-                LD L, E
-
-                ; классический метод "DOWN HL" 25/59
-                INC H
-                LD A, H
-                AND #07
-                JP NZ, $+12
-                LD A, L
-                SUB #E0
-                LD L, A
-                SBC A, A
-                AND #F8
-                ADD A, H
-                LD H, A
-
-                DEC C
-                JR NZ, .RowLoop
-                RET
+                LD BC, (LIST_WIDTH << 8) | LIST_HEIGHT * 8
+                JP ClearBlock
 
                 endif ; ~_MODULE_GAME_RENDER_SETTLEMENT_DISPLAY_BUILD_LIST_

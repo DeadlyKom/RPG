@@ -39,6 +39,7 @@ GameState           EQU Adr.GameState                                           
 .CharacterState     EQU GameState + FGameState.CharacterState                   ; состояние отображаемого персонажа
 .MenuID             EQU GameState + FGameState.MenuID                           ; тип меню
 .MenuFlags          EQU GameState + FGameState.MenuFlags                        ; флаги меню
+.CursorID           EQU GameState + FGameState.CursorID                         ; ID пункта
 .Cursor             EQU GameState + FGameState.Cursor                           ; позиция курсора (в режиме выбора)
 .Cursor.Old         EQU GameState + FGameState.Cursor.Old                       ; прошлая позиция курсора (в режиме выбора) 
 .Cursor.Top         EQU GameState + FGameState.Cursor.Top                       ; верхняя граница курсора

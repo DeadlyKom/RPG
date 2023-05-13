@@ -4,6 +4,7 @@
 HEADER_INDENT   EQU 6
 COLUMN_HEADER   EQU 32 - HEADER_INDENT
 ROW_HEADER      EQU 16
+HEADER_WIDTH    EQU 32 - HEADER_INDENT
 ; -----------------------------------------
 ; отображение место нахождения игрока
 ; In:
@@ -54,5 +55,15 @@ DisplayLoc:     SET_PAGE_OBJECT                                                 
                 ;   DE - координаты в пикселях (D - y, E - x)
                 ; -----------------------------------------
                 JP Draw.String
+
+ClearLoc        SCREEN_ADR_HL #4000, HEADER_INDENT * 8, ROW_HEADER * 8
+                LD BC, (HEADER_WIDTH << 8) | HEIGHT_ROW
+                ; -----------------------------------------
+                ; очистка блока
+                ; In:
+                ;   HL - адрес экрана
+                ;   BC - размер блока (B - ширина, C - высота)
+                ; -----------------------------------------
+                JP ClearBlock
 
                 endif ; ~_MODULE_GAME_RENDER_SETTLEMENT_DISPLAY_LOCATION_

@@ -20,7 +20,7 @@ Draw:           ; счётчик отображаемого экрана
                 LD DE, MemBank_03_SCR
                 LD BC, ScreenSize
                 CALL Memcpy.FastLDIR
-                JR .Processed
+                JP .Processed
                 
 .BaseDraw       SetPort PAGE_6, 1                                               ; включить 6 страницу и показать теневой экран
 
@@ -66,6 +66,10 @@ Draw:           ; счётчик отображаемого экрана
                 INC L
                 LD (HL), #00                                                    ; направление
 
+                ; позиция курсора
+                LD A, #00
+                LD (GameState.CursorID), A
+
                 ; ToDo тестовые настройки
                 LD A, CHAR_STATE_NONE
                 LD (GameState.CharacterState), A
@@ -73,15 +77,16 @@ Draw:           ; счётчик отображаемого экрана
                 LD A, (PlayerState.CharacterID)
                 LD (GameState.CharacterID), A
 
-                LD A, #01
+                LD A, #00
                 LD (PlayerState.SettlementLocID), A
 
-.NotStartup     ; проверка флага обновления
+.NotStartup      ; проверка флага обновления
                 CHECK_MENU_FLAG MENU_UPDTAE_BIT
                 JR Z, .Draw
                 RES_FLAG MENU_UPDTAE_BIT                                        ; сброс флага первичной инициализации
                 
                 ; отображение место нахождения игрока
+                CALL ClearLoc
                 CALL DisplayLoc
 
                 ; отображение рамок
@@ -101,13 +106,73 @@ Draw:           ; счётчик отображаемого экрана
                 ; отображение курсора
                 CALL Cursor.Draw
 
+                ; расчёт текущее положение курсора
+                LD A, (PlayerState.SettlementLocID)
+                LD C, A
+                LD HL, GameState.Cursor
+                LD A, (HL)
+                INC L
+                INC L
+                INC L
+                ADD A, (HL)
+                CP C
+                JR C, $+3
+                INC A
+                LD (GameState.CursorID), A
+
 .Processed      ifdef _DEBUG
                 CALL FPS_Counter.Frame
+                endif
+
+                ifdef _DEBUG
+                LD DE, #0000
+                CALL Console.SetCursor
+                LD A, (GameState.CursorID)
+                CALL Console.DrawByte
                 endif
 
                 SET_RENDER_FLAG FINISHED_BIT                                    ; установка флага завершения отрисовки
                 RET
 
 .Counter        DB #00
+
+; -----------------------------------------
+; очистка блока
+; In:
+;   HL - адрес экрана
+;   BC - размер блока (B - ширина, C - высота)
+; Out:
+; Corrupt:
+; Note:
+; -----------------------------------------
+ClearBlock      INC C
+                LD D, B
+.RowLoop        LD E, L
+                XOR A
+                LD B, D
+
+.Loop           LD (HL), A
+                INC L
+                DJNZ .Loop
+
+                LD L, E
+
+                ; классический метод "DOWN HL" 25/59
+                INC H
+                LD A, H
+                AND #07
+                JP NZ, $+12
+                LD A, L
+                SUB #E0
+                LD L, A
+                SBC A, A
+                AND #F8
+                ADD A, H
+                LD H, A
+
+                DEC C
+                JR NZ, .RowLoop
+
+                RET
 
                 endif ; ~_MODULE_GAME_RENDER_SETTLEMENT_DRAW_

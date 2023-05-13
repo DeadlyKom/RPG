@@ -5,6 +5,7 @@
                 module Dialog
 
                 include "Display.asm"
+                include "Scroll.asm"
 
                 endmodule
 
