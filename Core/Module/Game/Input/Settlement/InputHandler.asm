@@ -47,8 +47,10 @@ Selected:       ; установка флага обновления, необх
                 SET_MENU_FLAGS MENU_UPDTAE
 
                 ; текущая позиция
-                LD A, (GameState.CursorID)
-                LD (PlayerState.SettlementLocID), A
+                LD A, (GameState.CursorID + 0)
+                LD (GameState.CursorID + 1), A
+                LD A, (PlayerState.SettlementLocID + 1)
+                LD (PlayerState.SettlementLocID + 0), A
                 
                 JR Processed
 

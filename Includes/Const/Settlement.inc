@@ -11,14 +11,14 @@ SETTLEMENT_NUM                  EQU Size.Settlement / SETTLEMENT_SIZE
 SETTLEMENT_BEGIN                EQU 0x00
 
 ; тип постройки
-BUILDING_ENTRANCE_BIT           EQU 0x07                                        ; главный вход, наличие ограждённого периметра
-BUILDING_RESIDENTIAL_AREA_BIT   EQU 0x06                                        ; жилой район
-BUILDING_WAREHOUSE_BIT          EQU 0x05                                        ; склад и сборщик лома
-BUILDING_SHOPPING_AREA_BIT      EQU 0x04                                        ; торговый район
-BUILDING_BAR_BIT                EQU 0x03                                        ; бар
-BUILDING_WORKSHOP_BIT           EQU 0x02                                        ; мастерская
-BUILDING_PRISON_BIT             EQU 0x01                                        ; тюрьма
-BUILDING_RADIO_TOWER_BIT        EQU 0x00                                        ; радио вышка
+BUILDING_ENTRANCE_BIT           EQU 0x00                                        ; главный вход, наличие ограждённого периметра
+BUILDING_RESIDENTIAL_AREA_BIT   EQU 0x01                                        ; жилой район
+BUILDING_WAREHOUSE_BIT          EQU 0x02                                        ; склад и сборщик лома
+BUILDING_SHOPPING_AREA_BIT      EQU 0x03                                        ; торговый район
+BUILDING_BAR_BIT                EQU 0x04                                        ; бар
+BUILDING_WORKSHOP_BIT           EQU 0x05                                        ; мастерская
+BUILDING_PRISON_BIT             EQU 0x06                                        ; тюрьма
+BUILDING_RADIO_TOWER_BIT        EQU 0x07                                        ; радио вышка
 
 BUILDING_ENTRANCE               EQU 1 << BUILDING_ENTRANCE_BIT                  ; главный вход, наличие ограждённого периметра
 BUILDING_RESIDENTIAL_AREA       EQU 1 << BUILDING_RESIDENTIAL_AREA_BIT          ; жилой район

@@ -24,7 +24,7 @@ Draw:           ; счётчик отображаемого экрана
                 
 .BaseDraw       SetPort PAGE_6, 1                                               ; включить 6 страницу и показать теневой экран
 
-                SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами 
+                SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
                 
                 ; расчёт адреса поселения в котором находится игрок
                 LD A, (PlayerState.SettlementID)
@@ -80,7 +80,7 @@ Draw:           ; счётчик отображаемого экрана
                 LD A, #00
                 LD (PlayerState.SettlementLocID), A
 
-.NotStartup      ; проверка флага обновления
+.NotStartup     ; проверка флага обновления
                 CHECK_MENU_FLAG MENU_UPDTAE_BIT
                 JR Z, .Draw
                 RES_FLAG MENU_UPDTAE_BIT                                        ; сброс флага первичной инициализации
@@ -106,19 +106,7 @@ Draw:           ; счётчик отображаемого экрана
                 ; отображение курсора
                 CALL Cursor.Draw
 
-                ; расчёт текущее положение курсора
-                LD A, (PlayerState.SettlementLocID)
-                LD C, A
-                LD HL, GameState.Cursor
-                LD A, (HL)
-                INC L
-                INC L
-                INC L
-                ADD A, (HL)
-                CP C
-                JR C, $+3
-                INC A
-                LD (GameState.CursorID), A
+                CALL CalcCursorID
 
 .Processed      ifdef _DEBUG
                 CALL FPS_Counter.Frame
@@ -127,7 +115,13 @@ Draw:           ; счётчик отображаемого экрана
                 ifdef _DEBUG
                 LD DE, #0000
                 CALL Console.SetCursor
-                LD A, (GameState.CursorID)
+                LD A, (GameState.CursorID+0)
+                CALL Console.DrawByte
+                LD A, (GameState.CursorID+1)
+                CALL Console.DrawByte
+                LD A, (PlayerState.SettlementLocID+0)
+                CALL Console.DrawByte
+                LD A, (PlayerState.SettlementLocID+1)
                 CALL Console.DrawByte
                 endif
 
@@ -174,5 +168,49 @@ ClearBlock      INC C
                 JR NZ, .RowLoop
 
                 RET
+
+CalcCursorID:   SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
+    
+                ; расчёт текущее положение курсора
+                LD A, (GameState.CursorID + 1)
+                LD C, A
+                LD HL, GameState.Cursor
+                LD A, (HL)
+                INC L
+                INC L
+                INC L
+                ADD A, (HL)
+                CP C
+                JR C, $+3
+                INC A
+                LD (GameState.CursorID + 0), A
+                INC A
+                LD B, A
+
+                ;
+                LD L, (IX + FSettlement.Building)
+                LD H, #FF
+                LD (.Available), HL
+                LD HL, .Available
+
+                ;
+                LD A, -1
+                LD C, -1
+
+.Loop           INC A
+                INC C
+                BIT 3, A
+                JR Z, $+4
+                INC HL
+                XOR A
+                SRL (HL)
+                JR NC, .Loop
+                DJNZ .Loop
+                LD A, C
+                LD (PlayerState.SettlementLocID + 1), A
+
+                RET
+
+.Available      DW #0000
 
                 endif ; ~_MODULE_GAME_RENDER_SETTLEMENT_DRAW_

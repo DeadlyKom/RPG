@@ -62,19 +62,23 @@ Display:        ; инициализация
                 ; B  - количество оставшихся бит в байте
                 ; -----------------------------------------
 
-.RowLoop        ; проверка пропуска элемента
+.RowLoop        ; подготовка для проверки наличия опции
+                SRL (HL)
+                EX AF, AF'
+                
+                ; проверка пропуска элемента
                 DEC (IY + FDialog.SkipElement)
                 JR Z, .NextElement
+
+                ; проверка нааличия бита
+                EX AF, AF'
+                JR NC, .NextElement                                             ; переход к следующему элементу
 
                 ; уменьшение доступной области по вертикали
                 LD A, (IY + FDialog.Size.Height)
                 SUB (IY + FDialog.HeightRow)
                 RET C                                                           ; выход, если новая строка не поместится
                 LD (IY + FDialog.Size.Height), A
-
-                ; проверка нааличия бита
-                SRL (HL)
-                JR NC, .NextElement                                             ; переход к следующему элементу
 
                 ; сохранение
                 PUSH HL
