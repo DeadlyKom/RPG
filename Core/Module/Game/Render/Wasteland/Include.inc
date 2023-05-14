@@ -5,6 +5,7 @@
                 module Render
 
                 include "Draw.asm"
+                include "VFX_Draw.asm"
 
                 endmodule
 

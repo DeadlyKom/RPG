@@ -14,6 +14,10 @@ Wasteland:      ; установка бордюра
                 ; сброса и уход в затемнение
                 CALL Func.ResetFadeout
 
+                ; инициализаци эффекта
+                LD HL, Packs.Wasteland.Render.VFX_Draw
+                LD (Packs.Wasteland.Loop.FuncDraw), HL
+
                 ; инициализация главного цикла
                 SetGameLoop Packs.Wasteland.Loop
 

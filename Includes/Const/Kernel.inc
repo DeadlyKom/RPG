@@ -203,7 +203,9 @@ SFX
 .BEEP.Fail      EQU Kernel.SFX.BEEP.Fail                                        ; звуковой эффект ошибки
 
 VFX
-.Diagonal       EQU Kernel.VFX.Diagonal
+.Diagonal_In    EQU Kernel.VFX.Diagonal_In
+.Diagonal_Out   EQU Kernel.VFX.Diagonal_Out
+
 ; load modules
 
 ; functions

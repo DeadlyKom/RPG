@@ -2,13 +2,13 @@
                 ifndef _CORE_MODULE_VFX_FADE_OUT_DIAGONAL_
                 define _CORE_MODULE_VFX_FADE_OUT_DIAGONAL_
 ; -----------------------------------------
-; затемнение "диагональ"
+; уход в затемнение "диагональ"
 ; In:
 ; Out:
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Diagonal:       XOR A
+Diagonal_Out:   XOR A
                 LD (.pv1), A
                 LD A, #1F
                 LD (.pv2), A

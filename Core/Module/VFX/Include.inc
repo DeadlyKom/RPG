@@ -4,6 +4,7 @@
 
                 module VFX
 
+                include "Fadein/Diagonal.asm"
                 include "Fadeout/Diagonal.asm"
 
                 endmodule

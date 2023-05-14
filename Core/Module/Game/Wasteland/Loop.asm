@@ -15,7 +15,8 @@ Loop:
 
                 ; проверка завершение цикла главного меню
                 CHECK_MENU_FLAG MENU_LOOP_BIT
-                JP Z, Render.Draw
+.FuncDraw       EQU $+1
+                JP Z, $
                 
                 ; цикл завершён
                 JR$

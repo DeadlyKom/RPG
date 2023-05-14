@@ -89,7 +89,7 @@ Selected:       ; установка флага обновления, необх
                 JR NZ, Processed
 
                 ; установка флага завершения цикла и выход в пустошь
-                SET_MENU_FLAGS MENU_LOOP
+                SET_MENU_FLAGS MENU_LOOP | MENU_FADEIN
 
                 RET
 

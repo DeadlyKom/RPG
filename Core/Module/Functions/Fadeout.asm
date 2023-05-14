@@ -15,7 +15,7 @@ ResetFadeout:   ; инициализация главного цикла (отк
                 ResUserHendler
 
                 ; затемнение и очистка экрана
-                CALL VFX.Diagonal
+                CALL VFX.Diagonal_Out
 
                 ; очистка основного окна
                 CLS_4000
