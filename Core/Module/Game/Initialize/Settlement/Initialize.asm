@@ -12,7 +12,7 @@ Settlement:     ; установка бордюра
                 BORDER BLACK
 
                 ; инициализация главного цикла
-                SetMainLoop Packs.Settlement.Loop
+                SetGameLoop Packs.Settlement.Loop
 
                 ; инициализация обработчика прерываний
                 SetUserHendler Packs.Settlement.Interrupt

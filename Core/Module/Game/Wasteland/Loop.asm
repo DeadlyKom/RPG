@@ -1,8 +1,8 @@
 
-                ifndef _CORE_MODULE_GAME_LOOP_MAIN_MENU_
-                define _CORE_MODULE_GAME_LOOP_MAIN_MENU_
+                ifndef _CORE_MODULE_GAME_LOOP_WASTELAND_
+                define _CORE_MODULE_GAME_LOOP_WASTELAND_
 ; -----------------------------------------
-; цикл главного меню
+; игровой цикл поселения
 ; In:
 ; Out:
 ; Corrupt:
@@ -16,11 +16,8 @@ Loop:
                 ; проверка завершение цикла главного меню
                 CHECK_MENU_FLAG MENU_LOOP_BIT
                 JP Z, Render.Draw
-
-                ; сброс флага завершение цикла
-                RES_MENU_FLAG MENU_LOOP_BIT
                 
-                ; цикл завершён, запуск игры
-                JP Execute.PlayGame
+                ; цикл завершён
+                JR$
 
-                endif ; ~_CORE_MODULE_GAME_LOOP_MAIN_MENU_
+                endif ; ~_CORE_MODULE_GAME_LOOP_WASTELAND_

@@ -12,7 +12,7 @@ MainMenu:       ; установка бордюра
                 BORDER BLACK
 
                 ; инициализация главного цикла
-                SetMainLoop Packs.MainMenu.Loop
+                SetGameLoop Packs.MainMenu.Loop
 
                 ; инициализация обработчика прерываний
                 SetUserHendler Packs.MainMenu.Interrupt

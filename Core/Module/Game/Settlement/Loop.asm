@@ -8,10 +8,19 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Loop:       
+Loop:           
 .Render         ; ************ RENDER ************
                 CHECK_RENDER_FLAG FINISHED_BIT
                 RET NZ
-                JP Render.Draw
+
+                ; проверка завершение цикла главного меню
+                CHECK_MENU_FLAG MENU_LOOP_BIT
+                JP Z, Render.Draw
+
+                ; сброс флага завершение цикла
+                RES_MENU_FLAG MENU_LOOP_BIT
+                
+                ; цикл завершён, запуск пустоши
+                JP Execute.Wasteland
 
                 endif ; ~_CORE_MODULE_GAME_LOOP_SETTLEMENT_

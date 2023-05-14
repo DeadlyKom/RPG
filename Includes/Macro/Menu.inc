@@ -2,16 +2,6 @@
                 ifndef _MACRO_MENU_
                 define _MACRO_MENU_
 ; -----------------------------------------
-; установка обработчика игрового цикла
-; In:
-; Out:
-; Corrupt:
-; -----------------------------------------
-SetMainLoop:    macro Func?
-                LD BC, Func?
-                LD (Game.MainLoop.Address), BC
-                endm
-; -----------------------------------------
 ; установка HL на Menu флаги
 ; In:
 ; Out:
@@ -88,6 +78,16 @@ SET_MENU_FLAGS  macro Flags?
 RES_MENU_FLAG   macro FlagBit?
                 MENU_FLAGS
                 RES_FLAG FlagBit?
+                endm
+; -----------------------------------------
+; сброс Menu флага
+; In:
+; Out:
+; Corrupt:
+; -----------------------------------------
+RES_FLAGS       macro
+                MENU_FLAGS
+                RES_ALL
                 endm
 
                 endif ; ~_MACRO_MENU_

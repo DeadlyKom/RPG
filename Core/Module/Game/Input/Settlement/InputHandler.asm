@@ -85,7 +85,13 @@ Selected:       ; установка флага обновления, необх
                 LD A, C
                 LD (PlayerState.SettlementLocID), A
 
-                JR Processed
+                CP MENU_ID_WASTELAND
+                JR NZ, Processed
+
+                ; установка флага завершения цикла и выход в пустошь
+                SET_MENU_FLAGS MENU_LOOP
+
+                RET
 
 .Available      DW #0000
 

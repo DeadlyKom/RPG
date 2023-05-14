@@ -22,6 +22,7 @@ Begin6:         EQU $
                 include "Core/Module/Game/MainMenu/Include.inc"                 ; menu
                 include "Core/Module/Game/PlayGame/Include.inc"                 ; play game
                 include "Core/Module/Game/Settlement/Include.inc"               ; settlement
+                include "Core/Module/Game/Wasteland/Include.inc"                ; wasteland
 
                 ; generator
                 include "Core/Module/Table/Gen_PRNG.asm"

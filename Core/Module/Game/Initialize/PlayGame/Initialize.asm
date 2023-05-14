@@ -11,19 +11,8 @@
 PlayGame:       ; установка бордюра
                 BORDER BLACK
 
-                ; затемнение и очистка экрана
-                CALL VFX.Diagonal
-
-                ; очистка основного окна
-                CLS_4000
-                ATTR_4000_IPB WHITE, BLACK, 0
-
-                ; очистка теневого окна
-                SetPort PAGE_7, 0                                               ; включить 7 страницу и показать основной экран
-                LD HL, MemBank_01_SCR
-                LD DE, MemBank_03_SCR
-                LD BC, ScreenSize
-                CALL Memcpy.FastLDIR
+                ; сброса и уход в затемнение
+                CALL Func.ResetFadeout
 
                 ; генерация карты и окружения
                 CALL Generate.World
