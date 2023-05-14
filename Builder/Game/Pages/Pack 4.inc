@@ -13,6 +13,7 @@
 Begin2:         EQU $
 
                 ; include "Core/Module/Graphics/Include.inc"
+                DB #00
 Size2:          EQU $ - Begin2
 
                 ifndef _DEBUG

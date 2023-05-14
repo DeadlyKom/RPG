@@ -82,5 +82,32 @@ SHOW_BASE_SCREEN macro
 SHOW_SHADOW_SCREEN macro
                 CALL Screen.ShowShadow
                 endm
+; -----------------------------------------
+; включение страниц
+; -----------------------------------------
+SET_PAGE_0      macro
+                CALL SetPage0
+                endm
+SET_PAGE_1      macro
+                CALL SetPage1
+                endm
+SET_PAGE_2      macro
+                CALL SetPage2
+                endm
+SET_PAGE_3      macro
+                CALL SetPage3
+                endm
+SET_PAGE_4      macro
+                CALL SetPage4
+                endm
+SET_PAGE_5      macro
+                CALL SetPage5
+                endm
+SET_PAGE_6      macro
+                CALL SetPage6
+                endm
+SET_PAGE_7      macro
+                CALL SetPage7
+                endm
 
                 endif ; ~_MACRO_MEMORY_

@@ -10,8 +10,12 @@ Pack1           EQU PAGE_1                                                      
                 endmodule
 
                 module Adr
+                module Block1
+Code            EQU MemBank_03                                                  ; адрес блока "..."
+
+                endmodule
                 module Module
-Pack1:          EQU MemBank_03                                                  ; адрес пакета №1
+Pack1:          EQU MemBank_03                                                  ; адрес пакета №0
 
                 endmodule
                 endmodule

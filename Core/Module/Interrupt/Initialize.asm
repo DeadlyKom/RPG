@@ -33,8 +33,8 @@ Initialize:     ; **** INITIALIZE HANDLER IM 2 ****
                 LD I, A
                 IM 2
 
-                EI
-                HALT
+                ; EI
+                ; HALT
                 ; ~ INITIALIZE HANDLER IM 2
 
                 endmodule

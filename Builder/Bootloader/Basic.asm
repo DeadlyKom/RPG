@@ -19,7 +19,7 @@ StartBoot:      DI
                 LD SP, Adr.StackTop
 
                 ; -----------------------------------------
-                ; загрузка кернеля
+                ; загрузка кернеля                      [2]
                 ; -----------------------------------------
                 ifndef _DEBUG
                 LD IX, Adr.Kernel
@@ -36,7 +36,7 @@ StartBoot:      DI
                 include "Core/Module/Interrupt/Initialize.asm"
 
                 ; -----------------------------------------
-                ; загрузка игры
+                ; загрузка игры                         [5]
                 ; -----------------------------------------
                 ifndef _DEBUG
                 LD IX, Adr.Module.Game.Main
@@ -48,21 +48,72 @@ StartBoot:      DI
                 endif
 
                 ; -----------------------------------------
-                ; загрузка графики
+                ; загрузка графики                      [0]
                 ; -----------------------------------------
                 ifndef _DEBUG
-                SET_PAGE_GRAPHICS_1                                             ; включить страницу графики
-                LD IX, Adr.Graphics.Pack1
-                LD DE, Graphics.Size
+                SET_PAGE_0                                                      ; включить страницу работы с объектами
+                LD IX, Adr.Block0.Code
+                LD DE, Packs.Size0
                 LD A, #FF
                 SCF
                 CALL BASIC.LD_BYTES
                 DEBUG_BREAK_POINT_NC                                            ; ошибка загрузки
                 endif
 
-                ; вызов загрузчика пакета файлов
-                JP Adr.Module.Game.Main
+                ; -----------------------------------------
+                ; загрузка графики                      [1]
+                ; -----------------------------------------
+                ifndef _DEBUG
+                SET_PAGE_1                                                      ; включить страницу работы с объектами
+                LD IX, Adr.Block1.Code
+                LD DE, Packs.Size1
+                LD A, #FF
+                SCF
+                CALL BASIC.LD_BYTES
+                DEBUG_BREAK_POINT_NC                                            ; ошибка загрузки
+                endif
 
+                ; -----------------------------------------
+                ; загрузка графики                      [3]
+                ; -----------------------------------------
+                ifndef _DEBUG
+                SET_PAGE_3                                                      ; включить страницу графики 1
+                LD IX, Adr.Graphics.Pack1
+                LD DE, Graphics.Size1
+                LD A, #FF
+                SCF
+                CALL BASIC.LD_BYTES
+                DEBUG_BREAK_POINT_NC                                            ; ошибка загрузки
+                endif
+
+                ; -----------------------------------------
+                ; загрузка графики                      [4]
+                ; -----------------------------------------
+                ifndef _DEBUG
+                SET_PAGE_4                                                      ; включить страницу графики 2
+                LD IX, Adr.Graphics.Pack2
+                LD DE, Graphics.Size2
+                LD A, #FF
+                SCF
+                CALL BASIC.LD_BYTES
+                DEBUG_BREAK_POINT_NC                                            ; ошибка загрузки
+                endif
+
+                ; -----------------------------------------
+                ; загрузка графики                      [6]
+                ; -----------------------------------------
+                ifndef _DEBUG
+                SET_PAGE_6                                                      ; включить страницу работы с объектами
+                LD IX, Adr.Module.Pack6
+                LD DE, Packs.Size6
+                LD A, #FF
+                SCF
+                CALL BASIC.LD_BYTES
+                DEBUG_BREAK_POINT_NC                                            ; ошибка загрузки
+                endif
+
+                ; вызов главной функции
+                JP Adr.Module.Game.Main
 EndBoot:        DB #0D                                                          ; конец строки
                 DB #00, #14                                                     ; номер строки 20
                 DB #2A, #00                                                     ; длина строки 42 байта
