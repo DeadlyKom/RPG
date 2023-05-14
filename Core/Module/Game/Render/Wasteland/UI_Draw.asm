@@ -21,7 +21,6 @@ UI_Draw:        SHOW_BASE_SCREEN                                                
                 ATTR_RECT_IPB MemBank_03_SCR, 27, 2, 4, 4, WHITE, BLACK, 0
                 ATTR_RECT_IPB MemBank_03_SCR, 28, 3, 2, 2, WHITE, BLACK, 1
 
-                CALL UI.Initialize
-                RET
+                JP UI.Initialize
 
                 endif ; ~_MODULE_GAME_RENDER_WASTELAND_UI_DRAW_

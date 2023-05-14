@@ -92,7 +92,7 @@ Nearest:        ; количество обрабатываемых объект
                 ; Note:
                 ;   важно, 1 бит сдвиг влево меньше 
                 ; -----------------------------------------
-                CALL Object.DeltaPosition
+                CALL Packs.OpenWorld.Object.Utils.DeltaPosition
                 CALL Math.DistSquared
                 EX DE, HL
 

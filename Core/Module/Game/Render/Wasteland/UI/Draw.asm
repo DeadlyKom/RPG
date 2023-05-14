@@ -27,7 +27,6 @@ Draw:           CALL AnimationBars
                 LD A, 64
 .Set3           LD (.T3), A
 
-                
                 CHECK_PLAYER_FLAG DECREASE_SPEED_BIT
                 JR NZ, .LL12
 

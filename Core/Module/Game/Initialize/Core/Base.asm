@@ -52,38 +52,6 @@ Base:           ; -----------------------------------------
                 CALL Packs.Tables.Gen_ShiftTable                                ; генерация таблицы сдвигов
                 JP Packs.Tables.Gen_MulSprTable                                 ; генерация таблицы умножения для спрайтов
 
-                ; ; -----------------------------------------
-                ; ; подготовка теневого экрана
-                ; ; -----------------------------------------
-                ; SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
-                ; CLS_C000
-                ; ATTR_C000_IPB WHITE, BLACK, 0
-                ; ATTR_RECT_IPB MemBank_03_SCR, SCR_WORLD_POS_X, SCR_WORLD_POS_Y, SCR_WORLD_SIZE_X * 2 - 1, SCR_WORLD_SIZE_Y * 2, BLACK, WHITE, 0
-                ; ATTR_RECT_IPB MemBank_03_SCR, 27, 2, 4, 4, WHITE, BLACK, 0
-                ; ATTR_RECT_IPB MemBank_03_SCR, 28, 3, 2, 2, WHITE, BLACK, 1
-                
-                ; CALL Packs.Tables.Gen_WorldSpr                                  ; генерация спрайтов для карты мира
-
-                ; ; -----------------------------------------
-                ; ; подготовка основного экрана
-                ; ; -----------------------------------------
-                ; SET_SCREEN_SHADOW                                               ; включение страницы второго экрана
-                ; CLS_4000
-                ; ATTR_4000_IPB WHITE, BLACK, 0
-                ; ATTR_RECT_IPB MemBank_01_SCR, SCR_WORLD_POS_X, SCR_WORLD_POS_Y, SCR_WORLD_SIZE_X * 2 - 1, SCR_WORLD_SIZE_Y * 2, BLACK, WHITE, 0
-                ; ATTR_RECT_IPB MemBank_01_SCR, 27, 2, 4, 4, WHITE, BLACK, 0
-                ; ATTR_RECT_IPB MemBank_01_SCR, 28, 3, 2, 2, WHITE, BLACK, 1
-
-                ; ; -----------------------------------------
-                ; ; инициализация мира
-                ; ; -----------------------------------------
-                ; CALL Game.World.Generate
-
-                ; ; -----------------------------------------
-                ; ; инициализация обработчика прерываний
-                ; ; -----------------------------------------
-                ; SetUserHendler Game.World.Interrupt
-
 .CLS            ; -----------------------------------------
                 ; блок кода очистки теневого экрана
                 ; -----------------------------------------

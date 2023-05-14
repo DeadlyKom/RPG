@@ -15,6 +15,17 @@ Interrupt:      ; проверка завершённости процесса �
 .SwapScreens    ; ************ Swap Screens ************
                 CALL Game.Render.Swap
 
+.Camera         ; ************ CAMERA *************
+                SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
+                LD IX, PLAYER_ADR
+                CALL Packs.OpenWorld.Wasteland.Horizontal
+                CALL Packs.OpenWorld.Wasteland.Vertical
+
+.Tick           ; ************* TICK *************
+                SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
+                CALL Packs.OpenWorld.Object.Tick
+                CALL Packs.OpenWorld.Object.Collision.Handler
+
 .RenderProcess  ; процесс отрисовки не завершён
 
 .Input          ; ************ Scan Input ************

@@ -4,9 +4,6 @@
 
                 module Render
 Begin           EQU $
-                ; include "World/Include.inc"
-                ; include "Pause/Include.inc"
-                ; include "Sort/Include.inc"
 
                 include "Swap.asm"
 

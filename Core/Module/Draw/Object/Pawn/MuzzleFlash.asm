@@ -17,8 +17,10 @@ MuzzleFlash:    ; проверка ведёния огоня
                 LD A, (Adr.Port_7FFD)
                 LD (.RestoreMemPage), A                                         ; сохранение страницы спрайта
 
+                SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
+
                 ; получение смещение относительно пивата машины
-                CALL Kernel.Object.GetFireSocket
+                CALL Packs.OpenWorld.Object.GetFireSocket
                 ; -----------------------------------------
                 ; приведение к мировой впозиции
                 ; In:
@@ -28,7 +30,7 @@ MuzzleFlash:    ; проверка ведёния огоня
                 ;   HL - новая позиция по вертикали
                 ;   DE - новая позиция по горизонтали
                 ; -----------------------------------------
-                CALL Func.WorldPosition
+                CALL Packs.OpenWorld.Object.Initialize.WorldPosition
 
                 ; подготовка позиции вывода объекта
                 LD (Draw.Prepare.PosY), HL                                      ; сохранение позиции по вертикали

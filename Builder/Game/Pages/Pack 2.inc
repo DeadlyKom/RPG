@@ -30,12 +30,12 @@ Begin:          EQU $
                 include "Core/Module/Draw/World/DrawColumn.asm"
                 include "Core/Module/Draw/World/Functions/Include.inc"
                 include "Core/Module/Draw/World/Minimap.asm"
-                ; include "Core/Module/Draw/World/Arrow/Include.inc"              ; ToDo перенести в страницу!
+                include "Core/Module/Draw/World/Arrow/Include.inc"
 
                 ; draw sprite
                 include "Core/Module/Draw/Sprite/Include.inc"
                 include "Core/Module/Draw/Sprite/Functions/Include.inc"
-                ; include "Core/Module/Draw/Object/Include.inc"                   ; ToDo перенести в страницу!
+                include "Core/Module/Draw/Object/Include.inc"
 
                 ; draw attribute
                 include "Core/Module/Draw/Charboundary/DrawSprite.asm"
@@ -93,11 +93,6 @@ Begin:          EQU $
                 ; utils
                 include "Core/Module/Utils/Time/Include.inc"
                 include "Core/Module/Utils/String/Include.inc"
-
-                ; object
-                ; include "Core/Module/Object/Initialize/Include.inc"             ; ToDo перенести в страницу!
-                ; include "Core/Module/Object/Damage/Include.inc"                 ; ToDo перенести в страницу!
-                ; include "Core/Module/Game/Object/Include.inc"                   ; ToDo перенести в страницу!
 
                 ; debug
                 ifdef _DEBUG

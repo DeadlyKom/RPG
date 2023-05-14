@@ -36,7 +36,7 @@ Input:          SET_PAGE_BLOK_6                                                 
 ; Note:
 ; -----------------------------------------
 Gen_World:      SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
-                JP Packs.OpenWorld.Generate
+                JP Packs.OpenWorld.Gen_Game
 
                 display " - Game execute 'Base':\t\t\t\t", /A, Core, " = busy [ ", /D, $ - Core, " bytes  ]"
 

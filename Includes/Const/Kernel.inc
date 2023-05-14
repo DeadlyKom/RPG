@@ -57,7 +57,6 @@ Execute
 ; generate
 Generate:
 .World          EQU Kernel.Execute.Gen_World                                    ; запуск генерации мира
-; .WorldSprite    EQU Kernel.Tables.Gen_WorldSpr                                  ; генерация спрайтов для карты мира     ToDo перенести в страницу!
 
 ; tables
 Table:
@@ -71,8 +70,8 @@ Draw:
 .World          EQU Kernel.World.Draw                                           ; отображение карты миры
 .Minimap        EQU Kernel.World.Minimap                                        ; отображение миникарты
 .Sprite         EQU Kernel.Sprite.Draw                                          ; отображение спрайта без атрибутов
-; .Object         EQU Kernel.Object.Draw                                          ; отображение объектов                  ToDo перенести в страницу!
-; .WorldArrow     EQU Kernel.Arrow.Update                                         ; обновление стрелки ближайшего врага на карте мира ToDo перенести в страницу!
+.Object         EQU Kernel.Object.Draw                                          ; отображение объектов
+.WorldArrow     EQU Kernel.Arrow.Update                                         ; обновление стрелки ближайшего врага на карте мира
 .Line           EQU Kernel.DrawLine                                             ; отображение линии
 .Char           EQU Kernel.DrawChar                                             ; отобразить символ
 .String         EQU Kernel.DrawString                                           ; отобразить строку
@@ -99,18 +98,8 @@ Convert:
 .ToAttribute    EQU Kernel.Utils.PixelAttribute
 
 ; object
-; Object:
-; .Tick           EQU Kernel.Object.Tick                                          ; обработка тика объектов
-; .Collision      EQU Kernel.Object.Collision.Handler                             ; обработка коллизии
-; .Spawn_Dust     EQU Kernel.Object.Player.Spawn_Dust                             ; спавн пыли
-; .Spawn_Mine     EQU Kernel.Object.Player.Spawn_Mine                             ; спавн мины
-; .Spawn_Explosion EQU Kernel.Object.Player.Spawn_Explosion                       ; спавн взрыва
-; .ApplySpeed     EQU Kernel.Object.Player.Rotation.ApplySpeed                    ; применить скорость
-; .ApplyVelocity  EQU Kernel.Object.Update.Velocity                               ; применить вектор скорости
-; .ApplyDecel     EQU Kernel.Object.Player.Deceleration                           ; применить торможение
-; .GetSpriteInfo  EQU Kernel.Object.Pawn.GetSpriteInfo                            ; получить информацию о спрайте машины
-; .Remove         EQU Kernel.Object.Utils.Remove                                  ; удаление объекта
-; .DeltaPosition  EQU Kernel.Object.Utils.DeltaPosition                           ; расчёт дельт значений между двумя объектами
+Object:
+.GetSpriteInfo  EQU Kernel.Object.Pawn.GetSpriteInfo                            ; получить информацию о спрайте машины
 
 ; world map
 World:
@@ -230,12 +219,6 @@ Func
 .ResetFadeout   EQU Kernel.Functions.ResetFadeout                               ; функция сброса и уход в затемнение
 .ShadowScrcpy   EQU Kernel.Functions.ShadowScrcpy                               ; функция копирования в теневой экран
 .BaseScrcpy     EQU Kernel.Functions.BaseScrcpy                                 ; функция копирования в основной экран
-
-; .InitObject     EQU Kernel.Initialize.Object                                    ; инициализация работы с объектами      ToDo перенести в страницу!
-; .WorldPosition  EQU Kernel.Initialize.WorldPosition                             ; привести к мировой позиции            ToDo перенести в страницу!
-; .SpawnObject    EQU Kernel.Initialize.Spawn                                     ; спавн объекта в мире                  ToDo перенести в страницу!
-; .ApplyVehicle   EQU Kernel.Damage.ApplyVehicle                                  ; нанести урон машине игрока            ToDo перенести в страницу!
-; .ApplyExplosion EQU Kernel.Damage.ApplyExplosion                                ; нанести урон машине игрока            ToDo перенести в страницу!
 
 ; utils
 Utils

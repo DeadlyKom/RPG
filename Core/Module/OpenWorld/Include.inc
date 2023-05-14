@@ -5,7 +5,9 @@
                 module OpenWorld
 
                 include "Utils/Include.inc"
-                include "Generate.asm"
+                include "Object/Include.inc"
+                include "Wasteland/Include.inc"
+                include "Gen_Game.asm"
 
                 endmodule
 

@@ -23,9 +23,6 @@ EntryPoint:     ; -----------------------------------------
                 endif
 
                 CALL Execute.Input                                              ; инициализация управления
-                
-                ; CALL Initialize.World                                           ; инициализация загруженного уровня
-                ; CALL Game.Render.World.UI.DrawInit                              ; обновление UI (после инициализации всего)
 
                 display "\t- Game 'EntryPoint':\t\t\t\t", /A, EntryPoint, " = busy [ ", /D, $ - EntryPoint, " bytes  ]"
 

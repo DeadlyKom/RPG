@@ -13,32 +13,16 @@ VFX_Draw:       SHOW_BASE_SCREEN                                                
                 
                 ; отображение надписи "пустошь"
                 LD HL, .WastelandText
-                LD DE, #5A6A
+                LD DE, #5A68
                 CALL Draw.String
 
                 ; копирования в теневой экран
                 CALL Func.ShadowScrcpy
-
                 SHOW_SHADOW_SCREEN                                              ; отображение теневого экрана
 
-                ; генерация спрайтов для пустоши
-                CALL Execute.WastelandSpr
+                ; подготовка пустоши
+                CALL Prepare
 
-                ; копирования в базовый экран
-                CALL Func.BaseScrcpy
-
-                ; отображение UI пустоши
-                CALL UI_Draw
-
-                ; отобразить в теневом экране пустошь
-                CALL Draw
-                RES_RENDER_FLAG FINISHED_BIT                                    ; сброс флага завершения отрисовки, для эффекта
-
-                ; ожидание
-                LD B, #20
-.Wait           HALT
-                DJNZ .Wait
-                
                 ; проигрывания эффекта "осветление"
                 CALL VFX.Diagonal_In
 
