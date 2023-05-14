@@ -15,7 +15,15 @@ EntryPoint:     ; -----------------------------------------
                 HALT
                 CALL Execute.Core                                               ; инициализация ядра
                 CALL Execute.Player                                             ; инициализация игрока
+
+                ifdef ENABLE_MAIN_MENU
                 CALL Execute.MainMenu                                           ; инициализация и запуск главного меню
+                else
+                ; установка выход в пустошь
+                SET_MENU_FLAGS MENU_FADEIN
+                CALL Execute.Wasteland
+                endif
+
                 CALL Execute.Input                                              ; инициализация управления
                 
                 ; CALL Initialize.World                                           ; инициализация загруженного уровня

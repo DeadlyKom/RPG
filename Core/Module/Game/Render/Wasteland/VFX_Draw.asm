@@ -25,14 +25,14 @@ VFX_Draw:       ; отобразить в теневом экране пусто
                 JR Z, .Complete
                 RES_FLAG MENU_FADEIN_BIT                                        ; сброс флага эфекта перехода
 
-                LD B, #28
+                LD B, #38
 .Wait           HALT
                 DJNZ .Wait
                 
                 ; проигрывания эффекта "осветление"
                 CALL VFX.Diagonal_In
 
-.Complete       JR$; инициализаци главного рендера пустоши
+.Complete       ; инициализаци главного рендера пустоши
                 LD HL, Packs.Wasteland.Render.Draw
                 LD (Packs.Wasteland.Loop.FuncDraw), HL
                 RET

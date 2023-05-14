@@ -34,8 +34,4 @@ VFX:
 .MuzzleFlash    include "VFX/MuzzleFlash/Include.inc"
                 display " - MuzzleFlash:\t\t\t\t\t", /A, .MuzzleFlash, " = busy [ ", /D, $ - .MuzzleFlash, " bytes  ]"
 
-Screen          
-.Test           incbin "OldTower.scr"
-                display " - Screen Test :\t\t\t\t\t", /A, Screen.Test, " = busy [ ", /D, $ - Screen.Test, " bytes  ]"
-
                 endif ; ~ _CORE_MODULE_GRAPHICS_TILE_WORLD_GRAPHICS_PACK_1_
