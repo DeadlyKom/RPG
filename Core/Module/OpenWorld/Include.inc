@@ -9,6 +9,9 @@
                 include "Wasteland/Include.inc"
                 include "Gen_Game.asm"
 
+                ; generator
+                include "Core/Module/Table/Gen_PRNG.asm"
+
                 endmodule
 
                 endif ; ~_CORE_MODULE_OPEN_WORLD_INCLUDE_

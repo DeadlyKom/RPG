@@ -48,7 +48,6 @@ Base:           ; -----------------------------------------
                 ; инициализация таблиц
                 ; -----------------------------------------
                 CALL Packs.Tables.Gen_ScrAdr                                    ; генерация адресов экрана
-                CALL Packs.Tables.Gen_PRNG                                      ; генерация PRNG карты мира
                 CALL Packs.Tables.Gen_ShiftTable                                ; генерация таблицы сдвигов
                 JP Packs.Tables.Gen_MulSprTable                                 ; генерация таблицы умножения для спрайтов
 

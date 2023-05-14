@@ -8,7 +8,9 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Draw:           CALL AnimationBars
+Draw:           SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
+
+                CALL AnimationBars
                 CALL AnimationTurbo
 
 .T3             EQU $+1
@@ -44,7 +46,7 @@ Draw:           CALL AnimationBars
                 CP #7E
                 JR C, .L12
                 LD A, #7F
-.L12            LD (HL), A    
+.L12            LD (HL), A
 
 .Set22          LD A, #10
 .Set2           LD (.T2), A

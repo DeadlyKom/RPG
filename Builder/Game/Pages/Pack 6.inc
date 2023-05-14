@@ -25,7 +25,6 @@ Begin6:         EQU $
                 include "Core/Module/Game/Wasteland/Include.inc"                ; wasteland
 
                 ; generator
-                include "Core/Module/Table/Gen_PRNG.asm"
                 include "Core/Module/Table/Gen_ScrAdr.asm"
                 include "Core/Module/Table/Gen_ShiftTable.asm"
                 include "Core/Module/Table/Gen_WastelandSprite.asm"

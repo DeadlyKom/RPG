@@ -18,10 +18,10 @@ Initialize:     ; -----------------------------------------
                 LD BC, OBJECT_PLAYER
                 CALL Packs.OpenWorld.Object.Initialize.Spawn
 
-                ; ToDo тестовый спавн противника
-                LD DE, #9020
-                LD BC, ENEMY_FACTION_A | OBJECT_NPC
-                CALL Packs.OpenWorld.Object.Initialize.Spawn
+                ; ; ToDo тестовый спавн противника
+                ; LD DE, #9020
+                ; LD BC, ENEMY_FACTION_A | OBJECT_NPC
+                ; CALL Packs.OpenWorld.Object.Initialize.Spawn
                 
                 ; ; ToDo тестовый спавн противника
                 ; LD DE, #5020

@@ -98,6 +98,11 @@ Begin:          EQU $
                 ifdef _DEBUG
                 include "Core/Module/Utils/Debug/Console.asm"
                 include "Core/Module/Utils/Debug/FPS_Counter.asm"
+
+                ifdef SHOW_COLLISION_AABB
+                include "Core/Module/OpenWorld/Object/Collision/DrawAABB.asm"
+                endif
+                
                 endif
 
 Size:           EQU $ - Begin

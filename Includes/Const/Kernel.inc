@@ -246,6 +246,11 @@ FPS_Counter:
 .Tick           EQU Kernel.FPS_Counter.Tick
 .Frame          EQU Kernel.FPS_Counter.Frame
 .Render         EQU Kernel.FPS_Counter.Render
+
+                ifdef SHOW_COLLISION_AABB
+DebugDraw:
+.AABB           EQU  Kernel.DrawAABB
+                endif
                 endif
 
                 endif ; ~_BUILDER_KERNEL_
