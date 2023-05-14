@@ -3,7 +3,7 @@
                 define _CORE_MODULE_TEXT_SETTLEMENT_OPTIONS_
 Options
 .OpenWorld      lua allpass
-                Convert("Пустоши")
+                Convert("Пустошь")
                 endlua
 
                 endif ; ~ _CORE_MODULE_TEXT_SETTLEMENT_OPTIONS_

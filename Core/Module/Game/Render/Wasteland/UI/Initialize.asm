@@ -1,6 +1,6 @@
 
-                ifndef _MODULE_GAME_RENDER_UI_INITIALIZE_
-                define _MODULE_GAME_RENDER_UI_INITIALIZE_
+                ifndef _MODULE_GAME_RENDER_WASTELAND_UI_INITIALIZE_
+                define _MODULE_GAME_RENDER_WASTELAND_UI_INITIALIZE_
 ; -----------------------------------------
 ; отображение UI карты мира (инициализация)
 ; In:
@@ -8,10 +8,10 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-DrawInit:       CALL BackBar
+Initialize:     CALL BackBar
                 CALL SetBars
-
                 CALL BackFrame
+
                 XOR A
                 CALL Heart
                 CALL Gas
@@ -19,7 +19,6 @@ DrawInit:       CALL BackBar
                 CALL Turbo
 
                 LD A, (PlayerState.Slot)
-                CALL Slot
-                RET
+                JP Slot
 
-                endif ; ~_MODULE_GAME_RENDER_UI_INITIALIZE_
+                endif ; ~_MODULE_GAME_RENDER_WASTELAND_UI_INITIALIZE_

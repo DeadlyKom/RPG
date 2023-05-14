@@ -9,6 +9,7 @@
 ; Note:
 ; -----------------------------------------
 Draw:           
+
 .Processed      ifdef _DEBUG
                 CALL FPS_Counter.Frame
                 endif

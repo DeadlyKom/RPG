@@ -11,22 +11,6 @@
 Draw:           CALL AnimationBars
                 CALL AnimationTurbo
 
-; .T1             EQU $+1
-;                 LD A, 90
-;                 DEC A
-;                 JR NZ, .Set1
-
-;                 LD HL, PlayerState.Health + 2
-;                 LD A, (HL)
-;                 ADD A, 25
-;                 CP #7E
-;                 JR C, .L11
-;                 LD A, #7F
-; .L11            LD (HL), A    
-
-;                 LD A, 90
-; .Set1           LD (.T1), A
-
 .T3             EQU $+1
                 LD A, 64
                 DEC A

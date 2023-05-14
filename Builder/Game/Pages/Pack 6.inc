@@ -28,7 +28,7 @@ Begin6:         EQU $
                 include "Core/Module/Table/Gen_PRNG.asm"
                 include "Core/Module/Table/Gen_ScrAdr.asm"
                 include "Core/Module/Table/Gen_ShiftTable.asm"
-                include "Core/Module/Table/Gen_WorldSprite.asm"
+                include "Core/Module/Table/Gen_WastelandSprite.asm"
                 include "Core/Module/Table/Gen_MultiplySpriteTable.asm"
 End6:           EQU $
 Size6:          EQU End6 - Begin6

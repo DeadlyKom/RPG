@@ -13,10 +13,9 @@ Heart:          ; стартовый адрес спрайта
                 OR A
                 LD HL, Graphics.UI.Heart._0
                 JR Z, $+5
-                LD HL, Graphics.UI.Heart._1 
+                LD HL, Graphics.UI.Heart._1
+
                 ; установить страницу графики
-                ; LD A, Page.Graphics.Pack1
-                ; CALL SetPage
                 SET_PAGE_GRAPHICS_1                                             ; включить страницу графики
                 
                 ; копирование спрайта в буфер общего назначения
@@ -39,7 +38,7 @@ Heart:          ; стартовый адрес спрайта
                 LD HL, SharedBuffer
                 LD DE, #0801
                 LD BC, #0101
-                JP Draw.AttrSprTwo
+                JP Draw.AttrSprOne
 ; -----------------------------------------
 ; отображение иконци бензина
 ; In:
@@ -48,8 +47,6 @@ Heart:          ; стартовый адрес спрайта
 ; Note:
 ; -----------------------------------------
 Gas:            ; установить страницу графики
-                ; LD A, Page.Graphics.Pack1
-                ; CALL SetPage
                 SET_PAGE_GRAPHICS_1                                             ; включить страницу графики
                 
                 ; копирование спрайта в буфер общего назначения
@@ -73,7 +70,7 @@ Gas:            ; установить страницу графики
                 LD HL, SharedBuffer
                 LD DE, #0802
                 LD BC, #0101
-                JP Draw.AttrSprTwo
+                JP Draw.AttrSprOne
 ; -----------------------------------------
 ; отображение иконки турбонаддува
 ; In:
@@ -87,9 +84,8 @@ Turbo:          ; стартовый адрес спрайта
                 LD HL, Graphics.UI.Turbo._0
                 JR Z, $+5
                 LD HL, Graphics.UI.Turbo._1 
+                
                 ; установить страницу графики
-                ; LD A, Page.Graphics.Pack1
-                ; CALL SetPage
                 SET_PAGE_GRAPHICS_1                                             ; включить страницу графики
                 
                 ; копирование спрайта в буфер общего назначения
@@ -112,6 +108,6 @@ Turbo:          ; стартовый адрес спрайта
                 LD HL, SharedBuffer
                 LD DE, #0803
                 LD BC, #0101
-                JP Draw.AttrSprTwo
+                JP Draw.AttrSprOne
 
                 endif ; ~_MODULE_GAME_RENDER_UI_ICONS_

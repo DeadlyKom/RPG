@@ -47,7 +47,7 @@ Slot:           ; расчёт адрес спрайта
                 LD HL, SharedBuffer
                 LD DE, #1100
                 LD BC, #0505
-                JP Draw.AttrSprTwo
+                JP Draw.AttrSprOne
 
 .Table          DW Graphics.UI.None
                 DW Graphics.UI.MachineGun

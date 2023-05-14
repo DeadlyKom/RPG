@@ -5,7 +5,10 @@
                 module Render
 
                 include "Draw.asm"
+                include "UI_Draw.asm"
                 include "VFX_Draw.asm"
+
+                include "UI/Include.inc"
 
                 endmodule
 

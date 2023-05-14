@@ -1,6 +1,6 @@
 
-                ifndef _MODULE_GAME_RENDER_UI_BAR_
-                define _MODULE_GAME_RENDER_UI_BAR_
+                ifndef _MODULE_GAME_RENDER_WASTELAND_UI_BAR_
+                define _MODULE_GAME_RENDER_WASTELAND_UI_BAR_
 BarRowNum       EQU  62
 ; -----------------------------------------
 ; отображение баров
@@ -9,9 +9,7 @@ BarRowNum       EQU  62
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-BackBar:        ; LD A, Page.Graphics.Pack1
-                ; CALL SetPage
-                SET_PAGE_GRAPHICS_1                                             ; включить страницу графики
+BackBar:        SET_PAGE_GRAPHICS_1                                             ; включить страницу графики
                 
                 ; копирование спрайта в буфер общего назначения
                 LD HL, Graphics.UI.Bar
@@ -34,7 +32,7 @@ BackBar:        ; LD A, Page.Graphics.Pack1
                 LD HL, SharedBuffer
                 LD DE, #0201
                 LD BC, #0603
-                JP Draw.AttrSprTwo
+                JP Draw.AttrSprOne
 ; -----------------------------------------
 ; повышение уровня прогресс бара
 ; In:
@@ -100,10 +98,10 @@ IncBar:         ; инкремент
                 LD (BC), A
 
 .Loop           ; отображение
-                SET_SCREEN_BASE                                                 ; включение страницы основного экрана
+                ; SET_SCREEN_BASE                                                 ; включение страницы основного экрана
                 LD (HL), %01111110
-                SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
-                LD (HL), %01111110
+                ; SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
+                ; LD (HL), %01111110
 
                 ; классический метод "UP HL" 25/59
                 LD A, H
@@ -182,10 +180,10 @@ DecBar:         ; декремент
                 LD (BC), A
 
 .Loop           ; отображение
-                SET_SCREEN_BASE                                                 ; включение страницы основного экрана
+                ; SET_SCREEN_BASE                                                 ; включение страницы основного экрана
                 LD (HL), %01000010
-                SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
-                LD (HL), %01000010
+                ; SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
+                ; LD (HL), %01000010
 
                 ; классический метод "DOWN HL" 25/59
                 INC H
@@ -231,4 +229,4 @@ CalcProgress:   ; расчёт смещения прогресс бара
                 ; ----------------------------------------
                 JP Math.Mul16x8_16
 
-                endif ; ~_MODULE_GAME_RENDER_UI_BAR_
+                endif ; ~_MODULE_GAME_RENDER_WASTELAND_UI_BAR_

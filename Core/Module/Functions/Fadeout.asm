@@ -21,11 +21,7 @@ ResetFadeout:   ; инициализация главного цикла (отк
                 CLS_4000
                 ATTR_4000_IPB WHITE, BLACK, 0
 
-                ; очистка теневого окна
-                SetPort PAGE_7, 0                                               ; включить 7 страницу и показать основной экран
-                LD HL, MemBank_01_SCR
-                LD DE, MemBank_03_SCR
-                LD BC, ScreenSize
-                JP Memcpy.FastLDIR
+                ; копирование в теневой экран
+                ; идёт следом
 
                 endif ; ~_CORE_MODULE_FUNCTIONS_RESET_FADEOUT_

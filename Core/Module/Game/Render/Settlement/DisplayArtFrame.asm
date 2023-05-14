@@ -20,11 +20,12 @@ DisplayArtFrame ;
                 LD DE, Adr.SortBuffer
                 CALL Decompressor.Forward
 
+                ; ограничение спрайта
                 XOR A
-                rept 3
+                INC DE
+                INC DE
                 LD (DE), A
                 INC DE
-                endr
                 LD (DE), A
 
                 SET_SCREEN_BASE                                                 ; включение страницы основного экрана

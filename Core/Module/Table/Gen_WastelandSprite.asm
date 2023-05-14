@@ -1,7 +1,10 @@
-                ifndef _CORE_MODULE_TABLE_GENERATOR_WORLD_SPRITE_
-                define _CORE_MODULE_TABLE_GENERATOR_WORLD_SPRITE_
+                ifndef _CORE_MODULE_TABLE_GENERATOR_WASTELAND_SPRITE_
+                define _CORE_MODULE_TABLE_GENERATOR_WASTELAND_SPRITE_
 
                 module Tables
+GenWasteland    EQU $
+
+                DISP Adr.SharedBuffer                                           ; модификация адреса компиляции с блока общего кода
 ; -----------------------------------------
 ; генерация
 ; In:
@@ -9,8 +12,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Gen_WorldSpr:   SHOW_SHADOW_SCREEN                                              ; отображение теневого экрана
-                SET_PAGE_GRAPHICS_1                                             ; включить страницу графики
+GenWastelandSpr SET_PAGE_GRAPHICS_1                                             ; включить страницу графики
 
                 ; распаковк графики
                 LD HL, Adr.Graphics.Pack1
@@ -430,8 +432,10 @@ TableTilepairs  DB #00, #00 ; 0
 
 .Num            EQU ($-TableTilepairs) >> 1
 
-                display " - World sprite generatuion: \t\t[", /D, TableTilepairs.Num, " tilepairs]\t", /A, Gen_WorldSpr, " = busy [ ", /D, $ - Gen_WorldSpr, " bytes  ]"
+                ENT                                                             ; отмена модификации адреса компиляции
+GenWastelandSpr.Size   EQU $-GenWasteland
+                display " - Wasteland sprite generatuion: \t[", /D, TableTilepairs.Num, " tilepairs]\t", /A, GenWasteland, " = busy [ ", /D, GenWastelandSpr.Size, " bytes  ]"
 
                 endmodule
 
-                endif ; ~ _CORE_MODULE_TABLE_GENERATOR_WORLD_SPRITE_
+                endif ; ~ _CORE_MODULE_TABLE_GENERATOR_WASTELAND_SPRITE_

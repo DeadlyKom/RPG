@@ -15,11 +15,7 @@ Draw:           ; счётчик отображаемого экрана
                 RRA
                 JR NC, .BaseDraw
 
-.ShadowDraw     SetPort PAGE_7, 0                                               ; включить 7 страницу и показать основной экран
-                LD HL, MemBank_01_SCR
-                LD DE, MemBank_03_SCR
-                LD BC, ScreenSize
-                CALL Memcpy.FastLDIR
+.ShadowDraw     CALL Func.ShadowScrcpy                                          ; копирования в теневой экран
                 JP .Processed
                 
 .BaseDraw       SetPort PAGE_6, 1                                               ; включить 6 страницу и показать теневой экран

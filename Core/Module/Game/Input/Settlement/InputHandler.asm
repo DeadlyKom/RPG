@@ -88,8 +88,8 @@ Selected:       ; установка флага обновления, необх
                 CP MENU_ID_WASTELAND
                 JR NZ, Processed
 
-                ; установка флага завершения цикла и выход в пустошь
-                SET_MENU_FLAGS MENU_LOOP | MENU_FADEIN
+                ; установка флага завершения цикла
+                SET_MENU_FLAGS MENU_LOOP
 
                 RET
 

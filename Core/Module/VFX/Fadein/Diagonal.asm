@@ -8,7 +8,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Diagonal_In:    SET_PAGE_SHADOW_SCREEN                                          ; установка страницы невидимого экрана
+Diagonal_In:    SET_SCREEN_SHADOW                                               ; установка страницы теневого экрана
 
 .Loop           HALT
 .pv1            EQU $+1

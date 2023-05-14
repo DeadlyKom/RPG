@@ -8,8 +8,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-BackFrame:      ; LD A, Page.Graphics.Pack1
-                ; CALL SetPage
+BackFrame:      ; установить страницу графики
                 SET_PAGE_GRAPHICS_1                                             ; включить страницу графики
                 
                 ; копирование спрайта в буфер общего назначения
@@ -30,11 +29,11 @@ BackFrame:      ; LD A, Page.Graphics.Pack1
                 ;   данные о спрайте находятся в самом спрайте
                 ; -----------------------------------------
                 LD HL, SharedBuffer
-                CALL Draw.AttrStencilSpr
-
-                SET_SCREEN_BASE                                                 ; включение страницы основного экрана
-
-                LD HL, SharedBuffer
                 JP Draw.AttrStencilSpr
+
+                ; SET_SCREEN_BASE                                                 ; включение страницы основного экрана
+
+                ; LD HL, SharedBuffer
+                ; JP Draw.AttrStencilSpr
 
                 endif ; ~_MODULE_GAME_RENDER_UI_FRAME_

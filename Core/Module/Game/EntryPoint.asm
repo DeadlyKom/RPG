@@ -19,8 +19,6 @@ EntryPoint:     ; -----------------------------------------
                 ifdef ENABLE_MAIN_MENU
                 CALL Execute.MainMenu                                           ; инициализация и запуск главного меню
                 else
-                ; установка выход в пустошь
-                SET_MENU_FLAGS MENU_FADEIN
                 CALL Execute.Wasteland
                 endif
 

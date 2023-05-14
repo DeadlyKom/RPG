@@ -9,7 +9,7 @@ Bar             incbin "Core/Module/Graphics/UI/World/Original/Bar.spr"
 .Size           EQU $ - Bar
 
 Frame           incbin "Core/Module/Graphics/UI/World/Original/Frame.spr"
-                DW #0000
+                DW #0000, #0000
 .Size           EQU $ - Frame
 Heart
 ._0             incbin "Core/Module/Graphics/UI/World/Original/Heart_0.spr"

@@ -52,6 +52,7 @@ Execute
 .PlayGame       EQU Kernel.Execute.PlayGame                                     ; запуск игры (первичный)
 .Settlement     EQU Kernel.Execute.Settlement                                   ; запуск поселение
 .Wasteland      EQU Kernel.Execute.Wasteland                                    ; запуск пустоши
+.WastelandSpr   EQU Kernel.Execute.WastelandSpr                                 ; запуск генерация спрайтов для пустоши
 
 ; generate
 Generate:
@@ -227,6 +228,8 @@ Func
 .Right.x0       EQU Kernel.Functions.NoShiftRight.x0
 
 .ResetFadeout   EQU Kernel.Functions.ResetFadeout                               ; функция сброса и уход в затемнение
+.ShadowScrcpy   EQU Kernel.Functions.ShadowScrcpy                               ; функция копирования в теневой экран
+.BaseScrcpy     EQU Kernel.Functions.BaseScrcpy                                 ; функция копирования в основной экран
 
 ; .InitObject     EQU Kernel.Initialize.Object                                    ; инициализация работы с объектами      ToDo перенести в страницу!
 ; .WorldPosition  EQU Kernel.Initialize.WorldPosition                             ; привести к мировой позиции            ToDo перенести в страницу!

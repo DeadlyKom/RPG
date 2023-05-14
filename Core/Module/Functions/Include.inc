@@ -4,7 +4,8 @@
 
                 module Functions
 
-                include "Fadeout.asm"
+                include "Fadeout.asm"                                           ; (0)
+                include "ScreenCopy.asm"                                        ; (1)
 
                 endmodule
 

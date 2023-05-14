@@ -8,33 +8,44 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-VFX_Draw:       ; отобразить в теневом экране пустошь
-                SHOW_BASE_SCREEN                                                ; отобразить основной экран
-                HALT
-                CALL Draw
-                RES_RENDER_FLAG FINISHED_BIT                                    ; сброс флага завершения отрисовки, для эффекта
+VFX_Draw:       SHOW_BASE_SCREEN                                                ; отобразить основной экран
                 HALT                                                            ; ожидание луча
-
+                
                 ; отображение надписи "пустошь"
                 LD HL, .WastelandText
                 LD DE, #5A6A
                 CALL Draw.String
 
-                ; проверка флага проигрывания эффекта "осветление"
-                CHECK_MENU_FLAG MENU_FADEIN_BIT
-                JR Z, .Complete
-                RES_FLAG MENU_FADEIN_BIT                                        ; сброс флага эфекта перехода
+                ; копирования в теневой экран
+                CALL Func.ShadowScrcpy
 
-                LD B, #38
+                SHOW_SHADOW_SCREEN                                              ; отображение теневого экрана
+
+                ; генерация спрайтов для пустоши
+                CALL Execute.WastelandSpr
+
+                ; копирования в базовый экран
+                CALL Func.BaseScrcpy
+
+                ; отображение UI пустоши
+                CALL UI_Draw
+
+                ; отобразить в теневом экране пустошь
+                CALL Draw
+                RES_RENDER_FLAG FINISHED_BIT                                    ; сброс флага завершения отрисовки, для эффекта
+
+                ; ожидание
+                LD B, #20
 .Wait           HALT
                 DJNZ .Wait
                 
                 ; проигрывания эффекта "осветление"
                 CALL VFX.Diagonal_In
 
-.Complete       ; инициализаци главного рендера пустоши
+                ; инициализаци главного рендера пустоши
                 LD HL, Packs.Wasteland.Render.Draw
                 LD (Packs.Wasteland.Loop.FuncDraw), HL
+
                 RET
 
 .WastelandText  BYTE "Wasteland\0"
