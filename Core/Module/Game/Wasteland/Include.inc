@@ -8,6 +8,7 @@ Begin           EQU $
                 DISP Adr.Module.Game.Shared                                     ; модификация адреса компиляции с блока общего кода
                 include "Core/Module/Game/Initialize/Wasteland/Initialize.asm"  ; первый, точка входа
                 include "Loop.asm"
+                include "Tick_UI.asm"
                 include "Interrupt.asm"
                 include "Core/Module/Game/Render/Wasteland/Include.inc"
                 include "Core/Module/Game/Input/Wasteland/Include.inc"

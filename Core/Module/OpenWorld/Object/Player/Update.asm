@@ -9,16 +9,7 @@
 ; Corrupt:
 ; Note:
 ; ----------------------------------------
-Update:         ; кеширование очков здоровья игрока
-                LD A, (PlayerState.Health + 2)
-                OR A
-                JR NZ, .Skip
-                LD A, (PlayerState.Health + 0)
-                SUB (IX + FObject.Character.Health)
-                NEG
-                LD (PlayerState.Health + 2), A
-.Skip
-                ; применние сил
+Update:         ; применние сил
                 CALL Deceleration
                 CALL Rotation
                 CALL Packs.OpenWorld.Wasteland.Camera

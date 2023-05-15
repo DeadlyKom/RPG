@@ -4,6 +4,8 @@
 
                 struct FCharacter
 Health          DB #00                                                          ; уровень очков здоровья
+Gas             DB #00                                                          ; уровень очков топлива
+Turbo           DB #00                                                          ; уровень очков ускорения
 
                 ends
 

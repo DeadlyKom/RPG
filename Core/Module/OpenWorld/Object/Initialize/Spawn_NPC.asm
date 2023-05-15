@@ -41,6 +41,8 @@ NPC:            ; -----------------------------------------
 
                 ; установка характеристик персонажа
                 LD (IY + FObject.Character.Health), #FF
+                LD (IY + FObject.Character.Gas), #FF
+                LD (IY + FObject.Character.Turbo), #FF
 
                 XOR A
 

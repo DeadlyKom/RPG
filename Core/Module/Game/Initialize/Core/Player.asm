@@ -25,12 +25,6 @@ Player:         ; очистка буфера
                 LD HL, 2345
                 LD (PlayerState.GameTime + 6), HL                               ; Years
 
-                ;
-                LD A, #FF
-                LD (PlayerState.Health), A
-                LD (PlayerState.Gas), A
-                LD (PlayerState.Turbo), A
-
                 LD A, SLOT_MINE
                 LD (PlayerState.Slot), A
 

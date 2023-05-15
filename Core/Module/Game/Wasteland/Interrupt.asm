@@ -26,6 +26,8 @@ Interrupt:      ; проверка завершённости процесса �
                 CALL Packs.OpenWorld.Object.Tick
                 CALL Packs.OpenWorld.Object.Collision.Handler
 
+.Tick_UI        CALL Tick_UI                                                    ; тик UI элементов
+
 .RenderProcess  ; процесс отрисовки не завершён
 
 .Input          ; ************ Scan Input ************
