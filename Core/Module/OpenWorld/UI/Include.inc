@@ -5,8 +5,13 @@
                 module UI
 Begin           EQU $
                 include "Bar_Animation.asm"
+                include "Health_Animation.asm"
+                include "Gas_Tick.asm"
+                include "Gas_Animation.asm"
+                include "Turbo_Tick.asm"
+                include "Turbo_Animation.asm"
 
-                display "\t- UI bar animation :\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
+                display "\t- UI animation :\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
 
                 endmodule
 

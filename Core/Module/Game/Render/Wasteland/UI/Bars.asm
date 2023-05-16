@@ -48,6 +48,7 @@ IncBar:         ; инкремент
                 LD A, (BC)
                 INC A
                 RET Z                                                           ; выход, если значение максимальное
+                DEC A
 
                 ADD A, D
                 JR NC, .NotOverflow
@@ -99,10 +100,8 @@ IncBar:         ; инкремент
                 SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
 
 .Loop           ; отображение
-                ; SET_SCREEN_BASE                                                 ; включение страницы основного экрана
                 RES 7, H
                 LD (HL), %01111110
-                ; SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
                 SET 7, H
                 LD (HL), %01111110
 

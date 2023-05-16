@@ -57,7 +57,7 @@ Deceleration:
                 LD A, #FF
                 JP P, .Apply
                 LD A, #01
-                CHECK_PLAYER_FLAG DECREASE_SPEED_BIT
+                CHECK_PLAYER_INPUT_FLAG DECREASE_SPEED_BIT
                 RET NZ
 
 .Apply          ADD A, C

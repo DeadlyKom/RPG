@@ -58,6 +58,8 @@ PlayerState         EQU Adr.PlayerState
 .Health             EQU PlayerState + FPlayerState.Health                       ; уровень очков здоровья
 .Gas                EQU PlayerState + FPlayerState.Gas                          ; уровень очков бензина
 .Turbo              EQU PlayerState + FPlayerState.Turbo                        ; уровень очков ускорения
+.Wasteland_RF       EQU PlayerState + FPlayerState.UI.Wasteland_RF              ; флаги отображени элементов UI
+.Wasteland_SF       EQU PlayerState + FPlayerState.UI.Wasteland_SF              ; состояние элементов UI
 .NearestObject      EQU PlayerState + FPlayerState.NearestObject                ; адрес ближайшего противника
 .Slot               EQU PlayerState + FPlayerState.Slot                         ; номер расходника в слоте
 .CameraPosX         EQU PlayerState + FPlayerState.CameraPosX                   ; позиция карты мира по горизонтали

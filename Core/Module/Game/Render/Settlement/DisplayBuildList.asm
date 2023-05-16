@@ -73,7 +73,7 @@ DisplayBuildLst SET_PAGE_OBJECT                                                 
                 HEIGHT_ROW
                 }
 
-ClearBuildList  SCREEN_ADR_HL #4000, COLUMN_BUILD * 8, ROW_BUILD * 8
+ClearBuildList  SCREEN_ADR_REG HL, #4000, COLUMN_BUILD * 8, ROW_BUILD * 8
                 LD BC, (LIST_WIDTH << 8) | LIST_HEIGHT * 8
                 JP ClearBlock
 

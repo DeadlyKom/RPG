@@ -2,14 +2,15 @@
                 ifndef _MODULE_GAME_RENDER_UI_SLOT_
                 define _MODULE_GAME_RENDER_UI_SLOT_
 ; -----------------------------------------
-; отображение иконки оружия
+; отображение иконки в слоте
 ; In:
-;   A - номер предмета
 ; Out:
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Slot:           ; расчёт адрес спрайта
+Slot:           LD A, (PlayerState.Slot)
+
+                ; расчёт адрес спрайта
                 ADD A, A    ; x2
                 ADD A, LOW .Table
                 LD L, A

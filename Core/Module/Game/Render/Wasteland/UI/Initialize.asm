@@ -8,16 +8,16 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Initialize:     CALL BackBar
-                CALL BackFrame
-
-                XOR A
-                CALL Heart
-                CALL Gas
-                XOR A
-                CALL Turbo
-
-                LD A, (PlayerState.Slot)
-                JP Slot
+Initialize:     ; инициализация UI значка "сердце", "канистра", "нагнетатель", "слот"
+                LD HL, PlayerState.Wasteland_RF
+                LD A, (HL)
+                OR RENDER_HEALTH_FORCE | RENDER_GAS_FORCE | RENDER_TURBO_FORCE | RENDER_SLOT_FORCE
+                LD (HL), A
+               
+                LD HL, PlayerState.Wasteland_SF
+                LD (HL), VISIBLE_HEALTH | VISIBLE_GAS | VISIBLE_TURBO | VISIBLE_SLOT
+                
+                CALL BackBar
+                JP BackFrame
 
                 endif ; ~_MODULE_GAME_RENDER_WASTELAND_UI_INITIALIZE_

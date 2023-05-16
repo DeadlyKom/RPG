@@ -65,7 +65,7 @@ DrawChar:       ; расчёт адреса символа
 ;   HL, DE, С, AF
 ; Note:
 ; -----------------------------------------
-DrawByte:       LD C, A
+DrawByte:       LD B, A
 
                 ; старший полубайт
                 RRCA
@@ -81,7 +81,7 @@ DrawByte:       LD C, A
                 CALL DrawChar
 
                 ; младший полубайт
-                LD A, C
+                LD A, B
                 AND #0F
                 
                 CP #0A
@@ -116,9 +116,9 @@ DrawWordFromAdr PUSH HL
 ;   HL, DE, С, AF
 ; Note:
 ; -----------------------------------------
-DrawWord:       LD A, C
+DrawWord:       LD A, B
                 CALL DrawByte
-                LD A, B
+                LD A, C
                 JP DrawByte
 ; -----------------------------------------
 ; отображение строки

@@ -24,7 +24,7 @@ RotateLeft:     LD A, (IX + FObject.EnginePower)
                 ; CALL C, IncreaseSpeed
                 ; RET
 
-.Input          SET_PLAYER_FLAG ROTATE_LEFT_BIT
+.Input          SET_PLAYER_INPUT_FLAG ROTATE_LEFT_BIT
                 RET
 ; -----------------------------------------
 ; поворот игрока против часовой стрелки
@@ -50,7 +50,7 @@ RotateRight:
                 ; CALL C, IncreaseSpeed
                 ; RET
 
-.Input          SET_PLAYER_FLAG ROTATE_RIGHT_BIT
+.Input          SET_PLAYER_INPUT_FLAG ROTATE_RIGHT_BIT
                 RET
 ; -----------------------------------------
 ; увеличить скорость игрока
@@ -61,7 +61,7 @@ RotateRight:
 ; Note:
 ;   включить страницу работы с объектами
 ; -----------------------------------------
-IncreaseSpeed:  SET_PLAYER_FLAG INCREASE_SPEED_BIT
+IncreaseSpeed:  SET_PLAYER_INPUT_FLAG INCREASE_SPEED_BIT
 
                 ; проверка активации турбонаддува
                 CHECK_FLAG TURBOCHARGING_BIT
@@ -96,7 +96,7 @@ IncreaseSpeed:  SET_PLAYER_FLAG INCREASE_SPEED_BIT
 ; Note:
 ;   включить страницу работы с объектами
 ; -----------------------------------------
-DecreaseSpeed:  SET_PLAYER_FLAG DECREASE_SPEED_BIT
+DecreaseSpeed:  SET_PLAYER_INPUT_FLAG DECREASE_SPEED_BIT
 
                 CHECK_FLAG TURBOCHARGING_BIT
                 JR NZ, .HandBrake
@@ -112,7 +112,7 @@ DecreaseSpeed:  SET_PLAYER_FLAG DECREASE_SPEED_BIT
                 OR A
                 RET Z
 
-                CHECK_PLAYER_FLAG ROTATE_LEFT_BIT
+                CHECK_PLAYER_INPUT_FLAG ROTATE_LEFT_BIT
                 LD C, #01
                 JR NZ, .Right
                 LD C, #FF
@@ -128,7 +128,7 @@ DecreaseSpeed:  SET_PLAYER_FLAG DECREASE_SPEED_BIT
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-TurbochargOn:   SET_PLAYER_FLAG TURBOCHARGING_BIT
+TurbochargOn:   SET_PLAYER_INPUT_FLAG TURBOCHARGING_BIT
                 RET
 ; -----------------------------------------
 ; деактивация турбонаддува
@@ -137,7 +137,7 @@ TurbochargOn:   SET_PLAYER_FLAG TURBOCHARGING_BIT
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-TurbochargOff:  RES_PLAYER_FLAG TURBOCHARGING_BIT
+TurbochargOff:  RES_PLAYER_INPUT_FLAG TURBOCHARGING_BIT
                 RET
 
                 endif ; ~_MODULE_GAME_INPUT_GAMEPLAY_PLAYER_

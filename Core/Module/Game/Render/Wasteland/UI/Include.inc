@@ -7,7 +7,7 @@
                 include "Bars.asm"
                 include "Slot.asm"
                 include "Icons.asm"
-                include "Draw.asm"
+                include "Update.asm"
                 include "Frame.asm"
                 include "Initialize.asm"
 

@@ -56,7 +56,7 @@ DisplayLoc:     SET_PAGE_OBJECT                                                 
                 ; -----------------------------------------
                 JP Draw.String
 
-ClearLoc        SCREEN_ADR_HL #4000, HEADER_INDENT * 8, ROW_HEADER * 8
+ClearLoc        SCREEN_ADR_REG HL, #4000, HEADER_INDENT * 8, ROW_HEADER * 8
                 LD BC, (HEADER_WIDTH << 8) | HEIGHT_ROW
                 ; -----------------------------------------
                 ; очистка блока

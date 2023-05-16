@@ -15,8 +15,7 @@ Scan:           ; опрос виртуальных клавиш
                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
                 LD IX, PLAYER_ADR
 
-                PLAYER_FLAGS
-                LD (HL), #00
+                RES_PLAYER_INPUT_FLAGS
 
                 ; турбонаддув
                 LD A, (GameConfig.KeyAcceleration)

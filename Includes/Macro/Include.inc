@@ -8,13 +8,13 @@
                 include "Debug.inc"
                 include "Screen.inc"
                 include "Memory.inc"
-                include "Player.inc"
                 include "Render.inc"
                 include "Game.inc"
                 include "Menu.inc"
                 include "Hardware.inc"
                 include "Gameplay.inc"
                 include "Interrupt.inc"
+                include "Player_Input.inc"
                 include "Config_Graphics.inc"
 
                 endif ; ~_MACRO_INCLUDE_

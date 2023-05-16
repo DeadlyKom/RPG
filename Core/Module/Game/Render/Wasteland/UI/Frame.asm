@@ -31,9 +31,4 @@ BackFrame:      ; установить страницу графики
                 LD HL, SharedBuffer
                 JP Draw.AttrStencilSpr
 
-                ; SET_SCREEN_BASE                                                 ; включение страницы основного экрана
-
-                ; LD HL, SharedBuffer
-                ; JP Draw.AttrStencilSpr
-
                 endif ; ~_MODULE_GAME_RENDER_UI_FRAME_

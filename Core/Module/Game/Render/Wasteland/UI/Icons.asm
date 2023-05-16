@@ -2,15 +2,22 @@
                 ifndef _MODULE_GAME_RENDER_UI_ICONS_
                 define _MODULE_GAME_RENDER_UI_ICONS_
 ; -----------------------------------------
-; отображение иконки сердца
+; отображение UI значка "сердце"
 ; In:
-;   A - номер спрайта
 ; Out:
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Heart:          ; стартовый адрес спрайта
-                OR A
+Heart:          ; проверка видимости значка
+                LD A, (PlayerState.Wasteland_SF)
+                BIT VISIBLE_HEALTH_BIT, A
+                SCREEN_ADR_REG DE, #C000, 1 * 8, 8 * 8
+                JR Z, ClearIcon
+
+                PUSH DE
+
+                ; стартовый адрес спрайта
+                BIT SPRITE_HEALTH_BIT, A
                 LD HL, Graphics.UI.Heart._0
                 JR Z, $+5
                 LD HL, Graphics.UI.Heart._1
@@ -21,24 +28,19 @@ Heart:          ; стартовый адрес спрайта
                 ; копирование спрайта в буфер общего назначения
                 LD DE, SharedBuffer
                 LD BC, Graphics.UI.Heart.Size
-                CALL Memcpy.FastLDIR
+                LDIR
 
-                SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
+                SET_PAGE_SHADOW_SCREEN                                          ; установка страницы невидимого экрана
 
+                LD HL, SharedBuffer
+                POP DE
                 ; -----------------------------------------
-                ; отрисовка спрайта с атрибутами
+                ; отрисовка знакоместа с атрибутами (в одном экране)
                 ; In:
                 ;   HL - адрес спрайта
-                ;   DE - координаты в знакоместах (D - y, E - x)
-                ;   BC - размер (B - y, C - x)
-                ; Out:
-                ; Corrupt:
-                ; Note:
+                ;   DE - адрес экрана пикселей
                 ; -----------------------------------------
-                LD HL, SharedBuffer
-                LD DE, #0801
-                LD BC, #0101
-                JP Draw.AttrSprOne
+                JP Draw.AttrCharOne
 ; -----------------------------------------
 ; отображение иконци бензина
 ; In:
@@ -46,31 +48,34 @@ Heart:          ; стартовый адрес спрайта
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Gas:            ; установить страницу графики
+Gas:            ; проверка видимости значка
+                LD A, (PlayerState.Wasteland_SF)
+                BIT VISIBLE_GAS_BIT, A
+                SCREEN_ADR_REG DE, #C000, 2 * 8, 8 * 8
+                JR Z, ClearIcon
+
+                PUSH DE
+
+                ; установить страницу графики
                 SET_PAGE_GRAPHICS_1                                             ; включить страницу графики
                 
                 ; копирование спрайта в буфер общего назначения
                 LD HL, Graphics.UI.Gas
                 LD DE, SharedBuffer
                 LD BC, Graphics.UI.Gas.Size
-                CALL Memcpy.FastLDIR
+                LDIR
 
-                SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
+                SET_PAGE_SHADOW_SCREEN                                          ; установка страницы невидимого экрана
 
+                LD HL, SharedBuffer
+                POP DE
                 ; -----------------------------------------
-                ; отрисовка спрайта с атрибутами
+                ; отрисовка знакоместа с атрибутами (в одном экране)
                 ; In:
                 ;   HL - адрес спрайта
-                ;   DE - координаты в знакоместах (D - y, E - x)
-                ;   BC - размер (B - y, C - x)
-                ; Out:
-                ; Corrupt:
-                ; Note:
+                ;   DE - адрес экрана пикселей
                 ; -----------------------------------------
-                LD HL, SharedBuffer
-                LD DE, #0802
-                LD BC, #0101
-                JP Draw.AttrSprOne
+                JP Draw.AttrCharOne
 ; -----------------------------------------
 ; отображение иконки турбонаддува
 ; In:
@@ -79,35 +84,54 @@ Gas:            ; установить страницу графики
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Turbo:          ; стартовый адрес спрайта
-                OR A
+Turbo:          ; проверка видимости значка
+                LD A, (PlayerState.Wasteland_SF)
+                BIT VISIBLE_TURBO_BIT, A
+                SCREEN_ADR_REG DE, #C000, 3 * 8, 8 * 8
+                JR Z, ClearIcon
+
+                PUSH DE
+
+                ; стартовый адрес спрайта
+                BIT SPRITE_TURBO_BIT, A
                 LD HL, Graphics.UI.Turbo._0
                 JR Z, $+5
-                LD HL, Graphics.UI.Turbo._1 
-                
+                LD HL, Graphics.UI.Turbo._1
+
                 ; установить страницу графики
                 SET_PAGE_GRAPHICS_1                                             ; включить страницу графики
                 
                 ; копирование спрайта в буфер общего назначения
                 LD DE, SharedBuffer
                 LD BC, Graphics.UI.Turbo.Size
-                CALL Memcpy.FastLDIR
+                LDIR
 
-                SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
+                SET_PAGE_SHADOW_SCREEN                                          ; установка страницы невидимого экрана
 
+                LD HL, SharedBuffer
+                POP DE
                 ; -----------------------------------------
-                ; отрисовка спрайта с атрибутами
+                ; отрисовка знакоместа с атрибутами (в одном экране)
                 ; In:
                 ;   HL - адрес спрайта
-                ;   DE - координаты в знакоместах (D - y, E - x)
-                ;   BC - размер (B - y, C - x)
-                ; Out:
-                ; Corrupt:
-                ; Note:
+                ;   DE - адрес экрана пикселей
                 ; -----------------------------------------
-                LD HL, SharedBuffer
-                LD DE, #0803
-                LD BC, #0101
-                JP Draw.AttrSprOne
+                JP Draw.AttrCharOne
+; -----------------------------------------
+; очистка UI значка
+; In:
+;   DE - адрес экрана
+; Out:
+; Corrupt:
+; Note:
+; -----------------------------------------
+ClearIcon:      SET_PAGE_SHADOW_SCREEN                                          ; установка страницы невидимого экрана
+                XOR A
+                dup 7
+                LD (DE), A
+                INC D
+                edup
+                LD (DE), A
+                RET
 
                 endif ; ~_MODULE_GAME_RENDER_UI_ICONS_

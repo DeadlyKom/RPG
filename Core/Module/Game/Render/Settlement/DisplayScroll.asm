@@ -38,7 +38,7 @@ DisplayScroll   SET_PAGE_OBJECT                                                 
                 { SCROLL_WIDTH, SCROLL_HEIGHT },
                 HEIGHT_ROW
                 }
-ClearScroll     SCREEN_ADR_HL #4000, COLUMN_SCROLL * 8, ROW_SCROLL * 8 - 4
+ClearScroll     SCREEN_ADR_REG HL, #4000, COLUMN_SCROLL * 8, ROW_SCROLL * 8 - 4
                 LD BC, (SCROLL_WIDTH << 8) | SCROLL_HEIGHT * 8 + 6
                 JP ClearBlock
 
