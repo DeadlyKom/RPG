@@ -24,7 +24,7 @@ Build
                 Convert("Тюрьма")
                 endlua
 .RadioTower     lua allpass
-                Convert("Радио вышка")
+                Convert("Радиовышка")
                 endlua
 
                 endif ; ~ _CORE_MODULE_TEXT_SETTLEMENT_BUILD_

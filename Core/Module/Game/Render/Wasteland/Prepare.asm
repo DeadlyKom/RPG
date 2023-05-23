@@ -12,6 +12,12 @@ Prepare:        ; сохранение текущего счётчика
                 LD HL, (TickCounterRef)
                 LD (.OldTickCounter), HL
 
+                ; проверка необходимости генерации данных
+                CHECK_WORLD_FLAG WORLD_NEED_TO_GENERATE_BIT
+                JR Z, .SkipGenerate
+
+                RES_WORLD_FLAG WORLD_NEED_TO_GENERATE_BIT                       ; сброс флага, генерации данных
+
                 ; генерация спрайтов для пустоши
                 CALL Execute.WastelandSpr
 
@@ -23,7 +29,7 @@ Prepare:        ; сохранение текущего счётчика
                 ; копирования в базовый экран
                 CALL Func.BaseScrcpy
 
-                ; отображение UI пустоши
+.SkipGenerate   ; отображение UI пустоши
                 CALL UI_Draw
 
                 ; отобразить в теневом экране пустошь

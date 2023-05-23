@@ -6,8 +6,8 @@
                 module Settlement
 
                 ifdef _REBUILD
-Frame           EQU $
                 include "Compress.inc"
+Frame           EQU $
 ArtFrame_0      EQU $
 ArtFrame_1      EQU $
                 else

@@ -24,6 +24,7 @@ Begin:          EQU $
                 include "Core/Module/Game/Initialize/PlayGame/Include.inc"
                 include "Core/Module/Game/Initialize/Settlement/Include.inc"
                 include "Core/Module/Game/Initialize/Wasteland/Include.inc"
+                include "Core/Module/Game/Initialize/Map/Include.inc"
 
                 ; draw world map
                 include "Core/Module/Draw/World/Draw.asm"
@@ -79,7 +80,7 @@ Begin:          EQU $
                 include "Core/Module/Game/UI/Include.inc"
 
                 ; AI
-                include "Core/Module/AI/Include.inc"
+                ; include "Core/Module/AI/Include.inc"
 
                 ; SFX
                 include "Core/Module/SFX/Include.inc"

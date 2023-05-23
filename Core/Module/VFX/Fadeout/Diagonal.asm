@@ -8,10 +8,12 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Diagonal_Out:   XOR A
+Diagonal_Out:   ; инициализация переменных
+                XOR A
                 LD (.pv1), A
                 LD A, #1F
                 LD (.pv2), A
+
                 SHOW_BASE_SCREEN                                                ; отобразить основной экран
 
 .Loop           HALT

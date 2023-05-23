@@ -8,7 +8,13 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Diagonal_In:    SET_SCREEN_SHADOW                                               ; установка страницы теневого экрана
+Diagonal_In:    ; инициализация переменных
+                LD A, #1C
+                LD (.pv1), A
+                LD A, #03
+                LD (.pv2), A
+
+                SET_SCREEN_SHADOW                                               ; установка страницы теневого экрана
 
 .Loop           HALT
 .pv1            EQU $+1

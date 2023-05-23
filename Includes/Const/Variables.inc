@@ -35,6 +35,7 @@ GameState           EQU Adr.GameState                                           
 .Hardware           EQU GameState + FGameState.Hardware                         ; флаги железа
 .Objects            EQU GameState + FGameState.Objects                          ; количество объектов в массиве
 .Settlement         EQU GameState + FGameState.Settlement                       ; количество поселений в массиве
+.ExecuteID          EQU GameState + FGameState.ExecuteID                        ; идентификатор запуска блока
 .CharacterID        EQU GameState + FGameState.CharacterID                      ; ID отображаемого персонажа
 .CharacterState     EQU GameState + FGameState.CharacterState                   ; состояние отображаемого персонажа
 .MenuID             EQU GameState + FGameState.MenuID                           ; тип меню

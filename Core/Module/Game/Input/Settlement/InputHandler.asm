@@ -90,6 +90,7 @@ Selected:       ; установка флага обновления, необх
 
                 ; установка флага завершения цикла
                 SET_MENU_FLAGS MENU_LOOP
+                SET_WORLD_FLAG WORLD_NEED_TO_GENERATE_BIT                       ; установка флага, генерации данных
 
                 RET
 

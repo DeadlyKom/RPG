@@ -12,6 +12,8 @@ UI:
                 display " - Weapon UI:\t\t\t\t\t\t", /A, .Weapon, " = busy [ ", /D, $ - .Weapon, " bytes  ]"
 .SettleFrame    include "UI/Settlement/Include.inc"
                 display " - Settlement UI:\t\t\t\t\t", /A, .SettleFrame, " = busy [ ", /D, $ - .SettleFrame, " bytes  ]"
+.MapFrame       include "UI/Map/Include.inc"
+                display " - Map UI:\t\t\t\t\t\t", /A, .MapFrame, " = busy [ ", /D, $ - .MapFrame, " bytes  ]"
 .Charecters     include "UI/Charecter/Include.inc"
                 display " - Charecters UI:\t\t\t\t\t", /A, .Charecters, " = busy [ ", /D, $ - .Charecters, " bytes  ]"
 Cars:

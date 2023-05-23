@@ -17,6 +17,7 @@ MainMenu        EQU Packs.MainMenu.Begin                                        
 PlayGame        EQU Packs.PlayGame.Begin                                        ; адрес расположения блока "начало игры"
 Settlement      EQU Packs.Settlement.Begin                                      ; адрес расположения блока "поселение"
 Wasteland       EQU Packs.Wasteland.Begin                                       ; адрес расположения блока "пустошь"
+Map             EQU Packs.Map.Begin                                             ; адрес расположения блока "карта"
 
                 endmodule
                 module Module

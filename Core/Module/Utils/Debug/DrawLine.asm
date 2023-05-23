@@ -89,4 +89,6 @@ DrawLine:       ; инициализация
 
                 RET
 
+                display " - DrawLine:\t\t\t[DEBUG]\t\t\t", /A, DrawLine, " = busy [ ", /D, $ - DrawLine, " bytes  ]"
+
                 endif ; ~_DRAW_LINE_

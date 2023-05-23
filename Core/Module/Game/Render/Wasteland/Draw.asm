@@ -55,13 +55,13 @@ Draw:           ; -----------------------------------------
                 ; -----------------------------------------
                 CALL UI.Update
 
-                ifdef _DEBUG
-                SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
-                LD DE, #0000
-                CALL Console.SetCursor
-                LD BC, (PlayerState.DebugX)
-                CALL Console.DrawWord
-                endif
+                ; ifdef _DEBUG
+                ; SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
+                ; LD DE, #0000
+                ; CALL Console.SetCursor
+                ; LD BC, (PlayerState.DebugX)
+                ; CALL Console.DrawWord
+                ; endif
 
                 ; -----------------------------------------
                 ; готовность экрана

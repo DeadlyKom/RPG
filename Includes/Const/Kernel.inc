@@ -53,6 +53,7 @@ Execute
 .Settlement     EQU Kernel.Execute.Settlement                                   ; запуск поселение
 .Wasteland      EQU Kernel.Execute.Wasteland                                    ; запуск пустоши
 .WastelandSpr   EQU Kernel.Execute.WastelandSpr                                 ; запуск генерация спрайтов для пустоши
+.Map            EQU Kernel.Execute.Map                                          ; запуск карты
 
 ; generate
 Generate:
@@ -182,11 +183,11 @@ Decompressor
 UI
 .CharTick       EQU Kernel.UI.Charecter.Tick                                    ; тик анимации персонажа
 ; AI
-AI
-.SetBTS_UNKNOW  EQU Kernel.AI.SetBTS_UNKNOW
-.SetBTS_RUNNING EQU Kernel.AI.SetBTS_RUNNING
-.SetBTS_FAILURE EQU Kernel.AI.SetBTS_FAILURE
-.SetBTS_SUCCESS EQU Kernel.AI.SetBTS_SUCCESS
+; AI
+; .SetBTS_UNKNOW  EQU Kernel.AI.SetBTS_UNKNOW
+; .SetBTS_RUNNING EQU Kernel.AI.SetBTS_RUNNING
+; .SetBTS_FAILURE EQU Kernel.AI.SetBTS_FAILURE
+; .SetBTS_SUCCESS EQU Kernel.AI.SetBTS_SUCCESS
 
 ; sound
 SFX

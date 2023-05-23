@@ -130,4 +130,6 @@ DrawRectangle:  LD (.Start), HL
 .Start          DW #0000                                                        ; High - y, Low - x
 .End            DW #0000                                                        ; High - y, Low - x
 
+                display " - DrawAABB:\t\t\t[DEBUG]\t\t\t", /A, DrawAABB, " = busy [ ", /D, $ - DrawAABB, " bytes  ]"
+
                 endif ; ~_CORE_MODULE_OPEN_WORLD_OBJECT_COLLISION_PREPARE_DRAW_AABB_

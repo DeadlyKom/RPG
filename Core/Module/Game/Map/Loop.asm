@@ -1,6 +1,6 @@
 
-                ifndef _CORE_MODULE_GAME_LOOP_WASTELAND_
-                define _CORE_MODULE_GAME_LOOP_WASTELAND_
+                ifndef _CORE_MODULE_GAME_LOOP_MAP_
+                define _CORE_MODULE_GAME_LOOP_MAP_
 ; -----------------------------------------
 ; игровой цикл поселения
 ; In:
@@ -15,8 +15,7 @@ Loop:
 
                 ; проверка завершение цикла главного меню
                 CHECK_MENU_FLAG MENU_LOOP_BIT
-.FuncDraw       EQU $+1
-                JP Z, $
+                JP Z, Render.Draw
 
                 ; сброс флага завершение цикла
                 RES_MENU_FLAG MENU_LOOP_BIT
@@ -27,10 +26,10 @@ Loop:
 
                 ; выбор запускаемого блока
                 LD A, (GameState.ExecuteID)
-                CP EXECUTE_ID_MAP                                               ; идентификатор запуска "карта"
-                JP Z, Execute.Map                                               ; цикл завершён, запуска блока "карта"
+                CP EXECUTE_ID_WASTELAND                                         ; идентификатор запуска "пустошь"
+                JP Z, Execute.Wasteland                                         ; цикл завершён, запуска блока "пустошь"
 
                 ; цикл завершён
                 JR$
 
-                endif ; ~_CORE_MODULE_GAME_LOOP_WASTELAND_
+                endif ; ~_CORE_MODULE_GAME_LOOP_MAP_
