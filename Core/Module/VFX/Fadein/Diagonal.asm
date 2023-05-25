@@ -28,7 +28,7 @@ Diagonal_In:    ; инициализация переменных
                 ADD HL, HL
                 ADD HL, HL
                 LD C, E
-                LD B, #D8
+                LD B, #58
                 ADD HL, BC
 
                 CALL .CopyChar

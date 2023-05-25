@@ -6,7 +6,7 @@ GenWasteland    EQU $
 
                 DISP Adr.SharedBuffer                                           ; модификация адреса компиляции с блока общего кода
 ; -----------------------------------------
-; генерация
+; генерация спрайтов пустоши (тайлопары)
 ; In:
 ; Out:
 ; Corrupt:
@@ -225,6 +225,8 @@ GenWastelandSpr SET_PAGE_GRAPHICS_1                                             
 ;   A - ID тайлопары
 ;   C - номер левого индекса
 ; Out:
+;   IX - адрес левого тайла (не сдвигаемый)
+;   IY - адрес правого тайла (сдвигаемый)
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
@@ -239,8 +241,8 @@ Table:          PUSH BC
                 ; расчёт адреса спрайта
                 ; -----------------------------------------
                 DEC C
-                LD A, C
-                OR A
+                ; LD A, C
+                ; OR A
                 JR NZ, .Shift
 
                 ; address = Adr.WorldSpr + LeftIndex * 32
@@ -434,7 +436,7 @@ TableTilepairs  DB #00, #00 ; 0
 
                 ENT                                                             ; отмена модификации адреса компиляции
 GenWastelandSpr.Size   EQU $-GenWasteland
-                display " - Wasteland sprite generatuion: \t[", /D, TableTilepairs.Num, " tilepairs]\t", /A, GenWasteland, " = busy [ ", /D, GenWastelandSpr.Size, " bytes  ]"
+                display " - Wasteland sprite generatuion:\t[", /D, TableTilepairs.Num, " tilepairs]\t", /A, GenWasteland, " = busy [ ", /D, GenWastelandSpr.Size, " bytes  ]"
 
                 endmodule
 

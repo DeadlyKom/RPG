@@ -30,6 +30,9 @@ VFX_Draw:       SHOW_BASE_SCREEN                                                
                 LD HL, Packs.Wasteland.Render.Draw
                 LD (Packs.Wasteland.Loop.FuncDraw), HL
 
+                ; инициализация обработчика прерываний
+                SetUserHendler Packs.Wasteland.Interrupt
+
                 RET
 
 .WastelandText  BYTE "Wasteland\0"

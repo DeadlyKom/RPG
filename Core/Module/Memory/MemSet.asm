@@ -32,83 +32,48 @@ SafeFill_32:    RestoreDE
                 LD (MS_ContainerSP), SP
                 LD SP, HL
                 JP MemSet_32
-SafeFill_Screen RestoreDE
+SafeFill_Screen LD IX, MemSet_768                                               ; 768 * 6 = 6144
+                JR SafeFill
+SafeFill_4096:  LD IX, MemSet_512                                               ; 512 * 8 = 4096
+                JR SafeFill
+SafeFill_2048:  LD IX, MemSet_256                                               ; 256 * 8 = 2048
+                JR SafeFill
+SafeFill_1024:  LD IX, MemSet_128                                               ; 128 * 8 = 1024
+; -----------------------------------------
+; вызов 8 цепочек функции заполнении
+; In:
+;   HL  - адрес блока памяти для заполнения
+;   DE  - значение для заполнения
+;   IX  - адрес функции заполнения
+; Out:
+; Corrupt:
+;   HL, DE, AF, IX
+; Note:
+;   адрес блока должен учитываться с размером заполняемой области
+;   т.к. заполнение происходит используя стек и PUSH
+; -----------------------------------------
+SafeFill:       RestoreDE
                 LD (.ContainerSP), SP
                 LD SP, HL
-                LD A, #23
+                LD A, #23                                                       ; INC HL
                 LD (MS_ContainerSP - 1), A
                 LD (MS_ContainerSP + 0), A
-                LD A, #E9
+                LD A, #E9                                                       ; JP (HL)
                 LD (MS_ContainerSP + 1), A
-                LD IX, MemSet_768
                 LD HL, .Jumps
-.Jumps          dup 8
+.Jumps          dup 7
                 JP (IX)
                 edup
-.ContainerSP    EQU $+1
-                LD SP, #0000
                 LD A, #31
                 LD (MS_ContainerSP - 1), A
-                RET
-SafeFill_4096:  RestoreDE
-                LD (.ContainerSP), SP
-                LD SP, HL
-                LD A, #23
-                LD (MS_ContainerSP - 1), A
-                LD (MS_ContainerSP + 0), A
-                LD A, #E9
-                LD (MS_ContainerSP + 1), A
-                LD IX, MemSet_512
-                LD HL, .Jumps
-.Jumps          dup 8
+.ContainerSP    EQU $+1
+                LD HL, #0000
+                LD (MS_ContainerSP + 0), HL
                 JP (IX)
-                edup
-.ContainerSP    EQU $+1
-                LD SP, #0000
-                LD A, #31
-                LD (MS_ContainerSP - 1), A
-                RET
-SafeFill_2048:  RestoreDE
-                LD (.ContainerSP), SP
-                LD SP, HL
-                LD A, #23
-                LD (MS_ContainerSP - 1), A
-                LD (MS_ContainerSP + 0), A
-                LD A, #E9
-                LD (MS_ContainerSP + 1), A
-                LD IX, MemSet_512
-                LD HL, .Jumps
-.Jumps          dup 4
-                JP (IX)
-                edup
-.ContainerSP    EQU $+1
-                LD SP, #0000
-                LD A, #31
-                LD (MS_ContainerSP - 1), A
-                RET
-SafeFill_1024:  RestoreDE
-                LD (.ContainerSP), SP
-                LD SP, HL
-                LD A, #23
-                LD (MS_ContainerSP - 1), A
-                LD (MS_ContainerSP + 0), A
-                LD A, #E9
-                LD (MS_ContainerSP + 1), A
-                LD IX, MemSet_512
-                LD HL, .Jumps
-.Jumps          dup 2
-                JP (IX)
-                edup
-.ContainerSP    EQU $+1
-                LD SP, #0000
-                LD A, #31
-                LD (MS_ContainerSP - 1), A
-                RET
 SafeFill_768:   ; 768
                 RestoreDE
                 LD (MS_ContainerSP), SP
                 LD SP, HL
-
 MemSet_768:     dup 128                                                         ; 128 * 2 = 256 bytes
                 PUSH DE
                 edup

@@ -21,9 +21,6 @@ Wasteland:      ; установка бордюра
                 ; инициализация главного цикла
                 SetGameLoop Packs.Wasteland.Loop
 
-                ; инициализация обработчика прерываний
-                SetUserHendler Packs.Wasteland.Interrupt
-
                 RET
 
                 endif ; ~_CORE_MODULE_GAME_INITIALIZE_WASTELAND_

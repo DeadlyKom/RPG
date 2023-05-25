@@ -23,7 +23,7 @@ Map:            ; установка бордюра
                 ; сброс параметров
                 LD HL, PlayerState.Health
                 LD DE, PlayerState.Health+1
-                LD BC, 9
+                LD BC, #09
                 LD (HL), #00
                 LDIR
 

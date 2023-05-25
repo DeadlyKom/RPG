@@ -59,6 +59,16 @@ SET_WORLD_FLAG macro FlagBit?
                 SET_FLAG FlagBit?
                 endm
 ; -----------------------------------------
+; установка World флагов
+; In:
+; Out:
+; Corrupt:
+; -----------------------------------------
+SET_WORLD_FLAGS macro Flags?
+                WORLD_FLAGS
+                SET_FLAGS Flags?
+                endm
+; -----------------------------------------
 ; сброс World флага
 ; In:
 ; Out:

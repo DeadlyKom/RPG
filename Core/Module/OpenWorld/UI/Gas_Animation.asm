@@ -20,8 +20,8 @@ Gas_Anim        ; проверка что количество бензака м
                 OR VISIBLE_GAS
                 JR .SetVisible
 
-.Less           ; проверка что предыдущие кадры были отрисованы
-                LD HL, PlayerState.Wasteland_RF
+.Less           ; проверка отрисовки предыдущих кадров
+                LD HL, PlayerState.Wasteland_SF
                 LD A, (HL)
                 AND RENDER_GAS_FORCE
                 RET NZ
@@ -37,6 +37,7 @@ Gas_Anim        ; проверка что количество бензака м
 .SetVisible     LD (PlayerState.Wasteland_SF), A
 
                 ; установка значения по умолчанию
+                LD HL, .Delay
                 LD (HL), #09                                                    ; темп мигания
                 
                 ; установить флаг обновления
