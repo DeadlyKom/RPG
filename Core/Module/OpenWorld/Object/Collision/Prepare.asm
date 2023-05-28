@@ -84,4 +84,6 @@ Prepare:        LD HL, SortBuffer
 
                 RET
 
+                display "\t- Prepare:\t\t\t\t\t", /A, Prepare, " = busy [ ", /D, $ - Prepare, " bytes  ]"
+
                 endif ; ~_CORE_MODULE_OPEN_WORLD_OBJECT_COLLISION_PREPARE_

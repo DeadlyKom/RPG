@@ -43,4 +43,6 @@ Gas_Tick:       LD A, (IX + FObject.EnginePower)
 
 .Distance       DW -32768                                                       ; расход бензака
 
+                display "\t- Gas tick:\t\t\t\t\t", /A, Gas_Tick, " = busy [ ", /D, $ - Gas_Tick, " bytes  ]"
+
                 endif ; ~_CORE_MODULE_OPEN_WORLD_WASTELAND_UI_GAS_TICK_

@@ -3,6 +3,8 @@
                 define _CORE_MODULE_OPEN_WORLD_WASTELAND_INCLUDE_      
 
                 module Wasteland
+
+                display " - Game 'Wasteland':\t\t\t\t\t", /A, Begin, " = busy [ ", /D, Size, " bytes  ]"
 Begin           EQU $
                 include "Camera.asm"
                 include "Generate.asm"
@@ -13,8 +15,7 @@ Begin           EQU $
                 include "MoveRight.asm"
                 include "MoveDown.asm"
                 include "MoveLeft.asm"
-
-                display " - Game 'Wasteland':\t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
+Size            EQU $-Begin
 
                 endmodule
 

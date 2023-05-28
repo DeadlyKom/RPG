@@ -4,6 +4,9 @@
 
                 module Initialize
 
+                display " - Spawn bject:\t\t\t\t\t", /A, Begin, " = busy [ ", /D, Size, " bytes  ]"
+Begin           EQU $
+
                 include "Core.asm"
                 include "Initialize.asm"
                 include "Spawn.asm"
@@ -12,6 +15,7 @@
                 include "Spawn_Decal.asm"
                 include "Spawn_Particle.asm"
                 include "Spawn_Mine.asm"
+Size            EQU $-Begin
 
                 endmodule
 

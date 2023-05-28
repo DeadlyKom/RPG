@@ -31,7 +31,7 @@ Gen_PRNG:       ; установка seed
 
                 RET
 
-                display "\t- PRNG generator:\t\t\t\t", /A, Gen_PRNG, " = busy [ ", /D, $ - Gen_PRNG, " bytes  ]"
+                display " - PRNG generator:\t\t\t\t\t", /A, Gen_PRNG, " = busy [ ", /D, $ - Gen_PRNG, " bytes  ]"
 
                 endmodule
 

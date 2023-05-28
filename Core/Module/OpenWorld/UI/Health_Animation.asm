@@ -33,4 +33,6 @@ Health_Anim     ; отсчёт задержки
                 RET
 .Delay          DB #04
 
+                display "\t- Health animation:\t\t\t\t", /A, Health_Anim, " = busy [ ", /D, $ - Health_Anim, " bytes  ]"
+
                 endif ; ~_CORE_MODULE_OPEN_WORLD_WASTELAND_UI_HEALTH_TICK_ANIMATION_

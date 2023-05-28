@@ -11,7 +11,7 @@ Begin           EQU $
                 include "Spawn_Mine.asm"
                 include "Spawn_Explosion.asm"
 
-                display " - Update object 'PLAYER':\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
+                display "\t- Update object 'PLAYER':\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
 
                 endmodule
 

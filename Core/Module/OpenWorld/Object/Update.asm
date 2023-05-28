@@ -70,4 +70,6 @@ Update:         ; переход в зависимости от типа объ�
  
 .RET            RET
 
+                display "\t- Update:\t\t\t\t\t", /A, Update, " = busy [ ", /D, $ - Update, " bytes  ]"
+
                 endif ; ~_CORE_MODULE_OPEN_WORLD_OBJECT_UPDATE_

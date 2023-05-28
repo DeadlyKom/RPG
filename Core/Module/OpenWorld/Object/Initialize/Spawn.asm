@@ -76,6 +76,6 @@ Spawn:          ; поиск свободной ячейки
                 ; 7
                 JP $
 
-                display " - Spawn object in world : \t\t\t\t", /A, Spawn, " = busy [ ", /D, $ - Spawn, " bytes  ]"
+                display "\t- Spawn object in world :\t\t\t", /A, Spawn, " = busy [ ", /D, $ - Spawn, " bytes  ]"
 
                 endif ; ~ _CORE_MODULE_OPEN_WORLD_OBJECT_SPAWN_

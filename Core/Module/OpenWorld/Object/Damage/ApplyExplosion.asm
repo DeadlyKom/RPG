@@ -13,4 +13,6 @@ ApplyExplosion: LD A, (IX + FObject.Character.Health)
                 SUB 120
                 JR Apply
 
+                display "\t- Apply explosion:\t\t\t\t", /A, ApplyExplosion, " = busy [ ", /D, $ - ApplyExplosion, " bytes  ]"
+
                 endif ; ~ _CORE_MODULE_OPEN_WORLD_OBJECT_DAMAGE_APPLY_EXPLOSION_

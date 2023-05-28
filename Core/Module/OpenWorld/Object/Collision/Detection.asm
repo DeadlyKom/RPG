@@ -112,4 +112,6 @@ Detection:      ; проверка наличия объектов в масси
 
                 RET
 
+                display "\t- Detection:\t\t\t\t\t", /A, Detection, " = busy [ ", /D, $ - Detection, " bytes  ]"
+
                 endif ; ~_CORE_MODULE_OPEN_WORLD_OBJECT_COLLISION_DETECTION_

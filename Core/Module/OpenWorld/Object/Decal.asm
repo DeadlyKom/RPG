@@ -104,6 +104,6 @@ Decal:          RES VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                
 
                 RET
 
-                display " - Update object 'DECAL':\t\t\t\t", /A, Decal, " = busy [ ", /D, $ - Decal, " bytes  ]"
+                display "\t- Update object 'DECAL':\t\t\t", /A, Decal, " = busy [ ", /D, $ - Decal, " bytes  ]"
 
                 endif ; ~_CORE_MODULE_OPEN_WORLD_OBJECT_UPDATE_DECAL_

@@ -68,6 +68,6 @@ NPC:            ; -----------------------------------------
                 OR A                                                            ; успешный спавн
                 RET
 
-                display " - Spawn object 'NPC' in world:\t\t\t", /A, NPC, " = busy [ ", /D, $ - NPC, " bytes  ]"
+                display "\t- Spawn object 'NPC' in world:\t\t\t", /A, NPC, " = busy [ ", /D, $ - NPC, " bytes  ]"
 
                 endif ; ~ _CORE_MODULE_OPEN_WORLD_OBJECT_SPAWN_NPC_

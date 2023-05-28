@@ -50,4 +50,6 @@ ApplyVehicle:   LD HL, (IY + FObject.Velocity.X)
                 SUB H
                 JR Apply
 
+                display "\t- Apply vehicle:\t\t\t\t", /A, ApplyVehicle, " = busy [ ", /D, $ - ApplyVehicle, " bytes  ]"
+
                 endif ; ~ _CORE_MODULE_OPEN_WORLD_OBJECT_DAMAGE_APPLY_VEHICLE_

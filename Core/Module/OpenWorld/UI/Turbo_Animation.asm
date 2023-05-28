@@ -43,4 +43,6 @@ Turbo_Anim      ; проверка включенного турбонаддув
                 RET
 .Delay          DB #02
 
+                display "\t- Turbo animation:\t\t\t\t", /A, Turbo_Anim, " = busy [ ", /D, $ - Turbo_Anim, " bytes  ]"
+
                 endif ; ~_CORE_MODULE_OPEN_WORLD_WASTELAND_UI_TURBO_TICK_ANIMATION_

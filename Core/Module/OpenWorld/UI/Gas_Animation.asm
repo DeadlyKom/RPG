@@ -49,4 +49,6 @@ Gas_Anim        ; проверка что количество бензака м
                 RET
 .Delay          DB #09
 
+                display "\t- Gas animation:\t\t\t\t", /A, Gas_Anim, " = busy [ ", /D, $ - Gas_Anim, " bytes  ]"
+
                 endif ; ~_CORE_MODULE_OPEN_WORLD_WASTELAND_UI_GAS_TICK_ANIMATION_

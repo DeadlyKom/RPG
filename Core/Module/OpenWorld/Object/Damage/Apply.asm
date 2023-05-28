@@ -15,4 +15,6 @@ Apply:          JR NC, .IsLive
 .IsLive         LD (IX + FObject.Character.Health), A
                 RET
 
+                display "\t- Apply:\t\t\t\t\t", /A, Apply, " = busy [ ", /D, $ - Apply, " bytes  ]"
+
                 endif ; ~ _CORE_MODULE_OPEN_WORLD_OBJECT_DAMAGE_APPLY_

@@ -62,4 +62,6 @@ Bar_Animation   ; проверка обнуление счётчика заде�
                 DEC D
                 JP Packs.Wasteland.Render.UI.DecBar
 
+                display "\t- Bar animation:\t\t\t\t", /A, Bar_Animation, " = busy [ ", /D, $ - Bar_Animation, " bytes  ]"
+
                 endif ; ~_CORE_MODULE_OPEN_WORLD_WASTELAND_UI_BAR_TICK_ANIMATION_

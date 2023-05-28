@@ -17,4 +17,6 @@ Handler:        ; количество обрабатываемых объект
                 CALL Prepare
                 JP Detection
 
+                display "\t- Handler:\t\t\t\t\t", /A, Handler, " = busy [ ", /D, $ - Handler, " bytes  ]"
+
                 endif ; ~_CORE_MODULE_OPEN_WORLD_OBJECT_COLLISION_HANDLER_

@@ -40,6 +40,6 @@ Particle:       ; уменьшить счётчик продолжительно
                 CALL UpdateOffset
                 JP Packs.OpenWorld.Object.Update.Velocity
 
-                display " - Update object 'PARTICLE':\t\t\t\t", /A, Particle, " = busy [ ", /D, $ - Particle, " bytes  ]"
+                display "\t- Update object 'PARTICLE':\t\t\t", /A, Particle, " = busy [ ", /D, $ - Particle, " bytes  ]"
 
                 endif ; ~_CORE_MODULE_OPEN_WORLD_OBJECT_UPDATE_PARTICLE_

@@ -73,6 +73,6 @@ Particle:       ; -----------------------------------------
                 ; PARTICLE_EXPLOSION                                            ; 0x02
                 FParticleConst { #F1, (#04 - 1) << 3,  #03 }
 
-                display " - Spawn object 'PARTICLE' in world :\t\t\t", /A, Decal, " = busy [ ", /D, $ - Decal, " bytes  ]"
+                display "\t- Spawn object 'PARTICLE' in world :\t\t", /A, Decal, " = busy [ ", /D, $ - Decal, " bytes  ]"
 
                 endif ; ~ _CORE_MODULE_OPEN_WORLD_OBJECT_SPAWN_PARTICLE_

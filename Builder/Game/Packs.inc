@@ -11,5 +11,6 @@
                 include "Pages/Pack 3.inc"
                 include "Pages/Pack 4.inc"
                 include "Pages/Pack 6.inc"
+                include "Pages/Page 7.inc"
 
                 endif ; ~ _BUILDER_GAME_PACKS_

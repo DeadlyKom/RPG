@@ -40,6 +40,6 @@ Gen_Game:       ; инициализация мира
 
                 RET
 
-                display "\t- Generate 'WORLD':\t\t\t\t", /A, Gen_Game, " = busy [ ", /D, $ - Gen_Game, " bytes  ]"
+                display " - Generate 'WORLD':\t\t\t\t\t", /A, Gen_Game, " = busy [ ", /D, $ - Gen_Game, " bytes  ]"
 
                 endif ; ~ _CORE_MODULE_OPEN_WORLD_GENERATE_

@@ -3,6 +3,8 @@
                 define _CORE_MODULE_OPEN_WORLD_WASTELAND_UI_BAR_INCLUDE_
 
                 module UI
+
+                display " - UI:\t\t\t\t\t\t", /A, Begin, " = busy [ ", /D, Size, " bytes  ]"
 Begin           EQU $
                 include "Bar_Animation.asm"
                 include "Health_Animation.asm"
@@ -10,8 +12,7 @@ Begin           EQU $
                 include "Gas_Animation.asm"
                 include "Turbo_Tick.asm"
                 include "Turbo_Animation.asm"
-
-                display "\t- UI animation :\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
+Size            EQU $ - Begin
 
                 endmodule
 

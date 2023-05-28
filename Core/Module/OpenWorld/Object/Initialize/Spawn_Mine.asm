@@ -29,6 +29,6 @@ Mine:           ; -----------------------------------------
                 OR A                                                            ; успешный спавн
                 RET
 
-                display " - Spawn object 'MINE' in world:\t\t\t", /A, Mine, " = busy [ ", /D, $ - Mine, " bytes  ]"
+                display "\t- Spawn object 'MINE' in world:\t\t\t", /A, Mine, " = busy [ ", /D, $ - Mine, " bytes  ]"
 
                 endif ; ~ _CORE_MODULE_OPEN_WORLD_OBJECT_SPAWN_MINE_

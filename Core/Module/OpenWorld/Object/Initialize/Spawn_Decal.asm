@@ -47,6 +47,6 @@ Decal:          ; -----------------------------------------
                 OR A                                                            ; успешный спавн
                 RET
 
-                display " - Spawn object 'DECAL' in world:\t\t\t", /A, Decal, " = busy [ ", /D, $ - Decal, " bytes  ]"
+                display "\t- Spawn object 'DECAL' in world:\t\t", /A, Decal, " = busy [ ", /D, $ - Decal, " bytes  ]"
 
                 endif ; ~ _CORE_MODULE_OPEN_WORLD_OBJECT_SPAWN_DECAL_

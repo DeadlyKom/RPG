@@ -4,9 +4,12 @@
 
                 module Damage
 
+                display " - Damage:\t\t\t\t\t\t", /A, Begin, " = busy [ ", /D, Size, " bytes  ]"
+Begin           EQU $
+                include "Apply.asm"
                 include "ApplyVehicle.asm"
                 include "ApplyExplosion.asm"
-                include "Apply.asm"
+Size            EQU $-Begin
 
                 endmodule
 

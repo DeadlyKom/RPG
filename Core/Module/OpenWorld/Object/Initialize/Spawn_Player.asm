@@ -67,6 +67,6 @@ Player:         ; -----------------------------------------
                 OR A                                                            ; успешный спавн
                 RET
 
-                display " - Spawn object 'PLAYER' in world:\t\t\t", /A, Player, " = busy [ ", /D, $ - Player, " bytes  ]"
+                display "\t- Spawn object 'PLAYER' in world:\t\t", /A, Player, " = busy [ ", /D, $ - Player, " bytes  ]"
 
                 endif ; ~ _CORE_MODULE_OPEN_WORLD_OBJECT_SPAWN_PLAYER_

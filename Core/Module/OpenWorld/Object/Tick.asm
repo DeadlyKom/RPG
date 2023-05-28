@@ -43,4 +43,6 @@ Tick:           ; количество обрабатываемых объект
 
 .ObjectCounter  DB #00
 
+                display "\t- Tick:\t\t\t\t\t\t", /A, Tick, " = busy [ ", /D, $ - Tick, " bytes  ]"
+
                 endif ; ~_CORE_MODULE_OPEN_WORLD_OBJECT_OBJECT_TICK_

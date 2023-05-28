@@ -18,6 +18,6 @@ Mine:           ; уменьшить счётчик продолжительно
 
                 JP Packs.OpenWorld.Object.Player.Spawn_Explosion
 
-                display " - Update object 'MINE':\t\t\t\t", /A, Mine, " = busy [ ", /D, $ - Mine, " bytes  ]"
+                display "\t- Update object 'MINE':\t\t\t\t", /A, Mine, " = busy [ ", /D, $ - Mine, " bytes  ]"
 
                 endif ; ~_CORE_MODULE_OPEN_WORLD_OBJECT_UPDATE_MINE_

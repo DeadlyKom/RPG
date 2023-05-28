@@ -19,6 +19,6 @@ Base:           ; очистка массива объектов
 
                 RET
 
-                display " - Initialize object: \t\t\t\t", /A, Base, " = busy [ ", /D, $ - Base, " bytes  ]"
+                display "\t- Initialize object:\t\t\t\t", /A, Base, " = busy [ ", /D, $ - Base, " bytes  ]"
 
                 endif ; ~ _CORE_MODULE_OPEN_WORLD_OBJECT_INITIALIZE_

@@ -1,7 +1,7 @@
 
                 ifndef _CORE_MODULE_OPEN_WORLD_OBJECT_INITIALIZE_CORE_
                 define _CORE_MODULE_OPEN_WORLD_OBJECT_INITIALIZE_CORE_
-Begin           EQU $
+BeginCore       EQU $
 ; -----------------------------------------
 ; приведение к мировой впозиции
 ; In:
@@ -44,6 +44,6 @@ WorldPosition:   ; установка позиции по горизонтали
 
                 RET
 
-                display " - Initialize core:\t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
+                display "\t- Initialize core:\t\t\t\t", /A, BeginCore, " = busy [ ", /D, $ - BeginCore, " bytes  ]"
 
                 endif ; ~ _CORE_MODULE_OPEN_WORLD_OBJECT_INITIALIZE_CORE_

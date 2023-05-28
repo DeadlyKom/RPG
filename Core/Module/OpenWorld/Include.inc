@@ -6,12 +6,12 @@
 
                 display " - OpenWorld:\t\t\t\t\t\t", /A, Begin, " = busy [ ", /D, Size, " bytes ]"
 Begin           EQU $
+                include "Gen_Game.asm"
+                include "UI/Include.inc"
+                include "Map/Include.inc"
                 include "Utils/Include.inc"
                 include "Object/Include.inc"
                 include "Wasteland/Include.inc"
-                include "Gen_Game.asm"
-
-                include "UI/Include.inc"
 
                 ; generator
                 include "Core/Module/Table/Gen_PRNG.asm"

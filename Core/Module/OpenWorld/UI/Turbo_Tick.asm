@@ -70,4 +70,6 @@ Turbo_Tick:     ; проверка включенного турбонаддув
 .Distance       DW -16                                                          ; расход энергии нагнетателя
 .Delay          DB #09                                                          ; скорость накопления энергии нагнетателя
 
+                display "\t- Turbo tick:\t\t\t\t\t", /A, Turbo_Tick, " = busy [ ", /D, $ - Turbo_Tick, " bytes  ]"
+
                 endif ; ~_CORE_MODULE_OPEN_WORLD_WASTELAND_UI_TURBO_TICK_

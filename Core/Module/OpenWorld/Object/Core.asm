@@ -223,6 +223,6 @@ GetSocket:      ; -----------------------------------------
                 LD D, (HL)
                 RET
 
-                display " - Update core:\t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
+                display "\t- Core:\t\t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
 
                 endif ; ~_CORE_MODULE_OPEN_WORLD_OBJECT_CORE_
