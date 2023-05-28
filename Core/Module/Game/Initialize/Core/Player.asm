@@ -31,14 +31,6 @@ Player:         ; очистка буфера
                 LD A, #04
                 LD (PlayerState.CharacterID), A
 
-                LD HL, #0000
-                LD (PlayerState.CameraPosX + 1), HL
-                LD HL, #0000
-                LD (PlayerState.CameraPosY + 1), HL
-                LD HL, #1000
-                LD (PlayerState.CameraPosX + 3), HL
-                LD (PlayerState.CameraPosY + 3), HL
-
                 RET
 
                 endif ; ~_MODULE_GAME_INITIALIZE_PLAYER_

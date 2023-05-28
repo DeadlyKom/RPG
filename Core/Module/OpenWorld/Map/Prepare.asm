@@ -2,7 +2,7 @@
                 ifndef _CORE_MODULE_OPEN_WORLD_MAP_PREPARE_
                 define _CORE_MODULE_OPEN_WORLD_MAP_PREPARE_
 ; -----------------------------------------
-; подготовка данных для визуализации данных
+; подготовка данных для визуализации карты
 ; In:
 ; Out:
 ; Corrupt:

@@ -1,10 +1,11 @@
 
                 ifndef _CONST_SETTLEMENT_
                 define _CONST_SETTLEMENT_
-SETTLEMENT_EMPTY_ELEMENT        EQU #FF                                             ; свобдный элемент массива
+SETTLEMENT_EMPTY_ELEMENT        EQU #FF                                         ; свобдный элемент массива
 
-SETTLEMENT_SIZE                 EQU 16                                              ; размер структуры поселения
+SETTLEMENT_SIZE                 EQU 16                                          ; размер структуры поселения
 SETTLEMENT_NUM                  EQU Size.Settlement / SETTLEMENT_SIZE
+SETTLEMENT_ADR                  EQU Adr.Settlement                              ; адрес массива структур FSettlement
 
 
 ; тип поселения

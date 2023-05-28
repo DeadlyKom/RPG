@@ -22,7 +22,6 @@ Prepare:        ; сохранение текущего счётчика
                 CALL Execute.WastelandSpr
 
                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
-                CALL Packs.OpenWorld.Tables.Gen_PRNG                            ; генерация PRNG пустоши
                 CALL Packs.OpenWorld.Wasteland.Generate                         ; генерация пустоши (мини карта)
                 CALL Packs.OpenWorld.Wasteland.Initialize                       ; инициализация объектов пустоши
 

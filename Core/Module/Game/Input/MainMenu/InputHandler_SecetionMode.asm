@@ -129,7 +129,7 @@ Select_9:       ; проверка бита затемнения
                 CP MENU_ID_REDEFINE
                 JP Z, RedefineOpBack
                 RET
-StartGame:      SET_MENU_FLAGS MENU_STARTUP | MENU_FADEOUT                      ; установка флага первичной инициализации и эффекта затемнения
+StartGame:      SET_MENU_FLAGS MENU_STARTUP | MENU_UPDTAE | MENU_FADEOUT        ; установка флага первичной инициализации, обновления и эффекта затемнения
 
                 ; включить режим опроса игровых клавиш
                 LD HL, InputFlag

@@ -38,7 +38,7 @@ Lerp:           ; B - A
 
                 RET
 
-                display " - Lerp : \t\t\t\t\t\t", /A, Lerp, " = busy [ ", /D, $ - Lerp, " bytes  ]"
+                display " - Lerp:\t\t\t\t\t\t", /A, Lerp, " = busy [ ", /D, $ - Lerp, " bytes  ]"
 
                 endmodule
 

@@ -159,8 +159,10 @@ Math
 .PopSeed        EQU Kernel.Math.PopSeed
 .PushSeed       EQU Kernel.Math.PushSeed
 .SetSeed16      EQU Kernel.Math.SetSeed16
+.SetSeed32      EQU Kernel.Math.SetSeed32
 .SetSeed80      EQU Kernel.Math.SetSeed80
 .Lerp           EQU Kernel.Math.Lerp
+.Clamp          EQU Kernel.Math.Clamp
 .Mul16x8_16     EQU Kernel.Math.Mul16x8_16
 .Mul16x8_24     EQU Kernel.Math.Mul16x8_24
 .Mul32x8_40     EQU Kernel.Math.Mul32x8_40

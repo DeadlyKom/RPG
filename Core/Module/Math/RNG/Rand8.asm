@@ -35,6 +35,40 @@ SetSeed16:      LD HL, Rand8.Table
 
                 RET
 ; -----------------------------------------
+; set 32-bit seed
+; In :
+;   DEHL - seed
+; Out :
+; Corrupt :
+;   HL
+; Note:
+; -----------------------------------------
+SetSeed32:      LD B, H
+                LD C, L
+
+                LD HL, Rand8.Table
+                LD (HL), D
+                INC L
+                LD (HL), E
+                INC L
+                LD (HL), H
+                INC L
+                LD (HL), L
+                INC L
+                LD (HL), #78
+                INC L
+                LD (HL), #6F
+                INC L
+                LD (HL), #66
+                INC L
+                LD (HL), #74
+                INC L
+                LD (HL), #14
+                INC L
+                LD (HL), #0F
+
+                RET
+; -----------------------------------------
 ; set 80-bit seed
 ; In :
 ;   HLHL' - пакет 1

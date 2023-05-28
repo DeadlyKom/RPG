@@ -9,6 +9,25 @@ MENU_ID_CONTINUE            EQU 0x30
 MENU_ID_OPTIONS             EQU 0x40
 MENU_ID_REDEFINE            EQU 0x50
 
+; меню начала игры
+MENU_ID_KEY_GENERATION      EQU 0x00                                            ; ID меню, ключ генерации
+MENU_ID_DIFFICULTY          EQU 0x01                                            ; ID меню, выбора сложности
+MENU_ID_CLIMATE             EQU 0x02                                            ; ID меню, выбора климата
+MENU_ID_MAP_SIZE            EQU 0x03                                            ; ID меню, выбор размера карты
+MENU_ID_SETTLES_NUM         EQU 0x04
+MENU_ID_PLAY                EQU 0x04                                            ; ID меню, начало
+
+DIFFICULTY_EASY             EQU 0x00                                            ; сложность игры "легко"
+DIFFICULTY_NORMAL           EQU 0x01                                            ; сложность игры "нормально"
+DIFFICULTY_NIGHTMARE        EQU 0x02                                            ; сложность игры "кошмарно"
+DIFFICULTY_HARDCORE         EQU 0x03                                            ; сложность игры "ужасно"
+
+CLIMATE_TEMPERATE           EQU 0x00                                            ; климат "умеренный"
+CLIMATE_HARSH               EQU 0x01                                            ; климат "суровый"
+
+MAP_SIZE_SMALL              EQU 0x00                                            ; размер карты "маленький"
+MAP_SIZE_AVERAGE            EQU 0x01                                            ; размер карты "средний"
+MAP_SIZE_BIG                EQU 0x02                                            ; размер карты "большой"
 
 ; меню поселение
 

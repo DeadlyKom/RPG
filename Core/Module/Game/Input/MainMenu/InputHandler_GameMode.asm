@@ -52,19 +52,20 @@ Right:          CALL Cursor.Next
                 JR Processed
 Selected:       LD HL, GameState.Cursor
                 LD A, (HL)
-                CP Packs.MainMenu.Render.KEY_GEN_ID
-                JR Z, .KeyGen_RND
-                CP Packs.MainMenu.Render.PLAY_ID
+                ; CP Packs.MainMenu.Render.KEY_GEN_ID
+                ; JR Z, .KeyGen_RND
+                CP MENU_ID_PLAY
                 JP Z, .StartGame
 
                 RET
 
-.KeyGen_RND     CALL Math.Rand8
-                LD (GameConfig.Seed+0), A
-                CALL Math.Rand8
-                LD (GameConfig.Seed+1), A
+.KeyGen_RND     ; ToDo установка рандомного слова
+                ; CALL Math.Rand8
+                ; LD (GameConfig.Seed+0), A
+                ; CALL Math.Rand8
+                ; LD (GameConfig.Seed+1), A
 
-                SET_MENU_FLAG MENU_STARTUP_BIT                                  ; установка флага первичной инициализации
+                ; SET_MENU_FLAG MENU_STARTUP_BIT                                  ; установка флага первичной инициализации
                 RET
 
 .StartGame      ; установка флага завершения цикла, первичной инициализации, обновления

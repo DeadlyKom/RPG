@@ -1,7 +1,7 @@
 
                 ifndef _CORE_MODULE_DIALOG_CURSOR_DRAW_
                 define _CORE_MODULE_DIALOG_CURSOR_DRAW_
-HEIGHT_ROW      EQU 9                                                           ; высота строки (в пикселях)
+HEIGHT_ROW      EQU 10                                                           ; высота строки (в пикселях)
 ; -----------------------------------------
 ; отображение курсора
 ; In:
@@ -46,7 +46,7 @@ Draw:           LD HL, GameState.Cursor
                 ; расчёт положение курсора
                 INC A
                 LD B, A
-                LD A, -9
+                LD A, -HEIGHT_ROW
 
 .Mult           ADD A, HEIGHT_ROW
                 DJNZ .Mult

@@ -6,11 +6,11 @@
 
                 include "Draw.asm"
                 include "Main.asm"
-                include "StartGame.asm"
                 include "Continue.asm"
                 include "Options.asm"
                 include "RedefineKeys.asm"
                 include "Fadeout.asm"
+                include "StartGame/Include.inc"
 
                 endmodule
 

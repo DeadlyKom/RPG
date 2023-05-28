@@ -14,8 +14,6 @@ GameConfig          EQU Adr.GameConfig                                          
 
 .Options            EQU GameConfig + FGameConfig.Options                        ; флаги опций
 .Graphics           EQU GameConfig + FGameConfig.Graphics                       ; флаги графики
-.Seed               EQU GameConfig + FGameConfig.Seed                           ; адрес seed текущей сессии
-.Frequency          EQU GameConfig + FGameConfig.Frequency                      ; частота шума перлина
 .Screen             EQU GameConfig + FGameConfig.Screen                         ; текущий адрес рабочего окна
 .SpriteRef          EQU GameConfig + FGameConfig.Sprite                         ; данные спрайта
 .SpriteOffsetRef    EQU GameConfig + FGameConfig.Sprite.Data.Low                ; флаги спрайта (смещение)

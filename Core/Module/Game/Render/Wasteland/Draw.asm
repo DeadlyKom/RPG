@@ -55,13 +55,37 @@ Draw:           ; -----------------------------------------
                 ; -----------------------------------------
                 CALL UI.Update
 
-                ; ifdef _DEBUG
-                ; SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
-                ; LD DE, #0000
-                ; CALL Console.SetCursor
-                ; LD BC, (PlayerState.DebugX)
-                ; CALL Console.DrawWord
-                ; endif
+                ifdef _DEBUG
+                SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
+                ; позиция X
+                LD DE, #0000
+                CALL Console.SetCursor
+                LD A, '('
+                CALL Console.DrawChar
+                LD BC, (PlayerState.CameraPosX + 3)
+                CALL Console.DrawWord
+                LD BC, (PlayerState.CameraPosX + 1)
+                CALL Console.DrawWord
+                ; позиция Y
+                LD A, ','
+                CALL Console.DrawChar
+                LD BC, (PlayerState.CameraPosY + 3)
+                CALL Console.DrawWord
+                LD BC, (PlayerState.CameraPosY + 1)
+                CALL Console.DrawWord
+                LD A, ')'
+                CALL Console.DrawChar
+                ; количество объектов
+                LD DE, #0014
+                CALL Console.SetCursor
+                LD A, (GameState.Objects)
+                CALL Console.DrawByte
+                LD A, '/'
+                ; количество видимых объектов
+                CALL Console.DrawChar
+                LD A, (Packs.Wasteland.Render.OBJ_Draw.Num)
+                CALL Console.DrawByte
+                endif
 
                 ; -----------------------------------------
                 ; готовность экрана

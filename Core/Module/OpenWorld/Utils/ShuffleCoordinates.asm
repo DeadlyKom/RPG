@@ -31,8 +31,8 @@ ShuffleCoord:   ; смешивание координат осей поселе�
                 LD HL, (IX + FSettlement.Location.X.Low)
                 LD DE, (IX + FSettlement.Location.X.High)
 
-                LD C, #00
-                CALL .rot_left_3
+                LD B, #03
+                CALL RotateLeft.Loop
 
                 ; coordx += coordy
                 POP BC
@@ -45,8 +45,8 @@ ShuffleCoord:   ; смешивание координат осей поселе�
                 ; coordy = _rotl(coordy, 5)
                 POP BC
                 POP DE
-                LD C, #00
-                CALL .rot_left_5
+                LD B, #05
+                CALL RotateLeft.Loop
 
                 ; coordy += coordx
 .x_l            EQU $+1
@@ -59,7 +59,8 @@ ShuffleCoord:   ; смешивание координат осей поселе�
                 EX DE, HL
 
                 ; coordy = _rotl(coordy, 4)
-                CALL .rot_left_4
+                LD B, #04
+                CALL RotateLeft
                 PUSH DE
                 PUSH HL
 
@@ -71,21 +72,13 @@ ShuffleCoord:   ; смешивание координат осей поселе�
                 RRCA
                 RRCA
                 XOR C
+                INC A
                 AND #07
-                ADD A, A    ; x2
-                ADD A, A    ; x4
-                ADD A, A    ; x8
-                ADD A, LOW .rot_left_8
-                LD L, A
-                ADC A, HIGH .rot_left_8
-                SUB L
-                LD H, A
-                LD (.rot_left_x), HL
+                LD B, A
 
                 LD HL, (.x_l)
                 LD DE, (.x_h)
-.rot_left_x     EQU $+1
-                CALL $
+                CALL RotateLeft
 
                 ; coordx += coordy
                 POP BC
@@ -93,44 +86,6 @@ ShuffleCoord:   ; смешивание координат осей поселе�
                 EX DE, HL
                 POP BC
                 ADC HL, BC
-
-                RET
-
-.rot_left_8     rept 3
-                ADD HL, HL
-                EX DE, HL
-                ADC HL, HL
-                EX DE, HL
-                LD A, L
-                ADC A, C
-                LD L, A
-                endr
-
-.rot_left_5     ADD HL, HL
-                EX DE, HL
-                ADC HL, HL
-                EX DE, HL
-                LD A, L
-                ADC A, C
-                LD L, A
-
-.rot_left_4     ADD HL, HL
-                EX DE, HL
-                ADC HL, HL
-                EX DE, HL
-                LD A, L
-                ADC A, C
-                LD L, A
-
-.rot_left_3     rept 3
-                ADD HL, HL
-                EX DE, HL
-                ADC HL, HL
-                EX DE, HL
-                LD A, L
-                ADC A, C
-                LD L, A
-                endr
 
                 RET
 

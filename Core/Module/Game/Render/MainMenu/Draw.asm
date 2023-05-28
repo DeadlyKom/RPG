@@ -29,7 +29,7 @@ Draw:           ; счётчик отображаемого экрана
                 CP MENU_ID_MAIN
                 CALL Z, Main
                 CP MENU_ID_START
-                CALL Z, StartGame
+                CALL Z, StartGame.Draw
                 CP MENU_ID_CONTINUE
                 CALL Z, Continue
                 CP MENU_ID_OPTIONS

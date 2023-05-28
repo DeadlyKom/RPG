@@ -8,6 +8,7 @@
                 include "Time.inc"
                 include "Player.inc"
                 include "Settlement.inc"
+                include "GenerateWorld.inc"
                 include "VoronoiDiagram.inc"
 
                 include "Font.inc"

@@ -8,17 +8,9 @@
 ; Out:
 ; Corrupt:
 ; Note:
+;   должен быть установлен seed генерации
 ; -----------------------------------------
-Gen_PRNG:       ; установка seed
-                LD BC, (GameConfig.Seed)
-                CALL Math.SetSeed16
-                CALL Math.Rand8
-                
-                ; установка frequency
-                LD A, (GameConfig.Frequency)
-                LD (Math.PN_Frequency), A
-
-                ; инициализация генерации
+Gen_PRNG:       ; инициализация генерации
                 LD HL, Adr.PRNG
 
 .Loop           ; генерация таблицы PRNG

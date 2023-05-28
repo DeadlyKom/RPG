@@ -4,6 +4,8 @@
 
                 module Text
 
+                ; -----------------------------------------
+
                 ifdef _REBUILD
 BeginSettle
                 include "Original/Adjective.inc"
