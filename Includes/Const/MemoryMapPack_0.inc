@@ -18,11 +18,11 @@ Settlement      EQU #0100                                                       
 
                 module Adr
 Object          EQU MemBank_03                                                  ; адрес массива объектов
-Settlement      EQU Adr.Object + Size.Object                                    ; адрес массива поселений       (выравнен 1024 байт)
-Region          EQU Adr.Settlement + Size.Settlement                            ; адрес массива регионов
+Region          EQU Adr.Object + Size.Object                                    ; адрес массива регионов            (выравнен 1024 байт)
+Settlement      EQU Adr.Region + Size.Region                                    ; адрес массива поселений
 
                 module Block0
-Code            EQU Adr.Region + Size.Region                                    ; адрес блока "генерацией мира"
+Code            EQU Adr.Settlement + Size.Settlement                            ; адрес блока "генерацией мира"
 
                 endmodule
                 module Module

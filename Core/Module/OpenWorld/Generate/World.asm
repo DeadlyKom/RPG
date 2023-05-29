@@ -108,11 +108,11 @@ World:          ; получение хеш из строки
 .RND_16         EXX
                 CALL Math.Rand8
                 EXX
-                LD L, A
+                LD H, A
                 EXX
                 CALL Math.Rand8
                 EXX
-                LD H, A
+                LD L, A
                 RET
 
                 display "\t- World:\t\t\t\t\t", /A, World, " = busy [ ", /D, $ - World, " bytes  ]"

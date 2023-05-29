@@ -12,8 +12,8 @@ ArrayAddress    EQU Adr.Object
 ArraySize       EQU Size.Object + Size.Region + Size.Settlement
                 display " - Arrays:\t\t\t\t\t\t", /A, ArrayAddress, " = busy [ ", /D, ArraySize, " bytes ]"
                 display "\t- Object:\t\t\t\t\t", /A, Adr.Object, " = busy [ ", /D, Size.Object, " bytes ]"
-                display "\t- Settlement:\t\t\t\t\t", /A, Adr.Settlement, " = busy [ ", /D, Size.Settlement, " bytes ]"
                 display "\t- Region:\t\t\t\t\t", /A, Adr.Region, " = busy [ ", /D, Size.Region, " bytes ]"
+                display "\t- Settlement:\t\t\t\t\t", /A, Adr.Settlement, " = busy [ ", /D, Size.Settlement, " bytes ]"
 Begin0:         EQU $
 
                 ; open world

@@ -32,7 +32,7 @@ MainMenu:       ; установка бордюра
                 RET
 
 .DefaultWorld   FGenerateWorld {
-                {"Test Seed\0"},                                                     ; текстовое представление seed генерации мира
+                {"Beaver\0"},                                                     ; текстовое представление seed генерации мира
                 DIFFICULTY_EASY,                                                ; сложность
                 CLIMATE_TEMPERATE,                                              ; климат
                 MAP_SIZE_AVERAGE,                                               ; размер карты

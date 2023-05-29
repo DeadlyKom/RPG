@@ -18,7 +18,7 @@ GetRegion:      LD L, (IX + FSettlement.RegionID)
                 ADD A, A    ; x2
                 ADD A, L    ; x3
                 LD L, A
-                LD H, HIGH SETTLEMENT_ADR >> 2                                  ; выровнен 1024 байт
+                LD H, HIGH REGION_ADR >> 2                                      ; выровнен 1024 байт
                 ADD HL, HL  ; x6
                 ADD HL, HL  ; x12
 

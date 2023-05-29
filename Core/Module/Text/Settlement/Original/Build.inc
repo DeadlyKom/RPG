@@ -3,7 +3,7 @@
                 define _CORE_MODULE_TEXT_SETTLEMENT_BUILD_
 Build
 .Entrance       lua allpass
-                Convert("Главный вход")
+                Convert("Вход")
                 endlua
 .ResidentialArea lua allpass
                 Convert("Жилой район")

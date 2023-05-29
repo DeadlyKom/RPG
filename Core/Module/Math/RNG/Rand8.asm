@@ -79,7 +79,8 @@ SetSeed32:      LD B, H
 ;   IY
 ; Note:
 ; -----------------------------------------
-SetSeed80:      LD IY, Rand8.Table
+SetSeed80:      PUSH IY
+                LD IY, Rand8.Table
                 LD (IY + 0), C
                 LD (IY + 1), B
                 LD (IY + 2), H
@@ -92,6 +93,7 @@ SetSeed80:      LD IY, Rand8.Table
                 LD (IY + 8), D
                 LD (IY + 9), E
                 EXX
+                POP IY
                 RET
 ; -----------------------------------------
 ; сохранить состояние таблицы генерации
