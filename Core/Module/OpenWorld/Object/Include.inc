@@ -4,8 +4,8 @@
 
                 module Object
 
-                display " * Object:\t\t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
-                
+                display " * Object:\t\t\t\t\t\t", /A, Begin, " = busy [ ", /D, Size, " bytes  ]"
+Begin           EQU $
                 include "Core.asm"
                 include "Tick.asm"
                 include "Update.asm"
@@ -18,7 +18,7 @@
                 include "Player/Include.inc"
                 include "Collision/Include.inc"
                 include "Initialize/Include.inc"
-
+Size            EQU $-Begin
                 endmodule
 
                 endif ; ~_CORE_MODULE_OPEN_WORLD_OBJECT_INCLUDE_

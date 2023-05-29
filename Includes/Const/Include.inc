@@ -26,6 +26,8 @@
                 include "Charecter.inc"
                 include "Interrupt.inc"
                 include "Settlement.inc"
+                include "GenerateWorld.inc"
+                include "VoronoiDiagram.inc"
 
                 include "RenderBuffer.inc"
                 include "SharedBuffer.inc"

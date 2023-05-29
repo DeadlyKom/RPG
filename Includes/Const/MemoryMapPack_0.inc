@@ -13,6 +13,7 @@ Pack0           EQU PAGE_0                                                      
 Object          EQU #0400                                                       ; максимально доступный размер для массива объектов
 Region          EQU #0300                                                       ; максимально доступный размер для массива регионов
 Settlement      EQU #0100                                                       ; максимально доступный размер для массива поселений
+FOW             EQU #0400                                                       ; размер тумана войны (90х90 чанков)
 
                 endmodule
 
@@ -20,9 +21,10 @@ Settlement      EQU #0100                                                       
 Object          EQU MemBank_03                                                  ; адрес массива объектов
 Region          EQU Adr.Object + Size.Object                                    ; адрес массива регионов            (выравнен 1024 байт)
 Settlement      EQU Adr.Region + Size.Region                                    ; адрес массива поселений
+FOW             EQU Adr.Settlement + Size.Settlement                            ; адрес буфера тумана войны
 
                 module Block0
-Code            EQU Adr.Settlement + Size.Settlement                            ; адрес блока "генерацией мира"
+Code            EQU Adr.FOW + Size.FOW                                          ; адрес блока "генерацией мира"
 
                 endmodule
                 module Module

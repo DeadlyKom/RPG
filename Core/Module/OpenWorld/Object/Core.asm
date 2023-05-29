@@ -1,7 +1,6 @@
 
                 ifndef _CORE_MODULE_OPEN_WORLD_OBJECT_CORE_
                 define _CORE_MODULE_OPEN_WORLD_OBJECT_CORE_
-Begin           EQU $
 ; -----------------------------------------
 ; обновление позиции мины
 ; In:
@@ -223,6 +222,6 @@ GetSocket:      ; -----------------------------------------
                 LD D, (HL)
                 RET
 
-                display "\t- Core:\t\t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
+                display "\t- Core:\t\t\t\t\t\t", /A, UpdateOffset, " = busy [ ", /D, $ - UpdateOffset, " bytes  ]"
 
                 endif ; ~_CORE_MODULE_OPEN_WORLD_OBJECT_CORE_

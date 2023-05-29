@@ -9,11 +9,12 @@
                 display "\'Pack 0\':\t\t\t\t\t\t-------------------- [ ", /D, Size0, " bytes ]\t [", /D, Page.Module.Pack0, "]\t ------------------------"
 
 ArrayAddress    EQU Adr.Object
-ArraySize       EQU Size.Object + Size.Region + Size.Settlement
+ArraySize       EQU Size.Object + Size.Region + Size.Settlement + Size.FOW
                 display " - Arrays:\t\t\t\t\t\t", /A, ArrayAddress, " = busy [ ", /D, ArraySize, " bytes ]"
                 display "\t- Object:\t\t\t\t\t", /A, Adr.Object, " = busy [ ", /D, Size.Object, " bytes ]"
                 display "\t- Region:\t\t\t\t\t", /A, Adr.Region, " = busy [ ", /D, Size.Region, " bytes ]"
                 display "\t- Settlement:\t\t\t\t\t", /A, Adr.Settlement, " = busy [ ", /D, Size.Settlement, " bytes ]"
+                display "\t- FOW:\t\t\t\t\t\t", /A, Adr.FOW, " = busy [ ", /D, Size.FOW, " bytes ]"
 Begin0:         EQU $
 
                 ; open world

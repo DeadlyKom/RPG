@@ -5,7 +5,10 @@ REGION_EMPTY_ELEMENT        EQU #FF                                             
 
 REGION_SIZE                 EQU 12                                              ; размер структуры объекта
 REGION_ADR                  EQU Adr.Region                                      ; адрес массива структур FRegion
-REGION_NUM                  EQU Size.Region / REGION_SIZE                       ; максимальное количество элементов в масиве1
+REGION_NUM                  EQU Size.Region / REGION_SIZE                       ; максимальное количество элементов в масиве
+
+IDX_REGION_TYPE             EQU %00001111
+IDX_REGION_TYPE_INV         EQU (~IDX_REGION_TYPE) & 0xFF
 
 ; тип региона
 REGION_TYPE_RADIOACTIVE     EQU 0x00                                            ; радиация

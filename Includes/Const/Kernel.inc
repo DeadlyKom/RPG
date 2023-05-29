@@ -159,6 +159,7 @@ Math
 .SetSeed80      EQU Kernel.Math.SetSeed80
 .Lerp           EQU Kernel.Math.Lerp
 .Clamp          EQU Kernel.Math.Clamp
+.Sub32_32       EQU Kernel.Math.Sub32_32
 .Mul16x8_16     EQU Kernel.Math.Mul16x8_16
 .Mul16x8_24     EQU Kernel.Math.Mul16x8_24
 .Mul32x8_40     EQU Kernel.Math.Mul32x8_40

@@ -31,6 +31,7 @@ GameState           EQU Adr.GameState                                           
 .World              EQU GameState + FGameState.World                            ; флаги отрисовки мира
 .Gameplay           EQU GameState + FGameState.Gameplay                         ; флаги геймплея
 .Hardware           EQU GameState + FGameState.Hardware                         ; флаги железа
+.Setting            EQU GameState + FGameState.Setting                          ; флаги настройки игры
 .Objects            EQU GameState + FGameState.Objects                          ; количество объектов в массиве
 .Region             EQU GameState + FGameState.Region                           ; количество регионов в массиве
 .Settlement         EQU GameState + FGameState.Settlement                       ; количество поселений в массиве

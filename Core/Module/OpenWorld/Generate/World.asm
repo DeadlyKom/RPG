@@ -8,7 +8,69 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-World:          ; получение хеш из строки
+World:          ; -----------------------------------------
+                ; инициализация флагов настройки игры
+                ; -----------------------------------------
+                LD A, (IY + FGenerateWorld.MapSize)
+                AND MAP_SIZE_MASK
+                ADD A, A
+                ADD A, A
+                ADD A, A
+                LD C, A
+
+                LD A, (IY + FGenerateWorld.Climate)
+                AND CLIMATE_MASK
+                ADD A, A
+                ADD A, A
+                ADD A, C
+                LD C, A
+
+                LD A, (IY + FGenerateWorld.Difficulty)
+                AND DIFFICULTY_MASK
+                OR C
+                LD (GameState.Setting), A
+
+                ; -----------------------------------------
+                ; инициализация левого верхнего угла
+                ; -----------------------------------------
+                
+                LD HL, (IY + FGenerateWorld.Center.X.Low)
+                LD DE, MAP_SIZE_BIG_SQUARED >> 1
+                EXX
+                LD HL, (IY + FGenerateWorld.Center.X.High)
+                LD DE, #0000
+                ; -----------------------------------------
+                ; вычитание 32-битных чисел
+                ; In :
+                ;   HLHL' - 32-битное уменьшаемое число
+                ;   DEDE' - 32-битное вычитаемое число
+                ; Out :
+                ;   DEHL  - разность 32-битных чисел
+                ; -----------------------------------------
+                CALL Math.Sub32_32
+                LD (Packs.OpenWorld.Map.Prepare.LeftTop_X_Low), HL
+                LD (Packs.OpenWorld.Map.Prepare.LeftTop_X_High), DE
+
+                LD HL, (IY + FGenerateWorld.Center.Y.Low)
+                LD DE, MAP_SIZE_BIG_SQUARED >> 1
+                EXX
+                LD HL, (IY + FGenerateWorld.Center.Y.High)
+                LD DE, #0000
+                ; -----------------------------------------
+                ; вычитание 32-битных чисел
+                ; In :
+                ;   HLHL' - 32-битное уменьшаемое число
+                ;   DEDE' - 32-битное вычитаемое число
+                ; Out :
+                ;   DEHL  - разность 32-битных чисел
+                ; -----------------------------------------
+                CALL Math.Sub32_32
+                LD (Packs.OpenWorld.Map.Prepare.LeftTop_Y_Low), HL
+                LD (Packs.OpenWorld.Map.Prepare.LeftTop_Y_High), DE
+
+                ; -----------------------------------------
+                ; получение хеш из строки
+                ; -----------------------------------------
                 PUSH IY
                 POP HL                                                          ; FGenerateWorld.TextSeed
                 ; -----------------------------------------
@@ -25,7 +87,7 @@ World:          ; получение хеш из строки
 
                 ; установка frequency генератора пустоши (шума Перлина)
                 CALL Math.Rand8
-                LD DE, #2060                                                    ; значение в педелах (64-128)
+                LD DE, #2060                                                    ; значение в педелах (32-96)
                 CALL Math.Clamp
                 LD (Math.PN_Frequency), A
 

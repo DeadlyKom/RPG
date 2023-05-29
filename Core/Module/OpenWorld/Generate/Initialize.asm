@@ -22,6 +22,11 @@ Initialize:     ; генерация PRNG пустоши
                 LD DE, (SETTLEMENT_EMPTY_ELEMENT << 8) | SETTLEMENT_EMPTY_ELEMENT
                 CALL SafeFill.b256
 
+                ; очистка тумана войны
+                LD HL, Adr.FOW + Size.FOW
+                LD DE, #FFFF
+                CALL SafeFill.b1024
+
                 ; очистка количества элементов в массиве регионов
                 LD HL, GameState.Region
                 LD (HL), #00
