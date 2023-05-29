@@ -8,7 +8,9 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-Prepare:        
+Prepare:        LD IX, SETTLEMENT_ADR                                           ; адрес массива 
+                LD IY, SORT_BUF_ADR                                             ; FVoronoiDiagram
+
                 RET
 
                 display "\t- Prepare:\t\t\t\t\t", /A, Prepare, " = busy [ ", /D, $ - Prepare, " bytes  ]"

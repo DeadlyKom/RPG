@@ -4,7 +4,7 @@
 
                 module Initialize
 
-                display " - Spawn bject:\t\t\t\t\t", /A, Begin, " = busy [ ", /D, Size, " bytes  ]"
+                display " * Spawn bject:\t\t\t\t\t", /A, Begin, " = busy [ ", /D, Size, " bytes  ]"
 Begin           EQU $
 
                 include "Core.asm"

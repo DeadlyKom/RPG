@@ -3,9 +3,9 @@
                 define _CONST_SETTLEMENT_
 SETTLEMENT_EMPTY_ELEMENT        EQU #FF                                         ; свобдный элемент массива
 
-SETTLEMENT_SIZE                 EQU 16                                          ; размер структуры поселения
-SETTLEMENT_NUM                  EQU Size.Settlement / SETTLEMENT_SIZE
+SETTLEMENT_SIZE                 EQU 4                                           ; размер структуры поселения
 SETTLEMENT_ADR                  EQU Adr.Settlement                              ; адрес массива структур FSettlement
+SETTLEMENT_NUM                  EQU Size.Settlement / SETTLEMENT_SIZE           ; максимальное количество элементов в масиве
 
 
 ; тип поселения

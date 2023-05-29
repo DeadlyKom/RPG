@@ -4,7 +4,7 @@
 
                 module Collision
 
-                display " - Collision:\t\t\t\t\t\t", /A, Begin, " = busy [ ", /D, Size, " bytes  ]"
+                display " * Collision:\t\t\t\t\t\t", /A, Begin, " = busy [ ", /D, Size, " bytes  ]"
 Begin           EQU $
                 include "Collision.asm"
                 include "Prepare.asm"

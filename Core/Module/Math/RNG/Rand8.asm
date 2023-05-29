@@ -51,9 +51,9 @@ SetSeed32:      LD B, H
                 INC L
                 LD (HL), E
                 INC L
-                LD (HL), H
+                LD (HL), B
                 INC L
-                LD (HL), L
+                LD (HL), C
                 INC L
                 LD (HL), #78
                 INC L

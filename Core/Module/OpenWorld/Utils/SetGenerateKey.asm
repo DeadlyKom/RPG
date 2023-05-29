@@ -4,36 +4,34 @@
 ; -----------------------------------------
 ; установить ключ генерации для поселения
 ; In:
-;   IX - указывает на структуру FSettlement
+;   IY - указывает на структуру FRegion
 ; Out:
-
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-SetGenKey:      LD BC, (IX + FSettlement.Seed)
-                LD HL, (IX + FSettlement.Location.X.Low)
-                LD DE, (IX + FSettlement.Location.X.High)
+SetGenKey:      LD BC, (IY + FRegion.Seed)
+                LD HL, (IY + FRegion.Location.X.Low)
+                LD DE, (IY + FRegion.Location.X.High)
                 EXX
-                LD HL, (IX + FSettlement.Location.Y.Low)
-                LD DE, (IX + FSettlement.Location.Y.High)
+                LD HL, (IY + FRegion.Location.Y.Low)
+                LD DE, (IY + FRegion.Location.Y.High)
                 EXX
                 JP Math.SetSeed80
 ; -----------------------------------------
 ; установить ключ генерации для поселения
 ; In:
-;   IX - указывает на структуру FSettlement
+;   IY - указывает на структуру FRegion
 ; Out:
-
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-SetGenKeyTime:  ; ToDo разбавить позицию текущим временем
-                LD BC, (IX + FSettlement.Seed)
-                LD HL, (IX + FSettlement.Location.X.Low)
-                LD DE, (IX + FSettlement.Location.X.High)
+SetGenKeyTime:  JR$; ToDo разбавить позицию текущим временем
+                LD BC, (IY + FRegion.Seed)
+                LD HL, (IY + FRegion.Location.X.Low)
+                LD DE, (IY + FRegion.Location.X.High)
                 EXX
-                LD HL, (IX + FSettlement.Location.Y.Low)
-                LD DE, (IX + FSettlement.Location.Y.High)
+                LD HL, (IY + FRegion.Location.Y.Low)
+                LD DE, (IY + FRegion.Location.Y.High)
                 EXX
                 JP Math.SetSeed80
 

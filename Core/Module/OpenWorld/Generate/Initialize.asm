@@ -12,10 +12,19 @@
 Initialize:     ; генерация PRNG пустоши
                 CALL Tables.Gen_PRNG
 
+                ; очистка массива регионов
+                LD HL, Adr.Region + Size.Region
+                LD DE, (REGION_EMPTY_ELEMENT << 8) | REGION_EMPTY_ELEMENT
+                CALL SafeFill.b768
+
                 ; очистка массива поселений
                 LD HL, Adr.Settlement + Size.Settlement
                 LD DE, (SETTLEMENT_EMPTY_ELEMENT << 8) | SETTLEMENT_EMPTY_ELEMENT
-                CALL SafeFill.b1024
+                CALL SafeFill.b256
+
+                ; очистка количества элементов в массиве регионов
+                LD HL, GameState.Region
+                LD (HL), #00
 
                 ; очистка количества элементов в массиве поселений
                 LD HL, GameState.Settlement

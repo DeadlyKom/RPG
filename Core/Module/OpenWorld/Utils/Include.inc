@@ -7,13 +7,14 @@ Begin           EQU $
 
                 include "GetHash.asm"
                 include "GetName.asm"
+                include "GetRegion.asm"
                 include "SetGenerateKey.asm"
                 include "CalcSettlement.asm"
                 include "ShuffleCoordinates.asm"
                 include "RotateLeft_x32.asm"
                 include "RotateRight_x32.asm"
 
-                display " - Open world utils:\t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
+                display " * Open world utils:\t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
 
                 endmodule
 

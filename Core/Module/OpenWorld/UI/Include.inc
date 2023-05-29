@@ -4,7 +4,7 @@
 
                 module UI
 
-                display " - UI:\t\t\t\t\t\t", /A, Begin, " = busy [ ", /D, Size, " bytes  ]"
+                display " * UI:\t\t\t\t\t\t", /A, Begin, " = busy [ ", /D, Size, " bytes  ]"
 Begin           EQU $
                 include "Bar_Animation.asm"
                 include "Health_Animation.asm"

@@ -28,6 +28,9 @@ SetPort:        macro Page?, Screen?
 SET_PAGE_OBJECT macro
                 CALL SetPage0
                 endm
+SET_PAGE_BLOK_0 macro
+                CALL SetPage0
+                endm
 ; -----------------------------------------
 ; включение страницы с графикой
 ; -----------------------------------------

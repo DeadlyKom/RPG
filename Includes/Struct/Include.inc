@@ -7,6 +7,7 @@
                 include "Game.inc"
                 include "Time.inc"
                 include "Player.inc"
+                include "Region.inc"
                 include "Settlement.inc"
                 include "GenerateWorld.inc"
                 include "VoronoiDiagram.inc"

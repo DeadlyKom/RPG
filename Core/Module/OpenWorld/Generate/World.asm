@@ -32,47 +32,86 @@ World:          ; получение хеш из строки
                 ; инициализация мира
                 include "Initialize.asm"
 
-                ; ToDo переделать на нормальный
-                LD IX, SETTLEMENT_ADR
-
                 ; -----------------------------------------
                 ; инициализация первого поселения
                 ; -----------------------------------------
 
-                ; тип поселения
-                LD (IX + FSettlement.Type), SETTLEMENT_BEGIN
+                ; -----------------------------------------
+                ; резервирование ячейки региона
+                ; -----------------------------------------
+                ; добавить/зарезервировать ячейку в массиве
+                ; In:
+                ; Out:
+                ;   С  - ID элемента в массиве
+                ;   IX - адрес найденого свободного элемента структуры FRegion
+                ;   флаг переполнения Carry сброшен, если поиск свободного элемента успешен
+                ; -----------------------------------------
+                CALL Region.Add
+                DEBUG_BREAK_POINT_C                                             ; ошибка резервирования ячейки
+
+                ; сохранение ID региона
+                EX AF, AF'
+
+                ; -----------------------------------------
+                ; инициализация региона
+                ; -----------------------------------------
                 
+                ; тип региона
+                LD (IX + FRegion.Type), REGION_TYPE_SETTLEMENT
+
                 ; позиция поселения в мире
                 LD HL, #0000
                 LD (PlayerState.CameraPosX + 1), HL
                 LD (PlayerState.CameraPosY + 1), HL
-                LD (IX + FSettlement.Location.X.Low), HL
-                LD (IX + FSettlement.Location.Y.Low), HL
+                LD (IX + FRegion.Location.X.Low), HL
+                LD (IX + FRegion.Location.Y.Low), HL
                 
                 CALL .RND_16
                 LD (PlayerState.CameraPosX + 3), HL
-                LD (IX + FSettlement.Location.X.High), HL
+                LD (IX + FRegion.Location.X.High), HL
 
                 CALL .RND_16
                 LD (PlayerState.CameraPosY + 3), HL
-                LD (IX + FSettlement.Location.Y.High), HL
+                LD (IX + FRegion.Location.Y.High), HL
+
+                ; радиус влияния поселения
+                LD (IX + FRegion.InfluenceRadius), #08
+
+                ; генерация ключа
+                CALL Math.Rand8
+                LD (IX + FRegion.Seed.Low), A
+                CALL Math.Rand8
+                LD (IX + FRegion.Seed.High), A
+
+                ; -----------------------------------------
+                ; резервирование ячейки поселения
+                ; -----------------------------------------
+                ; добавить/зарезервировать ячейку в массиве
+                ; In:
+                ; Out:
+                ;   A  - ID элемента в массиве
+                ;   IX - адрес найденого свободного элемента структуры FSettlement
+                ;   флаг переполнения Carry сброшен, если поиск свободного элемента успешен
+                ; -----------------------------------------
+                CALL Settlement.Add
+                DEBUG_BREAK_POINT_C                                             ; ошибка резервирования ячейки
+
+                ; установка ID региона
+                EX AF, AF'
+                LD (IX + FSettlement.RegionID), A
 
                 ; доступные строения в поселении
                 LD (IX + FSettlement.Building), BUILDING_ENTRANCE | BUILDING_RESIDENTIAL_AREA; | BUILDING_WAREHOUSE | BUILDING_SHOPPING_AREA | BUILDING_BAR | BUILDING_WORKSHOP | BUILDING_PRISON | BUILDING_RADIO_TOWER
 
-                ; генерация ключа
-                CALL Math.Rand8
-                LD (IX + FSettlement.Seed.Low), A
-                CALL Math.Rand8
-                LD (IX + FSettlement.Seed.High), A
-
                 RET
 
-.RND_16         CALL Math.Rand8
-                EX AF, AF'
+.RND_16         EXX
                 CALL Math.Rand8
+                EXX
                 LD L, A
-                EX AF, AF'
+                EXX
+                CALL Math.Rand8
+                EXX
                 LD H, A
                 RET
 

@@ -15,7 +15,8 @@ PlayGame:       ; установка бордюра
                 CALL Func.ResetFadeout
 
                 ; генерация карты и окружения
-                CALL Generate.World
+                SET_PAGE_BLOK_0                                                 ; включение страницы с блоком кода
+                CALL Packs.OpenWorld.Generate.World
 
                 JP Execute.Settlement
 

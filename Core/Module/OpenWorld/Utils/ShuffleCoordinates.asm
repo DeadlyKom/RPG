@@ -4,7 +4,7 @@
 ; -----------------------------------------
 ; перемешать координаты
 ; In:
-;   IX   - указывает на структуру FSettlement
+;   IY   - указывает на структуру FRegion
 ; Out:
 ;   DEHL - перемешанные значение
 ; Corrupt:
@@ -13,13 +13,13 @@
 ShuffleCoord:   ; смешивание координат осей поселения
 
                 ; coordy += coordx
-                LD HL, (IX + FSettlement.Location.Y.Low)
-                LD BC, (IX + FSettlement.Location.X.Low)
+                LD HL, (IY + FRegion.Location.Y.Low)
+                LD BC, (IY + FRegion.Location.X.Low)
                 ADD HL, BC
                 PUSH HL
                 PUSH HL
-                LD HL, (IX + FSettlement.Location.Y.High)
-                LD BC, (IX + FSettlement.Location.X.High)
+                LD HL, (IY + FRegion.Location.Y.High)
+                LD BC, (IY + FRegion.Location.X.High)
                 ADC HL, BC
                 LD B, H
                 LD C, L
@@ -28,8 +28,8 @@ ShuffleCoord:   ; смешивание координат осей поселе�
                 PUSH BC
 
                 ; coordx = _rotl(coordx, 3)
-                LD HL, (IX + FSettlement.Location.X.Low)
-                LD DE, (IX + FSettlement.Location.X.High)
+                LD HL, (IY + FRegion.Location.X.Low)
+                LD DE, (IY + FRegion.Location.X.High)
 
                 LD B, #03
                 CALL RotateLeft.Loop

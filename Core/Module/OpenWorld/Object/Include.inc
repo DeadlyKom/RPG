@@ -4,7 +4,7 @@
 
                 module Object
 
-                display " - Object:\t\t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
+                display " * Object:\t\t\t\t\t\t", /A, Begin, " = busy [ ", /D, $ - Begin, " bytes  ]"
                 
                 include "Core.asm"
                 include "Tick.asm"

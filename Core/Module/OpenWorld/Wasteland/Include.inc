@@ -4,7 +4,7 @@
 
                 module Wasteland
 
-                display " - Game 'Wasteland':\t\t\t\t\t", /A, Begin, " = busy [ ", /D, Size, " bytes  ]"
+                display " * Game 'Wasteland':\t\t\t\t\t", /A, Begin, " = busy [ ", /D, Size, " bytes  ]"
 Begin           EQU $
                 include "Camera.asm"
                 include "Generate.asm"

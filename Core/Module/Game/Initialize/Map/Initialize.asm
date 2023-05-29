@@ -27,6 +27,10 @@ Map:            ; установка бордюра
                 LD (HL), #00
                 LDIR
 
+                ; подготовка данных карты мира
+                SET_PAGE_BLOK_0                                                 ; включение страницы с блоком кода
+                CALL Packs.OpenWorld.Map.Prepare
+
                 RET
 
                 endif ; ~_CORE_MODULE_GAME_INITIALIZE_MAP_

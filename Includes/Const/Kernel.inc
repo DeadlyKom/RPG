@@ -55,10 +55,6 @@ Execute
 .WastelandSpr   EQU Kernel.Execute.WastelandSpr                                 ; запуск генерация спрайтов для пустоши
 .Map            EQU Kernel.Execute.Map                                          ; запуск карты
 
-; generate
-Generate:
-.World          EQU Kernel.Execute.Gen_World                                    ; запуск генерации мира
-
 ; tables
 Table:
 .ShiftFunc      EQU Kernel.Function.Table.Shift_LD

@@ -7,12 +7,12 @@
                 include "Memory.inc"
                 include "MemoryMap.inc"
                 include "MemoryMapGame.inc"
-                include "MemoryMapObject.inc"
                 include "MemoryMapGraphics.inc"
                 include "MemoryMapPack_0.inc"
                 include "MemoryMapPack_1.inc"
                 include "MemoryMapPack_6.inc"
 
+                include "Map.inc"
                 include "Menu.inc"
                 include "Game.inc"
                 include "Kernel.inc"
@@ -20,10 +20,12 @@
                 include "World.inc"
                 include "Config.inc"
                 include "Render.inc"
+                include "Region.inc"
                 include "Hardware.inc"
                 include "Variables.inc"
                 include "Charecter.inc"
                 include "Interrupt.inc"
+                include "Settlement.inc"
 
                 include "RenderBuffer.inc"
                 include "SharedBuffer.inc"
@@ -40,7 +42,5 @@
                 include "ObjectType_Decal.inc"
                 include "ObjectType_Particle.inc"
                 include "ObjectType_Interaction.inc"
-
-                include "Settlement.inc"
 
                 endif ; ~_CONST_INCLUDES_

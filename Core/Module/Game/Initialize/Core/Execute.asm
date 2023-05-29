@@ -28,15 +28,6 @@ Player:         SET_PAGE_BLOK_6                                                 
 ; -----------------------------------------
 Input:          SET_PAGE_BLOK_6                                                 ; включение страницы с блоком кода
                 JP Packs.Initialize.Input
-; -----------------------------------------
-; запуск генерации мира
-; In:
-; Out:
-; Corrupt:
-; Note:
-; -----------------------------------------
-Gen_World:      SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
-                JP Packs.OpenWorld.Generate.World
 
                 display " - Game execute 'Base':\t\t\t\t", /A, Core, " = busy [ ", /D, $ - Core, " bytes  ]"
 
