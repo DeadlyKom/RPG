@@ -2,7 +2,7 @@
                 ifndef _CORE_MODULE_GAME_INITIALIZE_MAP_
                 define _CORE_MODULE_GAME_INITIALIZE_MAP_
 ; -----------------------------------------
-; инициализация поселения
+; инициализация карты мира
 ; In:
 ; Out:
 ; Corrupt:
@@ -13,6 +13,11 @@ Map:            ; установка бордюра
 
                 ; сброса и уход в затемнение
                 CALL Func.ResetFadeout
+
+                ; подготовка данных карты мира
+                SET_PAGE_BLOK_0                                                 ; включение страницы с блоком кода
+                CALL Packs.OpenWorld.Map.Prepare                                ; подготовка данных для прохода диаграммы Вороного
+                CALL Visualization
 
                 ; инициализация главного цикла
                 SetGameLoop Packs.Map.Loop
@@ -26,10 +31,6 @@ Map:            ; установка бордюра
                 LD BC, #09
                 LD (HL), #00
                 LDIR
-
-                ; подготовка данных карты мира
-                SET_PAGE_BLOK_0                                                 ; включение страницы с блоком кода
-                CALL Packs.OpenWorld.Map.Prepare
 
                 RET
 

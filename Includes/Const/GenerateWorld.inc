@@ -11,9 +11,9 @@ CLIMATE_TEMPERATE           EQU 0x00                                            
 CLIMATE_HARSH               EQU 0x01                                            ; климат "суровый"
 CLIMATE_MASK                EQU %00000001
 
-MAP_SIZE_SMALL              EQU 0x00                                            ; размер карты "маленький"
-MAP_SIZE_AVERAGE            EQU 0x01                                            ; размер карты "средний"
-MAP_SIZE_BIG                EQU 0x02                                            ; размер карты "большой"
+MAP_SIZE_SMALL              EQU 0x00                                            ; размер карты "маленькая"
+MAP_SIZE_AVERAGE            EQU 0x01                                            ; размер карты "средняя"
+MAP_SIZE_BIG                EQU 0x02                                            ; размер карты "большая"
 MAP_SIZE_MASK               EQU %00000011
 
                 endif ; ~_CONST_GENERATE_WORLD_

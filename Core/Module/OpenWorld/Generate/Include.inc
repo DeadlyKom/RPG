@@ -6,13 +6,12 @@
 
                 display " * Generate:\t\t\t\t\t\t", /A, Begin, " = busy [ ", /D, Size, " bytes ]"
 Begin           EQU $
-                include "World.asm"
-                
-                ; generator
-                include "Core/Module/Table/Gen_PRNG.asm"
 
+                include "World.asm"
+                include "RandomLocation.asm"
                 include "Region/Include.inc"
                 include "Settlement/Include.inc"
+                include "Core/Module/Table/Gen_PRNG.asm"
 Size            EQU $-Begin
 
                 endmodule

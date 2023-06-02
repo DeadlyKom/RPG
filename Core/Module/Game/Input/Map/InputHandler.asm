@@ -40,6 +40,7 @@ Wasteland:      ; установка запускаемого блока
 
                 ; установка флага завершения цикла, первичной инициализации, обновления
                 SET_MENU_FLAGS MENU_LOOP | MENU_STARTUP | MENU_UPDTAE
+                SET_WORLD_FLAG WORLD_NEED_TO_GENERATE_BIT                       ; установка флага, генерации данных
 
                 JR Processed
 

@@ -35,7 +35,7 @@ World:          ; -----------------------------------------
                 ; -----------------------------------------
                 
                 LD HL, (IY + FGenerateWorld.Center.X.Low)
-                LD DE, MAP_SIZE_BIG_SQUARED >> 1
+                LD DE, (MAP_SIZE_BIG_SQUARED >> 1) << 8
                 EXX
                 LD HL, (IY + FGenerateWorld.Center.X.High)
                 LD DE, #0000
@@ -52,7 +52,7 @@ World:          ; -----------------------------------------
                 LD (Packs.OpenWorld.Map.Prepare.LeftTop_X_High), DE
 
                 LD HL, (IY + FGenerateWorld.Center.Y.Low)
-                LD DE, MAP_SIZE_BIG_SQUARED >> 1
+                LD DE, (MAP_SIZE_BIG_SQUARED >> 1) << 8
                 EXX
                 LD HL, (IY + FGenerateWorld.Center.Y.High)
                 LD DE, #0000
@@ -117,33 +117,27 @@ World:          ; -----------------------------------------
                 ; -----------------------------------------
                 ; инициализация региона
                 ; -----------------------------------------
-                
-                ; тип региона
-                LD (IX + FRegion.Type), REGION_TYPE_SETTLEMENT
 
-                ; позиция поселения в мире
-                LD HL, #0000
-                LD (PlayerState.CameraPosX + 1), HL
-                LD (PlayerState.CameraPosY + 1), HL
-                LD (IX + FRegion.Location.X.Low), HL
-                LD (IX + FRegion.Location.Y.Low), HL
-                
-                CALL .RND_16
-                LD (PlayerState.CameraPosX + 3), HL
-                LD (IX + FRegion.Location.X.High), HL
-
-                CALL .RND_16
-                LD (PlayerState.CameraPosY + 3), HL
-                LD (IX + FRegion.Location.Y.High), HL
-
-                ; радиус влияния поселения
-                LD (IX + FRegion.InfluenceRadius), #08
+                LD (IX + FRegion.Type), REGION_TYPE_SETTLEMENT                  ; тип региона
+                LD (IX + FRegion.InfluenceRadius), #08                          ; радиус влияния поселения
 
                 ; генерация ключа
                 CALL Math.Rand8
                 LD (IX + FRegion.Seed.Low), A
                 CALL Math.Rand8
                 LD (IX + FRegion.Seed.High), A
+
+                CALL RND_Location                                               ; генерация позиции в мире
+
+                ; ToDo стартовое поселение
+                LD HL, (IX + FRegion.Location.X.Low)
+                LD (PlayerState.CameraPosX + 1), HL
+                LD HL, (IX + FRegion.Location.Y.Low)
+                LD (PlayerState.CameraPosY + 1), HL
+                LD HL, (IX + FRegion.Location.X.High)
+                LD (PlayerState.CameraPosX + 3), HL
+                LD HL, (IX + FRegion.Location.Y.High)
+                LD (PlayerState.CameraPosY + 3), HL
 
                 ; -----------------------------------------
                 ; резервирование ячейки поселения
@@ -165,16 +159,6 @@ World:          ; -----------------------------------------
                 ; доступные строения в поселении
                 LD (IX + FSettlement.Building), BUILDING_ENTRANCE | BUILDING_RESIDENTIAL_AREA; | BUILDING_WAREHOUSE | BUILDING_SHOPPING_AREA | BUILDING_BAR | BUILDING_WORKSHOP | BUILDING_PRISON | BUILDING_RADIO_TOWER
 
-                RET
-
-.RND_16         EXX
-                CALL Math.Rand8
-                EXX
-                LD H, A
-                EXX
-                CALL Math.Rand8
-                EXX
-                LD L, A
                 RET
 
                 display "\t- World:\t\t\t\t\t", /A, World, " = busy [ ", /D, $ - World, " bytes  ]"

@@ -5,6 +5,7 @@
 ; подготовка данных для визуализации карты
 ; In:
 ; Out:
+;   A' - количество элементов в массиве
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
@@ -17,6 +18,10 @@ Prepare:        ; количество элементов в массиве
                 LD IX, SORT_BUF_ADR                                             ; указывает на временный буфер массива структур FVoronoiDiagram
                 LD IY, REGION_ADR                                               ; адрес массива регионов
                 LD B, A
+
+                ; количество элементов в массиве
+                XOR A
+                EX AF, AF'
                 
 .Loop           PUSH BC
 
@@ -29,8 +34,11 @@ Prepare:        ; количество элементов в массиве
                 JR Z, .NextElement                                              ; переход, если тип региона не валидный
                 LD C, A
 
-                INC HL
                 LD A, (IY + FRegion.InfluenceRadius)
+                CP #40
+                JR NC, $+4
+                LD A, #40
+
                 XOR C
                 AND IDX_REGION_TYPE_INV
                 XOR C
@@ -102,12 +110,17 @@ Prepare:        ; количество элементов в массиве
                 OR VORONOI_DIAGRAM_COMPLETE
                 LD (IX + FVoronoiDiagram.Y), A
 
-                ; следующий элемент диаграмма Вороного
+                ; следующий элемент диаграммы Вороного
                 LD BC, FVoronoiDiagram
                 ADD IX, BC
 
+                ; увеличить счётчик элементов в массиве
+                EX AF, AF'
+                INC A
+                EX AF, AF'
+
 .NextElement    ; следующий элемент региона
-                LD BC, FVoronoiDiagram
+                LD BC, FRegion
                 ADD IY, BC
 
                 POP BC

@@ -166,6 +166,9 @@ Math
 .Div8x8         EQU Kernel.Math.Div8x8
 .DivFix8x8      EQU Kernel.Math.DivFix8x8
 .Atan           EQU Kernel.Math.Atan_Sector
+.SinCos         EQU Kernel.Math.SinCos
+.Cos            EQU Kernel.Math.Cos
+.Sin            EQU Kernel.Math.Sin
 .IntersectAABB  EQU Kernel.Math.IntersectAABB
 .DistSquared    EQU Kernel.Math.DistSquared
 .PerlinNoise2D  EQU Kernel.Math.PerlinNoise2D

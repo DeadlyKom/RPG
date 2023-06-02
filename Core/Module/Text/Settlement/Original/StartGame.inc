@@ -59,13 +59,13 @@ Climate
                 endlua
 MapSize
 .Small          lua allpass
-                Convert("маленький")
+                Convert("маленькая")
                 endlua
 .Average        lua allpass
-                Convert("средний")
+                Convert("средняя")
                 endlua
 .Big            lua allpass
-                Convert("большой")
+                Convert("большая")
                 endlua
 
                 endif ; ~ _CORE_MODULE_TEXT_START_GAME_
