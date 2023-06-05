@@ -17,8 +17,18 @@ Visualization:  ifdef _DEBUG
                 endif
 
                 CALL Initialize                                                 ; инициализация карты мира
-                CALL VoronoiPass                                                ; проход диаграмма Вороного
-                RET
+
+                ; проход диаграмма Вороного
+                LD B, 8
+.Loop           PUSH BC
+                CALL VoronoiPass
+                POP BC
+                DJNZ .Loop
+
+                ; свёртывание диаграмма Вороного в визуальный вид
+                CALL Convolution
+
+                JP Func.ShadowScrcpy                                            ; копирования в теневой экран
 
                 display "\t- Visualization:\t\t\t\t", /A, Visualization, " = busy [ ", /D, $ - Visualization, " bytes  ]"
 

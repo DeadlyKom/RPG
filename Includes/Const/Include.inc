@@ -11,6 +11,7 @@
                 include "MemoryMapPack_0.inc"
                 include "MemoryMapPack_1.inc"
                 include "MemoryMapPack_6.inc"
+                include "MemoryMapPack_7.inc"
 
                 include "Map.inc"
                 include "Menu.inc"

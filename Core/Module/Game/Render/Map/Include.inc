@@ -5,6 +5,7 @@
                 module Render
 
                 include "Draw.asm"
+                include "DisplayRegion.asm"
                 include "DisplayMapFrame.asm"
 
                 endmodule

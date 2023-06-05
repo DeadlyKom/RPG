@@ -2,16 +2,17 @@
                 ifndef _CORE_MODULE_OPEN_WORLD_MAP_CORE_
                 define _CORE_MODULE_OPEN_WORLD_MAP_CORE_
 ; -----------------------------------------
-; установка значения в буфере
+; расчёт адреса элемента
 ; In:
-;   IX - адрес структуры FVoronoiDiagram
+;   BC - положение ячейки (B - x, C - y)
 ; Out:
+;   HL - адрес элемента
 ; Corrupt:
+;   HL, DE, AF
 ; Note:
 ; -----------------------------------------
-SetValue:       ; позиция по вертикали
-                LD B, (IX + FVoronoiDiagram.Y)
-                LD A, B
+CalcAdrElement: ; позиция по вертикали
+                LD A, C
                 AND VORONOI_DIAGRAM_POS_MASK
 
                 ; Y * 72
@@ -28,8 +29,7 @@ SetValue:       ; позиция по вертикали
                 ADD HL, DE      ; x72
 
                 ; позиция по горизонтали
-                LD C, (IX + FVoronoiDiagram.X)
-                LD A, C
+                LD A, B
                 AND VORONOI_DIAGRAM_POS_MASK
 
                 ; Y * 72 + X
@@ -48,16 +48,25 @@ SetValue:       ; позиция по вертикали
                 OR %11000000
                 LD H, A
 
-                ; установка значения
-                LD (HL), C
-                INC HL
-                LD (HL), B
-                INC HL
-                LD A, (IY + FVoronoiDiagram.Data)
-                LD (HL), A
-
+                RET
+; -----------------------------------------
+; получить размер карты (из настроек)
+; In:
+;   C - размер карты
+; Out:
+; Corrupt:
+; Note:
+; -----------------------------------------
+GetMapSize:     LD A, (GameState.Setting)
+                AND SETTING_MAP_SIZE_MASK
+                LD C, MAP_SIZE_SMALL_SQUARED
+                RET Z                                                           ; SETTING_MAP_SIZE_SMALL
+                LD C, MAP_SIZE_AVERAGE_SQUARED
+                CP SETTING_MAP_SIZE_AVERAGE
+                RET Z
+                LD C, MAP_SIZE_BIG_SQUARED
                 RET
 
-                display "\t- Core:\t\t\t\t\t\t", /A, SetValue, " = busy [ ", /D, $ - SetValue, " bytes  ]"
+                display "\t- Core:\t\t\t\t\t\t", /A, CalcAdrElement, " = busy [ ", /D, $ - CalcAdrElement, " bytes  ]"
 
                 endif ; ~_CORE_MODULE_OPEN_WORLD_MAP_CORE_

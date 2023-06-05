@@ -35,7 +35,7 @@ MainMenu:       ; установка бордюра
                 {"Beaver\0"},                                                   ; текстовое представление seed генерации мира
                 DIFFICULTY_EASY,                                                ; сложность
                 CLIMATE_TEMPERATE,                                              ; климат
-                MAP_SIZE_AVERAGE,                                               ; размер карты
+                MAP_SIZE_SMALL,                                                 ; размер карты
                 {                                                               ; центр генерируемого мира
                   0x00, 0x00,                                                   ; low.X
                   0x00, 0x80,                                                   ; high.X

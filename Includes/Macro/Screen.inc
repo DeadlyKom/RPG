@@ -10,6 +10,9 @@ BORDER          macro Color?
 SCREEN_ADR_REG  macro Register?, ScreenAddress?, X?, Y?
                 LD Register?, ScreenAddress? + (((Y? >> 3) & 0x18) << 8) + ((Y? & 0x07) << 8) + ((Y? & 0x38) << 2) + (X? >> 3)
                 endm
+SCREEN_ATTR_ADR_REG  macro Register?, ScreenAddress?, X?, Y?
+                LD Register?, ScreenAddress? | 0x1800 + (((Y? & 0x1F) << 5) + (X? & 0x1F))
+                endm
 CLS_4000        macro
                 LD HL, #4000 + #1800
                 LD DE, #0000
@@ -33,7 +36,7 @@ ATTR_RECT_IPB   macro ScreenAddress?, X?, Y?, SizeX?, SizeY?, Inc?, Paper?, Brig
                 LD L, E
                 LD B, SizeX?
 .ColumnLoop     LD (HL), ((0 << 7) | (Bright? << 6) | (Paper? << 3) | Inc?)
-                INC HL
+                INC L
                 DJNZ .ColumnLoop
                 LD A, E
                 ADD A, #20

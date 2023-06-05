@@ -118,7 +118,7 @@ World:          ; -----------------------------------------
                 ; инициализация региона
                 ; -----------------------------------------
 
-                LD (IX + FRegion.Type), REGION_TYPE_SETTLEMENT                  ; тип региона
+                LD (IX + FRegion.Type), REGION_TYPE_SETTLEMENT_BEGIN            ; тип региона "начальный/стартовый"
                 LD (IX + FRegion.InfluenceRadius), #08                          ; радиус влияния поселения
 
                 ; генерация ключа

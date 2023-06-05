@@ -18,6 +18,7 @@ Begin           EQU $
                 include "Core/Module/OpenWorld/Map/Prepare.asm"
                 include "Core/Module/OpenWorld/Map/Initialize.asm"
                 include "Core/Module/OpenWorld/Map/VoronoiPass.asm"
+                include "Core/Module/OpenWorld/Map/Convolution.asm"
                 include "Core/Module/OpenWorld/Map/Visualization.asm"
                 ENT                                                             ; отмена модификации адреса компиляции
 Size            EQU $-Begin

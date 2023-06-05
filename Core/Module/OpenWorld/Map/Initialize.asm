@@ -12,10 +12,14 @@
 Initialize:     SetPort PAGE_7, 0                                               ; включить 7 страницу и показать основной экран
 
                 ; очистка временного буфера
-                LD HL, (MemBank_03 + BankSize) & 0xFFFF
                 LD DE, #FFFF
+                LD HL, (MemBank_03 + BankSize - #0000) & 0xFFFF
                 CALL SafeFill.b4096
+                LD HL, (MemBank_03 + BankSize - #1000) & 0xFFFF
                 CALL SafeFill.b4096
+                LD HL, (MemBank_03 + BankSize - #2000) & 0xFFFF
+                CALL SafeFill.b4096
+                LD HL, (MemBank_03 + BankSize - #3000) & 0xFFFF
                 CALL SafeFill.b4096
 
                 ; инициализация
@@ -23,8 +27,20 @@ Initialize:     SetPort PAGE_7, 0                                               
                 EX AF, AF'
 
 .Loop           EX AF, AF'
+                
+                LD B, (IX + FVoronoiDiagram.X)
+                LD C, (IX + FVoronoiDiagram.Y)
+                CALL CalcAdrElement                                             ; расчёт адреса элемента
 
-                CALL SetValue                                                   ; установка значения
+                ; установка значения
+                LD (HL), B
+                SET VORONOI_DIAGRAM_LOCK_BIT, (HL)
+                INC HL
+                LD (HL), C
+                ; SET VORONOI_DIAGRAM_COMPLETE_BIT, (HL)
+                INC HL
+                LD A, (IX + FVoronoiDiagram.Data)
+                LD (HL), A
                 
                 ; следующий элемент диаграммы Вороного
                 LD BC, FVoronoiDiagram
