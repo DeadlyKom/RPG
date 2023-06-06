@@ -12,15 +12,20 @@
 ; -----------------------------------------
 RND_Location:   ; радиус
                 CALL Math.Rand8
+                LD DE, #0008                                                    ; значение в педелах (8-22)
+                CALL Math.Clamp
+                LD (.RandRadius), A
+
+                ; угол поворота (спираль)
+                CALL Math.Rand8
 
                 ; -----------------------------------------
                 ; In :
                 ;   A - угол 0-255
                 ; Out :
-                ;   DE - cos α
-                ;   BC - sin α
+                ;   DE - cos α (старший бит отвечает за знак)
+                ;   BC - sin α (старший бит отвечает за знак)
                 ; Note:
-                ;   старший бит результата отвечает за знак
                 ; -----------------------------------------
                 CALL Math.SinCos
 
@@ -89,6 +94,10 @@ RND_Location:   ; радиус
                 LD A, (IX + FRegion.InfluenceRadius)
                 AND VORONOI_DIAGRAM_RADIUS
                 ADD A, VORONOI_DIAGRAM_RADIUS_MIN
+.RandRadius     EQU $+1
+                ADD A, #00
+                XOR C
+                
 
                 ; -----------------------------------------
                 ; integer multiplies DE by A

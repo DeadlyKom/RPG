@@ -5,6 +5,7 @@
                 module Input
 
                 include "Scan.asm"
+                include "Movement.asm"
                 include "InputHandler.asm"
 
                 endmodule

@@ -5,6 +5,7 @@
                 module Region
 
                 include "Add.asm"
+                include "Balancer.asm"
 
                 endmodule
 

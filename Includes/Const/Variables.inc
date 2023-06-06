@@ -63,6 +63,8 @@ PlayerState         EQU Adr.PlayerState
 .Wasteland_SF       EQU PlayerState + FPlayerState.UI.Wasteland_SF              ; состояние элементов UI
 .NearestObject      EQU PlayerState + FPlayerState.NearestObject                ; адрес ближайшего противника
 .Slot               EQU PlayerState + FPlayerState.Slot                         ; номер расходника в слоте
+.MapPosX            EQU PlayerState + FPlayerState.MapPosX                      ; позиция (левого-верхнего края) карты по горизонтали
+.MapPosY            EQU PlayerState + FPlayerState.MapPosY                      ; позиция (левого-верхнего края) карты по вертикали
 .CameraPosX         EQU PlayerState + FPlayerState.CameraPosX                   ; позиция карты мира по горизонтали
 .CameraPosY         EQU PlayerState + FPlayerState.CameraPosY                   ; позиция карты мира по вертикали
 .RotationAngle      EQU PlayerState + FPlayerState.RotationAngle                ; угол поворота игрока

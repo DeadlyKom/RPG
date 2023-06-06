@@ -13,6 +13,7 @@ World:          ; -----------------------------------------
                 ; -----------------------------------------
                 LD A, (IY + FGenerateWorld.MapSize)
                 AND MAP_SIZE_MASK
+                LD B, A
                 ADD A, A
                 ADD A, A
                 ADD A, A
@@ -33,9 +34,20 @@ World:          ; -----------------------------------------
                 ; -----------------------------------------
                 ; инициализация левого верхнего угла
                 ; -----------------------------------------
+
+                ; определение размера карты
+                LD E, #00
+                LD A, B
+                OR A
+                LD D, MAP_SIZE_SMALL_SQUARED >> 1
+                JR Z, .MapSize                                                  ; MAP_SIZE_SMALL
+                LD D, MAP_SIZE_AVERAGE_SQUARED >> 1
+                CP MAP_SIZE_AVERAGE
+                JR Z, .MapSize                                                  ; MAP_SIZE_AVERAGE
+                LD D, MAP_SIZE_BIG_SQUARED >> 1
+.MapSize        PUSH DE
                 
                 LD HL, (IY + FGenerateWorld.Center.X.Low)
-                LD DE, (MAP_SIZE_BIG_SQUARED >> 1) << 8
                 EXX
                 LD HL, (IY + FGenerateWorld.Center.X.High)
                 LD DE, #0000
@@ -52,7 +64,7 @@ World:          ; -----------------------------------------
                 LD (Packs.OpenWorld.Map.Prepare.LeftTop_X_High), DE
 
                 LD HL, (IY + FGenerateWorld.Center.Y.Low)
-                LD DE, (MAP_SIZE_BIG_SQUARED >> 1) << 8
+                POP DE
                 EXX
                 LD HL, (IY + FGenerateWorld.Center.Y.High)
                 LD DE, #0000
@@ -94,7 +106,35 @@ World:          ; -----------------------------------------
                 ; инициализация мира
                 include "Initialize.asm"
 
-                ; -----------------------------------------
+                CALL .L1
+                CALL .L2
+                CALL .L3
+                CALL .L2
+                CALL .L5
+                CALL .L3
+                CALL .L2
+                CALL .L4
+                CALL .L4
+                CALL .L5
+                CALL .L5
+                CALL .L2
+                CALL .L3
+                CALL .L4
+                CALL .L4
+                CALL .L3
+                CALL .L3
+                CALL .L4
+                CALL .L2
+                CALL .L5
+                CALL .L5
+                CALL .L3
+                CALL .L2
+                CALL .L5
+                CALL .L3
+                RET
+
+
+.L1             ; -----------------------------------------
                 ; инициализация первого поселения
                 ; -----------------------------------------
 
@@ -127,17 +167,166 @@ World:          ; -----------------------------------------
                 CALL Math.Rand8
                 LD (IX + FRegion.Seed.High), A
 
-                CALL RND_Location                                               ; генерация позиции в мире
+                ; CALL RND_Location                                               ; генерация позиции в мире
 
                 ; ToDo стартовое поселение
-                LD HL, (IX + FRegion.Location.X.Low)
+                LD HL, (IY + FGenerateWorld.Center.X.Low)
                 LD (PlayerState.CameraPosX + 1), HL
-                LD HL, (IX + FRegion.Location.Y.Low)
+                LD (IX + FRegion.Location.X.Low), HL
+                
+                LD HL, (IY +FGenerateWorld.Center.Y.Low)
                 LD (PlayerState.CameraPosY + 1), HL
-                LD HL, (IX + FRegion.Location.X.High)
+                LD (IX + FRegion.Location.Y.Low), HL
+
+                LD HL, (IY + FGenerateWorld.Center.X.High)
                 LD (PlayerState.CameraPosX + 3), HL
-                LD HL, (IX + FRegion.Location.Y.High)
+                LD (IX + FRegion.Location.X.High), HL
+
+                LD HL, (IY + FGenerateWorld.Center.Y.High)
                 LD (PlayerState.CameraPosY + 3), HL
+                LD (IX + FRegion.Location.Y.High), HL
+
+                ; -----------------------------------------
+                ; резервирование ячейки поселения
+                ; -----------------------------------------
+                ; добавить/зарезервировать ячейку в массиве
+                ; In:
+                ; Out:
+                ;   A  - ID элемента в массиве
+                ;   IX - адрес найденого свободного элемента структуры FSettlement
+                ;   флаг переполнения Carry сброшен, если поиск свободного элемента успешен
+                ; -----------------------------------------
+                CALL Settlement.Add
+                DEBUG_BREAK_POINT_C                                             ; ошибка резервирования ячейки
+
+                ; установка ID региона
+                EX AF, AF'
+                LD (IX + FSettlement.RegionID), A
+
+                ; доступные строения в поселении
+                LD (IX + FSettlement.Building), BUILDING_ENTRANCE | BUILDING_RESIDENTIAL_AREA; | BUILDING_WAREHOUSE | BUILDING_SHOPPING_AREA | BUILDING_BAR | BUILDING_WORKSHOP | BUILDING_PRISON | BUILDING_RADIO_TOWER
+
+                RET
+
+.L2             ; -----------------------------------------
+                ; инициализация первого поселения
+                ; -----------------------------------------
+
+                ; -----------------------------------------
+                ; резервирование ячейки региона
+                ; -----------------------------------------
+                ; добавить/зарезервировать ячейку в массиве
+                ; In:
+                ; Out:
+                ;   С  - ID элемента в массиве
+                ;   IX - адрес найденого свободного элемента структуры FRegion
+                ;   флаг переполнения Carry сброшен, если поиск свободного элемента успешен
+                ; -----------------------------------------
+                CALL Region.Add
+                DEBUG_BREAK_POINT_C                                             ; ошибка резервирования ячейки
+
+                ; сохранение ID региона
+                EX AF, AF'
+
+                ; -----------------------------------------
+                ; инициализация региона
+                ; -----------------------------------------
+
+                LD (IX + FRegion.Type), REGION_TYPE_SETTLEMENT_NEUTRAL          ; тип региона "начальный/стартовый"
+                JR .End
+
+.L3             ; -----------------------------------------
+                ; инициализация первого поселения
+                ; -----------------------------------------
+
+                ; -----------------------------------------
+                ; резервирование ячейки региона
+                ; -----------------------------------------
+                ; добавить/зарезервировать ячейку в массиве
+                ; In:
+                ; Out:
+                ;   С  - ID элемента в массиве
+                ;   IX - адрес найденого свободного элемента структуры FRegion
+                ;   флаг переполнения Carry сброшен, если поиск свободного элемента успешен
+                ; -----------------------------------------
+                CALL Region.Add
+                DEBUG_BREAK_POINT_C                                             ; ошибка резервирования ячейки
+
+                ; сохранение ID региона
+                EX AF, AF'
+
+                ; -----------------------------------------
+                ; инициализация региона
+                ; -----------------------------------------
+
+                LD (IX + FRegion.Type), REGION_TYPE_SETTLEMENT_HOSTILE          ; тип региона "начальный/стартовый"
+                JR .End
+
+.L4             ; -----------------------------------------
+                ; инициализация первого поселения
+                ; -----------------------------------------
+
+                ; -----------------------------------------
+                ; резервирование ячейки региона
+                ; -----------------------------------------
+                ; добавить/зарезервировать ячейку в массиве
+                ; In:
+                ; Out:
+                ;   С  - ID элемента в массиве
+                ;   IX - адрес найденого свободного элемента структуры FRegion
+                ;   флаг переполнения Carry сброшен, если поиск свободного элемента успешен
+                ; -----------------------------------------
+                CALL Region.Add
+                DEBUG_BREAK_POINT_C                                             ; ошибка резервирования ячейки
+
+                ; сохранение ID региона
+                EX AF, AF'
+
+                ; -----------------------------------------
+                ; инициализация региона
+                ; -----------------------------------------
+
+                LD (IX + FRegion.Type), REGION_TYPE_SETTLEMENT_FRIENDLY          ; тип региона "начальный/стартовый"
+                JR .End
+
+.L5             ; -----------------------------------------
+                ; инициализация первого поселения
+                ; -----------------------------------------
+
+                ; -----------------------------------------
+                ; резервирование ячейки региона
+                ; -----------------------------------------
+                ; добавить/зарезервировать ячейку в массиве
+                ; In:
+                ; Out:
+                ;   С  - ID элемента в массиве
+                ;   IX - адрес найденого свободного элемента структуры FRegion
+                ;   флаг переполнения Carry сброшен, если поиск свободного элемента успешен
+                ; -----------------------------------------
+                CALL Region.Add
+                DEBUG_BREAK_POINT_C                                             ; ошибка резервирования ячейки
+
+                ; сохранение ID региона
+                EX AF, AF'
+
+                ; -----------------------------------------
+                ; инициализация региона
+                ; -----------------------------------------
+
+                LD (IX + FRegion.Type), REGION_TYPE_RADIOACTIVE          ; тип региона "начальный/стартовый"
+                JR .End
+
+.End            CALL Math.Rand8
+                AND VORONOI_DIAGRAM_RADIUS
+                LD (IX + FRegion.InfluenceRadius), A                          ; радиус влияния поселения
+
+                ; генерация ключа
+                CALL Math.Rand8
+                LD (IX + FRegion.Seed.Low), A
+                CALL Math.Rand8
+                LD (IX + FRegion.Seed.High), A
+
+                CALL RND_Location                                               ; генерация позиции в мире
 
                 ; -----------------------------------------
                 ; резервирование ячейки поселения

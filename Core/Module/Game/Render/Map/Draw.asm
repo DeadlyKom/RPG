@@ -29,6 +29,9 @@ Draw:           ; счётчик отображаемого экрана
                 ; первичная инициализация
                 ; -----------------------------------------
 
+                ; отображение рамок
+                CALL DisplayMapFrame
+
 .NotStartup     ; проверка флага обновления
                 CHECK_MENU_FLAG MENU_UPDTAE_BIT
                 JR Z, .Draw
@@ -37,9 +40,6 @@ Draw:           ; счётчик отображаемого экрана
                 ; -----------------------------------------
                 ; обновление
                 ; -----------------------------------------
-                
-                ; отображение рамок
-                CALL DisplayMapFrame
 
                 ; отображение регионов
                 CALL DisplayRegion
@@ -52,14 +52,14 @@ Draw:           ; счётчик отображаемого экрана
                 CALL FPS_Counter.Frame
                 endif
 
-                ; ifdef _DEBUG
-                ; LD DE, #0100
-                ; CALL Console.SetCursor
-                ; LD A, (GameState.CursorID)
-                ; CALL Console.DrawByte
-                ; LD A, (PlayerState.SettlementLocID)
-                ; CALL Console.DrawByte
-                ; endif
+                ifdef _DEBUG
+                LD DE, #0119
+                CALL Console.SetCursor
+                LD A, (PlayerState.MapPosX)
+                CALL Console.DrawByte
+                LD A, (PlayerState.MapPosY)
+                CALL Console.DrawByte
+                endif
 
                 SET_RENDER_FLAG FINISHED_BIT                                    ; установка флага завершения отрисовки
                 RET

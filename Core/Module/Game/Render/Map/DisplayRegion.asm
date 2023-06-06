@@ -1,7 +1,6 @@
 
                 ifndef _MODULE_GAME_RENDER_MAP_DISPLAY_MAP_REGION_
                 define _MODULE_GAME_RENDER_MAP_DISPLAY_MAP_REGION_
-VISIBLE_REGION_SCR  EQU 22
 ; -----------------------------------------
 ; отображение регионов карты мира
 ; In:
@@ -11,9 +10,12 @@ VISIBLE_REGION_SCR  EQU 22
 ; -----------------------------------------
 DisplayRegion:  SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
 
+                ; -----------------------------------------
                 ; инициализация
-                LD HL, Adr.MapBuffer + 18 * MAP_SIZE_SMALL_SQUARED + 20
-                SCREEN_ATTR_ADR_REG DE, #4000, 1, 1
+                ; -----------------------------------------
+
+                ; расчёт адреса выводимой области
+                ; Adr.MapBuffer + MapPosY * MapSize + MapPosX
 
                 ; -----------------------------------------
                 ; получить размер карты (из настроек)
@@ -21,10 +23,32 @@ DisplayRegion:  SET_SCREEN_SHADOW                                               
                 ;   C - размер карты
                 ; -----------------------------------------
                 CALL Packs.Map.GetMapSize
-                LD A, VISIBLE_REGION_SCR
+                LD D, #00
+                LD E, C
+                LD A, (PlayerState.MapPosY)
+                ; -----------------------------------------
+                ; integer multiplies DE by A
+                ; In :
+                ;   DE - multiplicand
+                ;   A  - multiplier
+                ; Out :
+                ;   HL - product DE * A
+                ; Corrupt :
+                ;   HL, F
+                ; -----------------------------------------
+                CALL Math.Mul16x8_16
+                LD A, (PlayerState.MapPosX)
+                LD E, A
+                ADD HL, DE
+                LD DE, Adr.MapBuffer
+                ADD HL, DE
+
+                SCREEN_ATTR_ADR_REG DE, #4000, 1, 1                             ; адрес области атрибутов (вывода карты)
+
+                LD A, VISIBLE_MAP_SIZE_SCR
 
 .LoopY          EX AF, AF'
-                LD B, VISIBLE_REGION_SCR
+                LD B, VISIBLE_MAP_SIZE_SCR
                 PUSH HL
 
 .LoopX          LD A, (HL)
@@ -40,7 +64,7 @@ DisplayRegion:  SET_SCREEN_SHADOW                                               
                 ADD HL, BC
 
                 LD A, E
-                SUB VISIBLE_REGION_SCR
+                SUB VISIBLE_MAP_SIZE_SCR
                 ADD A, #20
                 LD E, A
                 ADC A, D
