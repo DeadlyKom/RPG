@@ -87,6 +87,8 @@ RND_Location:   ; радиус
 
 .MultRadius     ; умножение на радиус
                 LD A, (IX + FRegion.InfluenceRadius)
+                AND VORONOI_DIAGRAM_RADIUS
+                ADD A, VORONOI_DIAGRAM_RADIUS_MIN
 
                 ; -----------------------------------------
                 ; integer multiplies DE by A

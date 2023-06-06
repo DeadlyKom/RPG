@@ -19,7 +19,7 @@ Visualization:  ifdef _DEBUG
                 CALL Initialize                                                 ; инициализация карты мира
 
                 ; проход диаграмма Вороного
-                LD B, 8
+                LD B, VORONOI_DIAGRAM_RADIUS + VORONOI_DIAGRAM_RADIUS_MIN + 1
 .Loop           PUSH BC
                 CALL VoronoiPass
                 POP BC

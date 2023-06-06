@@ -12,7 +12,7 @@ VISIBLE_REGION_SCR  EQU 22
 DisplayRegion:  SET_SCREEN_SHADOW                                               ; включение страницы теневого экрана
 
                 ; инициализация
-                LD HL, Adr.MapBuffer + 20 * MAP_SIZE_SMALL_SQUARED + 20
+                LD HL, Adr.MapBuffer + 18 * MAP_SIZE_SMALL_SQUARED + 20
                 SCREEN_ATTR_ADR_REG DE, #4000, 1, 1
 
                 ; -----------------------------------------

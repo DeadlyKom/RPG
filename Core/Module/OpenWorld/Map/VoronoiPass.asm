@@ -29,40 +29,41 @@ VoronoiPass:    ; инициализация
 .LoopX          PUSH BC
 
                 ; проверка завершённости ячейки
-                BIT VORONOI_DIAGRAM_LOCK_BIT, (IX + FVoronoiDiagram.Y)
+                BIT VORONOI_DIAGRAM_LOCK_BIT, (IX + FVoronoiDiagram.X)
                 JR Z, .NextElement                                              ; переход, если флаг сброшен (ячейка завершила обработку)
 
                 ; проверка наличия фракции
-                LD A, (IX + FVoronoiDiagram.Data)
+                LD E, (IX + FVoronoiDiagram.Data)
+                LD A, E
                 AND VORONOI_DIAGRAM_FRACTION
                 CP VORONOI_DIAGRAM_FRACTION
                 JR Z, .NextElement                                              ; переход, если фракция не установлена
 
+                LD D, #00
                 ; -----------------------------------------
                 ; подготовка расчёта квадрат расстояния (радиуса)
                 ; -----------------------------------------
-                LD A, (IX + FVoronoiDiagram.Data)
+                LD A, E
                 AND VORONOI_DIAGRAM_RADIUS
+                ADD A, VORONOI_DIAGRAM_RADIUS_MIN
                 LD E, A
-                ADD A, A
-                ADD A, A
-                ADD A, A
-                ADD A, A
 
-                ; умножение
-                rept 4
-                ADD A, A
-                ADD A, E
-                endr
-                LD H, #00
-                LD L, A                                                         ; квадрат расстояния (радиуса)
-                PUSH HL
+                ; -----------------------------------------
+                ; integer multiplies DE by A
+                ; In :
+                ;   DE - multiplicand
+                ;   A  - multiplier
+                ; Out :
+                ;   HL - product DE * A
+                ; Corrupt :
+                ;   HL, F
+                ; -----------------------------------------
+                CALL Math.Mul16x8_16                                                        
+                PUSH HL                                                         ; квадрат расстояния (радиуса)
 
                 ; -----------------------------------------
                 ; квадрат расстояния между центром региона и позицией прохода
                 ; -----------------------------------------
-
-                LD D, #00
 
                 ; чтение позиции региона по горизонтали
                 LD A, (IX +  FVoronoiDiagram.X)
@@ -79,6 +80,7 @@ VoronoiPass:    ; инициализация
                 NEG
 
                 LD E, A
+
                 ; -----------------------------------------
                 ; integer multiplies DE by A
                 ; In :
@@ -97,17 +99,19 @@ VoronoiPass:    ; инициализация
                 AND VORONOI_DIAGRAM_POS_MASK
                 LD E, A
 
+                ; B - x, C - размер карты
                 EX AF, AF'
-                LD B, A
+                LD L, A
                 EX AF, AF'
-                ; B - y, C - размер карты
                 LD A, C
-                SUB B
+                SUB L
                 SUB E
 
                 ; abc (y - Region.y)
                 JP P, $+5
                 NEG
+
+                LD E, A
 
                 ; -----------------------------------------
                 ; integer multiplies DE by A
@@ -133,9 +137,9 @@ VoronoiPass:    ; инициализация
                                                                                 ; равен квадрат расстояния (радиуса)
 
                 ; опредление завершения или заполнения
-                BIT VORONOI_DIAGRAM_COMPLETE_BIT, (IX + FVoronoiDiagram.X)      ; проверка флага
-                RES VORONOI_DIAGRAM_COMPLETE_BIT, (IX + FVoronoiDiagram.X)      ; сброс флага
-                CALL Z, .FillCross                                             ; переход, если требуется заполнение соседних ячеек
+                BIT VORONOI_DIAGRAM_COMPLETE_BIT, (IX + FVoronoiDiagram.Y)      ; проверка флага завершения обработка
+                RES VORONOI_DIAGRAM_COMPLETE_BIT, (IX + FVoronoiDiagram.Y)      ; сброс флага завершения обработка
+                CALL Z, .FillCross                                              ; переход, если требуется заполнение соседних ячеек
 
 .NextElement    ; следующий элемент диаграммы Вороного
                 LD DE, FVoronoiDiagram
@@ -156,8 +160,19 @@ VoronoiPass:    ; инициализация
                 JR NZ, .LoopY
 
                 RET
-
+; -----------------------------------------
+; расчёт адреса элемента
+; In:
+;   B  - положение ячейки X
+;   C  - размер карты
+;   A' - положение ячейки Y
+; Out:
+;   HL - адрес элемента
+; Corrupt:
+;   HL, DE, AF
+; -----------------------------------------
 .FillCross      ; заполнение соседних ячеек
+                LD E, C
                 
                 ; положение текущей ячейки по горизонтали
                 LD A, C
@@ -172,36 +187,13 @@ VoronoiPass:    ; инициализация
                 SUB C
                 LD C, A
 
-                ; B - x, C - y
-
                 ; -----------------------------------------
                 ; правый
                 ; -----------------------------------------
 
                 INC B
-
-                ; ToDo проверка границ
-
-                ; -----------------------------------------
-                ; расчёт адреса элемента
-                ; In:
-                ;   BC - положение ячейки (B - x, C - y)
-                ; Out:
-                ;   HL - адрес элемента
-                ; Corrupt:
-                ;   HL, DE, AF
-                ; -----------------------------------------
-                CALL CalcAdrElement
-
-                ; установка значения
-                LD (HL), B
-                SET VORONOI_DIAGRAM_LOCK_BIT, (HL)
-                INC HL
-                LD (HL), C
-                SET VORONOI_DIAGRAM_COMPLETE_BIT, (HL)
-                INC HL
-                LD A, (IX + FVoronoiDiagram.Data)
-                LD (HL), A
+                LD D, %00000011
+                CALL .Set
 
                 ; -----------------------------------------
                 ; нижний
@@ -209,28 +201,8 @@ VoronoiPass:    ; инициализация
 
                 DEC B
                 INC C
-                ; ToDo проверка границ
-
-                ; -----------------------------------------
-                ; расчёт адреса элемента
-                ; In:
-                ;   BC - положение ячейки (B - x, C - y)
-                ; Out:
-                ;   HL - адрес элемента
-                ; Corrupt:
-                ;   HL, DE, AF
-                ; -----------------------------------------
-                CALL CalcAdrElement
-
-                ; установка значения
-                LD (HL), B
-                SET VORONOI_DIAGRAM_LOCK_BIT, (HL)
-                INC HL
-                LD (HL), C
-                SET VORONOI_DIAGRAM_COMPLETE_BIT, (HL)
-                INC HL
-                LD A, (IX + FVoronoiDiagram.Data)
-                LD (HL), A
+                LD D, %00000011
+                CALL .Set
 
                 ; -----------------------------------------
                 ; левый
@@ -238,26 +210,8 @@ VoronoiPass:    ; инициализация
 
                 DEC C
                 DEC B
-                ; ToDo проверка границ
-
-                ; -----------------------------------------
-                ; расчёт адреса элемента
-                ; In:
-                ;   BC - положение ячейки (B - x, C - y)
-                ; Out:
-                ;   HL - адрес элемента
-                ; Corrupt:
-                ;   HL, DE, AF
-                ; -----------------------------------------
-                CALL CalcAdrElement
-
-                ; установка значения
-                LD (HL), B
-                INC HL
-                LD (HL), C
-                INC HL
-                LD A, (IX + FVoronoiDiagram.Data)
-                LD (HL), A
+                LD D, %00000001
+                CALL .Set
 
                 ; -----------------------------------------
                 ; вверхний
@@ -265,7 +219,35 @@ VoronoiPass:    ; инициализация
 
                 INC B
                 DEC C
-                ; ToDo проверка границ
+                LD D, %00000001
+                CALL .Set
+
+                ; блокировка изменения ячейки
+                RES VORONOI_DIAGRAM_LOCK_BIT, (IX + FVoronoiDiagram.X)
+
+                RET
+; -----------------------------------------
+; расчёт адреса элемента
+; In:
+;   D  - биты установки (0 - VORONOI_DIAGRAM_LOCK_BIT, 1 - VORONOI_DIAGRAM_COMPLETE_BIT)
+;   E  - размер карты
+;   BC - положение ячейки (B - x, C - y)
+; Out:
+;   HL - адрес элемента
+; Corrupt:
+;   HL, DE, AF
+; -----------------------------------------
+.Set            ; проверка координат в пределах границы размера карты
+                LD A, B
+                OR A
+                RET M                                                           ; выход, если отрицательный
+                CP E
+                RET NC                                                          ; выход, если больше
+                LD A, C
+                OR A
+                RET M                                                           ; выход, если отрицательный
+                CP E
+                RET NC                                                          ; выход, если больше
 
                 ; -----------------------------------------
                 ; расчёт адреса элемента
@@ -276,16 +258,33 @@ VoronoiPass:    ; инициализация
                 ; Corrupt:
                 ;   HL, DE, AF
                 ; -----------------------------------------
+                PUSH DE
                 CALL CalcAdrElement
+                POP DE
+                PUSH HL
+                POP IY
+
+                ; проверка отсутствия ранее установленной фракции
+                LD A, (IY + FVoronoiDiagram.Data)
+                AND VORONOI_DIAGRAM_FRACTION
+                CP VORONOI_DIAGRAM_FRACTION
+                RET NZ
 
                 ; установка значения
-                LD (HL), B
-                INC HL
-                LD (HL), C
-                INC HL
-                LD A, (IX + FVoronoiDiagram.Data)
-                LD (HL), A
+                LD A, (IX + FVoronoiDiagram.X)
+                ADD A, A
+                RR D                                                            ; VORONOI_DIAGRAM_LOCK_BIT
+                RRA
+                LD (IY + FVoronoiDiagram.X), A
 
+                LD A, (IX + FVoronoiDiagram.Y)
+                ADD A, A
+                RR D                                                            ; VORONOI_DIAGRAM_COMPLETE_BIT
+                RRA
+                LD (IY + FVoronoiDiagram.Y), A
+
+                LD A, (IX + FVoronoiDiagram.Data)
+                LD (IY + FVoronoiDiagram.Data), A
                 RET
 
                 display "\t- Voronoi pass:\t\t\t\t\t", /A, VoronoiPass, " = busy [ ", /D, $ - VoronoiPass, " bytes  ]"

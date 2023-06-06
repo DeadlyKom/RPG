@@ -34,10 +34,8 @@ Initialize:     SetPort PAGE_7, 0                                               
 
                 ; установка значения
                 LD (HL), B
-                SET VORONOI_DIAGRAM_LOCK_BIT, (HL)
                 INC HL
                 LD (HL), C
-                ; SET VORONOI_DIAGRAM_COMPLETE_BIT, (HL)
                 INC HL
                 LD A, (IX + FVoronoiDiagram.Data)
                 LD (HL), A

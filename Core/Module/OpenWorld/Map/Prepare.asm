@@ -32,22 +32,16 @@ Prepare:        ; количество элементов в массиве
                 AND IDX_REGION_TYPE
                 CP IDX_REGION_TYPE
                 JR Z, .NextElement                                              ; переход, если тип региона не валидный
+
+                ADD A, A
+                ADD A, A
+                ADD A, A
+                ADD A, A
                 LD C, A
 
                 LD A, (IY + FRegion.InfluenceRadius)
-                CP #40
-                JR NC, $+4
-                LD A, #40
-
-                XOR C
-                AND IDX_REGION_TYPE_INV
-                XOR C
-
-                ; смена F3-F0 и R3-R0 местами
-                RRCA
-                RRCA
-                RRCA
-                RRCA
+                AND VORONOI_DIAGRAM_RADIUS
+                OR C
 
                 ; -----------------------------------------
                 ;      7    6    5    4    3    2    1    0
@@ -113,7 +107,7 @@ Prepare:        ; количество элементов в массиве
 
                 LD A, H
                 AND VORONOI_DIAGRAM_POS_MASK
-                OR VORONOI_DIAGRAM_COMPLETE
+                ; OR VORONOI_DIAGRAM_COMPLETE
                 LD (IX + FVoronoiDiagram.Y), A
 
                 ; следующий элемент диаграммы Вороного

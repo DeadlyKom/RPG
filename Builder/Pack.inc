@@ -47,6 +47,7 @@
                 display "-------------------------------------------------------------------------------------------------------------------------------"
 
                 labelslist "C:/Work/spectrum/unreal/user.l"
+                ; labelslist "C:/Work/Spectrum/unreal NS r0170/user.l"
 
                 ifdef _DEBUG
                 savesna SNA_FILENAME, Bootloader.StartBoot
