@@ -1,15 +1,11 @@
 
                 ifndef _CONST_SETTLEMENT_
                 define _CONST_SETTLEMENT_
-SETTLEMENT_EMPTY_ELEMENT        EQU #FF                                         ; свобдный элемент массива
+METADATA_EMPTY_ELEMENT          EQU #FF                                         ; свобдный элемент массива
 
-SETTLEMENT_SIZE                 EQU 4                                           ; размер структуры поселения
-SETTLEMENT_ADR                  EQU Adr.Settlement                              ; адрес массива структур FSettlement
-SETTLEMENT_NUM                  EQU Size.Settlement / SETTLEMENT_SIZE           ; максимальное количество элементов в масиве
-
-
-; тип поселения
-SETTLEMENT_BEGIN                EQU 0x00
+METADATA_SIZE                   EQU 4                                           ; размер структуры поселения
+METADATA_ADR                    EQU Adr.Metadata                                ; адрес массива метаданных (структур FSettlement/FHabitats/FDungeon)
+METADATA_NUM                    EQU Size.Metadata / METADATA_SIZE               ; максимальное количество элементов в масиве
 
 ; тип постройки
 BUILDING_ENTRANCE_BIT           EQU 0x00                                        ; главный вход, наличие ограждённого периметра

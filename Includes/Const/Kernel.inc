@@ -164,6 +164,7 @@ Math
 .Mul16x8_24     EQU Kernel.Math.Mul16x8_24
 .Mul32x8_40     EQU Kernel.Math.Mul32x8_40
 .Div8x8         EQU Kernel.Math.Div8x8
+.Div16x8_16     EQU Kernel.Math.Div16x8_16
 .DivFix8x8      EQU Kernel.Math.DivFix8x8
 .Atan           EQU Kernel.Math.Atan_Sector
 .SinCos         EQU Kernel.Math.SinCos

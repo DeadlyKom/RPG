@@ -13,10 +13,12 @@ IDX_REGION_TYPE_INV         EQU (~IDX_REGION_TYPE) & 0xFF
 ; тип региона
 REGION_TYPE_RADIOACTIVE                 EQU 0x00                                ; радиация
 REGION_TYPE_HABITATS                    EQU 0x01                                ; места обитания существ
-REGION_TYPE_SETTLEMENT_BEGIN            EQU 0x02                                ; поселение "начальный/стартовый"
-REGION_TYPE_SETTLEMENT_NEUTRAL          EQU 0x03                                ; поселение "нейтральный"
-REGION_TYPE_SETTLEMENT_FRIENDLY         EQU 0x04                                ; поселение "дружественный"
-REGION_TYPE_SETTLEMENT_HOSTILE          EQU 0x05                                ; поселение "враждебный"
+REGION_TYPE_DUNGEON                     EQU 0x02                                ; подземелья
+REGION_TYPE_SETTLEMENT_BEGIN            EQU 0x03                                ; поселение "начальный/стартовый"
+REGION_TYPE_SETTLEMENT_ABANDONED        EQU 0x04                                ; поселение "заброшенных/покинутых"
+REGION_TYPE_SETTLEMENT_NEUTRAL          EQU 0x05                                ; поселение "нейтральный"
+REGION_TYPE_SETTLEMENT_FRIENDLY         EQU 0x06                                ; поселение "дружественный"
+REGION_TYPE_SETTLEMENT_HOSTILE          EQU 0x07                                ; поселение "враждебный"
 
 
 ; цвет региона

@@ -3,7 +3,7 @@
                 define _STRUCT_PLAYER_
 
                 struct FPlayerState
-SettlementID    DB #00                                                          ; ID поселения в котором находится игрок        [1 байт]
+MetadataID      DB #00                                                          ; ID метаданных в котором находится игрок       [1 байт]
 SettlementLocID DB #00                                                          ; ID места в котором находится игрок            [1 байт]
 CharacterID     DB #00                                                          ; ID вид персонажа                              [1 байт]
 InputFlags      DB #00                                                          ; флаги управления игроком                      [1 байт]

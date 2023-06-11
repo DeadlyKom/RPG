@@ -11,10 +11,10 @@ Begin           EQU $
                 include "Initialize.asm"
                 include "WastelandNoise.asm"
 
-                include "MoveUp.asm"
-                include "MoveRight.asm"
                 include "MoveDown.asm"
+                include "MoveUp.asm"
                 include "MoveLeft.asm"
+                include "MoveRight.asm"
 Size            EQU $-Begin
 
                 endmodule

@@ -1,22 +1,22 @@
 
-                ifndef _CORE_MODULE_OPEN_WORLD_GENERATE_SETTLEMENT_ADD_
-                define _CORE_MODULE_OPEN_WORLD_GENERATE_SETTLEMENT_ADD_
+                ifndef _CORE_MODULE_OPEN_WORLD_GENERATE_METADATA_ADD_
+                define _CORE_MODULE_OPEN_WORLD_GENERATE_METADATA_ADD_
 ; -----------------------------------------
 ; добавить/зарезервировать ячейку в массиве
 ; In:
 ; Out:
 ;   A  - ID элемента в массиве
-;   IX - адрес найденого свободного элемента структуры FSettlement
+;   IX - адрес найденого свободного элемента метаданных региона
 ;   флаг переполнения Carry сброшен, если поиск свободного элемента успешен
 ; Corrupt:
 ;   HL, DE, BC, AF, IX
 ; Note:
 ; -----------------------------------------
 Add:            ; инициализация
-                LD HL, SETTLEMENT_ADR
-                LD DE, SETTLEMENT_SIZE - 1
-                LD BC, SETTLEMENT_NUM + 1                                       ; количество элементов
-                LD A, SETTLEMENT_EMPTY_ELEMENT
+                LD HL, METADATA_ADR
+                LD DE, METADATA_SIZE - 1
+                LD BC, METADATA_NUM + 1                                         ; количество элементов
+                LD A, METADATA_EMPTY_ELEMENT
 
                 ; поиск свободной ячейки 
 .Loop           CPI
@@ -27,7 +27,7 @@ Add:            ; инициализация
                 RET
 
 .Found          ; преобразование ID
-                LD A, SETTLEMENT_NUM
+                LD A, METADATA_NUM
                 SUB C
 
                 ; адрес свободного элемента найден
@@ -35,11 +35,11 @@ Add:            ; инициализация
                 PUSH HL
                 POP IX
 
-                ; увеличение количества регионов в массиве
-                LD HL, GameState.Settlement
+                ; увеличение количества метаданных региона в массиве
+                LD HL, GameState.Metadata
                 INC (HL)
                 RET
 
-                display "\t- Add Settlement:\t\t\t\t", /A, Add, " = busy [ ", /D, $ - Add, " bytes  ]"
+                display "\t- Add metadata:\t\t\t\t", /A, Add, " = busy [ ", /D, $ - Add, " bytes  ]"
 
-                endif ; ~_CORE_MODULE_OPEN_WORLD_GENERATE_SETTLEMENT_ADD_
+                endif ; ~_CORE_MODULE_OPEN_WORLD_GENERATE_METADATA_ADD_

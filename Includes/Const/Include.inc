@@ -23,6 +23,7 @@
                 include "Render.inc"
                 include "Region.inc"
                 include "Hardware.inc"
+                include "Habitats.inc"
                 include "Variables.inc"
                 include "Charecter.inc"
                 include "Interrupt.inc"

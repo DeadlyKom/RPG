@@ -8,9 +8,10 @@
 Begin           EQU $
 
                 include "World.asm"
+                include "Packing.asm"
                 include "RandomLocation.asm"
                 include "Region/Include.inc"
-                include "Settlement/Include.inc"
+                include "Metadata/Include.inc"
                 include "Core/Module/Table/Gen_PRNG.asm"
 Size            EQU $-Begin
 

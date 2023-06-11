@@ -26,8 +26,8 @@ Draw:           ; счётчик отображаемого экрана
                 SET_PAGE_OBJECT                                                 ; включить страницу работы с объектами
                 
                 ; расчёт адреса поселения в котором находится игрок
-                LD A, (PlayerState.SettlementID)
-                CALL Packs.OpenWorld.Utils.CalcSettlement
+                LD A, (PlayerState.MetadataID)
+                CALL Packs.OpenWorld.Utils.CalcMetadata
 
                 ; проверка флага первичной инициализации
                 CHECK_MENU_FLAG MENU_STARTUP_BIT

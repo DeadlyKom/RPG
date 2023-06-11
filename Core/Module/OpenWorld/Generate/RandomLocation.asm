@@ -2,7 +2,7 @@
                 ifndef _CORE_MODULE_OPEN_WORLD_RANDOM_LOCATION_
                 define _CORE_MODULE_OPEN_WORLD_RANDOM_LOCATION_
 ; -----------------------------------------
-; генерация региона
+; рандомизация положения в мире
 ; In:
 ;   IX - адрес структуры FRegion
 ;   IY - указатель на заполненую структуру FGenerateWorld
@@ -10,13 +10,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-RND_Location:   ; радиус
-                CALL Math.Rand8
-                LD DE, #0008                                                    ; значение в педелах (8-22)
-                CALL Math.Clamp
-                LD (.RandRadius), A
-
-                ; угол поворота (спираль)
+RandLocation:   ; угол поворота (спираль)
                 CALL Math.Rand8
 
                 ; -----------------------------------------
@@ -94,11 +88,7 @@ RND_Location:   ; радиус
                 LD A, (IX + FRegion.InfluenceRadius)
                 AND VORONOI_DIAGRAM_RADIUS
                 ADD A, VORONOI_DIAGRAM_RADIUS_MIN
-.RandRadius     EQU $+1
-                ADD A, #00
-                XOR C
                 
-
                 ; -----------------------------------------
                 ; integer multiplies DE by A
                 ; In :
@@ -114,6 +104,6 @@ RND_Location:   ; радиус
                 LD H, A
                 RET
 
-                display "\t- Random location:\t\t\t\t", /A, RND_Location, " = busy [ ", /D, $ - RND_Location, " bytes  ]"
+                display "\t- Random location:\t\t\t\t", /A, RandLocation, " = busy [ ", /D, $ - RandLocation, " bytes  ]"
 
                 endif ; ~ _CORE_MODULE_OPEN_W_CORE_MODULE_OPEN_WORLD_RANDOM_LOCATION_ORLD_INITIALIZE_

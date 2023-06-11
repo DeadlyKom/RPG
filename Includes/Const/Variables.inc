@@ -34,7 +34,7 @@ GameState           EQU Adr.GameState                                           
 .Setting            EQU GameState + FGameState.Setting                          ; флаги настройки игры
 .Objects            EQU GameState + FGameState.Objects                          ; количество объектов в массиве
 .Region             EQU GameState + FGameState.Region                           ; количество регионов в массиве
-.Settlement         EQU GameState + FGameState.Settlement                       ; количество поселений в массиве
+.Metadata           EQU GameState + FGameState.Metadata                         ; количество метаданные в массиве
 .ExecuteID          EQU GameState + FGameState.ExecuteID                        ; идентификатор запуска блока
 .CharacterID        EQU GameState + FGameState.CharacterID                      ; ID отображаемого персонажа
 .CharacterState     EQU GameState + FGameState.CharacterState                   ; состояние отображаемого персонажа
@@ -52,7 +52,7 @@ GameState           EQU Adr.GameState                                           
                                                                                 ;   #01 - вперёд (+1 позиция)
                                                                                 ;   #FF - назда (-1 позиция)
 PlayerState         EQU Adr.PlayerState
-.SettlementID       EQU PlayerState + FPlayerState.SettlementID                 ; ID поселения в котором находится игрок
+.MetadataID         EQU PlayerState + FPlayerState.MetadataID                   ; ID метаданных в котором находится игрок
 .SettlementLocID    EQU PlayerState + FPlayerState.SettlementLocID              ; ID места в котором находится игрок
 .CharacterID        EQU PlayerState + FPlayerState.CharacterID                  ; ID персонажа
 .InputFlags         EQU PlayerState + FPlayerState.InputFlags                   ; флаги управления игроком
