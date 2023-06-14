@@ -32,6 +32,12 @@ Prepare:        ; количество элементов в массиве
                 AND IDX_REGION_TYPE
                 CP IDX_REGION_TYPE
                 JR Z, .NextElement                                              ; переход, если тип региона не валидный
+                CP REGION_TYPE_HABITATS
+                JR Z, .NextElement                                              ; переход, если тип региона не учавствует
+                CP REGION_TYPE_DUNGEON
+                JR Z, .NextElement                                              ; переход, если тип региона не учавствует
+                CP REGION_TYPE_SETTLEMENT_ABANDONED
+                JR Z, .NextElement                                              ; переход, если тип региона не учавствует
 
                 ADD A, A
                 ADD A, A

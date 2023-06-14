@@ -12,17 +12,11 @@
 ;   HL, DE, BC, AF, IX
 ; Note:
 ; -----------------------------------------
-RandSettlement: ; радиус влияния поселения
-                CALL Math.Rand8
-                AND VORONOI_DIAGRAM_RADIUS
-                LD (IX + FRegion.InfluenceRadius), A
-
-                ; генерация ключа
+RandSettlement: ; генерация ключа
                 CALL Math.Rand8
                 LD (IX + FRegion.Seed.Low), A
                 CALL Math.Rand8
                 LD (IX + FRegion.Seed.High), A
-                CALL Packs.OpenWorld.Generate.RandLocation                      ; генерация позиции в мире
 
                 ; -----------------------------------------
                 ; резервирование ячейки поселения

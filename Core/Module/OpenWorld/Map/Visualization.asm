@@ -18,7 +18,29 @@ Visualization:  ifdef _DEBUG
 
                 CALL Initialize                                                 ; инициализация карты мира
 
-                ; проход диаграмма Вороного
+                ; сохранение количества элементов в массиве
+                EX AF, AF'
+                PUSH AF
+                EX AF, AF'
+
+                ; -----------------------------------------
+                ; проход диаграмма Вороного (радиоактивный)
+                ; -----------------------------------------
+                CALL RadiactivePass
+                LD B, REGION_TYPE_RADIOACTIVE_RADIUS + VORONOI_DIAGRAM_RADIUS_MIN + 1
+.RLoop          PUSH BC
+                CALL VoronoiPass
+                POP BC
+                DJNZ .RLoop
+
+                ; восстановление количества элементов в массиве
+                POP AF
+                EX AF, AF'
+
+                ; -----------------------------------------
+                ; проход диаграмма Вороного (базовый)
+                ; -----------------------------------------
+                CALL BasicPass
                 LD B, VORONOI_DIAGRAM_RADIUS + VORONOI_DIAGRAM_RADIUS_MIN + 1
 .Loop           PUSH BC
                 CALL VoronoiPass

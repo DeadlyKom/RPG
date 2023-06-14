@@ -6,6 +6,7 @@
 ; In:
 ;   IX - указывает на структуру FSettlement
 ; Out:
+;   HL - указывает на структуру FRegion
 ;   IY - указывает на структуру FRegion
 ; Corrupt:
 ;   HL, AF, IY
@@ -15,7 +16,7 @@ GetRegion:      LD L, (IX + FSettlement.RegionID)
 
                 ; REGION_SIZE = 12 байт
                 LD A, L
-                ADD A, A    ; x2
+.Accumulator    ADD A, A    ; x2
                 ADD A, L    ; x3
                 LD L, A
                 LD H, HIGH REGION_ADR >> 2                                      ; выровнен 1024 байт

@@ -29,4 +29,14 @@ REGION_TYPE_SETTLEMENT_NEUTRAL_COLOR    EQU WHITE                               
 REGION_TYPE_SETTLEMENT_FRIENDLY_COLOR   EQU GREEN                               ; дружественный
 REGION_TYPE_SETTLEMENT_HOSTILE_COLOR    EQU RED                                 ; враждебный
 
+; радиусы регионов
+
+REGION_TYPE_RADIOACTIVE_RADIUS          EQU 0x07
+REGION_TYPE_HABITATS_RADIUS             EQU 0x06
+REGION_TYPE_ABANDONED_RADIUS            EQU 0x05
+REGION_TYPE_NEUTRAL_RADIUS              EQU 0x05
+REGION_TYPE_FRIENDLY_RADIUS             EQU 0x05
+REGION_TYPE_HOSTILE_RADIUS              EQU 0x05
+REGION_TYPE_DUNGEON_RADIUS              EQU 0x03
+
                 endif ; ~_CONST_REGION_

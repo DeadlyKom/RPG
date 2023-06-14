@@ -39,7 +39,6 @@ VoronoiPass:    ; инициализация
                 CP VORONOI_DIAGRAM_FRACTION
                 JR Z, .NextElement                                              ; переход, если фракция не установлена
 
-                LD D, #00
                 ; -----------------------------------------
                 ; подготовка расчёта квадрат расстояния (радиуса)
                 ; -----------------------------------------
@@ -47,6 +46,7 @@ VoronoiPass:    ; инициализация
                 AND VORONOI_DIAGRAM_RADIUS
                 ADD A, VORONOI_DIAGRAM_RADIUS_MIN
                 LD E, A
+                LD D, #00
 
                 ; -----------------------------------------
                 ; integer multiplies DE by A

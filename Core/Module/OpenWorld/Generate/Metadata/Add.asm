@@ -40,6 +40,6 @@ Add:            ; инициализация
                 INC (HL)
                 RET
 
-                display "\t- Add metadata:\t\t\t\t", /A, Add, " = busy [ ", /D, $ - Add, " bytes  ]"
+                display "\t- Add metadata:\t\t\t\t\t", /A, Add, " = busy [ ", /D, $ - Add, " bytes  ]"
 
                 endif ; ~_CORE_MODULE_OPEN_WORLD_GENERATE_METADATA_ADD_

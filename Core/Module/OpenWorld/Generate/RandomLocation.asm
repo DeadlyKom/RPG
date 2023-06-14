@@ -10,7 +10,39 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-RandLocation:   ; угол поворота (спираль)
+RandLocation:   ; -----------------------------------------
+                ; слчайный радиус
+                ; -----------------------------------------
+
+                ; определение размера карты
+                LD A, (GameState.Setting)
+                AND SETTING_MAP_SIZE_MASK
+                LD E, MAP_SIZE_SMALL_SQUARED >> 1
+                JR Z, .MapSize                                                  ; MAP_SIZE_SMALL
+                LD E, MAP_SIZE_AVERAGE_SQUARED >> 1
+                CP SETTING_MAP_SIZE_AVERAGE
+                JR Z, .MapSize                                                  ; MAP_SIZE_AVERAGE
+                LD E, MAP_SIZE_BIG_SQUARED >> 1
+.MapSize        EXX
+                CALL Math.Rand8
+                EXX
+
+                ; -----------------------------------------
+                ; integer 8-bit divides D by E
+                ; In :
+                ;   D - dividend
+                ;   E - divider
+                ; Out :
+                ;   D - division result
+                ;   A - remainder
+                ; Corrupt :
+                ;   D, AF
+                ; -----------------------------------------
+                LD D, A
+                CALL Math.Div8x8                                                ; A = RandAngle % MapSize
+                LD (.RandRadius), A
+                
+                ; случайный угол (theta)
                 CALL Math.Rand8
 
                 ; -----------------------------------------
@@ -65,6 +97,7 @@ RandLocation:   ; угол поворота (спираль)
                 LD (IX + FRegion.Location.X.Low), DE
                 LD (IX + FRegion.Location.X.High), HL
 
+                OR A                                                            ; успешный выход (для TryPacking)
                 RET
 
 .Mult           ; избавится от знака
@@ -88,6 +121,8 @@ RandLocation:   ; угол поворота (спираль)
                 LD A, (IX + FRegion.InfluenceRadius)
                 AND VORONOI_DIAGRAM_RADIUS
                 ADD A, VORONOI_DIAGRAM_RADIUS_MIN
+.RandRadius     EQU $+1
+                ADD A, #00
                 
                 ; -----------------------------------------
                 ; integer multiplies DE by A
