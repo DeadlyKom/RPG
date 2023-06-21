@@ -159,14 +159,6 @@ UpdateKeyGen:   ; проверка что курсор на позиции
 
                 LD (HL), #00                                                    ; сброс направления
 
-                ; LD HL, (GameConfig.Seed)
-                ; LD C, A
-                ; ADD A, A
-                ; SBC A, A
-                ; LD B, A
-                ; ADD HL, BC
-                ; LD (GameConfig.Seed), HL
-
 .Clear          LD DE, #23A0
                 LD HL, ClearText
                 ; -----------------------------------------
@@ -191,51 +183,7 @@ UpdateKeyGen:   ; проверка что курсор на позиции
                 ;   DE - координаты в пикселях (D - y, E - x)
                 ; -----------------------------------------
                 JP Draw.String
-; UpdateFreqGen:  ; проверка что курсор на позиции
-;                 LD HL, GameState.Cursor
-;                 LD A, (HL)
-;                 CP FREQ_GEN_ID
-;                 RET NZ                                                          ; выход, курсор не на позиции
 
-;                 ; проверка что значения изменились
-;                 LD HL, GameState.Cursor.Dir
-;                 LD A, (HL)                                                      ; направление движения (для инпута)
-;                                                                                 ;   #01 - вперёд (+1 позиция)
-;                                                                                 ;   #FF - назда (-1 позиция)
-;                 OR A
-;                 RET Z                                                           ; выход, позиция не изменилась
-
-;                 LD (HL), #00                                                    ; сброс направления
-
-;                 LD C, A
-;                 LD A, (GameConfig.Frequency)
-;                 ADD A, C
-;                 LD (GameConfig.Frequency), A
-
-; .Clear          LD DE, #2CA0
-;                 LD HL, ClearText
-;                 ; -----------------------------------------
-;                 ; отображение символа
-;                 ; In:
-;                 ;   HL - адрес строки
-;                 ;   DE - координаты в пикселях (D - y, E - x)
-;                 ; -----------------------------------------
-;                 CALL Draw.String
-
-; .Draw           LD A, (GameConfig.Frequency)
-;                 CALL Utils.ToString_8
-;                 EX DE, HL
-;                 XOR A
-;                 LD (HL), A
-;                 SBC HL, BC
-;                 LD DE, #2CA0
-;                 ; -----------------------------------------
-;                 ; отображение символа
-;                 ; In:
-;                 ;   HL - адрес строки
-;                 ;   DE - координаты в пикселях (D - y, E - x)
-;                 ; -----------------------------------------
-;                 JP Draw.String
 UpdateDif:      ; проверка что курсор на позиции
                 LD HL, GameState.Cursor
                 LD A, (HL)
