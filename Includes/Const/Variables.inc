@@ -20,6 +20,8 @@ GameConfig          EQU Adr.GameConfig                                          
 .SpriteFlagRef      EQU GameConfig + FGameConfig.Sprite.Data.High               ; флаги спрайта
 .UpEdgeChar         EQU GameConfig + FGameConfig.UpEdgeChar                     ; верхняя граница вывода спрайтов (в знакоместах)
 .DownEdgeChar       EQU GameConfig + FGameConfig.DownEdgeChar                   ; нижняя граница вывода спрайтов (в знакоместах)
+.LeftEdgeChar       EQU GameConfig + FGameConfig.LeftEdgeChar                   ; левая граница вывода спрайтов (в знакоместах)
+.RightEdgeChar      EQU GameConfig + FGameConfig.RightEdgeChar                  ; правая граница вывода спрайтов (в знакоместах)
 .OffsetY            EQU GameConfig + FGameConfig.CompositeY                     ; смещение по вертикали для композитного спрайта
 .Array              EQU GameConfig + FGameConfig.Animation                      ; массив анимаций
 .Element_0          EQU GameConfig + FGameConfig.Animation + 0                  ; 1 элемент массив анимаций

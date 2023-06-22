@@ -71,12 +71,9 @@ Prepare:        EX DE, HL
                 LD E, A
 
                 ; проверка пересечения верхней грани видемой области
-                PUSH DE
                 LD A, (GameConfig.UpEdgeChar)
-                LD E, A
-                LD A, H
-                SUB E
-                POP DE
+                NEG
+                ADD A, H
                 JP P, .BelowTop                                                 ; переход, если спрайт находится ниже верхней грани видимой области
 
                 ; проверка нахождения спрайта (полностью) выше границы видимой области
@@ -251,7 +248,6 @@ Prepare:        EX DE, HL
                 LD A, H
                 SUB E
                 POP DE
-                
                 RET NC                                                          ; выход, если результат положительный, т.к. спрайт находится
                                                                                 ; ниже нижней границы видимой области
 
@@ -336,9 +332,9 @@ Prepare:        EX DE, HL
                 LD E, A
 
                 ; проверка пересечения верхней грани видемой области
-                LD A, H
-.LeftEdgeChar   EQU $+1                                                         ; в знакоместах
-                SUB SCR_WORLD_POS_X
+                LD A, (GameConfig.LeftEdgeChar)
+                NEG
+                ADD A, H
                 JP P, .ToRightOfEdge                                            ; переход, если спрайт находится правее левой границы видимой области
 
                 ; проверка нахождения спрайта (полностью) выше границы видимой области
@@ -383,10 +379,16 @@ Prepare:        EX DE, HL
                 LD L, A
 
                 ; откинуть смещение знакомест
-                LD A, H
+                LD A, (GameConfig.LeftEdgeChar)
+                ADD A, A    ; x2
+                ADD A, A    ; x4
+                ADD A, A    ; x8
+                LD E, A
+
+                ADD A, H
                 SUB B
                 AND #07
-                ADD A, #28                                                      ; 5 знакомест * 8 (40 пикселей)
+                ADD A, E
                 LD H, A
 
                 ; H   - позиция спрайта по горизонтали в пикселях
@@ -406,9 +408,12 @@ Prepare:        EX DE, HL
                 ; ---------------------------------------------
 
                 ; проверка нахождения спрайта правее правой границы видивой области
+                PUSH DE
+                LD A, (GameConfig.RightEdgeChar)
+                LD E, A
                 LD A, H
-.RightEdgeChar  EQU $+1                                                         ; в знакоместах
-                SUB SCR_WORLD_POS_X + (SCR_WORLD_SIZE_X << 1) - 1
+                SUB E
+                POP DE
                 RET NC                                                          ; выход, если результат положительный, т.к. спрайт находится
                                                                                 ; правее правой границы видимой области
 
