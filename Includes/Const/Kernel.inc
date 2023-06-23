@@ -233,8 +233,8 @@ Utils
 .ToString_8     EQU Kernel.Utils.String.B2D8                                    ; преобразовать 8-битное число в строку
 .ToString_16    EQU Kernel.Utils.String.B2D16                                   ; преобразовать 16-битное число в строку
 .StrBuffer      EQU Kernel.Utils.String.B2DBUF                                  ; буфер строки после преобразования чиста в строку
-.TimeTick       EQU  Kernel.Utils.Time.Tick                                     ; приращение счётчика времени
-
+.TimeTick       EQU Kernel.Utils.Time.Tick                                      ; приращение счётчика времени
+.SpriteParse    EQU Kernel.Utils.SpriteParse                                    ; парсинг структуры спрайта
 ; debug
                 ifdef _DEBUG
 Console:

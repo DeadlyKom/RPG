@@ -16,6 +16,8 @@ UI:
                 display " - Map UI:\t\t\t\t\t\t", /A, .MapFrame, " = busy [ ", /D, $ - .MapFrame, " bytes  ]"
 .Charecters     include "UI/Charecter/Include.inc"
                 display " - Charecters UI:\t\t\t\t\t", /A, .Charecters, " = busy [ ", /D, $ - .Charecters, " bytes  ]"
+.MapMarkers     include "UI/MapMarkers/Include.inc"
+                display " - MapMarkers UI:\t\t\t\t\t", /A, .MapMarkers, " = busy [ ", /D, $ - .MapMarkers, " bytes  ]"
 Cars:
 .A              include "Car/A/Include.inc"
                 display " - Car A:\t\t\t\t\t\t", /A, Cars.A, " = busy [ ", /D, $ - Cars.A, " bytes  ]"

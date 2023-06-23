@@ -4,8 +4,11 @@
 
                 module Render
 
+                include "UI/Include.inc"
+
                 include "Draw.asm"
                 include "DisplayRegion.asm"
+                include "DisplayMarkers.asm"
                 include "DisplayMapFrame.asm"
 
                 endmodule

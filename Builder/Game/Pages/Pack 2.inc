@@ -69,14 +69,15 @@ Begin:          EQU $
                 include "Core/Module/Math/Div/DivFix8x8.asm"
                 include "Core/Module/Math/Div/Div16x8_16.asm"
                 include "Core/Module/Math/SinCos/SinCos.asm"
-                include "Core/Module/Math/Sqrt/DistSquared.asm"
                 include "Core/Module/Math/PerlinNoise/Include.inc"
+                include "Core/Module/Math/Sqrt/DistSquared.asm"
                 include "Core/Module/Math/BoundVolume/IntersectsAABB_vs_AABB.asm"
 
                 ; input
                 include "Core/Module/Input/Include.inc"
 
                 ; utils
+                include "Core/Module/Draw/Utils/SpriteParse.asm"
                 include "Core/Module/Draw/Utils/PixelAddress.asm"
                 include "Core/Module/Draw/Utils/PixelAttribute.asm"
 
