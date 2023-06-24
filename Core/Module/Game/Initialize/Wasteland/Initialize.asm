@@ -14,6 +14,9 @@ Wasteland:      ; установка бордюра
                 ; сброса и уход в затемнение
                 CALL Func.ResetFadeout
 
+                ; установить отсечение отображения пустоши
+                SET_CLIP_WASTELAND
+
                 ; инициализаци эффекта
                 LD HL, Packs.Wasteland.Render.VFX_Draw
                 LD (Packs.Wasteland.Loop.FuncDraw), HL

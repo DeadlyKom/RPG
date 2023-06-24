@@ -29,7 +29,7 @@ MovementRight:  ; -----------------------------------------
                 ;   C - размер карты
                 ; -----------------------------------------
                 CALL Packs.Map.GetMapSize
-                LD A, -VISIBLE_MAP_SIZE_SCR
+                LD A, -SCR_MAP_SIZE_X
                 ADD A, C
                 LD C, A
                 
@@ -69,7 +69,7 @@ MovementDown:   ; -----------------------------------------
                 ;   C - размер карты
                 ; -----------------------------------------
                 CALL Packs.Map.GetMapSize
-                LD A, -VISIBLE_MAP_SIZE_SCR
+                LD A, -SCR_MAP_SIZE_X
                 ADD A, C
                 LD C, A
                 

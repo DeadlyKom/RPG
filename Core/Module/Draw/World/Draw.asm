@@ -15,12 +15,12 @@
 Draw:           ; -----------------------------------------
                 ; расчёт адреса строки в экранной области
                 ; -----------------------------------------
-                LD A, SCR_WORLD_POS_PIX_Y
+                LD A, SCR_WASTELAND_POS_PIX_Y
 .Shake_Y        EQU $+1                                                         ; смещение карты мира по вертикали                  (кратный 2)
                 ADD A, #00
                 LD L, A
                 LD H, HIGH Adr.ScrAdrTable
-                LD A, SCR_WORLD_POS_PIX_X
+                LD A, SCR_WASTELAND_POS_PIX_X
 .Shake_X        EQU $+1                                                         ; смещение области карты мира по горизонтали        (кратный 2)
                 ADD A, #00
                 AND %11111000
@@ -226,7 +226,7 @@ Draw:           ; -----------------------------------------
                 ;   IX  - адрес функции Up
                 ;   IY  - адрес функции Down
                 ; -----------------------------------------
-                LD C, SCR_WORLD_SIZE_X-1
+                LD C, SCR_WASTELAND_SIZE_X-1
 
 .ColumnLoop     ;
                 EXX

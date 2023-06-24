@@ -20,7 +20,7 @@ DisplayMarker:
                 JR NZ, .Draw
                 LD (HL), #01 + 1
 
-.Draw           LD DE, #6080
+.Draw           LD DE, #60B8
                 CALL UI.Player
 
                 RET

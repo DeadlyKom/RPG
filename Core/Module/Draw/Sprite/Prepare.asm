@@ -444,10 +444,17 @@ Prepare:        EX DE, HL
                 ADD HL, HL
                 ; H -  позиции спрайта по горизонтали в пикселях
 
+                ; положения правой границы спрайта
+                LD A, (GameConfig.RightEdgeChar)
+                ADD A, A    ; x2
+                ADD A, A    ; x4
+                ADD A, A    ; x8
+                LD E, A
+
                 ; расчёт ширины невидимой части спрайта в пикселях
                 LD A, H
                 ADD A, B
-                SUB (SCR_WORLD_POS_X + (SCR_WORLD_SIZE_X << 1) - 1) * 8
+                SUB E
                 LD L, A
                 LD A, B
                 NEG

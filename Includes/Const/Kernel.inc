@@ -235,6 +235,7 @@ Utils
 .StrBuffer      EQU Kernel.Utils.String.B2DBUF                                  ; буфер строки после преобразования чиста в строку
 .TimeTick       EQU Kernel.Utils.Time.Tick                                      ; приращение счётчика времени
 .SpriteParse    EQU Kernel.Utils.SpriteParse                                    ; парсинг структуры спрайта
+.ClipRect       EQU Kernel.Utils.SetClipRect                                    ; установка отсечения видимой области
 ; debug
                 ifdef _DEBUG
 Console:

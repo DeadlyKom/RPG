@@ -21,7 +21,7 @@ Decal:          RES VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                
                 SBC HL, BC
                 LD A, L
                 EX AF, AF'
-                LD BC, ((SCR_MINIMAP_SIZE_X - (SCR_WORLD_SIZE_X << 1)) >> 1) + 2
+                LD BC, ((SCR_MINIMAP_SIZE_X - (SCR_WASTELAND_SIZE_X << 1)) >> 1) + 2
                 ADD HL, BC
 
                 EX AF, AF'
@@ -54,7 +54,7 @@ Decal:          RES VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                
                 LD A, H
                 SUB SCR_CAMERA_RIGH_EDGE >> 1
                 RET NC
-                ADD A, SCR_WORLD_SIZE_X + 1
+                ADD A, SCR_WASTELAND_SIZE_X + 1
                 RET NC
 
                 ; -----------------------------------------
@@ -65,7 +65,7 @@ Decal:          RES VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                
                 SBC HL, BC
                 LD A, L
                 EX AF, AF'
-                LD BC, ((SCR_MINIMAP_SIZE_Y - ((SCR_WORLD_SIZE_Y + 1) << 1)) >> 1) + 0
+                LD BC, ((SCR_MINIMAP_SIZE_Y - ((SCR_WASTELAND_SIZE_Y + 1) << 1)) >> 1) + 0
                 ADD HL, BC
 
                 EX AF, AF'
@@ -97,7 +97,7 @@ Decal:          RES VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                
                 LD A, H
                 SUB (SCR_CAMERA_DOWN_EDGE - 1) >> 1
                 RET NC
-                ADD A, SCR_WORLD_SIZE_Y + 1
+                ADD A, SCR_WASTELAND_SIZE_Y + 1
                 RET NC
 
                 SET VISIBLE_OBJECT_BIT, (IX + FObjectDecal.Type)                ; установка флага видимости

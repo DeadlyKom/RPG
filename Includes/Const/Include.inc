@@ -38,6 +38,7 @@
                 include "Player.inc"
 
                 include "UI.inc"
+                include "GameScreenMap.inc"
                 include "GameScreenWorld.inc"
                 include "GameWorldSprite.inc"
                 include "GameWorldCamera.inc"

@@ -89,13 +89,13 @@ MoveRight:      ; -----------------------------------------
                 RET
 
 .Tile           ; сдвигаем всё влево на ширину видимой чати карты
-                LD HL, RenderBuffer + (SCR_WORLD_SIZE_Y + 1)
+                LD HL, RenderBuffer + (SCR_WASTELAND_SIZE_Y + 1)
                 LD DE, RenderBuffer
-                LD BC, (SCR_WORLD_SIZE_X - 1) * (SCR_WORLD_SIZE_Y + 1)
+                LD BC, (SCR_WASTELAND_SIZE_X - 1) * (SCR_WASTELAND_SIZE_Y + 1)
                 CALL Memcpy.FastLDIR
 
                 LD HL, Adr.MinimapSpr + 2 + 4 * 10 - 4                          ; адрес правой грани видимой части карты мира (-1 строка)
-                LD A, SCR_WORLD_SIZE_Y + 1
+                LD A, SCR_WASTELAND_SIZE_Y + 1
 
 .TileLoop       EX AF, AF
 
@@ -194,7 +194,7 @@ MoveRight:      ; -----------------------------------------
 
                 ; смещение адреса на тайл левее
                 LD A, E
-                SUB SCR_WORLD_SIZE_Y + 1
+                SUB SCR_WASTELAND_SIZE_Y + 1
                 LD E, A
 
                 ; совмещение левого тайла (3..0 биты) и текущую выбоку

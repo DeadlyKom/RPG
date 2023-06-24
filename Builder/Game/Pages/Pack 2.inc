@@ -77,6 +77,7 @@ Begin:          EQU $
                 include "Core/Module/Input/Include.inc"
 
                 ; utils
+                include "Core/Module/Draw/Utils/Clip.asm"
                 include "Core/Module/Draw/Utils/SpriteParse.asm"
                 include "Core/Module/Draw/Utils/PixelAddress.asm"
                 include "Core/Module/Draw/Utils/PixelAttribute.asm"

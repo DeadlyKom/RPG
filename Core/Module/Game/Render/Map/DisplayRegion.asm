@@ -43,12 +43,12 @@ DisplayRegion:  SET_SCREEN_SHADOW                                               
                 LD DE, Adr.MapBuffer
                 ADD HL, DE
 
-                SCREEN_ATTR_ADR_REG DE, #4000, 1, 1                             ; адрес области атрибутов (вывода карты)
+                SCREEN_ATTR_ADR_REG DE, #4000, SCR_MAP_POS_X, SCR_MAP_POS_Y     ; адрес области атрибутов (вывода карты)
 
-                LD A, VISIBLE_MAP_SIZE_SCR
+                LD A, SCR_MAP_SIZE_X
 
 .LoopY          EX AF, AF'
-                LD B, VISIBLE_MAP_SIZE_SCR
+                LD B, SCR_MAP_SIZE_X
                 PUSH HL
 
 .LoopX          LD A, (HL)
@@ -64,7 +64,7 @@ DisplayRegion:  SET_SCREEN_SHADOW                                               
                 ADD HL, BC
 
                 LD A, E
-                SUB VISIBLE_MAP_SIZE_SCR
+                SUB SCR_MAP_SIZE_X
                 ADD A, #20
                 LD E, A
                 ADC A, D

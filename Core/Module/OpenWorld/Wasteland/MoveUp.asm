@@ -82,13 +82,13 @@ MoveUp:         ; -----------------------------------------
                 RET
 
 .Tile           ; сдвигаем всё вниз на высоту видимой чати карты (правый нижний)
-                LD HL, RenderBuffer + SCR_WORLD_SIZE_X * (SCR_WORLD_SIZE_Y + 1) - 2
-                LD DE, RenderBuffer + SCR_WORLD_SIZE_X * (SCR_WORLD_SIZE_Y + 1) - 1
-                LD BC, (SCR_WORLD_SIZE_Y + 1) - 1
+                LD HL, RenderBuffer + SCR_WASTELAND_SIZE_X * (SCR_WASTELAND_SIZE_Y + 1) - 2
+                LD DE, RenderBuffer + SCR_WASTELAND_SIZE_X * (SCR_WASTELAND_SIZE_Y + 1) - 1
+                LD BC, (SCR_WASTELAND_SIZE_Y + 1) - 1
                 LD A, C
                 LDDR
 
-                rept SCR_WORLD_SIZE_X - 1
+                rept SCR_WASTELAND_SIZE_X - 1
                 DEC E
                 DEC L
                 LD C, A
@@ -219,7 +219,7 @@ MoveUp:         ; -----------------------------------------
                 ;   | D  | U  | L  | R  | .. | .. | .. | .. |
                 ;   +----+----+----+----+----+----+----+----+
 
-                LD A, SCR_WORLD_SIZE_X
+                LD A, SCR_WASTELAND_SIZE_X
 .TileLoop       EX AF, AF
 
                 ; -----------------------------------------
@@ -285,7 +285,7 @@ MoveUp:         ; -----------------------------------------
 
                 ;
                 LD A, E
-                ADD A, SCR_WORLD_SIZE_Y + 1
+                ADD A, SCR_WASTELAND_SIZE_Y + 1
                 LD E, A
 
                 EX AF, AF'

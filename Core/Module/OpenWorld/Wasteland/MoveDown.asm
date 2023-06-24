@@ -91,18 +91,18 @@ MoveDown:       ; -----------------------------------------
 .Tile           ; сдвигаем всё вверх на высоту видимой чати карты (левый вверхний)
                 LD HL, RenderBuffer + 1
                 LD DE, RenderBuffer + 0
-                LD BC, (SCR_WORLD_SIZE_Y + 1) - 1
+                LD BC, (SCR_WASTELAND_SIZE_Y + 1) - 1
                 LD A, C
                 LDIR
 
-                rept SCR_WORLD_SIZE_X - 1
+                rept SCR_WASTELAND_SIZE_X - 1
                 INC E
                 INC L
                 LD C, A
                 LDIR
                 endr
 
-                LD DE, RenderBuffer + (SCR_WORLD_SIZE_Y + 1) - 1
+                LD DE, RenderBuffer + (SCR_WASTELAND_SIZE_Y + 1) - 1
                 ; -----------------------------------------
                 LD BC, Adr.MinimapSpr + 1 + 4 * 20 - 4                          ; адрес левой-нижней грани видимой части карты мира (-1 строка)
                 JP MoveUp.AdaptTilepair

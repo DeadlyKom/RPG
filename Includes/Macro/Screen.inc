@@ -139,4 +139,17 @@ SET_PAGE_SHADOW_SCREEN macro
                 CALL Screen.SetPageShadow
                 endm
 
+; установить отсечение отображения пустоши
+SET_CLIP_WASTELAND macro
+                LD DE, ((SCR_WASTELAND_POS_Y + (SCR_WASTELAND_SIZE_Y << 1)) << 8)     | SCR_WASTELAND_POS_Y
+                LD BC, ((SCR_WASTELAND_POS_X + (SCR_WASTELAND_SIZE_X << 1) - 1) << 8) | SCR_WASTELAND_POS_X
+                CALL Utils.ClipRect
+                endm
+; установить отсечение отображения карты мира
+SET_CLIP_MAP    macro
+                LD DE, ((SCR_MAP_POS_Y + SCR_MAP_SIZE_Y) << 8) | SCR_MAP_POS_Y
+                LD BC, ((SCR_MAP_POS_X + SCR_MAP_SIZE_X) << 8) | SCR_MAP_POS_X
+                CALL Utils.ClipRect
+                endm
+
                 endif ; ~_MACRO_SCREEN_
