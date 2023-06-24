@@ -20,11 +20,80 @@ DisplayMarker:
                 JR NZ, .Draw
                 LD (HL), #01 + 1
 
-.Draw           LD DE, #60B8
+.Draw           LD (.Last), A
+                EX AF, AF'
+
+                ; горизонталь
+                LD HL, (PlayerState.CameraPosX + 1)
+                LD DE, (PlayerState.WorldLeftTopPos + 0)                        ; X.Low
+                EXX
+                LD HL, (PlayerState.CameraPosX + 3)
+                LD DE, (PlayerState.WorldLeftTopPos + 2)                        ; X.High
+
+                ; -----------------------------------------
+                ; вычитание 32-битных чисел
+                ; In :
+                ;   HLHL' - 32-битное уменьшаемое число
+                ;   DEDE' - 32-битное вычитаемое число
+                ; Out :
+                ;   DEHL  - разность 32-битных чисел
+                ; -----------------------------------------
+                CALL Math.Sub32_32
+
+                ;
+                ADD HL, HL  ; x2
+                ADD HL, HL  ; x4
+                ADD HL, HL  ; x8
+                
+                LD A, (PlayerState.MapPosX)
+                ADD A, A
+                ADD A, A
+                ADD A, A
+                NEG
+                ADD A, H
+
+                ; вертикаль
+
+                LD HL, (PlayerState.CameraPosY + 1)
+                LD DE, (PlayerState.WorldLeftTopPos + 4)                        ; Y.Low
+                EXX
+                LD HL, (PlayerState.CameraPosY + 3)
+                LD DE, (PlayerState.WorldLeftTopPos + 6)                        ; Y.High
+
+                ; -----------------------------------------
+                ; вычитание 32-битных чисел
+                ; In :
+                ;   HLHL' - 32-битное уменьшаемое число
+                ;   DEDE' - 32-битное вычитаемое число
+                ; Out :
+                ;   DEHL  - разность 32-битных чисел
+                ; -----------------------------------------
+                CALL Math.Sub32_32
+
+                ;
+                ADD HL, HL  ; x2
+                ADD HL, HL  ; x4
+                ADD HL, HL  ; x8
+                
+                LD E, A
+                LD A, (PlayerState.MapPosY)
+                ADD A, A
+                ADD A, A
+                ADD A, A
+                NEG
+                ADD A, H
+                LD D, A
+
+                EX AF, AF'
                 CALL UI.Player
 
                 RET
+
+.ForceDraw      LD A, (.Last)
+                JR .Draw
+
 .Counter        DB #01
 .Anim           DB #01 + 1
+.Last           DB #00
 
                 endif ; ~_MODULE_GAME_RENDER_MAP_DISPLAY_MAP_MARKER_

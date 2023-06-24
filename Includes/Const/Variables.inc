@@ -69,6 +69,7 @@ PlayerState         EQU Adr.PlayerState
 .Slot               EQU PlayerState + FPlayerState.Slot                         ; номер расходника в слоте
 .MapPosX            EQU PlayerState + FPlayerState.MapPosX                      ; позиция (левого-верхнего края) карты по горизонтали
 .MapPosY            EQU PlayerState + FPlayerState.MapPosY                      ; позиция (левого-верхнего края) карты по вертикали
+.WorldLeftTopPos    EQU PlayerState + FPlayerState.WorldLeftTopPos              ; позиция левого-верхнего края карты мира
 .CameraPosX         EQU PlayerState + FPlayerState.CameraPosX                   ; позиция карты мира по горизонтали
 .CameraPosY         EQU PlayerState + FPlayerState.CameraPosY                   ; позиция карты мира по вертикали
 .RotationAngle      EQU PlayerState + FPlayerState.RotationAngle                ; угол поворота игрока

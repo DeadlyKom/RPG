@@ -10,13 +10,56 @@ BORDER          macro Color?
 SCREEN_ADR_REG  macro Register?, ScreenAddress?, X?, Y?
                 LD Register?, ScreenAddress? + (((Y? >> 3) & 0x18) << 8) + ((Y? & 0x07) << 8) + ((Y? & 0x38) << 2) + (X? >> 3)
                 endm
-SCREEN_ATTR_ADR_REG  macro Register?, ScreenAddress?, X?, Y?
-                LD Register?, ScreenAddress? | 0x1800 + (((Y? & 0x1F) << 5) + (X? & 0x1F))
-                endm
 CLS_4000        macro
                 LD HL, #4000 + #1800
                 LD DE, #0000
                 CALL SafeFill.Screen
+                endm
+; -----------------------------------------
+; очистка прямоугольника экрана
+; In:
+;   ScreenAddress? - адрес экрана
+;   X?, Y?         - позиция в знакоместах
+;   SizeX?, SizeY? - размер в знакоместах
+; Out:
+; Corrupt:
+; Note:
+; -----------------------------------------
+CLS_RECT        macro ScreenAddress?, X?, Y?, SizeX?, SizeY?
+                LD HL, ScreenAddress? | (((Y? & 0x1F) << 5) + (X? & 0x1F))
+                LD C, SizeY? << 3
+
+.RowLoop        XOR A
+                LD B, SizeX?
+
+.ColumnLoop     LD (HL), A
+                INC L
+                DJNZ .ColumnLoop
+
+                ; вернуться в начало колонки
+                LD A, -SizeX?
+                ADD A, L
+                LD L, A
+                
+                ; классический метод "DOWN HL" 25/59
+                INC H
+                LD A, H
+                AND #07
+                JP NZ, $+12
+                LD A, L
+                SUB #E0
+                LD L, A
+                SBC A, A
+                AND #F8
+                ADD A, H
+                LD H, A
+
+                ; следующая строка
+                DEC C
+                JR NZ, .RowLoop
+                endm
+SCREEN_ATTR_ADR_REG  macro Register?, ScreenAddress?, X?, Y?
+                LD Register?, ScreenAddress? | 0x1800 + (((Y? & 0x1F) << 5) + (X? & 0x1F))
                 endm
 ATTR_4000_IP    macro Inc?, Paper?
                 LD HL, #4000 + #1800 + #0300

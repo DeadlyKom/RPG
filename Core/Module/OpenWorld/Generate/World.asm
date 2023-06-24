@@ -95,6 +95,8 @@ World:          ; -----------------------------------------
                 ;   DEHL  - разность 32-битных чисел
                 ; -----------------------------------------
                 CALL Math.Sub32_32
+                LD (PlayerState.WorldLeftTopPos + 0), HL                        ; X.Low
+                LD (PlayerState.WorldLeftTopPos + 2), DE                        ; X.High
                 LD (Packs.OpenWorld.Map.Prepare.LeftTop_X_Low), HL
                 LD (Packs.OpenWorld.Map.Prepare.LeftTop_X_High), DE
 
@@ -112,6 +114,8 @@ World:          ; -----------------------------------------
                 ;   DEHL  - разность 32-битных чисел
                 ; -----------------------------------------
                 CALL Math.Sub32_32
+                LD (PlayerState.WorldLeftTopPos + 4), HL                        ; Y.Low
+                LD (PlayerState.WorldLeftTopPos + 6), DE                        ; Y.High
                 LD (Packs.OpenWorld.Map.Prepare.LeftTop_Y_Low), HL
                 LD (Packs.OpenWorld.Map.Prepare.LeftTop_Y_High), DE
 
