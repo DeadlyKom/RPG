@@ -5,6 +5,8 @@
                 module UI
 
                 include "Marker.asm"
+                include "DrawSettle.asm"
+                include "DrawPlayer.asm"
 
                 endmodule
 

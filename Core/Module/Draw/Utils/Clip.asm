@@ -27,7 +27,7 @@ SetClipRect:    LD HL, GameConfig.UpEdgeChar
 
 ; ToDo мб добавить функции для сохранения в стек значений клипа и восстановления их
 
-                display " - Clipping functions: \t\t\t\t\t", /A, SetClipRect, " = busy [ ", /D, $ - SetClipRect, " bytes  ]"
+                display " - Clipping functions: \t\t\t\t", /A, SetClipRect, " = busy [ ", /D, $ - SetClipRect, " bytes  ]"
 
                 endmodule
 

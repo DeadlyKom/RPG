@@ -85,6 +85,7 @@ Prepare:        ; количество элементов в массиве
                 JP M, .NextElement                                              ; переход, если координаты за пределами карты
                 
                 LD A, H
+                DEC A   ; ?
                 AND VORONOI_DIAGRAM_POS_MASK
                 OR VORONOI_DIAGRAM_LOCK
                 LD (IX + FVoronoiDiagram.X), A
@@ -112,6 +113,7 @@ Prepare:        ; количество элементов в массиве
                 JP M, .NextElement                                              ; переход, если координаты за пределами карты
 
                 LD A, H
+                DEC A   ; ?
                 AND VORONOI_DIAGRAM_POS_MASK
                 ; OR VORONOI_DIAGRAM_COMPLETE
                 LD (IX + FVoronoiDiagram.Y), A

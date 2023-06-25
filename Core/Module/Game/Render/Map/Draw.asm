@@ -48,14 +48,12 @@ Draw:           ; счётчик отображаемого экрана
                 SET_SCREEN_BASE                                                 ; включение страницы основного экрана
                 CLS_RECT #4000, SCR_MAP_POS_X, SCR_MAP_POS_Y, SCR_MAP_SIZE_X, SCR_MAP_SIZE_Y
 
-                CALL DisplayMarker.ForceDraw
-                JR .L1
 .Draw           ; -----------------------------------------
                 ; основной цикл рисования
                 ; -----------------------------------------
                 ; отображение маркеров
                 CALL DisplayMarker
-.L1
+
 .Processed      ifdef _DEBUG
                 CALL FPS_Counter.Frame
                 endif
