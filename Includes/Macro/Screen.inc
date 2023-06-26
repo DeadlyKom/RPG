@@ -20,43 +20,46 @@ CLS_4000        macro
 ; In:
 ;   ScreenAddress? - адрес экрана
 ;   X?, Y?         - позиция в знакоместах
-;   SizeX?, SizeY? - размер в знакоместах
+;   SizeX?, SizeY? - размер в знакоместах (горизонталь кратная 2)
 ; Out:
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
 CLS_RECT        macro ScreenAddress?, X?, Y?, SizeX?, SizeY?
-                LD HL, ScreenAddress? | (((Y? & 0x1F) << 5) + (X? & 0x1F))
-                LD C, SizeY? << 3
+                SCREEN_ADR_REG HL, ScreenAddress?, (X? + SizeX?) << 3, ((Y? + SizeY? - 1) << 3) + 7
+                RestoreDE
+                LD (.ContainerSP), SP
+                LD SP, HL
 
-.RowLoop        XOR A
-                LD B, SizeX?
+                LD DE, #0000
+                LD C, SizeY?
+.Loop
+                LD B, #08
+.RowLoop        dup SizeX? >> 1                                                 ; SizeX? / 21
+                PUSH DE
+                edup
+                LD HL, -256 + SizeX?
+                ADD HL, SP
+                LD SP, HL
+                DJNZ .RowLoop
 
-.ColumnLoop     LD (HL), A
-                INC L
-                DJNZ .ColumnLoop
-
-                ; вернуться в начало колонки
-                LD A, -SizeX?
-                ADD A, L
-                LD L, A
-                
-                ; классический метод "DOWN HL" 25/59
-                INC H
-                LD A, H
-                AND #07
-                JP NZ, $+12
+                ; классический метод "UP SP"
+                LD HL, #0000
+                ADD HL, SP
                 LD A, L
-                SUB #E0
+                ADD A, #E0
                 LD L, A
                 SBC A, A
-                AND #F8
+                AND #08
                 ADD A, H
                 LD H, A
+                LD SP, HL
 
-                ; следующая строка
                 DEC C
-                JR NZ, .RowLoop
+                JR NZ, .Loop
+
+.ContainerSP    EQU $+1
+                LD SP, #0000
                 endm
 SCREEN_ATTR_ADR_REG  macro Register?, ScreenAddress?, X?, Y?
                 LD Register?, ScreenAddress? | 0x1800 + (((Y? & 0x1F) << 5) + (X? & 0x1F))

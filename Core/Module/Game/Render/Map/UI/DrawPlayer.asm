@@ -57,18 +57,6 @@ DrawPlayer:     LD HL, .Counter
                 ; сохрнить значение по горизонтали
                 LD A, H
 
-                ; ;
-                ; ADD HL, HL  ; x2
-                ; ADD HL, HL  ; x4
-                ; ADD HL, HL  ; x8
-                
-                ; LD A, (PlayerState.MapPosX)
-                ; ADD A, A
-                ; ADD A, A
-                ; ADD A, A
-                ; NEG
-                ; ADD A, H
-
                 ; вертикаль
 
                 LD HL, (PlayerState.CameraPosY + 1)
@@ -105,20 +93,6 @@ DrawPlayer:     LD HL, .Counter
 
                 ; инициалзация позиций
                 LD D, H
-
-                ; ;
-                ; ADD HL, HL  ; x2
-                ; ADD HL, HL  ; x4
-                ; ADD HL, HL  ; x8
-                
-                ; LD E, A
-                ; LD A, (PlayerState.MapPosY)
-                ; ADD A, A
-                ; ADD A, A
-                ; ADD A, A
-                ; NEG
-                ; ADD A, H
-                ; LD D, A
 
                 EX AF, AF'
                 JP Player

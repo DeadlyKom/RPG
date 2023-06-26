@@ -84,8 +84,14 @@ Prepare:        ; количество элементов в массиве
                 CALL Math.Sub32_32
                 JP M, .NextElement                                              ; переход, если координаты за пределами карты
                 
+                ; учёт смещения
+                ; RL L
+                ; CCF
+                ; SBC A, A
+                ; ADD A, H
                 LD A, H
                 DEC A   ; ?
+
                 AND VORONOI_DIAGRAM_POS_MASK
                 OR VORONOI_DIAGRAM_LOCK
                 LD (IX + FVoronoiDiagram.X), A
@@ -112,8 +118,14 @@ Prepare:        ; количество элементов в массиве
                 CALL Math.Sub32_32
                 JP M, .NextElement                                              ; переход, если координаты за пределами карты
 
+                ; учёт смещения
+                ; RL L
+                ; CCF
+                ; SBC A, A
+                ; ADD A, H
                 LD A, H
                 DEC A   ; ?
+
                 AND VORONOI_DIAGRAM_POS_MASK
                 ; OR VORONOI_DIAGRAM_COMPLETE
                 LD (IX + FVoronoiDiagram.Y), A
